@@ -58,6 +58,7 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services'])
                     }
                 }
             })
+
             .state('tab.settings', {
                 url: '/settings',
                 views: {
@@ -66,6 +67,11 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services'])
                         controller: 'SettingsCtrl'
                     }
                 }
+            })
+
+            .state('qids-response', {
+                url: '/response',
+                templateUrl: "templates/qids-response.html"
             });
 
         // if none of the above states are matched, use this as the fallback
