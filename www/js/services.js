@@ -18,6 +18,10 @@ angular.module('trump.services', [])
             id: 2,
             type: "qids_response",
             date: "2015-03-15T18:25:43.511Z"
+        }, {
+            id: 3,
+            type: "qids_response",
+            date: "2015-03-15T18:25:43.511Z"
         }];
 
         // just look at this sneaky javascript - return an anonymous
