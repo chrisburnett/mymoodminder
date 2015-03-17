@@ -12,14 +12,10 @@
             </div>
         </div>
 
-        <div class="list card">
-            <div class="item item-divider">Recent activity</div>
-            <div class="item item-body">
-            </div>
-        </div>
 
-        <ion-list>
-            <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="timepoint in timepoints" type="item-text-wrap" href="#/tab/timepoint/{{timepoint.id}}">
+        <ion-list class="list list-inset">
+            <div class="item item-divider">Recent activity</div>
+            <ion-item class="item item-remove-animate item-icon-right" ng-repeat="timepoint in timepoints" type="item-text-wrap" href="#/tab/timepoint/{{timepoint.id}}">
                 <h2>{{timepoint.type == "message" ? "Message" : "QIDS Response"}}</h2>
                 <p>{{timepoint.date}}</p>
                 <i class="icon ion-chevron-right icon-accessory"></i>
