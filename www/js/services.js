@@ -1,4 +1,16 @@
-angular.module('trump.services', [])
+angular.module('trump.services', ['LocalStorageModule'])
+
+    .factory('QIDSResponse', function(localStorageService) {
+        return {
+            // return a service which lets us persist a response
+            // between invocations of the app locally (for now) and
+            // retrieve it later
+            storeLocally: function(response) {
+                return localStorageService.set(new Date(), response);
+            }
+        }
+    })
+
 
     .factory('Timepoints', function() {
         // Might use a resource here that returns a JSON array We

@@ -71,7 +71,8 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services'])
 
             .state('qids-response', {
                 url: '/response',
-                templateUrl: "templates/qids-response.html"
+                templateUrl: "templates/qids-response.html",
+                controller: 'QIDSResponseCtrl'                                
             });
 
         // if none of the above states are matched, use this as the fallback
