@@ -1,0 +1,32 @@
+<ion-nav-view></ion-nav-view>
+
+<ion-view view-title="Overview">
+    <ion-content class="padding">
+
+        <div class="list card">
+            <div class="item item-divider">Progress</div>
+            <div class="item item-body">
+                <div>
+                    You ate an apple today!
+                </div>
+            </div>
+        </div>
+
+        <div class="list card">
+            <div class="item item-divider">Recent activity</div>
+            <div class="item item-body">
+                <ion-list>
+                    <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="timepoint in timepoints" type="item-text-wrap" href="#/tab/timepoint/{{timepoint.id}}">
+                        <h2>{{timepoint.type == "message" ? "Message" : "QIDS Response"}}</h2>
+                        <p>{{timepoint.date}}</p>
+                        <i class="icon ion-chevron-right icon-accessory"></i>
+
+                        <ion-option-button class="button-assertive" ng-click="remove(timepoint)">
+                            Delete
+                        </ion-option-button>
+                    </ion-item>
+                </ion-list>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
