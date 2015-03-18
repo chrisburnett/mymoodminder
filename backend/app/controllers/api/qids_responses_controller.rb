@@ -1,4 +1,4 @@
-class QidsResponsesController < ApplicationController
+class Api::QidsResponsesController < ApplicationController
   def create
     user = User.find(params[:user_id])
     if user then
