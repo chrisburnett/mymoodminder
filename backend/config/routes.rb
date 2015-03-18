@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
-  resources :qids_responses
+  namespace :api, defaults: {format: :json} do
+    resources :users do
+      resources :qids_responses
+    end
+  end
+  
 
-  resources :users
+  
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
