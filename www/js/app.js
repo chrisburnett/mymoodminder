@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'trump.services' is found in services.js
 // 'trump.controllers' is found in controllers.js
-angular.module('trump', ['ionic', 'trump.controllers', 'trump.services'])
+angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'LocalStorageModule'])
 
     .run(function($ionicPlatform) {
         $ionicPlatform.ready(function() {
@@ -19,6 +19,10 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services'])
                 StatusBar.styleDefault();
             }
         });
+    })
+
+    .config(function(localStorageServiceProvider) {
+        localStorageServiceProvider.setPrefix('trumpApp');
     })
 
     .config(function($stateProvider, $urlRouterProvider) {
