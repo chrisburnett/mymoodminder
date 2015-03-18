@@ -1,0 +1,43 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 
+  completed_at: 2015-03-18 15:25:07
+  q1: MyString
+  q2: MyString
+  q3: MyString
+  q4: MyString
+  q5: MyString
+  q6: MyString
+  q7: MyString
+  q8: MyString
+  q9: MyString
+  q10: MyString
+  q11: MyString
+  q12: MyString
+  q13: MyString
+  q14: MyString
+  q15: MyString
+  q16: MyString
+  score: 1
+
+two:
+  user_id: 
+  completed_at: 2015-03-18 15:25:07
+  q1: MyString
+  q2: MyString
+  q3: MyString
+  q4: MyString
+  q5: MyString
+  q6: MyString
+  q7: MyString
+  q8: MyString
+  q9: MyString
+  q10: MyString
+  q11: MyString
+  q12: MyString
+  q13: MyString
+  q14: MyString
+  q15: MyString
+  q16: MyString
+  score: 1
