@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   namespace :api, defaults: {format: :json} do
     resources :users do
-      resources :qids_responses
+      resources :qids_responses, only: [:index, :create, :update, :destroy]
     end
   end
   
