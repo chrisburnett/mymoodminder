@@ -5,8 +5,11 @@ angular.module('trump.services', ['LocalStorageModule'])
             // return a service which lets us persist a response
             // between invocations of the app locally (for now) and
             // retrieve it later
-            storeLocally: function(response) {
-                return localStorageService.set(new Date(), response);
+            save: function(response) {
+                var qids_responses = localStorageService.get('qids_responses');
+                if(!qids_responses) qids_responses = {};
+                qids_responses[new Date()] = response;
+                return localStorageService.set('qids_responses', qids_responses);
             }
         }
     })

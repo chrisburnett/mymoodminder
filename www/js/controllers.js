@@ -13,7 +13,7 @@ angular.module('trump.controllers', [])
 
     .controller('QIDSResponseCtrl', function($scope, QIDSResponse, localStorageService) {
         $scope.createResponse = function(response, localStorageService) {
-            console.log(QIDSResponse.storeLocally(response, localStorageService));
+            console.log(QIDSResponse.save(response, localStorageService));
         };
     })
 
