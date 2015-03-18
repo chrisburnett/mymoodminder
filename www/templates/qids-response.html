@@ -1,94 +1,143 @@
 <ion-view view-title="Questionnaire response">
     <ion-content class="padding">
 
-
         <!-- Here will go all the QIDS questions, scrollable -->
-        <form action="">
-            <!-- START OF FORM
+        <form name="QIDSResponseForm" ng-controller="QIDSResponseCtrl" ng-submit="createResponse(response)">
+            <!-- START OF FORM -->
 
             <div class="list">
-
                 <!-- QUESTION 1 -->
                 <div class="item item-divider">
                     <!-- Question -->
-                    Falling asleep
+                    1. Falling asleep
                 </div>
                 <!-- Answers with radios -->
                 <div class="list" id="qids-qa-1">
                     <label class="item item-radio">
-                        <input type="radio" name="qids-1" value="a"/>
+                        <input type="radio" value="a" ng-model="response.q1"/>
                         <div class="item-content">
-                            Answer 1
+                            I never take longer than 30 minutes to fall asleep.
                         </div>
                         <i class="radio-icon ion-checkmark"></i>
                     </label>
                     <label class="item item-radio">
-                        <input type="radio" name="qids-1" value="b"/>
+                        <input type="radio" value="b" ng-model="response.q1"/>
                         <div class="item-content">
-                            Answer 2
+                            I take at least 30 minutes to fall asleep, less than half the time.
                         </div>
                         <i class="radio-icon ion-checkmark"></i>
                     </label>
                     <label class="item item-radio">
-                        <input type="radio" name="qids-1" value="c"/>
+                        <input type="radio" value="c" ng-model="response.q1"/>
                         <div class="item-content">
-                            Answer 3
+                            I take at least 30 minutes to fall asleep, more than half the time.
                         </div>
                         <i class="radio-icon ion-checkmark"></i>
                     </label>
                     <label class="item item-radio">
-                        <input type="radio" name="qids-1" value="d"/>
+                        <input type="radio" value="d" ng-model="response.q1"/>
                         <div class="item-content">
-                            Answer 4
+                            I take more than 60 minutes to fall asleep, more than half the time.
                         </div>
                         <i class="radio-icon ion-checkmark"></i>
                     </label>
                 </div>
             </div>
 
-            <div class="list">
-
-                <!-- QUESTION 1 -->
-                <div class="item item-divider">
-                    <!-- Question -->
-                    Sleeping at night
-                </div>
-                <!-- Answers with radios -->
-                <div class="list" id="qids-qa-2">
-                    <label class="item item-radio">
-                        <input type="radio" name="qids-2" value="a"/>
-                        <div class="item-content">
-                            Answer 1
-                        </div>
-                        <i class="radio-icon ion-checkmark"></i>
-                    </label>
-                    <label class="item item-radio">
-                        <input type="radio" name="qids-2" value="b"/>
-                        <div class="item-content">
-                            Answer 2
-                        </div>
-                        <i class="radio-icon ion-checkmark"></i>
-                    </label>
-                    <label class="item item-radio">
-                        <input type="radio" name="qids-2" value="c"/>
-                        <div class="item-content">
-                            Answer 3
-                        </div>
-                        <i class="radio-icon ion-checkmark"></i>
-                    </label>
-                    <label class="item item-radio">
-                        <input type="radio" name="qids-2" value="d"/>
-                        <div class="item-content">
-                            Answer 4
-                        </div>
-                        <i class="radio-icon ion-checkmark"></i>
-                    </label>
-                </div>
+            <!-- QUESTION 2 -->
+            <div class="item item-divider">
+                <!-- Question -->
+                2. Sleeping at night
             </div>
+            <!-- Answers with radios -->
+            <div class="list" id="qids-qa-2">
+                <label class="item item-radio">
+                    <input type="radio" value="a" ng-model="response.q2"/>
+                    <div class="item-content">
+                        I do not wake up at night.
+                    </div>
+                    <i class="radio-icon ion-checkmark"></i>
+                </label>
+                <label class="item item-radio">
+                    <input type="radio" value="b" ng-model="response.q2"/>
+                    <div class="item-content">
+                        I have a restless, light sleep with a few brief awakenings each night.
+                    </div>
+                    <i class="radio-icon ion-checkmark"></i>
+                </label>
+                <label class="item item-radio">
+                    <input type="radio" value="c" ng-model="response.q2"/>
+                    <div class="item-content">
+                        I wake up at least once a night, but I go back to sleep easily.
+                    </div>
+                    <i class="radio-icon ion-checkmark"></i>
+                </label>
+                <label class="item item-radio">
+                    <input type="radio" value="d" ng-model="response.q2"/>
+                    <div class="item-content">
+                        I awaken more than once a night and stay awake for 20 minutes or more, more than half the time.
+                    </div>
+                    <i class="radio-icon ion-checkmark"></i>
+                </label>
+            </div>
+
+            <!-- QUESTION 3 -->
+            <div class="item item-divider">
+                <!-- Question -->
+                3. Waking up too early
+            </div>
+            <!-- Answers with radios -->
+            <div class="list" id="qids-qa-3">
+                <label class="item item-radio">
+                    <input type="radio" value="a" ng-model="response.q3"/>
+                    <div class="item-content">
+                        Most of the time, I awaken no more than 30 minutes before I need to get up.
+                    </div>
+                    <i class="radio-icon ion-checkmark"></i>
+                </label>
+                <label class="item item-radio">
+                    <input type="radio" value="b" ng-model="response.q3"/>
+                    <div class="item-content">
+                        More than half the time, I awaken more than 30 minutes before I need to get up.
+                    </div>
+                    <i class="radio-icon ion-checkmark"></i>
+                </label>
+                <label class="item item-radio">
+                    <input type="radio" value="c" ng-model="response.q3"/>
+                    <div class="item-content">
+                        I almost always awaken at least one hour or so before I need to, but I go back to sleep eventually.
+                    </div>
+                    <i class="radio-icon ion-checkmark"></i>
+                </label>
+                <label class="item item-radio">
+                    <input type="radio" value="d" ng-model="response.q3"/>
+                    <div class="item-content">
+                        I awaken at least one hour before I need to, and can't go back to sleep.
+                    </div>
+                    <i class="radio-icon ion-checkmark"></i>
+                </label>
+            </div>
+
+
+            <div>
+                {{response.q1}}
+                {{response.q2}}
+                {{response.q3}}
+            </div>
+            
+            <!-- submit button -->
+            <div class="padding">
+                <button type="submit" class="button button-block button-positive">I'm finished</button>
+            </div>
+
+
+
+
 
 
             <!-- END OF FORM -->
         </form>
+
 
 
     </ion-content>
