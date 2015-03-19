@@ -7,6 +7,9 @@
 // 'trump.controllers' is found in controllers.js
 angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'LocalStorageModule'])
 
+    // this is where you configure the URL of the backend UI server
+    .constant('BACKEND_URL', 'http://localhost:3000/api')
+
     .run(function($ionicPlatform) {
         $ionicPlatform.ready(function() {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
