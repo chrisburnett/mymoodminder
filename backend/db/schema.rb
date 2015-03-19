@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150318152507) do
+ActiveRecord::Schema.define(version: 20150319081757) do
 
   create_table "qids_responses", force: :cascade do |t|
     t.integer  "user_id"
@@ -21,10 +21,6 @@ ActiveRecord::Schema.define(version: 20150318152507) do
     t.string   "q3"
     t.string   "q4"
     t.string   "q5"
-    t.string   "q6"
-    t.string   "q7"
-    t.string   "q8"
-    t.string   "q9"
     t.string   "q10"
     t.string   "q11"
     t.string   "q12"
@@ -35,6 +31,8 @@ ActiveRecord::Schema.define(version: 20150318152507) do
     t.integer  "score"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.string   "q6_7"
+    t.string   "q8_9"
   end
 
   add_index "qids_responses", ["user_id"], name: "index_qids_responses_on_user_id"
