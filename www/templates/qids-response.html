@@ -119,23 +119,170 @@
             </div>
 
 
+            <!-- QUESTION 4 -->
+            <div class="item item-divider">
+                <!-- Question -->
+                4. Sleeping too much
+            </div>
+            <!-- Answers with radios -->
+            <div class="list" id="qids-qa-4">
+                <label class="item item-radio">
+                    <input type="radio" value="0" ng-model="response.q4"/>
+                    <div class="item-content">
+                        I sleep no longer than 7-8 hours/night, without napping during the day.
+                    </div>
+                    <i class="radio-icon ion-checkmark"></i>
+                </label>
+                <label class="item item-radio">
+                    <input type="radio" value="1" ng-model="response.q4"/>
+                    <div class="item-content">
+                        I sleep no longer than 10 hours in a 24-hour period including naps.
+                    </div>
+                    <i class="radio-icon ion-checkmark"></i>
+                </label>
+                <label class="item item-radio">
+                    <input type="radio" value="2" ng-model="response.q4"/>
+                    <div class="item-content">
+                        I sleep no longer than 12 hours in a 24-hour period including naps.
+                    </div>
+                    <i class="radio-icon ion-checkmark"></i>
+                </label>
+                <label class="item item-radio">
+                    <input type="radio" value="3" ng-model="response.q4"/>
+                    <div class="item-content">
+                        I sleep longer than 12 hours in a 24-hour period including naps.
+                    </div>
+                    <i class="radio-icon ion-checkmark"></i>
+                </label>
+            </div>
+
+            <!-- QUESTION 4 -->
+            <div class="item item-divider">
+                <!-- Question -->
+                5. Feeling sad
+            </div>
+            <!-- Answers with radios -->
+            <div class="list" id="qids-qa-5">
+                <label class="item item-radio">
+                    <input type="radio" value="0" ng-model="response.q5"/>
+                    <div class="item-content">
+                        I do not feel sad.
+                    </div>
+                    <i class="radio-icon ion-checkmark"></i>
+                </label>
+                <label class="item item-radio">
+                    <input type="radio" value="1" ng-model="response.q5"/>
+                    <div class="item-content">
+                        More than half the time, I awaken more than 30 minutes before I need to get up.
+                    </div>
+                    <i class="radio-icon ion-checkmark"></i>
+                </label>
+                <label class="item item-radio">
+                    <input type="radio" value="2" ng-model="response.q5"/>
+                    <div class="item-content">
+                        I almost always awaken at least one hour or so before I need to, but I go back to sleep eventually.
+                    </div>
+                    <i class="radio-icon ion-checkmark"></i>
+                </label>
+                <label class="item item-radio">
+                    <input type="radio" value="3" ng-model="response.q5"/>
+                    <div class="item-content">
+                        I awaken at least one hour before I need to, and can't go back to sleep.
+                    </div>
+                    <i class="radio-icon ion-checkmark"></i>
+                </label>
+            </div>
+
+            <!-- QUESTION 6/7 -->
+            <h3>Please complete either 6 or 7 (not both)</h3>
+          
             <div>
-                {{response.q1}}
-                {{response.q2}}
-                {{response.q3}}
-            </div>
-            
-            <!-- submit button -->
-            <div class="padding">
-                <button type="submit" class="button button-block button-positive">I'm finished</button>
-            </div>
+                <div class="item item-divider">
+                    <!-- Question -->
+                    6. Decreased appetite
+                </div>
+                <!-- Answers with radios -->
+                <div class="list" id="qids-qa-6-7">
+                    <label class="item item-radio">
+                        <input type="radio" value="0" ng-model="response.q6_7"/>
+                        <div class="item-content">
+                            There is no change in my usual appetite.
+                        </div>
+                        <i class="radio-icon ion-checkmark"></i>
+                    </label>
+                    <label class="item item-radio">
+                        <input type="radio" value="1" ng-model="response.q6_7"/>
+                        <div class="item-content">
+                            I eat somewhat less often or lesser amounts of food than usual.
+                        </div>
+                        <i class="radio-icon ion-checkmark"></i>
+                    </label>
+                    <label class="item item-radio">
+                        <input type="radio" value="2" ng-model="response.q6_7"/>
+                        <div class="item-content">
+                            I eat much less than usual and only with personal effort.
+                        </div>
+                        <i class="radio-icon ion-checkmark"></i>
+                    </label>
+                    <label class="item item-radio">
+                        <input type="radio" value="3" ng-model="response.q6_7"/>
+                        <div class="item-content">
+                            I rarely eat within a 24-hour period, and only with extreme personal effort or when others persuade me to eat.
+                        </div>
+                        <i class="radio-icon ion-checkmark"></i>
+                    </label>
+                    <div class="item item-divider">
+                        <!-- Question -->
+                        7. Increased appetite
+                    </div>
+                    <label class="item item-radio">
+                        <input type="radio" value="4" ng-model="response.q6_7"/>
+                        <div class="item-content">
+                            There is no change from my usual appetite.
+                        </div>
+                        <i class="radio-icon ion-checkmark"></i>
+                    </label>
+                    <label class="item item-radio">
+                        <input type="radio" value="5" ng-model="response.q6_7"/>
+                        <div class="item-content">
+                            I feel a need to eat more frequently than usual.
+                        </div>
+                        <i class="radio-icon ion-checkmark"></i>
+                    </label>
+                    <label class="item item-radio">
+                        <input type="radio" value="6" ng-model="response.q6_7"/>
+                        <div class="item-content">
+                            I regularly eat more often and/or greater amounts of food than usual.
+                        </div>
+                        <i class="radio-icon ion-checkmark"></i>
+                    </label>
+                    <label class="item item-radio">
+                        <input type="radio" value="7" ng-model="response.q6_7"/>
+                        <div class="item-content">
+                            I feel driven to overeat both at mealtime and between meals.
+                        </div>
+                        <i class="radio-icon ion-checkmark"></i>
+                    </label>
+                </div>
+
+
+                <div>
+                    {{response.q1}}
+                    {{response.q2}}
+                    {{response.q3}}
+                </div>
+
+                <!-- submit button -->
+                <div class="padding">
+                    <button type="submit" class="button button-block button-positive">I'm finished</button>
+                </div>
 
 
 
 
 
 
-            <!-- END OF FORM -->
+                <!-- END OF FORM -->
         </form>
 
 
