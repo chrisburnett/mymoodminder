@@ -1,6 +1,6 @@
 angular.module('trump.services', ['LocalStorageModule'])
 
-    .factory('QIDSResponse', function(localStorageService) {
+    .factory('QIDSResponses', function(localStorageService) {
         return {
             // return a service which lets us persist a response
             // between invocations of the app locally (for now) and
@@ -8,8 +8,18 @@ angular.module('trump.services', ['LocalStorageModule'])
             save: function(response) {
                 var qids_responses = localStorageService.get('qids_responses');
                 if(!qids_responses) qids_responses = {};
-                qids_responses[new Date()] = response;
+                // use the date and time of completion as the key
+                // locally, but also set it as a property so it gets
+                // uploaded at sync
+                var completion_time = (new Date()).toISOString();;
+                response.completion_time = completion_time;
+                qids_responses[completion_time] = response;
+                
                 return localStorageService.set('qids_responses', qids_responses);
+            },
+            all: function() {
+                console.log(localStorageService.get('qids_responses'));
+                return localStorageService.get('qids_responses');
             }
         }
     })
