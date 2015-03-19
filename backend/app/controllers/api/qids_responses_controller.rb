@@ -1,11 +1,21 @@
 class Api::QidsResponsesController < ApplicationController
+
+  protect_from_forgery with: :null_session
+  
   def create
     user = User.find(params[:user_id])
     if user then
-      user.qids_responses.create(safe_params)
-      render json: task, status: 201
+      resp = user.qids_responses.create(safe_params)
+      render json: resp, status: 201
     end
   end
+
+  def index
+    user = User.find(params[:user_id])
+    responses = user.qids_responses
+    render json: responses, status: 201
+  end
+  
 
   private
   
