@@ -156,7 +156,7 @@
                 </label>
             </div>
 
-            <!-- QUESTION 4 -->
+            <!-- QUESTION 5 -->
             <div class="item item-divider">
                 <!-- Question -->
                 5. Feeling sad
@@ -195,7 +195,7 @@
 
             <!-- QUESTION 6/7 -->
             <h3>Please complete either 6 or 7 (not both)</h3>
-          
+
             <div>
                 <div class="item item-divider">
                     <!-- Question -->
@@ -264,25 +264,206 @@
                         <i class="radio-icon ion-checkmark"></i>
                     </label>
                 </div>
+            </div>
 
 
-                <div>
-                    {{response.q1}}
-                    {{response.q2}}
-                    {{response.q3}}
+            <!-- QUESTION 8/9 -->
+            <h3>Please complete either 8 or 9 (not both)</h3>
+
+            <div>
+                <div class="item item-divider">
+                    <!-- Question -->
+                    8. Decreased weight (within the last two weeks)
                 </div>
-
-                <!-- submit button -->
-                <div class="padding">
-                    <button type="submit" class="button button-block button-positive">I'm finished</button>
+                <!-- Answers with radios -->
+                <div class="list" id="qids-qa-8-9">
+                    <label class="item item-radio">
+                        <input type="radio" value="0" ng-model="response.q8_9"/>
+                        <div class="item-content">
+                            I have not had a change in my weight.
+                        </div>
+                        <i class="radio-icon ion-checkmark"></i>
+                    </label>
+                    <label class="item item-radio">
+                        <input type="radio" value="1" ng-model="response.q8_9"/>
+                        <div class="item-content">
+                            I feel as if I have had a slight weight loss.
+                        </div>
+                        <i class="radio-icon ion-checkmark"></i>
+                    </label>
+                    <label class="item item-radio">
+                        <input type="radio" value="2" ng-model="response.q8_9"/>
+                        <div class="item-content">
+                            I have lost 2 pounds or more.
+                        </div>
+                        <i class="radio-icon ion-checkmark"></i>
+                    </label>
+                    <label class="item item-radio">
+                        <input type="radio" value="3" ng-model="response.q8_9"/>
+                        <div class="item-content">
+                            I have lost 5 pounds or more.
+                        </div>
+                        <i class="radio-icon ion-checkmark"></i>
+                    </label>
+                    <div class="item item-divider">
+                        <!-- Question -->
+                        9. Increased weight (within the last two weeks)
+                    </div>
+                    <label class="item item-radio">
+                        <input type="radio" value="4" ng-model="response.q8_9"/>
+                        <div class="item-content">
+                            I have not had a change in my weight.
+                        </div>
+                        <i class="radio-icon ion-checkmark"></i>
+                    </label>
+                    <label class="item item-radio">
+                        <input type="radio" value="5" ng-model="response.q8_9"/>
+                        <div class="item-content">
+                            I feel as if I have had a slight weight gain.
+                        </div>
+                        <i class="radio-icon ion-checkmark"></i>
+                    </label>
+                    <label class="item item-radio">
+                        <input type="radio" value="6" ng-model="response.q8_9"/>
+                        <div class="item-content">
+                            I have gained 2 pounds or more.
+                        </div>
+                        <i class="radio-icon ion-checkmark"></i>
+                    </label>
+                    <label class="item item-radio">
+                        <input type="radio" value="7" ng-model="response.q8_9"/>
+                        <div class="item-content">
+                            I have gained 5 pounds or more.
+                        </div>
+                        <i class="radio-icon ion-checkmark"></i>
+                    </label>
                 </div>
+            </div>
+
+            <!-- QUESTION 10 -->
+            <div class="item item-divider">
+                <!-- Question -->
+                10. Concentration / decision making
+            </div>
+            <!-- Answers with radios -->
+            <div class="list" id="qids-qa-10">
+                <label class="item item-radio">
+                    <input type="radio" value="0" ng-model="response.q10"/>
+                    <div class="item-content">
+                        There is no change in my usual capacity to concentrate or make decisions.
+                    </div>
+                    <i class="radio-icon ion-checkmark"></i>
+                </label>
+                <label class="item item-radio">
+                    <input type="radio" value="1" ng-model="response.q10"/>
+                    <div class="item-content">
+                        I occasionally feel indecisive or find that my attention wanders.
+                    </div>
+                    <i class="radio-icon ion-checkmark"></i>
+                </label>
+                <label class="item item-radio">
+                    <input type="radio" value="2" ng-model="response.q10"/>
+                    <div class="item-content">
+                        Most of the time, I struggle to focus my attention or to make decisions.
+                    </div>
+                    <i class="radio-icon ion-checkmark"></i>
+                </label>
+                <label class="item item-radio">
+                    <input type="radio" value="3" ng-model="response.q10"/>
+                    <div class="item-content">
+                        I cannot concentrate well enough to read or cannot even make minor decisions.
+                    </div>
+                    <i class="radio-icon ion-checkmark"></i>
+                </label>
+            </div>
+
+            <!-- QUESTION 11 -->
+            <div class="item item-divider">
+                <!-- Question -->
+                11. View of myself
+            </div>
+            <!-- Answers with radios -->
+            <div class="list" id="qids-qa-11">
+                <label class="item item-radio">
+                    <input type="radio" value="0" ng-model="response.q11"/>
+                    <div class="item-content">
+                        I see myself as equally worthwhile and deserving as other people.
+                    </div>
+                    <i class="radio-icon ion-checkmark"></i>
+                </label>
+                <label class="item item-radio">
+                    <input type="radio" value="1" ng-model="response.q11"/>
+                    <div class="item-content">
+                        I am more self-blaming than usual.
+                    </div>
+                    <i class="radio-icon ion-checkmark"></i>
+                </label>
+                <label class="item item-radio">
+                    <input type="radio" value="2" ng-model="response.q11"/>
+                    <div class="item-content">
+                        I largely believe that I cause problems for others.
+                    </div>
+                    <i class="radio-icon ion-checkmark"></i>
+                </label>
+                <label class="item item-radio">
+                    <input type="radio" value="3" ng-model="response.q11"/>
+                    <div class="item-content">
+                        I think almost constantly about major and minor defects in myself.
+                    </div>
+                    <i class="radio-icon ion-checkmark"></i>
+                </label>
+            </div>
+
+            <!-- QUESTION 12 -->
+            <div class="item item-divider">
+                <!-- Question -->
+                12. Thoughts of death or suicide
+            </div>
+            <!-- Answers with radios -->
+            <div class="list" id="qids-qa-12">
+                <label class="item item-radio">
+                    <input type="radio" value="0" ng-model="response.q12"/>
+                    <div class="item-content">
+                        I do not think of suicide or death.
+                    </div>
+                    <i class="radio-icon ion-checkmark"></i>
+                </label>
+                <label class="item item-radio">
+                    <input type="radio" value="1" ng-model="response.q12"/>
+                    <div class="item-content">
+                        I feel that life is empty or wonder if it's worth living.
+                    </div>
+                    <i class="radio-icon ion-checkmark"></i>
+                </label>
+                <label class="item item-radio">
+                    <input type="radio" value="2" ng-model="response.q12"/>
+                    <div class="item-content">
+                        I think of suicide or death several times a week for several minutes.
+                    </div>
+                    <i class="radio-icon ion-checkmark"></i>
+                </label>
+                <label class="item item-radio">
+                    <input type="radio" value="3" ng-model="response.q12"/>
+                    <div class="item-content">
+                        I think of suicide or death several times a day in some detail, or I have made specific plans for suicide, or have actually tried to take my life.
+                    </div>
+                    <i class="radio-icon ion-checkmark"></i>
+                </label>
+            </div>
 
 
+            <div>
+                {{response.q1}}
+                {{response.q2}}
+                {{response.q3}}
+            </div>
 
+            <!-- submit button -->
+            <div class="padding">
+                <button type="submit" class="button button-block button-positive">I'm finished</button>
+            </div>
 
-
-
-                <!-- END OF FORM -->
+            <!-- END OF FORM -->
         </form>
 
 
