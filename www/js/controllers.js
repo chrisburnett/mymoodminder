@@ -23,6 +23,15 @@ angular.module('trump.controllers', [])
         };
     })
 
+    .controller('LoginCtrl', function($scope) {
+        // controller for handling login requests
+        $scope.credentials = {};
+
+        $scope.login = function(credentials) {
+            console.log(credentials);
+        }
+    })
+
     .controller('SettingsCtrl', function($scope) {
         $scope.settings = {
             enableFriends: true
