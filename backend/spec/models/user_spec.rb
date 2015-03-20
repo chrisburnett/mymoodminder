@@ -2,8 +2,11 @@ require 'rails_helper'
 require 'spec_helper'
 
 RSpec.describe User, :type => :model do
+  
   it "fails because no password" do
-    expect(User.new({:username => "hans"}).save).to be false
+
+    user = build(:user)
+    expect(user.save).to be false
     
   end
   
@@ -16,6 +19,8 @@ RSpec.describe User, :type => :model do
     expect(User.new({:username => "hans",
               :password => 'hansohanso'}).save).to be true
   end
+
+  it "allows a valid user to log in"
 
 end
 
