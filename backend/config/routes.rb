@@ -4,8 +4,9 @@ Rails.application.routes.draw do
       resources :qids_responses, only: [:index, :create, :update, :destroy]
     end
   end
-  
 
+  # route for authenticating with the AuthController
+  post 'auth' => 'auth#authenticate'
   
 
   # The priority is based upon order of creation: first created -> highest priority.
