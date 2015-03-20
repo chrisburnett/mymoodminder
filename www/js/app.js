@@ -8,7 +8,7 @@
 angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'LocalStorageModule'])
 
     // this is where you configure the URL of the backend UI server
-    .constant('BACKEND_URL', 'http://localhost:3000/api')
+    .constant('BACKEND_URL', 'http://localhost:3000/api/users/1/qids_responses')
 
     .run(function($ionicPlatform) {
         $ionicPlatform.ready(function() {

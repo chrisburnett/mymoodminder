@@ -1,6 +1,6 @@
 angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
 
-    .factory('QIDSResponses', function(localStorageService, BACKEND_URL) {
+    .factory('QIDSResponses', function(localStorageService, BACKEND_URL, $resource) {
         return {
             // return a service which lets us persist a response
             // between invocations of the app locally (for now) and
@@ -14,13 +14,16 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
                 var completion_time = (new Date()).toISOString();;
                 response.completion_time = completion_time;
                 qids_responses[completion_time] = response;
-                
-                return localStorageService.set('qids_responses', qids_responses);
+                localStorageService.set('qids_responses', qids_responses);
             },
             all: function() {
                 return localStorageService.get('qids_responses');
+            },
+            rest: function() {
+                // configure a rest service proxy and return it
+                return $resource(BACKEND_URL);
             }
-        }
+        };
     })
 
 
