@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
 
   validates :username,
             uniqueness: true, presence: true
+
+
   
   def generate_auth_token
     payload = { user_id: self.id }
