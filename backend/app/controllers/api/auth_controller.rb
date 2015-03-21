@@ -1,4 +1,4 @@
-class AuthController < ApplicationController
+class Api::AuthController < ApplicationController
   skip_before_action :authenticate_request # this will be implemented later
   def authenticate
     user = User.find_by_username(params[:username]).authenticate(params[:password])
