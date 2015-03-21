@@ -26,6 +26,38 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
         };
     })
 
+    .factory('AuthToken', function(localStorageService) {
+        // service for storing the authentication token in local storage
+        return {
+            set: function(token) {
+                return localStorageService.set('auth_token', token);
+            },
+            get: function() {
+                return localStorageService.get('auth_token');
+            }
+        };
+    })
+
+    .factory('AuthService', function($http, $q, $rootScope, AuthToken, AuthEvents, AUTH_URL) {
+        // service for logging in
+        return {
+            login: function(username, password) {
+                var d = $q.defer();
+                $http.post(AUTH_URL, {
+                    username: username,
+                    password: password
+                }).success(function(resp) {
+                    AuthToken.set(resp.auth_token);
+                    $rootScope.$broadcast(AuthEvents.loginSuccess);
+                    d.resolve(resp.user);
+                }).error(function(resp) {
+                    $rootScope.$broadcast(AuthEvents.loginFailed);
+                    d.reject(resp.error);
+                });
+                return d.promise;
+            }
+        };
+    })
 
     .factory('Timepoints', function() {
         // Might use a resource here that returns a JSON array We
