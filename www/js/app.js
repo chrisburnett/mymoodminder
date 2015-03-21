@@ -7,7 +7,7 @@
 // 'trump.controllers' is found in controllers.js
 angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'LocalStorageModule'])
 
-    // this is where you configure the URL of the backend UI server
+// this is where you configure the URL of the backend UI server
     .constant('BACKEND_URL', 'http://localhost:3000/api/users/1/qids_responses')
     .constant('AUTH_URL', 'http://localhost:3000/api/auth')
 
@@ -29,6 +29,11 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'LocalS
         localStorageServiceProvider.setPrefix('trumpApp');
     })
 
+    .config(function($httpProvider) {
+        return $httpProvider.interceptors.push('AuthInterceptor');
+    })
+
+
     .config(function($stateProvider, $urlRouterProvider) {
 
         // Ionic uses AngularUI Router which uses the concept of states
@@ -42,7 +47,7 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'LocalS
                 templateUrl: 'templates/login.html',
                 controller: 'LoginCtrl'
             })
-        
+
         // setup an abstract state for the tabs directive
             .state('tab', {
                 url: "/tab",
@@ -50,7 +55,7 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'LocalS
                 templateUrl: "templates/tabs.html"
             })
 
-        // Each tab has its own nav history stack: 
+        // Each tab has its own nav history stack:
             .state('tab.dash', {
                 url: '/dash',
                 views: {
@@ -86,10 +91,73 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'LocalS
             .state('qids-response', {
                 url: '/response',
                 templateUrl: "templates/qids-response.html",
-                controller: 'QIDSResponseCtrl'                                
+                controller: 'QIDSResponseCtrl'
             });
 
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/tab/dash');
 
+    })
+
+
+    .factory('AuthToken', function(localStorageService) {
+        // service for storing the authentication token in local storage
+        return {
+            set: function(token) {
+                return localStorageService.set('auth_token', token);
+            },
+            get: function() {
+                return localStorageService.get('auth_token');
+            }
+        };
+    })
+
+    .factory('AuthInterceptor', function($q, $injector) {
+        return {
+            // This will be called on every outgoing http request
+            request: function(config) {
+                var AuthToken = $injector.get('AuthToken');
+                var token = AuthToken.get();
+                config.headers = config.headers || {};
+                if (token) {
+                    config.headers.Authorization = 'Bearer ' + token;
+                }
+                return config || $q.when(config);
+            },
+            // This will be called on every incoming response that has en error status code
+            responseError: function(response) {
+                var AuthEvents = $injector.get('AuthEvents');
+                var matchesAuthenticatePath = response.config && response.config.url.match(new RegExp('/api/auth'));
+                if (!matchesAuthenticatePath) {
+                    $injector.get('$rootScope').$broadcast({
+                        401: AuthEvents.notAuthenticated,
+                        403: AuthEvents.notAuthorized,
+                        419: AuthEvents.sessionTimeout
+                    }[response.status], response);
+                }
+                return $q.reject(response);
+            }
+        };
+    })
+
+
+    .factory('AuthService', function($http, $q, $rootScope, AuthToken, AuthEvents, AUTH_URL) {
+        // service for logging in
+        return {
+            login: function(username, password) {
+                var d = $q.defer();
+                $http.post(AUTH_URL, {
+                    username: username,
+                    password: password
+                }).success(function(resp) {
+                    AuthToken.set(resp.auth_token);
+                    $rootScope.$broadcast('Login successful.');
+                    d.resolve(resp.user);
+                }).error(function(resp) {
+                    $rootScope.$broadcast('Login failed');
+                    d.reject(resp.error);
+                });
+                return d.promise;
+            }
+        };
     });
