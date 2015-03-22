@@ -23,13 +23,13 @@ angular.module('trump.controllers', [])
         };
     })
 
-    .controller('LoginCtrl', function($scope) {
+    .controller('LoginCtrl', function($scope, AuthService) {
         // controller for handling login requests
         $scope.credentials = {};
 
         $scope.login = function(credentials) {
-            console.log(credentials);
-        }
+            return AuthService.login(credentials.username, credentials.password);
+        };
     })
 
     .controller('SettingsCtrl', function($scope) {

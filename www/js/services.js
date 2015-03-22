@@ -21,7 +21,7 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
             },
             rest: function() {
                 // configure a rest service proxy and return it
-                return $resource(BACKEND_URL);
+                return $resource(BACKEND_URL + '/qids_responses');
             }
         };
     })

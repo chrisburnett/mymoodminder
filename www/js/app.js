@@ -8,7 +8,7 @@
 angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'LocalStorageModule'])
 
 // this is where you configure the URL of the backend UI server
-    .constant('BACKEND_URL', 'http://localhost:3000/api/users/1/qids_responses')
+    .constant('BACKEND_URL', 'http://localhost:3000/api')
     .constant('AUTH_URL', 'http://localhost:3000/api/auth')
 
     .run(function($ionicPlatform) {
@@ -27,10 +27,6 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'LocalS
 
     .config(function(localStorageServiceProvider) {
         localStorageServiceProvider.setPrefix('trumpApp');
-    })
-
-    .config(function($httpProvider) {
-        return $httpProvider.interceptors.push('AuthInterceptor');
     })
 
 
@@ -95,8 +91,8 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'LocalS
             });
 
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/tab/dash');
-
+        // $urlRouterProvider.otherwise('/tab/dash');
+        $urlRouterProvider.otherwise('/response');
     })
 
 
@@ -112,7 +108,7 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'LocalS
         };
     })
 
-    .factory('AuthInterceptor', function($q, $injector) {
+    .factory('AuthInterceptor', function($q, $injector, AUTH_URL) {
         return {
             // This will be called on every outgoing http request
             request: function(config) {
@@ -126,13 +122,12 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'LocalS
             },
             // This will be called on every incoming response that has en error status code
             responseError: function(response) {
-                var AuthEvents = $injector.get('AuthEvents');
-                var matchesAuthenticatePath = response.config && response.config.url.match(new RegExp('/api/auth'));
+                var matchesAuthenticatePath = response.config && response.config.url.match(AUTH_URL);
                 if (!matchesAuthenticatePath) {
                     $injector.get('$rootScope').$broadcast({
-                        401: AuthEvents.notAuthenticated,
-                        403: AuthEvents.notAuthorized,
-                        419: AuthEvents.sessionTimeout
+                        401: "Not authenticated",
+                        403: "Not authorised",
+                        419: "Session timed out"
                     }[response.status], response);
                 }
                 return $q.reject(response);
@@ -141,7 +136,7 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'LocalS
     })
 
 
-    .factory('AuthService', function($http, $q, $rootScope, AuthToken, AuthEvents, AUTH_URL) {
+    .factory('AuthService', function($http, $q, $rootScope, AuthToken, AUTH_URL) {
         // service for logging in
         return {
             login: function(username, password) {
@@ -160,4 +155,8 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'LocalS
                 return d.promise;
             }
         };
+    })
+
+    .config(function($httpProvider) {
+        return $httpProvider.interceptors.push('AuthInterceptor');
     });
