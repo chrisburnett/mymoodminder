@@ -1,19 +1,22 @@
 class Api::QidsResponsesController < ApplicationController
 
-  # protect_from_forgery with: :null_session
   
   def create
-    user = User.find(params[:user_id])
-    if user then
-      resp = user.qids_responses.create(safe_params)
+    if @current_user then
+      resp = @current_user.qids_responses.create(safe_params)
       render json: resp, status: 201
+    else
+      fail NotAuthenticatedError
     end
   end
 
   def index
-    user = User.find(params[:user_id])
-    responses = user.qids_responses
-    render json: responses, status: 201
+    if @current_user then
+      responses = @current_user.qids_responses
+      render json: responses, status: 201
+    else
+      fail NotAuthenticatedError
+    end
   end
   
 

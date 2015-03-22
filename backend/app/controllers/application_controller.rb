@@ -21,9 +21,6 @@ class ApplicationController < ActionController::Base
     render json: { error: 'Auth token is expired' }, status: 419 # unofficial timeout status code
   end
 
-
-
-
    # Based on the user_id inside the token payload, find the user.
   def set_current_user
     if decoded_auth_token
@@ -40,10 +37,14 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  protected
+  
+  # return the cached decoded token, or decode if needed
   def decoded_auth_token
     @decoded_auth_token ||= Authentication::AuthToken.decode(http_auth_header_content)
   end
 
+  # check for token expiry
   def auth_token_expired?
     decoded_auth_token && decoded_auth_token.expired?
   end
@@ -60,10 +61,6 @@ class ApplicationController < ActionController::Base
       end
     end
   end
-
-  protected
-
-
 
 
 end
