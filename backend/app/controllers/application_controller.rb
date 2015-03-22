@@ -4,12 +4,16 @@ class AuthenticationTimeoutError < StandardError
 end
 
 class ApplicationController < ActionController::Base
+  include Authentication
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
-  protect_from_forgery with: :exception
-
+  protect_from_forgery with: :null_session
   before_action :set_current_user, :authenticate_request
-
+  #after_filter :set_csrf_cookie_for_ng
+  #skip_before_filter :verify_authenticity_token, :if => Proc.new { |c| c.request.format == 'application/json' }
+  
+  skip_before_action :verify_authenticity_token
+  
   rescue_from NotAuthenticatedError do
     render json: { error: 'Not Authorized' }, status: :unauthorized
   end
@@ -18,7 +22,6 @@ class ApplicationController < ActionController::Base
   end
 
 
-  private
 
 
    # Based on the user_id inside the token payload, find the user.
@@ -38,7 +41,7 @@ class ApplicationController < ActionController::Base
   end
 
   def decoded_auth_token
-    @decoded_auth_token ||= AuthToken.decode(http_auth_header_content)
+    @decoded_auth_token ||= Authentication::AuthToken.decode(http_auth_header_content)
   end
 
   def auth_token_expired?
@@ -57,6 +60,11 @@ class ApplicationController < ActionController::Base
       end
     end
   end
+
+  protected
+
+
+
 
 end
 

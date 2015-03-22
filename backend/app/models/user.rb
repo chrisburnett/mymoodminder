@@ -1,6 +1,6 @@
-require_relative '../../lib/util/AuthToken.rb'
-
 class User < ActiveRecord::Base
+  include Authentication
+  
   has_many :qids_responses
 
   has_secure_password
@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   
   def generate_auth_token
     payload = { user_id: self.id }
-    AuthToken.encode(payload)
+    Authentication::AuthToken.encode(payload)
   end
   
 end
