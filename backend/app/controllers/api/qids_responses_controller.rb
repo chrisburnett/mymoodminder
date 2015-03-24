@@ -13,7 +13,7 @@ class Api::QidsResponsesController < ApplicationController
   def index
     if @current_user then
       responses = @current_user.qids_responses
-      render json: responses, status: 201
+      render json: responses, status: 200
     else
       fail NotAuthenticatedError
     end

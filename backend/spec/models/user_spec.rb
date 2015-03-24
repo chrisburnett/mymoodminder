@@ -24,14 +24,13 @@ RSpec.describe User, :type => :model do
     expect(user.save).to be true
   end
 
-  it "allows a valid user to log in" do
+  it "allows a user to log in with correct credentials" do
     user = create(:user)
     logged_user = User.find_by_username(user.username).authenticate(user.password)
     expect(logged_user).to eq(user)
   end
-  
 
-  it "prevents an invalid user from logging in" do
+  it "prevents a user from logging in with incorrect credentials" do
     user = create(:user)
     logged_user = User.find_by_username(user.username).authenticate("wrongpassword")
     expect(logged_user).not_to eq(user)

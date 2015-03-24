@@ -16,9 +16,13 @@
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 require 'factory_girl_rails'
 
+
 RSpec.configure do |config|
   
-    config.include FactoryGirl::Syntax::Methods
+  config.include FactoryGirl::Syntax::Methods
+
+  # spec/spec_helper.rb
+  
  
 
 # The settings below are suggested to provide a good initial experience
