@@ -35,7 +35,7 @@ RSpec.describe ApplicationController, :type => :controller do
   end
 
   it "returns HTTP 419 if the given token has expired" do
-    @token = Authentication::AuthToken.revoke(@token)
+    allow(Time).to receive(:now).and_return(2.days.from_now)
     request.headers['Authorization'] = 'Bearer ' + @token
     get :index
     expect(response.status).to be 419
