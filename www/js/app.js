@@ -38,6 +38,12 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'LocalS
         // Each state's controller can be found in controllers.js
         $stateProvider
 
+            .state('pinlock', {
+                url: '/unlock',
+                templateUrl: 'templates/pinlock.html',
+                controller: 'PinlockCtrl'
+            })
+        
             .state('login', {
                 url: '/login',
                 templateUrl: 'templates/login.html',

@@ -36,4 +36,26 @@ angular.module('trump.controllers', [])
         $scope.settings = {
             enableFriends: true
         };
+    })
+
+    .controller('PinlockCtrl', function($scope) {
+        $scope.init = function() {
+            $scope.passcode = "";
+        }
+        
+        $scope.add = function(value) {
+            if($scope.passcode.length < 4) {
+                $scope.passcode = $scope.passcode + value;
+                if($scope.passcode.length == 4) {
+                    console.log("The four digit code was entered");
+                };
+                
+            }
+        }
+        
+        $scope.delete = function() {
+            if($scope.passcode.length > 0) {
+                $scope.passcode = $scope.passcode.substring(0, $scope.passcode.length - 1);
+            }
+        }
     });
