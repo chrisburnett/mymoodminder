@@ -23,12 +23,14 @@ angular.module('trump.controllers', [])
         };
     })
 
-    .controller('LoginCtrl', function($scope, AuthService) {
+    .controller('LoginCtrl', function($scope, $state, AuthService) {
         // controller for handling login requests
         $scope.credentials = {};
-
         $scope.login = function(credentials) {
-            return AuthService.login(credentials.username, credentials.password);
+
+            AuthService.login(credentials.username, credentials.password).then(function() {
+                $state.go('qids-response');
+            });
         };
     })
 
