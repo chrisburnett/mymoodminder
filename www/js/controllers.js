@@ -1,11 +1,17 @@
 angular.module('trump.controllers', [])
 
-    .controller('DashCtrl', function($scope, Timepoints, QIDSResponses) {
+    .controller('DashCtrl', function($scope, $state, Timepoints, QIDSResponses, AuthService) {
         $scope.timepoints = Timepoints.all();
         $scope.remove = function(timepoint) {
             Timepoints.remove(timepoint);
         };
         $scope.qids_responses = QIDSResponses.all();
+
+        // clear token and go to login screen
+        $scope.logout = function() {
+            AuthService.logout();
+            $state.go('login');
+        };
     })
 
     .controller('TimepointDetailCtrl', function($scope, $stateParams, Timepoints) {

@@ -110,6 +110,9 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'LocalS
             },
             get: function() {
                 return localStorageService.get('auth_token');
+            },
+            delete: function() {
+                localStorageService.remove('auth_token');
             }
         };
     })
