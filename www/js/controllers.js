@@ -32,13 +32,19 @@ angular.module('trump.controllers', [])
     .controller('LoginCtrl', function($scope, $state, AuthService) {
         // controller for handling login requests
         $scope.credentials = {};
+  
+        
         $scope.login = function(credentials) {
-
+            // reset problem flags
+            $scope.wrongCredentials = null;
+            $scope.cannotConnect = null;
             AuthService.login(credentials.username, credentials.password).then(
                 function() {
-                    $state.go('qids-response');
-                }, function() {
-                    $scope.loginProblem = true;
+                    $state.go('tab.dash');
+                }, function(reason) {
+                    // display the appropriate error message
+                    if(reason == "401") { $scope.wrongCredentials = true; }
+                    else { $scope.cannotConnect = true; }
                 });
         };
     })
@@ -52,7 +58,7 @@ angular.module('trump.controllers', [])
     .controller('PinlockCtrl', function($scope) {
         $scope.init = function() {
             $scope.passcode = "";
-        }
+        };
         
         $scope.add = function(value) {
             if($scope.passcode.length < 4) {
@@ -62,11 +68,11 @@ angular.module('trump.controllers', [])
                 };
                 
             }
-        }
+        };
         
         $scope.delete = function() {
             if($scope.passcode.length > 0) {
                 $scope.passcode = $scope.passcode.substring(0, $scope.passcode.length - 1);
             }
-        }
+        };
     });

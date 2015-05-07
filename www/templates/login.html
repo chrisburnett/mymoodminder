@@ -8,13 +8,22 @@
                 <input type="password" placeholder="Password" ng-model="credentials.password">
             </label>
         </div>
-        <button class="button button-block button-calm" ng-click="login(credentials)">Login</button>
+        
+        <button class="button button-block button-calm" ng-click="login(credentials)">Login</button
+>
 
-        <div ng-if="loginProblem" class="card">
+        <div ng-if="wrongCredentials" class="card">
             <div class="item item-text-wrap item-assertive">
-                Sorry, the username or password you entered was incorrect. Please try again.
+                Sorry, the username and/or password you have provided are incorrect. Please try again.
             </div>
         </div>
+
+        <div ng-if="cannotConnect" class="card">
+            <div class="item item-text-wrap item-assertive">
+                Sorry, there was a problem verifying your password with the server. Please try again later.
+            </div>
+        </div>
+
 
     </ion-content>
 

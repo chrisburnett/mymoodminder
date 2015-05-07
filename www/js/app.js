@@ -153,15 +153,16 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'LocalS
                 $http.post(AUTH_URL, {
                     username: username,
                     password: password
-                }).success(function(resp) {
-                    AuthToken.set(resp.auth_token);
-                    $rootScope.$broadcast('Login successful.');
-                    d.resolve(resp.user);
-                }).error(function(resp) {
-                    $rootScope.$broadcast('Login failed');
-                    d.reject(resp.error);
+                }).success(function(response) {
+                    AuthToken.set(response.auth_token);
+                    d.resolve(response.user);
+                }).error(function(data, status) {
+                    d.reject(status);
                 });
                 return d.promise;
+            },
+            logout: function() {
+                AuthToken.delete();
             }
         };
     })
