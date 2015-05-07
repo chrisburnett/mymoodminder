@@ -28,9 +28,12 @@ angular.module('trump.controllers', [])
         $scope.credentials = {};
         $scope.login = function(credentials) {
 
-            AuthService.login(credentials.username, credentials.password).then(function() {
-                $state.go('qids-response');
-            });
+            AuthService.login(credentials.username, credentials.password).then(
+                function() {
+                    $state.go('qids-response');
+                }, function() {
+                    $scope.loginProblem = true;
+                });
         };
     })
 

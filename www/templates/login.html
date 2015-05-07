@@ -1,13 +1,24 @@
 <ion-view view-title="Login" name="login-view">
-  <ion-content class="padding">
-      <div class="list list-inset">
-          <label class="item item-input">
-              <input type="text" placeholder="Username" ng-model="credentials.username">
-          </label>
-          <label class="item item-input">
-              <input type="password" placeholder="Password" ng-model="credentials.password">
-          </label>
-      </div>
-      <button class="button button-block button-calm" ng-click="login(credentials)">Login</button>
-  </ion-content>
+    <ion-content class="padding">
+        <div class="list list-inset">
+            <label class="item item-input">
+                <input type="text" placeholder="Username" ng-model="credentials.username">
+            </label>
+            <label class="item item-input">
+                <input type="password" placeholder="Password" ng-model="credentials.password">
+            </label>
+        </div>
+        <button class="button button-block button-calm" ng-click="login(credentials)">Login</button>
+
+        <div ng-if="loginProblem" class="card">
+            <div class="item item-text-wrap item-assertive">
+                Sorry, the username or password you entered was incorrect. Please try again.
+            </div>
+        </div>
+
+    </ion-content>
+
+
+
+
 </ion-view>
