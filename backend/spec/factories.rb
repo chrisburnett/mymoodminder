@@ -1,4 +1,8 @@
-FactoryGirl.define do
+FactoryGirl.define do  factory :message do
+    content "MyText"
+user nil
+  end
+
 
   factory :qids_response do
     q1 "2"

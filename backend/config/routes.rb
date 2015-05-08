@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: {format: :json} do
     resources :users
     resources :qids_responses, only: [:index, :create, :update, :destroy]
-    
+    resources :messages, only: [:index, :create, :update, :destroy]
 
     
     # route for authenticating with the AuthController
