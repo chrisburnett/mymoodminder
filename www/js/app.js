@@ -11,7 +11,8 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'LocalS
     .constant('BACKEND_URL', 'http://localhost:3000/api')
     .constant('AUTH_URL', 'http://localhost:3000/api/auth')
 
-    .run(function($ionicPlatform) {
+
+    .run(function($ionicPlatform, $rootScope, $injector, $state) {
         $ionicPlatform.ready(function() {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
@@ -22,6 +23,21 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'LocalS
                 // org.apache.cordova.statusbar required
                 StatusBar.styleDefault();
             }
+
+            // register listener to watch route changes whenever state
+            // changes, we check to see if there's an auth token in
+            // local storage. If there's not (i.e. user clicked
+            // logout) then any state changes should go to login state
+            $rootScope.$on( "$stateChangeStart", function(event, toState, toParams, fromState, fromParams) {
+                var AuthToken = $injector.get('AuthToken');
+                if ( AuthToken.get() == null ) {
+                    // no logged user, we should be going to #login
+                    if ( toState.name != 'login' ) {
+                        // not going to #login, we should redirect now
+                        $state.go("login");
+                    }
+                }         
+            });
         });
     })
 
@@ -97,8 +113,7 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'LocalS
             });
 
         // if none of the above states are matched, use this as the fallback
-        // $urlRouterProvider.otherwise('/tab/dash');
-        $urlRouterProvider.otherwise('/response');
+        $urlRouterProvider.otherwise('/tab/dash');
     })
 
 
