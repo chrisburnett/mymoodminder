@@ -1,11 +1,10 @@
 angular.module('trump.controllers', [])
 
-    .controller('DashCtrl', function($scope, $state, Timepoints, QIDSResponses, AuthService) {
-        $scope.timepoints = Timepoints.all();
-        $scope.remove = function(timepoint) {
-            Timepoints.remove(timepoint);
-        };
-        $scope.qids_responses = QIDSResponses.all();
+    .controller('DashCtrl', function($scope, $state, QIDSResponses, AuthService) {
+        // resolve the promise and bind to scope
+        QIDSResponses.all()
+            .then(function(responses) { $scope.qids_responses = responses; });
+        
 
         // clear token and go to login screen
         $scope.logout = function() {
@@ -14,6 +13,7 @@ angular.module('trump.controllers', [])
         };
     })
 
+
     .controller('TimepointDetailCtrl', function($scope, $stateParams, Timepoints) {
         // here we will want to use the message service and qids
         // service to get a list of events, order them by time and
@@ -21,13 +21,17 @@ angular.module('trump.controllers', [])
         $scope.timepoint = Timepoints.get($stateParams.timepointId);
     })
 
-    .controller('QIDSResponseCtrl', function($scope, QIDSResponses) {
+
+
+    .controller('QIDSResponseCtrl', function($scope, $state, QIDSResponses) {
         $scope.createResponse = function(response) {
             // get the rest service object and create a new resource
-            // on the server
-            QIDSResponses.rest().save(response);
+            // on the server, then transition back to dashboard state
+            QIDSResponses.save(response).then(function() { $state.go('tab.dash'); });
+         
         };
     })
+
 
     .controller('LoginCtrl', function($scope, $state, AuthService) {
         // controller for handling login requests

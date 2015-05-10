@@ -81,7 +81,8 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'LocalS
                         templateUrl: 'templates/tab-dash.html',
                         controller: 'DashCtrl'
                     }
-                }
+                },
+                cache: false
             })
         // The timepoint overview is a child of the dashboard tab, but
         // it loads into the same UI element (ion-nav-view) as the
@@ -160,7 +161,7 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'LocalS
     })
 
 
-    .factory('AuthService', function($http, $q, $rootScope, AuthToken, AUTH_URL) {
+    .factory('AuthService', function($http, $q, $rootScope, AuthToken, QIDSResponses, AUTH_URL) {
         // service for logging in
         return {
             login: function(username, password) {
@@ -178,6 +179,7 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'LocalS
             },
             logout: function() {
                 AuthToken.delete();
+                QIDSResponses.clear_cache();
             }
         };
     })

@@ -1,59 +1,57 @@
 angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
 
-    .factory('QIDSResponses', function(localStorageService, BACKEND_URL, $resource) {
+    .factory('QIDSResponses', function(localStorageService, BACKEND_URL, $q, $resource) {
         return {
             // return a service which lets us persist a response
             // between invocations of the app locally (for now) and
             // retrieve it later
+            all: function() {
+                var d = $q.defer();
+                $resource(BACKEND_URL + '/qids_responses')
+                    .query({}, function(data) {
+                        // if successful, update local storage
+                        localStorageService.set('qids_responses', data);
+                        d.resolve(data);
+                    }, function(reason) {
+                        // if can't connect, just return local storage
+                        d.resolve(localStorageService.get('qids_responses'));
+                    });
+                return d.promise;
+
+            },
             save: function(response) {
-                var qids_responses = localStorageService.get('qids_responses');
-                if(!qids_responses) qids_responses = {};
+                // the list of responses is stored locally in localStorage.
+                var qids_responses = localStorageService.get('qids_responses') || {};
+
                 // use the date and time of completion as the key
                 // locally, but also set it as a property so it gets
                 // uploaded at sync
-                var completion_time = (new Date()).toISOString();;
-                response.completion_time = completion_time;
-                qids_responses[completion_time] = response;
-                localStorageService.set('qids_responses', qids_responses);
+                var completed_at = (new Date()).toISOString();
+                response.completed_at = completed_at;
+                qids_responses[completed_at] = response;
+                localStorageService.set('qids_responses', JSON.stringify(qids_responses));
+
+                // if we are using the remote storage scheme, send to
+                // server (for now, just do this anyway)
+                return $resource(BACKEND_URL + '/qids_responses').save(response).$promise;
             },
-            all: function() {
-                return localStorageService.get('qids_responses');
-            },
-            rest: function() {
-                // configure a rest service proxy and return it
-                return $resource(BACKEND_URL + '/qids_responses');
+            clear_cache: function() {
+                localStorageService.remove('qids_responses');
             }
         };
     })
-    .factory('Timepoints', function() {
+
+    .factory('Timepoints', function(localStorageService, BACKEND_URL, $resource) {
         // Might use a resource here that returns a JSON array We
         // should be querying the intermediate data service after
         // checking the local data store
 
-        // Some fake testing data
-        var timepoints = [{
-            id: 0,
-            type: 'message',
-            date: '2015-03-13T18:25:43.511Z'
-        }, {
-            id: 1,
-            type: 'message',
-            date: '2015-03-14T18:25:43.511Z'
-        }, {
-            id: 2,
-            type: 'qids_response',
-            date: '2015-03-15T18:25:43.511Z'
-        }, {
-            id: 3,
-            type: 'qids_response',
-            date: '2015-03-15T18:25:43.511Z'
-        }];
 
         // just look at this sneaky javascript - return an anonymous
         // object with the following methods
         return {
             all: function() {
-                return timepoints;
+
             },
             remove: function(timepoint) {
                 timepoints.splice(timepoints.indexOf(timepoint), 1);

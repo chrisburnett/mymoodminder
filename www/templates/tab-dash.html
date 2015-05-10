@@ -15,14 +15,14 @@
 
         <ion-list class="list list-inset">
             <div class="item item-divider">Recent activity</div>
-            <ion-item class="item item-remove-animate item-icon-right" ng-repeat="timepoint in timepoints" type="item-text-wrap" href="#/tab/timepoint/{{timepoint.id}}">
-                <h2>{{timepoint.type == "message" ? "Message" : "QIDS Response"}}</h2>
-                <p>{{timepoint.date}}</p>
+            <ion-item class="item item-remove-animate item-icon-right" ng-repeat="qids_response in qids_responses" type="item-text-wrap" href="#/tab/timepoint/{{timepoint.id}}">
+                <h2>QIDS Response</h2>
+                <p>{{qids_response.completed_at}}</p>
                 <i class="icon ion-chevron-right icon-accessory"></i>
 
-                <ion-option-button class="button-assertive" ng-click="remove(timepoint)">
-                    Delete
-                </ion-option-button>
+                <!-- <ion-option-button class="button-assertive" ng-click="remove(timepoint)">-->
+                <!--    Delete -->
+                <!-- </ion-option-button> -->
             </ion-item>
         </ion-list>
 
@@ -31,4 +31,4 @@
     <ion-nav-buttons side="secondary">
         <button class="button" ng-click="logout()">Logout</button>
     </ion-nav-buttons>
-</ion-view>
+</ion-view>s
