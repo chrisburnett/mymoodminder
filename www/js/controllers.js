@@ -1,11 +1,14 @@
 angular.module('trump.controllers', [])
 
     .controller('DashCtrl', function($scope, $state, QIDSResponses, AuthService) {
-        // resolve the promise and bind to scope
-        QIDSResponses.all()
-            .then(function(responses) { $scope.qids_responses = responses; });
         
+        // try to sync pending responses, then load responses to scope
+        QIDSResponses.sync_pending().finally(function() {
+            QIDSResponses.all()
+                .then(function(responses) { $scope.qids_responses = responses; });
+        });
 
+        
         // clear token and go to login screen
         $scope.logout = function() {
             AuthService.logout();
@@ -54,9 +57,7 @@ angular.module('trump.controllers', [])
     })
 
     .controller('SettingsCtrl', function($scope) {
-        $scope.settings = {
-            enableFriends: true
-        };
+
     })
 
     .controller('PinlockCtrl', function($scope) {

@@ -24,33 +24,33 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
                 // update this before sending to server
                 var qids_responses = localStorageService.get('qids_responses') || {};
                 var d = $q.defer();
-                
+
                 // use the date and time of completion as the key
                 // locally, but also set it as a property so it gets
                 // uploaded at sync
-                if(!response.completed_at) {
-                    var completed_at = (new Date()).toISOString();
+                var completed_at = response.completed_at;
+                if(!completed_at) {
+                    completed_at = (new Date()).toISOString();
                     response.completed_at = completed_at;
-                } else {
-                    // if we already have a completion time, don't update it
-                    completed_at = response.completed_at;
                 }
-                qids_responses[completed_at] = response;
-                
+
                 // if we are using the remote storage scheme, send to
                 // server (for now, just do this anyway) if we are
                 // unable to connect, mark the QIDSresponse as pending
                 // for later submission
-                $resource(BACKEND_URL + '/qids_responses').save({}, response, function(data) {
+                $resource(BACKEND_URL + '/qids_responses').save(response).$promise.then(function(data) {
                     response.pending = false;
                     d.resolve(data);
                 }, function(reason) {
-                    response.pending = true;
+                    // don't re-save a pending response
+                    if(!response.pending) {
+                        response.pending = true;
+                        // store in localstorage
+                        qids_responses.push(response);
+                        localStorageService.set('qids_responses', JSON.stringify(qids_responses));
+                    }
                     d.resolve(reason);
                 });
-                
-                // store in localstorage
-                localStorageService.set('qids_responses', JSON.stringify(qids_responses));
                 return d.promise;
             },
             clear_cache: function() {
@@ -61,10 +61,10 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
                 var qids_responses = localStorageService.get('qids_responses');
                 // collect up all the promises so that we can resolve them as one
                 var promises = [];
-                for(var response in qids_responses) {
-                    if(response.pending)
-                        promises.push(this.save(response));
-                }
+                if(qids_responses)
+                    for(var i = 0; i < qids_responses.length; i++)
+                        if(qids_responses[i].pending) promises.push(this.save(qids_responses[i]));
+ 
                 return $q.all(promises);
             }
         };
