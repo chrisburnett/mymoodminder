@@ -1,42 +1,41 @@
-<ion-view view-title="Questionnaire response">
+<ion-view view-title="Questionnaire Response">
     <ion-content class="padding">
 
         <!-- Here will go all the QIDS questions, scrollable -->
         <form name="QIDSResponseForm" ng-controller="QIDSResponseCtrl" ng-submit="createResponse(response)">
             <!-- START OF FORM -->
-
             <!-- QUESTION 1 -->
             <div class="item item-divider">
                 <!-- Question -->
-                1. Falling asleep
+                {{text.q1.q}}
             </div>
             <!-- Answers with radios -->
             <div class="list" id="qids-qa-1">
                 <label class="item item-radio">
                     <input type="radio" value="0" ng-model="response.q1"/>
                     <div class="item-content item-text-wrap">
-                        I never take longer than 30 minutes to fall asleep.
+                        {{text.q1[1]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
                 <label class="item item-radio">
                     <input type="radio" value="1" ng-model="response.q1"/>
                     <div class="item-content item-text-wrap">
-                        I take at least 30 minutes to fall asleep, less than half the time.
+                        {{text.q1[2]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
                 <label class="item item-radio">
                     <input type="radio" value="2" ng-model="response.q1"/>
                     <div class="item-content item-text-wrap">
-                        I take at least 30 minutes to fall asleep, more than half the time.
+                        {{text.q1[3]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
                 <label class="item item-radio">
                     <input type="radio" value="3" ng-model="response.q1"/>
                     <div class="item-content item-text-wrap">
-                        I take more than 60 minutes to fall asleep, more than half the time.
+                        {{text.q1[4]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
@@ -45,35 +44,35 @@
             <!-- QUESTION 2 -->
             <div class="item item-divider">
                 <!-- Question -->
-                2. Sleeping at night
+                {{text.q2.q}}
             </div>
             <!-- Answers with radios -->
             <div class="list" id="qids-qa-2">
                 <label class="item item-radio">
                     <input type="radio" value="0" ng-model="response.q2"/>
                     <div class="item-content item-text-wrap">
-                        I do not wake up at night.
+                        {{text.q2[1]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
                 <label class="item item-radio">
                     <input type="radio" value="1" ng-model="response.q2"/>
                     <div class="item-content item-text-wrap">
-                        I have a restless, light sleep with a few brief awakenings each night.
+                        {{text.q2[2]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
                 <label class="item item-radio">
                     <input type="radio" value="2" ng-model="response.q2"/>
                     <div class="item-content item-text-wrap">
-                        I wake up at least once a night, but I go back to sleep easily.
+                        {{text.q2[3]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
                 <label class="item item-radio">
                     <input type="radio" value="3" ng-model="response.q2"/>
                     <div class="item-content item-text-wrap">
-                        I awaken more than once a night and stay awake for 20 minutes or more, more than half the time.
+                        {{text.q2[4]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
@@ -82,35 +81,35 @@
             <!-- QUESTION 3 -->
             <div class="item item-divider">
                 <!-- Question -->
-                3. Waking up too early
+                {{text.q3.q}}
             </div>
             <!-- Answers with radios -->
             <div class="list" id="qids-qa-3">
                 <label class="item item-radio">
                     <input type="radio" value="0" ng-model="response.q3"/>
                     <div class="item-content item-text-wrap">
-                        Most of the time, I awaken no more than 30 minutes before I need to get up.
+                        {{text.q3[1]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
                 <label class="item item-radio">
                     <input type="radio" value="1" ng-model="response.q3"/>
                     <div class="item-content item-text-wrap">
-                        More than half the time, I awaken more than 30 minutes before I need to get up.
+                        {{text.q3[2]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
                 <label class="item item-radio">
                     <input type="radio" value="2" ng-model="response.q3"/>
                     <div class="item-content item-text-wrap">
-                        I almost always awaken at least one hour or so before I need to, but I go back to sleep eventually.
+                        {{text.q3[3]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
                 <label class="item item-radio">
                     <input type="radio" value="3" ng-model="response.q3"/>
                     <div class="item-content item-text-wrap">
-                        I awaken at least one hour before I need to, and can't go back to sleep.
+                        {{text.q3[4]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
@@ -120,35 +119,35 @@
             <!-- QUESTION 4 -->
             <div class="item item-divider">
                 <!-- Question -->
-                4. Sleeping too much
+                {{text.q4.q}}
             </div>
             <!-- Answers with radios -->
             <div class="list" id="qids-qa-4">
                 <label class="item item-radio">
                     <input type="radio" value="0" ng-model="response.q4"/>
                     <div class="item-content item-text-wrap">
-                        I sleep no longer than 7-8 hours/night, without napping during the day.
+                        {{text.q4[1]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
                 <label class="item item-radio">
                     <input type="radio" value="1" ng-model="response.q4"/>
                     <div class="item-content item-text-wrap">
-                        I sleep no longer than 10 hours in a 24-hour period including naps.
+                        {{text.q4[2]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
                 <label class="item item-radio">
                     <input type="radio" value="2" ng-model="response.q4"/>
                     <div class="item-content item-text-wrap">
-                        I sleep no longer than 12 hours in a 24-hour period including naps.
+                        {{text.q4[3]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
                 <label class="item item-radio">
                     <input type="radio" value="3" ng-model="response.q4"/>
                     <div class="item-content item-text-wrap">
-                        I sleep longer than 12 hours in a 24-hour period including naps.
+                        {{text.q4[4]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
@@ -157,35 +156,35 @@
             <!-- QUESTION 5 -->
             <div class="item item-divider">
                 <!-- Question -->
-                5. Feeling sad
+                {{text.q5.q}}
             </div>
             <!-- Answers with radios -->
             <div class="list" id="qids-qa-5">
                 <label class="item item-radio">
                     <input type="radio" value="0" ng-model="response.q5"/>
                     <div class="item-content item-text-wrap">
-                        I do not feel sad.
+                        {{text.q5[1]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
                 <label class="item item-radio">
                     <input type="radio" value="1" ng-model="response.q5"/>
                     <div class="item-content item-text-wrap">
-                        More than half the time, I awaken more than 30 minutes before I need to get up.
+                        {{text.q5[2]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
                 <label class="item item-radio">
                     <input type="radio" value="2" ng-model="response.q5"/>
                     <div class="item-content item-text-wrap">
-                        I almost always awaken at least one hour or so before I need to, but I go back to sleep eventually.
+                        {{text.q5[3]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
                 <label class="item item-radio">
                     <input type="radio" value="3" ng-model="response.q5"/>
                     <div class="item-content item-text-wrap">
-                        I awaken at least one hour before I need to, and can't go back to sleep.
+                        {{text.q5[4]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
@@ -196,67 +195,67 @@
 
             <div class="item item-divider">
                 <!-- Question -->
-                6. Decreased appetite
+                {{text.q6.q}}
             </div>
             <!-- Answers with radios -->
             <div class="list" id="qids-qa-6-7">
                 <label class="item item-radio">
                     <input type="radio" value="0" ng-model="response.q6_7"/>
                     <div class="item-content item-text-wrap">
-                        There is no change in my usual appetite.
+                        {{text.q6[1]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
                 <label class="item item-radio">
                     <input type="radio" value="1" ng-model="response.q6_7"/>
                     <div class="item-content item-text-wrap">
-                        I eat somewhat less often or lesser amounts of food than usual.
+                        {{text.q6[2]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
                 <label class="item item-radio">
                     <input type="radio" value="2" ng-model="response.q6_7"/>
                     <div class="item-content item-text-wrap">
-                        I eat much less than usual and only with personal effort.
+                        {{text.q6[3]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
                 <label class="item item-radio">
                     <input type="radio" value="3" ng-model="response.q6_7"/>
                     <div class="item-content item-text-wrap">
-                        I rarely eat within a 24-hour period, and only with extreme personal effort or when others persuade me to eat.
+                        {{text.q6[4]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
                 <div class="item item-divider">
                     <!-- Question -->
-                    7. Increased appetite
+                    {{text.q7.q}}
                 </div>
                 <label class="item item-radio">
                     <input type="radio" value="4" ng-model="response.q6_7"/>
                     <div class="item-content item-text-wrap">
-                        There is no change from my usual appetite.
+                        {{text.q7[1]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
                 <label class="item item-radio">
                     <input type="radio" value="5" ng-model="response.q6_7"/>
                     <div class="item-content item-text-wrap">
-                        I feel a need to eat more frequently than usual.
+                        {{text.q7[2]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
                 <label class="item item-radio">
                     <input type="radio" value="6" ng-model="response.q6_7"/>
                     <div class="item-content item-text-wrap">
-                        I regularly eat more often and/or greater amounts of food than usual.
+                        {{text.q7[3]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
                 <label class="item item-radio">
                     <input type="radio" value="7" ng-model="response.q6_7"/>
                     <div class="item-content item-text-wrap">
-                        I feel driven to overeat both at mealtime and between meals.
+                        {{text.q7[4]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
@@ -269,67 +268,67 @@
 
             <div class="item item-divider">
                 <!-- Question -->
-                8. Decreased weight (within the last two weeks)
+                {{text.q8.q}}
             </div>
             <!-- Answers with radios -->
             <div class="list" id="qids-qa-8-9">
                 <label class="item item-radio">
                     <input type="radio" value="0" ng-model="response.q8_9"/>
                     <div class="item-content item-text-wrap">
-                        I have not had a change in my weight.
+                        {{text.q8[1]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
                 <label class="item item-radio">
                     <input type="radio" value="1" ng-model="response.q8_9"/>
                     <div class="item-content item-text-wrap">
-                        I feel as if I have had a slight weight loss.
+                        {{text.q8[2]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
                 <label class="item item-radio">
                     <input type="radio" value="2" ng-model="response.q8_9"/>
                     <div class="item-content item-text-wrap">
-                        I have lost 2 pounds or more.
+                        {{text.q8[3]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
                 <label class="item item-radio">
                     <input type="radio" value="3" ng-model="response.q8_9"/>
                     <div class="item-content item-text-wrap">
-                        I have lost 5 pounds or more.
+                        {{text.q8[4]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
                 <div class="item item-divider">
                     <!-- Question -->
-                    9. Increased weight (within the last two weeks)
+                    {{text.q9.q}}
                 </div>
                 <label class="item item-radio">
                     <input type="radio" value="4" ng-model="response.q8_9"/>
                     <div class="item-content item-text-wrap">
-                        I have not had a change in my weight.
+                        {{text.q9[1]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
                 <label class="item item-radio">
                     <input type="radio" value="5" ng-model="response.q8_9"/>
                     <div class="item-content item-text-wrap">
-                        I feel as if I have had a slight weight gain.
+                        {{text.q9[2]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
                 <label class="item item-radio">
                     <input type="radio" value="6" ng-model="response.q8_9"/>
                     <div class="item-content item-text-wrap">
-                        I have gained 2 pounds or more.
+                        {{text.q9[3]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
                 <label class="item item-radio">
                     <input type="radio" value="7" ng-model="response.q8_9"/>
                     <div class="item-content item-text-wrap">
-                        I have gained 5 pounds or more.
+                        {{text.q9[4]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
@@ -340,35 +339,35 @@
 
             <div class="item item-divider">
                 <!-- Question -->
-                10. Concentration and decision making
+                {{text.q10.q}}
             </div>
             <!-- Answers with radios -->
             <div class="list" id="qids-qa-10">
                 <label class="item item-radio">
                     <input type="radio" value="0" ng-model="response.q10"/>
                     <div class="item-content item-text-wrap">
-                        There is no change in my usual capacity to concentrate or make decisions.
+                        {{text.q10[1]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
                 <label class="item item-radio">
                     <input type="radio" value="1" ng-model="response.q10"/>
                     <div class="item-content item-text-wrap">
-                        I occasionally feel indecisive or find that my attention wanders.
+                        {{text.q10[2]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
                 <label class="item item-radio">
                     <input type="radio" value="2" ng-model="response.q10"/>
                     <div class="item-content item-text-wrap">
-                        Most of the time, I struggle to focus my attention or to make decisions.
+                        {{text.q10[3]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
                 <label class="item item-radio">
                     <input type="radio" value="3" ng-model="response.q10"/>
                     <div class="item-content item-text-wrap">
-                        I cannot concentrate well enough to read or cannot even make minor decisions.
+                        {{text.q10[4]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
@@ -377,35 +376,35 @@
             <!-- QUESTION 11 -->
             <div class="item item-divider">
                 <!-- Question -->
-                11. View of myself
+                {{text.q11.q}}
             </div>
             <!-- Answers with radios -->
             <div class="list" id="qids-qa-11">
                 <label class="item item-radio">
                     <input type="radio" value="0" ng-model="response.q11"/>
                     <div class="item-content item-text-wrap">
-                        I see myself as equally worthwhile and deserving as other people.
+                        {{text.q11[1]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
                 <label class="item item-radio">
                     <input type="radio" value="1" ng-model="response.q11"/>
                     <div class="item-content item-text-wrap">
-                        I am more self-blaming than usual.
+                        {{text.q11[2]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
                 <label class="item item-radio">
                     <input type="radio" value="2" ng-model="response.q11"/>
                     <div class="item-content item-text-wrap">
-                        I largely believe that I cause problems for others.
+                        {{text.q11[3]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
                 <label class="item item-radio">
                     <input type="radio" value="3" ng-model="response.q11"/>
                     <div class="item-content item-text-wrap">
-                        I think almost constantly about major and minor defects in myself.
+                        {{text.q11[4]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
@@ -414,35 +413,35 @@
             <!-- QUESTION 12 -->
             <div class="item item-divider">
                 <!-- Question -->
-                12. Thoughts of death or suicide
+                {{text.q12.q}}
             </div>
             <!-- Answers with radios -->
             <div class="list" id="qids-qa-12">
                 <label class="item item-radio">
                     <input type="radio" value="0" ng-model="response.q12"/>
                     <div class="item-content item-text-wrap">
-                        I do not think of suicide or death.
+                        {{text.q12[1]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
                 <label class="item item-radio">
                     <input type="radio" value="1" ng-model="response.q12"/>
                     <div class="item-content item-text-wrap">
-                        I feel that life is empty or wonder if it's worth living.
+                        {{text.q12[2]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
                 <label class="item item-radio">
                     <input type="radio" value="2" ng-model="response.q12"/>
                     <div class="item-content item-text-wrap">
-                        I think of suicide or death several times a week for several minutes.
+                        {{text.q12[3]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
                 <label class="item item-radio">
                     <input type="radio" value="3" ng-model="response.q12"/>
                     <div class="item-content item-text-wrap">
-                        I think of suicide or death several times a day in some detail, or I have made specific plans for suicide, or have actually tried to take my life.
+                        {{text.q12[4]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
@@ -452,35 +451,35 @@
             <!-- QUESTION 13 -->
             <div class="item item-divider">
                 <!-- Question -->
-                13. General interest
+                {{text.q13.q}}
             </div>
             <!-- Answers with radios -->
             <div class="list" id="qids-qa-13">
                 <label class="item item-radio">
                     <input type="radio" value="0" ng-model="response.q13"/>
                     <div class="item-content item-text-wrap">
-                        I do not think of suicide or death.
+                        {{text.q13[1]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
                 <label class="item item-radio">
                     <input type="radio" value="1" ng-model="response.q13"/>
                     <div class="item-content item-text-wrap">
-                        I notice that I am less interested in people or activities.
+                        {{text.q13[2]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
                 <label class="item item-radio">
                     <input type="radio" value="2" ng-model="response.q13"/>
                     <div class="item-content item-text-wrap">
-                        I find I have interest in only one or two of my formerly pursued activities.
+                        {{text.q13[3]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
                 <label class="item item-radio">
                     <input type="radio" value="3" ng-model="response.q13"/>
                     <div class="item-content item-text-wrap">
-                        I have virtually no interest in formerly pursued activities.
+                        {{text.q13[4]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
@@ -490,35 +489,35 @@
             <!-- QUESTION 14 -->
             <div class="item item-divider">
                 <!-- Question -->
-                14. Energy level
+                {{text.q14.q}}
             </div>
             <!-- Answers with radios -->
             <div class="list" id="qids-qa-14">
                 <label class="item item-radio">
                     <input type="radio" value="0" ng-model="response.q14"/>
                     <div class="item-content item-text-wrap">
-                        There is no change in my usual level of energy.
+                        {{text.q14[1]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
                 <label class="item item-radio">
                     <input type="radio" value="1" ng-model="response.q14"/>
                     <div class="item-content item-text-wrap">
-                        I get tired more easily than usual.
+                        {{text.q14[2]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
                 <label class="item item-radio">
                     <input type="radio" value="2" ng-model="response.q14"/>
                     <div class="item-content item-text-wrap">
-                        I have to make a big effort to start or finish my usual daily activities (for example, shopping, homework, cooking, or going to work).
+                        {{text.q14[3]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
                 <label class="item item-radio">
                     <input type="radio" value="3" ng-model="response.q14"/>
                     <div class="item-content item-text-wrap">
-                        I really cannot carry out most of my usual daily activities because I just don't have the energy.
+                        {{text.q14[4]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
@@ -528,35 +527,35 @@
             <!-- QUESTION 15 -->
             <div class="item item-divider">
                 <!-- Question -->
-                15. Feeling slowed down
+                {{text.q15.q}}
             </div>
             <!-- Answers with radios -->
             <div class="list" id="qids-qa-15">
                 <label class="item item-radio">
                     <input type="radio" value="0" ng-model="response.q15"/>
                     <div class="item-content item-text-wrap">
-                        I think, speak, and move at my usual rate of speed.
+                        {{text.q15[1]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
                 <label class="item item-radio">
                     <input type="radio" value="1" ng-model="response.q15"/>
                     <div class="item-content item-text-wrap">
-                        I find that my thinking is slowed down or my voice sounds dull or flat.
+                        {{text.q15[2]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
                 <label class="item item-radio">
                     <input type="radio" value="2" ng-model="response.q15"/>
                     <div class="item-content item-text-wrap">
-                        It takes me several seconds to respond to most questions and I'm sure my thinking is slowed.
+                        {{text.q15[3]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
                 <label class="item item-radio">
                     <input type="radio" value="3" ng-model="response.q15"/>
                     <div class="item-content item-text-wrap">
-                        I am often unable to respond to questions without extreme effort.
+                        {{text.q15[4]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
@@ -566,35 +565,35 @@
             <!-- QUESTION 16 -->
             <div class="item item-divider">
                 <!-- Question -->
-                16. Feeling restless
+                {{text.q16.q}}
             </div>
             <!-- Answers with radios -->
             <div class="list" id="qids-qa-16">
                 <label class="item item-radio">
                     <input type="radio" value="0" ng-model="response.q16"/>
                     <div class="item-content item-text-wrap">
-                        I do not feel restless.
+                        {{text.q16[1]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
                 <label class="item item-radio">
                     <input type="radio" value="1" ng-model="response.q16"/>
                     <div class="item-content item-text-wrap">
-                        I'm often fidgety, wringing my hands, or need to shift how I am sitting.
+                        {{text.q16[2]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
                 <label class="item item-radio">
                     <input type="radio" value="2" ng-model="response.q16"/>
                     <div class="item-content item-text-wrap">
-                        I have impulses to move about and am quite restless.
+                        {{text.q16[3]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
                 <label class="item item-radio">
                     <input type="radio" value="3" ng-model="response.q16"/>
                     <div class="item-content item-text-wrap">
-                        At times, I am unable to stay seated and need to pace around.
+                        {{text.q16[4]}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
