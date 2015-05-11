@@ -21,22 +21,51 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
             },
             save: function(response) {
                 // the list of responses is stored locally in localStorage.
+                // update this before sending to server
                 var qids_responses = localStorageService.get('qids_responses') || {};
-
+                var d = $q.defer();
+                
                 // use the date and time of completion as the key
                 // locally, but also set it as a property so it gets
                 // uploaded at sync
-                var completed_at = (new Date()).toISOString();
-                response.completed_at = completed_at;
+                if(!response.completed_at) {
+                    var completed_at = (new Date()).toISOString();
+                    response.completed_at = completed_at;
+                } else {
+                    // if we already have a completion time, don't update it
+                    completed_at = response.completed_at;
+                }
                 qids_responses[completed_at] = response;
-                localStorageService.set('qids_responses', JSON.stringify(qids_responses));
-
+                
                 // if we are using the remote storage scheme, send to
-                // server (for now, just do this anyway)
-                return $resource(BACKEND_URL + '/qids_responses').save(response).$promise;
+                // server (for now, just do this anyway) if we are
+                // unable to connect, mark the QIDSresponse as pending
+                // for later submission
+                $resource(BACKEND_URL + '/qids_responses').save({}, response, function(data) {
+                    response.pending = false;
+                    d.resolve(data);
+                }, function(reason) {
+                    response.pending = true;
+                    d.resolve(reason);
+                });
+                
+                // store in localstorage
+                localStorageService.set('qids_responses', JSON.stringify(qids_responses));
+                return d.promise;
             },
             clear_cache: function() {
                 localStorageService.remove('qids_responses');
+            },
+            sync_pending: function() {
+                // for each pending response in localstorage, try to save.
+                var qids_responses = localStorageService.get('qids_responses');
+                // collect up all the promises so that we can resolve them as one
+                var promises = [];
+                for(var response in qids_responses) {
+                    if(response.pending)
+                        promises.push(this.save(response));
+                }
+                return $q.all(promises);
             }
         };
     })
