@@ -17,22 +17,25 @@ angular.module('trump.controllers', [])
     })
 
 
-    .controller('TimepointDetailCtrl', function($scope, $stateParams, Timepoints) {
+    .controller('QIDSResponseDetailCtrl', function($scope, $stateParams, QIDSResponses) {
         // here we will want to use the message service and qids
         // service to get a list of events, order them by time and
         // then add that processed list to the scope
-        $scope.timepoint = Timepoints.get($stateParams.timepointId);
+        $scope.response = QIDSResponses.get($stateParams.responseId);
+        console.log($scope.response);
     })
 
 
 
-    .controller('QIDSResponseCtrl', function($scope, $state, QIDSResponses) {
+    .controller('QIDSResponseCtrl', function($scope, $state, QIDSResponses, QuestionnaireText) {
         $scope.createResponse = function(response) {
             // get the rest service object and create a new resource
             // on the server, then transition back to dashboard state
             QIDSResponses.save(response).then(function() { $state.go('tab.dash'); });
          
         };
+
+        $scope.text = QuestionnaireText;
     })
 
 

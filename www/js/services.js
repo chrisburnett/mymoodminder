@@ -17,7 +17,15 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
                         d.resolve(localStorageService.get('qids_responses'));
                     });
                 return d.promise;
-
+            },
+            get: function(id) {
+                var qids_responses = localStorageService.get('qids_responses');
+                for(var response in qids_responses)
+                    if(qids_responses[response].completed_at == id) return qids_responses[response];
+                // it shouldn't happen that we can't find the matching
+                // response. If this happens, let the controller deal
+                // with it
+                return null;
             },
             save: function(response) {
                 // the list of responses is stored locally in localStorage.

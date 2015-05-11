@@ -15,7 +15,7 @@
 
         <ion-list class="list list-inset">
             <div class="item item-divider">Recent activity</div>
-            <ion-item class="item item-remove-animate item-icon-right" ng-repeat="qids_response in qids_responses" type="item-text-wrap" href="#/tab/timepoint/{{timepoint.id}}">
+            <ion-item class="item item-remove-animate item-icon-right" ng-repeat="qids_response in qids_responses" type="item-text-wrap" href="#/tab/qids_response/{{qids_response.completed_at}}">
                 <h2>QIDS Response</h2>
                 <p>{{qids_response.completed_at}}</p>
                 <i class="icon ion-chevron-right icon-accessory"></i>

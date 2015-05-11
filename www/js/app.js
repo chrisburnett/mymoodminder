@@ -84,15 +84,15 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'LocalS
                 },
                 cache: false
             })
-        // The timepoint overview is a child of the dashboard tab, but
+        // The qids-response overview is a child of the dashboard tab, but
         // it loads into the same UI element (ion-nav-view) as the
         // dash itself, supplanting it.
-            .state('tab.timepoint-detail', {
-                url: '/timepoint/:timepointId',
+            .state('tab.qids-response-detail', {
+                url: '/qids_response/:responseId',
                 views: {
                     'tab-dash': {
-                        templateUrl: 'templates/timepoint-detail.html',
-                        controller: 'TimepointDetailCtrl'
+                        templateUrl: 'templates/qids-response.html',
+                        controller: 'QIDSResponseDetailCtrl'
                     }
                 }
             })
