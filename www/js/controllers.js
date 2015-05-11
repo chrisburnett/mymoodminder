@@ -17,12 +17,26 @@ angular.module('trump.controllers', [])
     })
 
 
-    .controller('QIDSResponseDetailCtrl', function($scope, $stateParams, QIDSResponses) {
+    .controller('QIDSResponseDetailCtrl', function($scope, $stateParams, QIDSResponses, QuestionnaireText) {
         // here we will want to use the message service and qids
         // service to get a list of events, order them by time and
         // then add that processed list to the scope
-        $scope.response = QIDSResponses.get($stateParams.responseId);
-        console.log($scope.response);
+        var response = QIDSResponses.get($stateParams.responseId);
+
+        // conveniently deal with the "joined together" questions
+        // so we can look up the text service properly
+        if(response.q6_7 < 3)
+            response.q6 = response.q6_7;
+        else
+            response.q7 = response.q6_7 - 4;
+        
+        if(response.q8_9 < 3)
+            response.q8 = response.q8_9;
+        else
+            response.q9 = response.q8_9 - 4;
+
+        $scope.response = response;
+        $scope.text = QuestionnaireText;
     })
 
 

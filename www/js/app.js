@@ -91,7 +91,7 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'LocalS
                 url: '/qids_response/:responseId',
                 views: {
                     'tab-dash': {
-                        templateUrl: 'templates/qids-response.html',
+                        templateUrl: 'templates/qids-response-detail.html',
                         controller: 'QIDSResponseDetailCtrl'
                     }
                 }
