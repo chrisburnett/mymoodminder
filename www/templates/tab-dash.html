@@ -13,7 +13,7 @@
         </div>
 
 
-        <ion-list class="list list-inset">
+        <ion-list class="list list-inset" show-delete="false" can-swipe="true">
             <div class="item item-divider">Recent activity</div>
             <ion-item class="item item-remove-animate item-icon-right" ng-repeat="qids_response in qids_responses" type="item-text-wrap" href="#/tab/qids_response/{{qids_response.completed_at}}">
                 <h2>QIDS Response</h2>
@@ -23,6 +23,7 @@
                 <!-- <ion-option-button class="button-assertive" ng-click="remove(timepoint)">-->
                 <!--    Delete -->
                 <!-- </ion-option-button> -->
+                <ion-option-button class="button-assertive ion-trash-a" ng-click="delete(qids_response)"></ion-option-button>
             </ion-item>
         </ion-list>
 

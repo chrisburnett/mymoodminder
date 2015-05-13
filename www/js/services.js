@@ -14,14 +14,19 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
                         d.resolve(data);
                     }, function(reason) {
                         // if can't connect, just return local storage
-                        d.resolve(localStorageService.get('qids_responses'));
+                        // miss out responses that are pending to be deleted
+                        var qids_responses = localStorageService.get('qids_responses');
+                        if(qids_responses)
+                            d.resolve(qids_responses.filter(function(response) {
+                                return !response.delete;
+                            }));
                     });
                 return d.promise;
             },
-            get: function(id) {
+            get: function(completed_at) {
                 var qids_responses = localStorageService.get('qids_responses');
                 for(var response in qids_responses)
-                    if(qids_responses[response].completed_at == id) return qids_responses[response];
+                    if(qids_responses[response].completed_at == completed_at) return qids_responses[response];
                 // it shouldn't happen that we can't find the matching
                 // response. If this happens, let the controller deal
                 // with it
@@ -61,18 +66,64 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
                 });
                 return d.promise;
             },
+            delete: function(completed_at) {
+                // we use the completion time to identify the
+                // QIDSresponse on the client, becuase it might not
+                // have been created on the server yet
+                // try to delete. Next time use a sync library for this...
+                var d = $q.defer();
+                var qids_responses = localStorageService.get('qids_responses');
+                for (var response in qids_responses) {
+                    if (qids_responses[response].completed_at == completed_at) {
+                        // if the matching response doesn't have an id
+                        // attribute yet, it hasn't been persisted on
+                        // the backend - just delete and be done with
+                        if(!qids_responses[response].id) {
+                            qids_responses.splice(qids_responses.indexOf(response), 1);
+                            d.resolve(qids_responses);
+                        } else {
+                            var id = qids_responses[response].id;
+                            $resource(BACKEND_URL + '/qids_responses/:id').delete({id: id}).$promise.then(function() {
+                                // successfully deleted
+                                // clear from hash only if we were able to
+                                // delete on server, otherwise leave it with
+                                // the delete flag set. We'll ignore it and
+                                // try to delete later
+                                qids_responses.splice(qids_responses.indexOf(response), 1);
+                                d.resolve(qids_responses);
+                            }, function() {
+                                // the response has been persisted but
+                                // we can't update the server yet -
+                                // mark for deletion
+                                qids_responses[response].delete = true;
+                                // on failure, update localstorage with response marked for deletion
+                                // it will be hidden
+                                d.resolve(qids_responses);
+                            }).finally(function() {
+                                // finally update localstorage
+                                localStorageService.set('qids_responses', JSON.stringify(qids_responses));
+                            });
+                        }
+                        break;
+                    };
+                };
+                return d.promise;
+            },
             clear_cache: function() {
                 localStorageService.remove('qids_responses');
+                console.log(localStorageService.get('qids_responses'));
             },
             sync_pending: function() {
-                // for each pending response in localstorage, try to save.
-                var qids_responses = localStorageService.get('qids_responses');
                 // collect up all the promises so that we can resolve them as one
                 var promises = [];
-                if(qids_responses)
-                    for(var i = 0; i < qids_responses.length; i++)
+                // for each pending response in localstorage, try to save.
+                var qids_responses = localStorageService.get('qids_responses');
+                if(qids_responses) {
+                    for(var i = 0; i < qids_responses.length; i++) {
                         if(qids_responses[i].pending) promises.push(this.save(qids_responses[i]));
- 
+                        if(qids_responses[i].delete) promises.push(this.delete(qids_responses[i].completed_at));
+                    }
+                }
                 return $q.all(promises);
             }
         };

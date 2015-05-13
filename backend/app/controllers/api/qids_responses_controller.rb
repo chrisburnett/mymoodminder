@@ -1,5 +1,11 @@
 class Api::QidsResponsesController < ApplicationController
 
+  def destroy
+    if @current_user then
+      resp = @current_user.qids_responses.find(params[:id]).destroy
+      render json: resp, status: 201
+    end
+  end
   
   def create
     if @current_user then

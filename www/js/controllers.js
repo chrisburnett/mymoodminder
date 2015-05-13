@@ -8,6 +8,11 @@ angular.module('trump.controllers', [])
                 .then(function(responses) { $scope.qids_responses = responses; });
         });
 
+        $scope.delete = function(response) {
+            QIDSResponses.delete(response.completed_at).then(function(responses) {
+                $scope.qids_responses = responses;
+            });
+        };
         
         // clear token and go to login screen
         $scope.logout = function() {
