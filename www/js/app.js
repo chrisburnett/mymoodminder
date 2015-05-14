@@ -36,7 +36,7 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'LocalS
                         // not going to #login, we should redirect now
                         $state.go("login");
                     }
-                }         
+                }
             });
         });
     })
@@ -48,10 +48,6 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'LocalS
 
     .config(function($stateProvider, $urlRouterProvider) {
 
-        // Ionic uses AngularUI Router which uses the concept of states
-        // Learn more here: https://github.com/angular-ui/ui-router
-        // Set up the various states which the app can be in.
-        // Each state's controller can be found in controllers.js
         $stateProvider
 
             .state('pinlock', {
@@ -73,7 +69,7 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'LocalS
                 templateUrl: "templates/tabs.html"
             })
 
-        // Each tab has its own nav history stack:
+        // Dashboard or overview tab
             .state('tab.dash', {
                 url: '/dash',
                 views: {
@@ -84,19 +80,28 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'LocalS
                 },
                 cache: false
             })
-        // The qids-response overview is a child of the dashboard tab, but
-        // it loads into the same UI element (ion-nav-view) as the
-        // dash itself, supplanting it.
-            .state('tab.qids-response-detail', {
-                url: '/qids_response/:responseId',
+        // view a list of QIDS entries and details about them
+            .state('tab.qids-detail', {
+                url: '/qids/:responseId',
                 views: {
-                    'tab-dash': {
-                        templateUrl: 'templates/qids-response-detail.html',
-                        controller: 'QIDSResponseDetailCtrl'
+                    'tab-qids': {
+                        templateUrl: 'templates/qids-detail.html',
+                        controller: 'QIDSDetailCtrl'
                     }
                 }
             })
+            .state('tab.qids-list', {
+                url: '/qids-list',
+                views: {
+                    'tab-qids': {
+                        templateUrl: 'templates/tab-qids.html',
+                        controller: 'QIDSListCtrl'
+                    }
+                },
+                cache: false
+            })
 
+        // customise app settings
             .state('tab.settings', {
                 url: '/settings',
                 views: {
@@ -107,14 +112,20 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'LocalS
                 }
             })
 
-            .state('qids-response', {
-                url: '/response',
-                templateUrl: "templates/qids-response.html",
-                controller: 'QIDSResponseCtrl'
+        // create a new entry
+            .state('tab.qids-new', {
+                url: '/entry',
+                views: {
+                    'tab-qids': {
+                        templateUrl: "templates/qids-new.html",
+                        controller: 'QIDSResponseCtrl'
+                    }
+                }
+                
             });
 
         // if none of the above states are matched, use this as the fallback
-        //$urlRouterProvider.otherwise('/tab/dash');
+        $urlRouterProvider.otherwise('/login');
     })
 
 

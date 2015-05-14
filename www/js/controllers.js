@@ -1,7 +1,15 @@
 angular.module('trump.controllers', [])
 
-    .controller('DashCtrl', function($scope, $state, QIDSResponses, AuthService) {
-        
+    .controller('DashCtrl', function($scope, $state, AuthService) {
+
+        // clear token and go to login screen
+        $scope.logout = function() {
+            AuthService.logout();
+            $state.go('login');
+        };
+    })
+
+    .controller('QIDSListCtrl', function($scope, $state, QIDSResponses, AuthService) {
         // try to sync pending responses, then load responses to scope
         QIDSResponses.sync_pending().finally(function() {
             QIDSResponses.all()
@@ -13,6 +21,10 @@ angular.module('trump.controllers', [])
                 $scope.qids_responses = responses;
             });
         };
+
+        $scope.new = function() {
+            $state.go('tab.qids-new');
+        }
         
         // clear token and go to login screen
         $scope.logout = function() {
@@ -21,8 +33,7 @@ angular.module('trump.controllers', [])
         };
     })
 
-
-    .controller('QIDSResponseDetailCtrl', function($scope, $stateParams, QIDSResponses, QuestionnaireText) {
+    .controller('QIDSDetailCtrl', function($scope, $stateParams, QIDSResponses, QuestionnaireText) {
         // here we will want to use the message service and qids
         // service to get a list of events, order them by time and
         // then add that processed list to the scope
