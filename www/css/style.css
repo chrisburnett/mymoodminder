@@ -31,7 +31,7 @@
     -ms-flex-align: center;
     align-items: center;
 }
- 
+
 .center-vertical > * {
     -webkit-box-ordinal-group: 1;
     -moz-box-ordinal-group: 1;
@@ -51,8 +51,11 @@
 .button-stretch {
     width: 100%;
 }
- 
+
 .col-offset-15 {
     margin-left: 15%;
 }
 /* End CSS for pin code unlock */
+.slider-pager .slider-pager-page {
+    width: 10px;
+}
