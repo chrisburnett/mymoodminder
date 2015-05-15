@@ -6,3 +6,4 @@ platforms/
 #plugins/
 /old/
 /backend/Gemfile.lock
+/www/css/ionic.app.min.css

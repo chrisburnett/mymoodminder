@@ -4636,7 +4636,7 @@ ion-tabs.tabs-color-active-dark .tab-item {
   padding: 16px;
   border-width: 1px;
   border-style: solid;
-  font-size: 16px; }
+  font-size: 14px; }
   .item h2 {
     margin: 0 0 2px 0;
     font-size: 16px;
@@ -5435,7 +5435,7 @@ a.item-content {
   text-align: center; }
   .slider-pager .slider-pager-page {
     display: inline-block;
-    margin: 0px 3px;
+    /*margin: 0px 3px;*/
     width: 15px;
     color: #000;
     text-decoration: none;

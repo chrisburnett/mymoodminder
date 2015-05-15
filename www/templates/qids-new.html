@@ -1,614 +1,693 @@
 <ion-view view-title="New Entry">
-    <ion-content class="padding">
+    <ion-content>
 
         <!-- Here will go all the QIDS questions, scrollable -->
         <form name="QIDSResponseForm" ng-controller="QIDSResponseCtrl" ng-submit="createResponse(response)">
             <!-- START OF FORM -->
             <!-- QUESTION 1 -->
-            <div class="item item-divider">
-                <!-- Question -->
-                1. {{text.q1.q}}
-            </div>
-            <!-- Answers with radios -->
-            <div class="list" id="qids-qa-1">
-                <label class="item item-radio">
-                    <input type="radio" value="0" ng-model="response.q1"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q1[0]}}
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-                <label class="item item-radio">
-                    <input type="radio" value="1" ng-model="response.q1"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q1[1]}}
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-                <label class="item item-radio">
-                    <input type="radio" value="2" ng-model="response.q1"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q1[2]}}
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-                <label class="item item-radio">
-                    <input type="radio" value="3" ng-model="response.q1"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q1[3]}}
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-            </div>
+            <ion-slide-box show-pager="true" on-slide-changed="slideChanged(index)" >
 
-            <!-- QUESTION 2 -->
-            <div class="item item-divider">
-                <!-- Question -->
-                2. {{text.q2.q}}
-            </div>
-            <!-- Answers with radios -->
-            <div class="list" id="qids-qa-2">
-                <label class="item item-radio">
-                    <input type="radio" value="0" ng-model="response.q2"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q2[0]}}
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-                <label class="item item-radio">
-                    <input type="radio" value="1" ng-model="response.q2"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q2[1]}}
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-                <label class="item item-radio">
-                    <input type="radio" value="2" ng-model="response.q2"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q2[2]}}
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-                <label class="item item-radio">
-                    <input type="radio" value="3" ng-model="response.q2"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q2[3]}}
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-            </div>
+                <ion-slide>
+                    <div class="list card" id="qids-qa-1">
 
-            <!-- QUESTION 3 -->
-            <div class="item item-divider">
-                <!-- Question -->
-                3. {{text.q3.q}}
-            </div>
-            <!-- Answers with radios -->
-            <div class="list" id="qids-qa-3">
-                <label class="item item-radio">
-                    <input type="radio" value="0" ng-model="response.q3"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q3[0]}}
+                        <div class="item item-divider">
+                            <!-- Question -->
+                            1. {{text.q1.q}}
+                        </div>
+                        <!-- Answers with radios -->
+                        <label class="item item-radio">
+                            <input type="radio" value="0" ng-model="response.q1"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q1[0]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                        <label class="item item-radio">
+                            <input type="radio" value="1" ng-model="response.q1"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q1[1]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                        <label class="item item-radio">
+                            <input type="radio" value="2" ng-model="response.q1"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q1[2]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                        <label class="item item-radio">
+                            <input type="radio" value="3" ng-model="response.q1"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q1[3]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
                     </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-                <label class="item item-radio">
-                    <input type="radio" value="1" ng-model="response.q3"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q3[1]}}
+                </ion-slide>
+
+                <!-- QUESTION 2 -->
+                <ion-slide>
+                    <div class="list card" id="qids-qa-2">
+
+                        <div class="item item-divider">
+                            <!-- Question -->
+                            2. {{text.q2.q}}
+                        </div>
+                        <!-- Answers with radios -->
+                        <label class="item item-radio">
+                            <input type="radio" value="0" ng-model="response.q2"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q2[0]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                        <label class="item item-radio">
+                            <input type="radio" value="1" ng-model="response.q2"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q2[1]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                        <label class="item item-radio">
+                            <input type="radio" value="2" ng-model="response.q2"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q2[2]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                        <label class="item item-radio">
+                            <input type="radio" value="3" ng-model="response.q2"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q2[3]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
                     </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-                <label class="item item-radio">
-                    <input type="radio" value="2" ng-model="response.q3"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q3[2]}}
+                </ion-slide>
+
+                <!-- QUESTION 3 -->
+                <ion-slide>
+                    <div class="list card" id="qids-qa-3">
+
+                        <div class="item item-divider">
+                            <!-- Question -->
+                            3. {{text.q3.q}}
+                        </div>
+                        <!-- Answers with radios -->
+                        <label class="item item-radio">
+                            <input type="radio" value="0" ng-model="response.q3"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q3[0]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                        <label class="item item-radio">
+                            <input type="radio" value="1" ng-model="response.q3"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q3[1]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                        <label class="item item-radio">
+                            <input type="radio" value="2" ng-model="response.q3"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q3[2]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                        <label class="item item-radio">
+                            <input type="radio" value="3" ng-model="response.q3"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q3[3]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
                     </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-                <label class="item item-radio">
-                    <input type="radio" value="3" ng-model="response.q3"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q3[3]}}
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-            </div>
+                </ion-slide>
 
 
-            <!-- QUESTION 4 -->
-            <div class="item item-divider">
-                <!-- Question -->
-                4. {{text.q4.q}}
-            </div>
-            <!-- Answers with radios -->
-            <div class="list" id="qids-qa-4">
-                <label class="item item-radio">
-                    <input type="radio" value="0" ng-model="response.q4"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q4[0]}}
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-                <label class="item item-radio">
-                    <input type="radio" value="1" ng-model="response.q4"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q4[1]}}
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-                <label class="item item-radio">
-                    <input type="radio" value="2" ng-model="response.q4"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q4[2]}}
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-                <label class="item item-radio">
-                    <input type="radio" value="3" ng-model="response.q4"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q4[3]}}
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-            </div>
+                <!-- QUESTION 4 -->
+                <ion-slide>
+                    <div class="list card" id="qids-qa-4">
 
-            <!-- QUESTION 5 -->
-            <div class="item item-divider">
-                <!-- Question -->
-                5. {{text.q5.q}}
-            </div>
-            <!-- Answers with radios -->
-            <div class="list" id="qids-qa-5">
-                <label class="item item-radio">
-                    <input type="radio" value="0" ng-model="response.q5"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q5[0]}}
+                        <div class="item item-divider">
+                            <!-- Question -->
+                            4. {{text.q4.q}}
+                        </div>
+                        <!-- Answers with radios -->
+                        <label class="item item-radio">
+                            <input type="radio" value="0" ng-model="response.q4"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q4[0]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                        <label class="item item-radio">
+                            <input type="radio" value="1" ng-model="response.q4"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q4[1]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                        <label class="item item-radio">
+                            <input type="radio" value="2" ng-model="response.q4"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q4[2]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                        <label class="item item-radio">
+                            <input type="radio" value="3" ng-model="response.q4"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q4[3]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
                     </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-                <label class="item item-radio">
-                    <input type="radio" value="1" ng-model="response.q5"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q5[1]}}
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-                <label class="item item-radio">
-                    <input type="radio" value="2" ng-model="response.q5"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q5[2]}}
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-                <label class="item item-radio">
-                    <input type="radio" value="3" ng-model="response.q5"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q5[3]}}
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-            </div>
+                </ion-slide>
 
-            <!-- QUESTION 6/7 -->
-            <h3>Please complete either 6 or 7 (not both)</h3>
+                <ion-slide>
+                    <!-- QUESTION 5 -->
+                    <div class="list card" id="qids-qa-5">
 
-            <div class="item item-divider">
-                <!-- Question -->
-                6. {{text.q6.q}}
-            </div>
-            <!-- Answers with radios -->
-            <div class="list" id="qids-qa-6-7">
-                <label class="item item-radio">
-                    <input type="radio" value="0" ng-model="response.q6_7"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q6[0]}}
+                        <div class="item item-divider">
+                            <!-- Question -->
+                            5. {{text.q5.q}}
+                        </div>
+                        <!-- Answers with radios -->
+                        <label class="item item-radio">
+                            <input type="radio" value="0" ng-model="response.q5"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q5[0]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                        <label class="item item-radio">
+                            <input type="radio" value="1" ng-model="response.q5"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q5[1]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                        <label class="item item-radio">
+                            <input type="radio" value="2" ng-model="response.q5"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q5[2]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                        <label class="item item-radio">
+                            <input type="radio" value="3" ng-model="response.q5"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q5[3]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
                     </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-                <label class="item item-radio">
-                    <input type="radio" value="1" ng-model="response.q6_7"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q6[1]}}
+                </ion-slide>
+
+                <!-- QUESTION 6/7 -->
+                <ion-slide>
+                    <div class="item item-balanced">
+                        Please complete either 6 or 7 (not both)
                     </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-                <label class="item item-radio">
-                    <input type="radio" value="2" ng-model="response.q6_7"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q6[2]}}
+                    <div class="list card" id="qids-qa-6-7-a">
+
+
+                        <div class="item item-divider">
+                            <!-- Question -->
+                            6. {{text.q6.q}}
+                        </div>
+                        <!-- Answers with radios -->
+                        <label class="item item-radio">
+                            <input type="radio" value="0" ng-model="response.q6_7"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q6[0]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                        <label class="item item-radio">
+                            <input type="radio" value="1" ng-model="response.q6_7"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q6[1]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                        <label class="item item-radio">
+                            <input type="radio" value="2" ng-model="response.q6_7"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q6[2]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                        <label class="item item-radio">
+                            <input type="radio" value="3" ng-model="response.q6_7"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q6[3]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
                     </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-                <label class="item item-radio">
-                    <input type="radio" value="3" ng-model="response.q6_7"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q6[3]}}
+                </ion-slide>
+                <ion-slide>
+                    <div class="item item-balanced">
+                        Please complete either 6 or 7 (not both)
                     </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-                <div class="item item-divider">
-                    <!-- Question -->
-                    7. {{text.q7.q}}
+                    <div class="list card" id="qids-qa-6-7-b">
+                        <div class="item item-divider">
+                            <!-- Question -->
+                            7. {{text.q7.q}}
+                        </div>
+                        <label class="item item-radio">
+                            <input type="radio" value="4" ng-model="response.q6_7"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q7[0]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                        <label class="item item-radio">
+                            <input type="radio" value="5" ng-model="response.q6_7"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q7[1]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                        <label class="item item-radio">
+                            <input type="radio" value="6" ng-model="response.q6_7"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q7[2]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                        <label class="item item-radio">
+                            <input type="radio" value="7" ng-model="response.q6_7"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q7[3]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                    </div>
+
+                </ion-slide>
+
+
+
+                <!-- QUESTION 8/9 -->
+                <ion-slide>
+                    <div class="item item-balanced">
+                        Please complete either 8 or 9 (not both)
+                    </div>
+                    <div class="list card" id="qids-qa-8-9-a">
+
+                        
+
+                        <div class="item item-divider">
+                            <!-- Question -->
+                            8. {{text.q8.q}}
+                        </div>
+                        <!-- Answers with radios -->
+                        <label class="item item-radio">
+                            <input type="radio" value="0" ng-model="response.q8_9"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q8[0]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                        <label class="item item-radio">
+                            <input type="radio" value="1" ng-model="response.q8_9"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q8[1]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                        <label class="item item-radio">
+                            <input type="radio" value="2" ng-model="response.q8_9"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q8[2]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                        <label class="item item-radio">
+                            <input type="radio" value="3" ng-model="response.q8_9"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q8[3]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                    </div>
+                </ion-slide>
+                <ion-slide>
+                    <div class="item item-balanced">
+                        Please complete either 8 or 9 (not both)
+                    </div>
+                    <div class="list card" id="qids-qa-8-9-b">
+                        <div class="item item-divider">
+                            <!-- Question -->
+                            9. {{text.q9.q}}
+                        </div>
+                        <label class="item item-radio">
+                            <input type="radio" value="4" ng-model="response.q8_9"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q9[0]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                        <label class="item item-radio">
+                            <input type="radio" value="5" ng-model="response.q8_9"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q9[1]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                        <label class="item item-radio">
+                            <input type="radio" value="6" ng-model="response.q8_9"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q9[2]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                        <label class="item item-radio">
+                            <input type="radio" value="7" ng-model="response.q8_9"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q9[3]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                    </div>
+                </ion-slide>
+
+
+                <!-- QUESTION 10 -->
+                <ion-slide>
+                    <div class="list card" id="qids-qa-10">
+
+                        <div class="item item-divider">
+                            <!-- Question -->
+                            10. {{text.q10.q}}
+                        </div>
+                        <!-- Answers with radios -->
+                        <label class="item item-radio">
+                            <input type="radio" value="0" ng-model="response.q10"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q10[0]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                        <label class="item item-radio">
+                            <input type="radio" value="1" ng-model="response.q10"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q10[1]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                        <label class="item item-radio">
+                            <input type="radio" value="2" ng-model="response.q10"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q10[2]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                        <label class="item item-radio">
+                            <input type="radio" value="3" ng-model="response.q10"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q10[3]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                    </div>
+                </ion-slide>
+
+                <!-- QUESTION 11 -->
+                <ion-slide>
+                    <div class="list card" id="qids-qa-11">
+
+                        <div class="item item-divider">
+                            <!-- Question -->
+                            11. {{text.q11.q}}
+                        </div>
+                        <!-- Answers with radios -->
+                        <label class="item item-radio">
+                            <input type="radio" value="0" ng-model="response.q11"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q11[0]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                        <label class="item item-radio">
+                            <input type="radio" value="1" ng-model="response.q11"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q11[1]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                        <label class="item item-radio">
+                            <input type="radio" value="2" ng-model="response.q11"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q11[2]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                        <label class="item item-radio">
+                            <input type="radio" value="3" ng-model="response.q11"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q11[3]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                    </div>
+                </ion-slide>
+
+                <!-- QUESTION 12 -->
+                <ion-slide>
+                    <div class="list card" id="qids-qa-12">
+
+                        <div class="item item-divider">
+                            <!-- Question -->
+                            12. {{text.q12.q}}
+                        </div>
+                        <!-- Answers with radios -->
+                        <label class="item item-radio">
+                            <input type="radio" value="0" ng-model="response.q12"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q12[0]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                        <label class="item item-radio">
+                            <input type="radio" value="1" ng-model="response.q12"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q12[1]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                        <label class="item item-radio">
+                            <input type="radio" value="2" ng-model="response.q12"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q12[2]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                        <label class="item item-radio">
+                            <input type="radio" value="3" ng-model="response.q12"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q12[3]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                    </div>
+                </ion-slide>
+
+                <!-- QUESTION 13 -->
+                <ion-slide>
+                    <div class="list card" id="qids-qa-13">
+
+                        <div class="item item-divider">
+                            <!-- Question -->
+                            13. {{text.q13.q}}
+                        </div>
+                        <!-- Answers with radios -->
+                        <label class="item item-radio">
+                            <input type="radio" value="0" ng-model="response.q13"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q13[0]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                        <label class="item item-radio">
+                            <input type="radio" value="1" ng-model="response.q13"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q13[1]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                        <label class="item item-radio">
+                            <input type="radio" value="2" ng-model="response.q13"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q13[2]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                        <label class="item item-radio">
+                            <input type="radio" value="3" ng-model="response.q13"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q13[3]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                    </div>
+                </ion-slide>
+
+                <!-- QUESTION 14 -->
+                <ion-slide>
+                    <div class="list card" id="qids-qa-14">
+
+                        <div class="item item-divider">
+                            <!-- Question -->
+                            14. {{text.q14.q}}
+                        </div>
+                        <!-- Answers with radios -->
+                        <label class="item item-radio">
+                            <input type="radio" value="0" ng-model="response.q14"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q14[0]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                        <label class="item item-radio">
+                            <input type="radio" value="1" ng-model="response.q14"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q14[1]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                        <label class="item item-radio">
+                            <input type="radio" value="2" ng-model="response.q14"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q14[2]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                        <label class="item item-radio">
+                            <input type="radio" value="3" ng-model="response.q14"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q14[3]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                    </div>
+                </ion-slide>
+
+
+                <!-- QUESTION 15 -->
+                <ion-slide>
+                    <div class="list card" id="qids-qa-15">
+
+                        <div class="item item-divider">
+                            <!-- Question -->
+                            15. {{text.q15.q}}
+                        </div>
+                        <!-- Answers with radios -->
+                        <label class="item item-radio">
+                            <input type="radio" value="0" ng-model="response.q15"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q15[0]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                        <label class="item item-radio">
+                            <input type="radio" value="1" ng-model="response.q15"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q15[1]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                        <label class="item item-radio">
+                            <input type="radio" value="2" ng-model="response.q15"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q15[2]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                        <label class="item item-radio">
+                            <input type="radio" value="3" ng-model="response.q15"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q15[3]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                    </div>
+                </ion-slide>
+
+                <!-- QUESTION 16 -->
+                <ion-slide>
+                    <div class="list card" id="qids-qa-16">
+
+                        <div class="item item-divider">
+                            <!-- Question -->
+                            16. {{text.q16.q}}
+                        </div>
+                        <!-- Answers with radios -->
+                        <label class="item item-radio">
+                            <input type="radio" value="0" ng-model="response.q16"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q16[0]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                        <label class="item item-radio">
+                            <input type="radio" value="1" ng-model="response.q16"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q16[1]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                        <label class="item item-radio">
+                            <input type="radio" value="2" ng-model="response.q16"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q16[2]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                        <label class="item item-radio">
+                            <input type="radio" value="3" ng-model="response.q16"/>
+                            <div class="item-content item-text-wrap">
+                                {{text.q16[3]}}
+                            </div>
+                            <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                    </div>
+                </ion-slide>
+
+                <ion-slide>
+                    <div class="card padding">
+
+
+                    </div>
+                    <!-- submit button -->
+                    <div class="padding">
+                        <button type="submit" class="button button-block button-positive">Save</button>
+                    </div>
+                </ion-slide>
+
+            </ion-slide-box>
+
+
+            <div class="row">
+                <div class="col" ng-if="ind > 0">
+                    <div class="padding">
+                        <button type="button" class="button button-small button-block button-clear icon-left ion-chevron-left button-calm" ng-click="back()">Back</button>
+                    </div>
                 </div>
-                <label class="item item-radio">
-                    <input type="radio" value="4" ng-model="response.q6_7"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q7[0]}}
+                <div class="col">
+                    <div class="padding">
+                        <button type="button" class="button button-small button-block button-clear icon-right ion-chevron-right button-calm" ng-click="next()">Next</button>
                     </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-                <label class="item item-radio">
-                    <input type="radio" value="5" ng-model="response.q6_7"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q7[1]}}
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-                <label class="item item-radio">
-                    <input type="radio" value="6" ng-model="response.q6_7"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q7[2]}}
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-                <label class="item item-radio">
-                    <input type="radio" value="7" ng-model="response.q6_7"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q7[3]}}
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-            </div>
-
-
-
-            <!-- QUESTION 8/9 -->
-            <h3>Please complete either 8 or 9 (not both)</h3>
-
-            <div class="item item-divider">
-                <!-- Question -->
-                8. {{text.q8.q}}
-            </div>
-            <!-- Answers with radios -->
-            <div class="list" id="qids-qa-8-9">
-                <label class="item item-radio">
-                    <input type="radio" value="0" ng-model="response.q8_9"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q8[0]}}
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-                <label class="item item-radio">
-                    <input type="radio" value="1" ng-model="response.q8_9"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q8[1]}}
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-                <label class="item item-radio">
-                    <input type="radio" value="2" ng-model="response.q8_9"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q8[2]}}
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-                <label class="item item-radio">
-                    <input type="radio" value="3" ng-model="response.q8_9"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q8[3]}}
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-                <div class="item item-divider">
-                    <!-- Question -->
-                    9. {{text.q9.q}}
                 </div>
-                <label class="item item-radio">
-                    <input type="radio" value="4" ng-model="response.q8_9"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q9[0]}}
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-                <label class="item item-radio">
-                    <input type="radio" value="5" ng-model="response.q8_9"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q9[1]}}
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-                <label class="item item-radio">
-                    <input type="radio" value="6" ng-model="response.q8_9"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q9[2]}}
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-                <label class="item item-radio">
-                    <input type="radio" value="7" ng-model="response.q8_9"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q9[3]}}
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
+
             </div>
-
-
-            <!-- QUESTION 10 -->
-
-            <div class="item item-divider">
-                <!-- Question -->
-                10. {{text.q10.q}}
-            </div>
-            <!-- Answers with radios -->
-            <div class="list" id="qids-qa-10">
-                <label class="item item-radio">
-                    <input type="radio" value="0" ng-model="response.q10"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q10[0]}}
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-                <label class="item item-radio">
-                    <input type="radio" value="1" ng-model="response.q10"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q10[1]}}
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-                <label class="item item-radio">
-                    <input type="radio" value="2" ng-model="response.q10"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q10[2]}}
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-                <label class="item item-radio">
-                    <input type="radio" value="3" ng-model="response.q10"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q10[3]}}
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-            </div>
-
-            <!-- QUESTION 11 -->
-            <div class="item item-divider">
-                <!-- Question -->
-                11. {{text.q11.q}}
-            </div>
-            <!-- Answers with radios -->
-            <div class="list" id="qids-qa-11">
-                <label class="item item-radio">
-                    <input type="radio" value="0" ng-model="response.q11"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q11[0]}}
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-                <label class="item item-radio">
-                    <input type="radio" value="1" ng-model="response.q11"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q11[1]}}
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-                <label class="item item-radio">
-                    <input type="radio" value="2" ng-model="response.q11"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q11[2]}}
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-                <label class="item item-radio">
-                    <input type="radio" value="3" ng-model="response.q11"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q11[3]}}
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-            </div>
-
-            <!-- QUESTION 12 -->
-            <div class="item item-divider">
-                <!-- Question -->
-                12. {{text.q12.q}}
-            </div>
-            <!-- Answers with radios -->
-            <div class="list" id="qids-qa-12">
-                <label class="item item-radio">
-                    <input type="radio" value="0" ng-model="response.q12"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q12[0]}}
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-                <label class="item item-radio">
-                    <input type="radio" value="1" ng-model="response.q12"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q12[1]}}
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-                <label class="item item-radio">
-                    <input type="radio" value="2" ng-model="response.q12"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q12[2]}}
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-                <label class="item item-radio">
-                    <input type="radio" value="3" ng-model="response.q12"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q12[3]}}
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-            </div>
-
-
-            <!-- QUESTION 13 -->
-            <div class="item item-divider">
-                <!-- Question -->
-                13. {{text.q13.q}}
-            </div>
-            <!-- Answers with radios -->
-            <div class="list" id="qids-qa-13">
-                <label class="item item-radio">
-                    <input type="radio" value="0" ng-model="response.q13"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q13[0]}}
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-                <label class="item item-radio">
-                    <input type="radio" value="1" ng-model="response.q13"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q13[1]}}
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-                <label class="item item-radio">
-                    <input type="radio" value="2" ng-model="response.q13"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q13[2]}}
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-                <label class="item item-radio">
-                    <input type="radio" value="3" ng-model="response.q13"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q13[3]}}
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-            </div>
-
-
-            <!-- QUESTION 14 -->
-            <div class="item item-divider">
-                <!-- Question -->
-                14. {{text.q14.q}}
-            </div>
-            <!-- Answers with radios -->
-            <div class="list" id="qids-qa-14">
-                <label class="item item-radio">
-                    <input type="radio" value="0" ng-model="response.q14"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q14[0]}}
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-                <label class="item item-radio">
-                    <input type="radio" value="1" ng-model="response.q14"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q14[1]}}
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-                <label class="item item-radio">
-                    <input type="radio" value="2" ng-model="response.q14"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q14[2]}}
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-                <label class="item item-radio">
-                    <input type="radio" value="3" ng-model="response.q14"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q14[3]}}
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-            </div>
-
-
-            <!-- QUESTION 15 -->
-            <div class="item item-divider">
-                <!-- Question -->
-                15. {{text.q15.q}}
-            </div>
-            <!-- Answers with radios -->
-            <div class="list" id="qids-qa-15">
-                <label class="item item-radio">
-                    <input type="radio" value="0" ng-model="response.q15"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q15[0]}}
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-                <label class="item item-radio">
-                    <input type="radio" value="1" ng-model="response.q15"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q15[1]}}
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-                <label class="item item-radio">
-                    <input type="radio" value="2" ng-model="response.q15"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q15[2]}}
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-                <label class="item item-radio">
-                    <input type="radio" value="3" ng-model="response.q15"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q15[3]}}
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-            </div>
-
-
-            <!-- QUESTION 16 -->
-            <div class="item item-divider">
-                <!-- Question -->
-                16. {{text.q16.q}}
-            </div>
-            <!-- Answers with radios -->
-            <div class="list" id="qids-qa-16">
-                <label class="item item-radio">
-                    <input type="radio" value="0" ng-model="response.q16"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q16[0]}}
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-                <label class="item item-radio">
-                    <input type="radio" value="1" ng-model="response.q16"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q16[1]}}
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-                <label class="item item-radio">
-                    <input type="radio" value="2" ng-model="response.q16"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q16[2]}}
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-                <label class="item item-radio">
-                    <input type="radio" value="3" ng-model="response.q16"/>
-                    <div class="item-content item-text-wrap">
-                        {{text.q16[3]}}
-                    </div>
-                    <i class="radio-icon ion-checkmark"></i>
-                </label>
-            </div>
-
-
-
-            <!-- submit button -->
-            <div class="padding">
-                <button type="submit" class="button button-block button-positive">Save</button>
-            </div>
-
             <!-- END OF FORM -->
         </form>
-
 
 
     </ion-content>

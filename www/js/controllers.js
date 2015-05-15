@@ -27,11 +27,11 @@ angular.module('trump.controllers', [])
                 $scope.qids_responses = responses;
             });
         };
-        
+
         $scope.new = function() {
             $state.go('tab.qids-new');
-        }
-        
+        };
+
         // clear token and go to login screen
         $scope.logout = function() {
             AuthService.logout();
@@ -44,7 +44,7 @@ angular.module('trump.controllers', [])
         // service to get a list of events, order them by time and
         // then add that processed list to the scope
         var response = QIDSResponses.get($stateParams.responseId);
-      
+
         // conveniently deal with the "joined together" questions
         // so we can look up the text service properly
         if(response.q6_7 < 3) {
@@ -54,7 +54,7 @@ angular.module('trump.controllers', [])
         else {
             response.q7 = response.q6_7 - 4;
             response.q6 = null;
-        }        
+        }
         if(response.q8_9 < 3) {
             response.q8 = response.q8_9;
             response.q9 = null;
@@ -72,29 +72,41 @@ angular.module('trump.controllers', [])
         $scope.delete = function(response) {
             QIDSResponses.delete(response.completed_at).then(function() {
                 $state.go ('tab.qids-list');
-            })
+            });
         };
     })
 
 
 
-    .controller('QIDSResponseCtrl', function($scope, $state, QIDSResponses, QuestionnaireText) {
+    .controller('QIDSResponseCtrl', function($scope, $state, $ionicSlideBoxDelegate, QIDSResponses, QuestionnaireText) {
         $scope.createResponse = function(response) {
             // get the rest service object and create a new resource
             // on the server, then transition back to dashboard state
             QIDSResponses.save(response).then(function() { $state.go('tab.qids-list'); });
-         
+
         };
 
+
         $scope.text = QuestionnaireText;
+
+        // slide box control functions
+        $scope.next = function() {
+            $ionicSlideBoxDelegate.next();
+        };
+        $scope.back = function() {
+            $ionicSlideBoxDelegate.previous();
+        };
+        $scope.slideChanged = function(index) {
+            $scope.ind = index;
+        };
     })
 
 
     .controller('LoginCtrl', function($scope, $state, AuthService) {
         // controller for handling login requests
         $scope.credentials = {};
-  
-        
+
+
         $scope.login = function(credentials) {
             // reset problem flags
             $scope.wrongCredentials = null;
@@ -118,17 +130,17 @@ angular.module('trump.controllers', [])
         $scope.init = function() {
             $scope.passcode = "";
         };
-        
+
         $scope.add = function(value) {
             if($scope.passcode.length < 4) {
                 $scope.passcode = $scope.passcode + value;
                 if($scope.passcode.length == 4) {
                     console.log("The four digit code was entered");
                 };
-                
+
             }
         };
-        
+
         $scope.delete = function() {
             if($scope.passcode.length > 0) {
                 $scope.passcode = $scope.passcode.substring(0, $scope.passcode.length - 1);
