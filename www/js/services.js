@@ -80,6 +80,7 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
                         // the backend - just delete and be done with
                         if(!qids_responses[response].id) {
                             qids_responses.splice(qids_responses.indexOf(response), 1);
+                            localStorageService.set('qids_responses', qids_responses);
                             d.resolve(qids_responses);
                         } else {
                             var id = qids_responses[response].id;
@@ -90,6 +91,7 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
                                 // the delete flag set. We'll ignore it and
                                 // try to delete later
                                 qids_responses.splice(qids_responses.indexOf(response), 1);
+                                localStorageService.set('qids_responses', qids_responses);
                                 d.resolve(qids_responses);
                             }, function() {
                                 // the response has been persisted but
@@ -111,7 +113,6 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
             },
             clear_cache: function() {
                 localStorageService.remove('qids_responses');
-                console.log(localStorageService.get('qids_responses'));
             },
             sync_pending: function() {
                 // collect up all the promises so that we can resolve them as one
