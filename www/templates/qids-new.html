@@ -2,9 +2,10 @@
     <ion-content>
 
         <!-- Here will go all the QIDS questions, scrollable -->
-        <form name="QIDSResponseForm" ng-controller="QIDSResponseCtrl" ng-submit="createResponse(response)">
+        <form name="QIDSResponseForm" ng-submit="createResponse(response)" ng-model="response">
             <!-- START OF FORM -->
             <!-- QUESTION 1 -->
+
             <ion-slide-box show-pager="true" on-slide-changed="slideChanged(index)" >
 
                 <ion-slide>
@@ -16,28 +17,28 @@
                         </div>
                         <!-- Answers with radios -->
                         <label class="item item-radio">
-                            <input type="radio" value="0" ng-model="response.q1"/>
+                            <input type="radio" value="0" ng-model="$parent.$parent.response.q1"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q1[0]}}
                             </div>
                             <i class="radio-icon ion-checkmark"></i>
                         </label>
                         <label class="item item-radio">
-                            <input type="radio" value="1" ng-model="response.q1"/>
+                            <input type="radio" value="1" ng-model="$parent.$parent.response.q1"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q1[1]}}
                             </div>
                             <i class="radio-icon ion-checkmark"></i>
                         </label>
                         <label class="item item-radio">
-                            <input type="radio" value="2" ng-model="response.q1"/>
+                            <input type="radio" value="2" ng-model="$parent.$parent.response.q1"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q1[2]}}
                             </div>
                             <i class="radio-icon ion-checkmark"></i>
                         </label>
                         <label class="item item-radio">
-                            <input type="radio" value="3" ng-model="response.q1"/>
+                            <input type="radio" value="3" ng-model="$parent.$parent.response.q1"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q1[3]}}
                             </div>
@@ -56,28 +57,28 @@
                         </div>
                         <!-- Answers with radios -->
                         <label class="item item-radio">
-                            <input type="radio" value="0" ng-model="response.q2"/>
+                            <input type="radio" value="0" ng-model="$parent.$parent.response.q2"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q2[0]}}
                             </div>
                             <i class="radio-icon ion-checkmark"></i>
                         </label>
                         <label class="item item-radio">
-                            <input type="radio" value="1" ng-model="response.q2"/>
+                            <input type="radio" value="1" ng-model="$parent.$parent.response.q2"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q2[1]}}
                             </div>
                             <i class="radio-icon ion-checkmark"></i>
                         </label>
                         <label class="item item-radio">
-                            <input type="radio" value="2" ng-model="response.q2"/>
+                            <input type="radio" value="2" ng-model="$parent.$parent.response.q2"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q2[2]}}
                             </div>
                             <i class="radio-icon ion-checkmark"></i>
                         </label>
                         <label class="item item-radio">
-                            <input type="radio" value="3" ng-model="response.q2"/>
+                            <input type="radio" value="3" ng-model="$parent.$parent.response.q2"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q2[3]}}
                             </div>
@@ -96,28 +97,28 @@
                         </div>
                         <!-- Answers with radios -->
                         <label class="item item-radio">
-                            <input type="radio" value="0" ng-model="response.q3"/>
+                            <input type="radio" value="0" ng-model="$parent.$parent.response.q3"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q3[0]}}
                             </div>
                             <i class="radio-icon ion-checkmark"></i>
                         </label>
                         <label class="item item-radio">
-                            <input type="radio" value="1" ng-model="response.q3"/>
+                            <input type="radio" value="1" ng-model="$parent.$parent.response.q3"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q3[1]}}
                             </div>
                             <i class="radio-icon ion-checkmark"></i>
                         </label>
                         <label class="item item-radio">
-                            <input type="radio" value="2" ng-model="response.q3"/>
+                            <input type="radio" value="2" ng-model="$parent.$parent.response.q3"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q3[2]}}
                             </div>
                             <i class="radio-icon ion-checkmark"></i>
                         </label>
                         <label class="item item-radio">
-                            <input type="radio" value="3" ng-model="response.q3"/>
+                            <input type="radio" value="3" ng-model="$parent.$parent.response.q3"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q3[3]}}
                             </div>
@@ -137,28 +138,28 @@
                         </div>
                         <!-- Answers with radios -->
                         <label class="item item-radio">
-                            <input type="radio" value="0" ng-model="response.q4"/>
+                            <input type="radio" value="0" ng-model="$parent.$parent.response.q4"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q4[0]}}
                             </div>
                             <i class="radio-icon ion-checkmark"></i>
                         </label>
                         <label class="item item-radio">
-                            <input type="radio" value="1" ng-model="response.q4"/>
+                            <input type="radio" value="1" ng-model="$parent.$parent.response.q4"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q4[1]}}
                             </div>
                             <i class="radio-icon ion-checkmark"></i>
                         </label>
                         <label class="item item-radio">
-                            <input type="radio" value="2" ng-model="response.q4"/>
+                            <input type="radio" value="2" ng-model="$parent.$parent.response.q4"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q4[2]}}
                             </div>
                             <i class="radio-icon ion-checkmark"></i>
                         </label>
                         <label class="item item-radio">
-                            <input type="radio" value="3" ng-model="response.q4"/>
+                            <input type="radio" value="3" ng-model="$parent.$parent.response.q4"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q4[3]}}
                             </div>
@@ -177,28 +178,28 @@
                         </div>
                         <!-- Answers with radios -->
                         <label class="item item-radio">
-                            <input type="radio" value="0" ng-model="response.q5"/>
+                            <input type="radio" value="0" ng-model="$parent.$parent.response.q5"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q5[0]}}
                             </div>
                             <i class="radio-icon ion-checkmark"></i>
                         </label>
                         <label class="item item-radio">
-                            <input type="radio" value="1" ng-model="response.q5"/>
+                            <input type="radio" value="1" ng-model="$parent.$parent.response.q5"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q5[1]}}
                             </div>
                             <i class="radio-icon ion-checkmark"></i>
                         </label>
                         <label class="item item-radio">
-                            <input type="radio" value="2" ng-model="response.q5"/>
+                            <input type="radio" value="2" ng-model="$parent.$parent.response.q5"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q5[2]}}
                             </div>
                             <i class="radio-icon ion-checkmark"></i>
                         </label>
                         <label class="item item-radio">
-                            <input type="radio" value="3" ng-model="response.q5"/>
+                            <input type="radio" value="3" ng-model="$parent.$parent.response.q5"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q5[3]}}
                             </div>
@@ -221,28 +222,28 @@
                         </div>
                         <!-- Answers with radios -->
                         <label class="item item-radio">
-                            <input type="radio" value="0" ng-model="response.q6_7"/>
+                            <input type="radio" value="0" ng-model="$parent.$parent.response.q6_7"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q6[0]}}
                             </div>
                             <i class="radio-icon ion-checkmark"></i>
                         </label>
                         <label class="item item-radio">
-                            <input type="radio" value="1" ng-model="response.q6_7"/>
+                            <input type="radio" value="1" ng-model="$parent.$parent.response.q6_7"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q6[1]}}
                             </div>
                             <i class="radio-icon ion-checkmark"></i>
                         </label>
                         <label class="item item-radio">
-                            <input type="radio" value="2" ng-model="response.q6_7"/>
+                            <input type="radio" value="2" ng-model="$parent.$parent.response.q6_7"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q6[2]}}
                             </div>
                             <i class="radio-icon ion-checkmark"></i>
                         </label>
                         <label class="item item-radio">
-                            <input type="radio" value="3" ng-model="response.q6_7"/>
+                            <input type="radio" value="3" ng-model="$parent.$parent.response.q6_7"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q6[3]}}
                             </div>
@@ -260,28 +261,28 @@
                             7. {{text.q7.q}}
                         </div>
                         <label class="item item-radio">
-                            <input type="radio" value="4" ng-model="response.q6_7"/>
+                            <input type="radio" value="4" ng-model="$parent.$parent.response.q6_7"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q7[0]}}
                             </div>
                             <i class="radio-icon ion-checkmark"></i>
                         </label>
                         <label class="item item-radio">
-                            <input type="radio" value="5" ng-model="response.q6_7"/>
+                            <input type="radio" value="5" ng-model="$parent.$parent.response.q6_7"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q7[1]}}
                             </div>
                             <i class="radio-icon ion-checkmark"></i>
                         </label>
                         <label class="item item-radio">
-                            <input type="radio" value="6" ng-model="response.q6_7"/>
+                            <input type="radio" value="6" ng-model="$parent.$parent.response.q6_7"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q7[2]}}
                             </div>
                             <i class="radio-icon ion-checkmark"></i>
                         </label>
                         <label class="item item-radio">
-                            <input type="radio" value="7" ng-model="response.q6_7"/>
+                            <input type="radio" value="7" ng-model="$parent.$parent.response.q6_7"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q7[3]}}
                             </div>
@@ -300,7 +301,7 @@
                     </div>
                     <div class="list card" id="qids-qa-8-9-a">
 
-                        
+
 
                         <div class="item item-divider">
                             <!-- Question -->
@@ -308,28 +309,28 @@
                         </div>
                         <!-- Answers with radios -->
                         <label class="item item-radio">
-                            <input type="radio" value="0" ng-model="response.q8_9"/>
+                            <input type="radio" value="0" ng-model="$parent.$parent.response.q8_9"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q8[0]}}
                             </div>
                             <i class="radio-icon ion-checkmark"></i>
                         </label>
                         <label class="item item-radio">
-                            <input type="radio" value="1" ng-model="response.q8_9"/>
+                            <input type="radio" value="1" ng-model="$parent.$parent.response.q8_9"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q8[1]}}
                             </div>
                             <i class="radio-icon ion-checkmark"></i>
                         </label>
                         <label class="item item-radio">
-                            <input type="radio" value="2" ng-model="response.q8_9"/>
+                            <input type="radio" value="2" ng-model="$parent.$parent.response.q8_9"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q8[2]}}
                             </div>
                             <i class="radio-icon ion-checkmark"></i>
                         </label>
                         <label class="item item-radio">
-                            <input type="radio" value="3" ng-model="response.q8_9"/>
+                            <input type="radio" value="3" ng-model="$parent.$parent.response.q8_9"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q8[3]}}
                             </div>
@@ -347,28 +348,28 @@
                             9. {{text.q9.q}}
                         </div>
                         <label class="item item-radio">
-                            <input type="radio" value="4" ng-model="response.q8_9"/>
+                            <input type="radio" value="4" ng-model="$parent.$parent.response.q8_9"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q9[0]}}
                             </div>
                             <i class="radio-icon ion-checkmark"></i>
                         </label>
                         <label class="item item-radio">
-                            <input type="radio" value="5" ng-model="response.q8_9"/>
+                            <input type="radio" value="5" ng-model="$parent.$parent.response.q8_9"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q9[1]}}
                             </div>
                             <i class="radio-icon ion-checkmark"></i>
                         </label>
                         <label class="item item-radio">
-                            <input type="radio" value="6" ng-model="response.q8_9"/>
+                            <input type="radio" value="6" ng-model="$parent.$parent.response.q8_9"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q9[2]}}
                             </div>
                             <i class="radio-icon ion-checkmark"></i>
                         </label>
                         <label class="item item-radio">
-                            <input type="radio" value="7" ng-model="response.q8_9"/>
+                            <input type="radio" value="7" ng-model="$parent.$parent.response.q8_9"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q9[3]}}
                             </div>
@@ -388,28 +389,28 @@
                         </div>
                         <!-- Answers with radios -->
                         <label class="item item-radio">
-                            <input type="radio" value="0" ng-model="response.q10"/>
+                            <input type="radio" value="0" ng-model="$parent.$parent.response.q10"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q10[0]}}
                             </div>
                             <i class="radio-icon ion-checkmark"></i>
                         </label>
                         <label class="item item-radio">
-                            <input type="radio" value="1" ng-model="response.q10"/>
+                            <input type="radio" value="1" ng-model="$parent.$parent.response.q10"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q10[1]}}
                             </div>
                             <i class="radio-icon ion-checkmark"></i>
                         </label>
                         <label class="item item-radio">
-                            <input type="radio" value="2" ng-model="response.q10"/>
+                            <input type="radio" value="2" ng-model="$parent.$parent.response.q10"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q10[2]}}
                             </div>
                             <i class="radio-icon ion-checkmark"></i>
                         </label>
                         <label class="item item-radio">
-                            <input type="radio" value="3" ng-model="response.q10"/>
+                            <input type="radio" value="3" ng-model="$parent.$parent.response.q10"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q10[3]}}
                             </div>
@@ -428,28 +429,28 @@
                         </div>
                         <!-- Answers with radios -->
                         <label class="item item-radio">
-                            <input type="radio" value="0" ng-model="response.q11"/>
+                            <input type="radio" value="0" ng-model="$parent.$parent.response.q11"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q11[0]}}
                             </div>
                             <i class="radio-icon ion-checkmark"></i>
                         </label>
                         <label class="item item-radio">
-                            <input type="radio" value="1" ng-model="response.q11"/>
+                            <input type="radio" value="1" ng-model="$parent.$parent.response.q11"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q11[1]}}
                             </div>
                             <i class="radio-icon ion-checkmark"></i>
                         </label>
                         <label class="item item-radio">
-                            <input type="radio" value="2" ng-model="response.q11"/>
+                            <input type="radio" value="2" ng-model="$parent.$parent.response.q11"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q11[2]}}
                             </div>
                             <i class="radio-icon ion-checkmark"></i>
                         </label>
                         <label class="item item-radio">
-                            <input type="radio" value="3" ng-model="response.q11"/>
+                            <input type="radio" value="3" ng-model="$parent.$parent.response.q11"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q11[3]}}
                             </div>
@@ -468,28 +469,28 @@
                         </div>
                         <!-- Answers with radios -->
                         <label class="item item-radio">
-                            <input type="radio" value="0" ng-model="response.q12"/>
+                            <input type="radio" value="0" ng-model="$parent.$parent.response.q12"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q12[0]}}
                             </div>
                             <i class="radio-icon ion-checkmark"></i>
                         </label>
                         <label class="item item-radio">
-                            <input type="radio" value="1" ng-model="response.q12"/>
+                            <input type="radio" value="1" ng-model="$parent.$parent.response.q12"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q12[1]}}
                             </div>
                             <i class="radio-icon ion-checkmark"></i>
                         </label>
                         <label class="item item-radio">
-                            <input type="radio" value="2" ng-model="response.q12"/>
+                            <input type="radio" value="2" ng-model="$parent.$parent.response.q12"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q12[2]}}
                             </div>
                             <i class="radio-icon ion-checkmark"></i>
                         </label>
                         <label class="item item-radio">
-                            <input type="radio" value="3" ng-model="response.q12"/>
+                            <input type="radio" value="3" ng-model="$parent.$parent.response.q12"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q12[3]}}
                             </div>
@@ -508,28 +509,28 @@
                         </div>
                         <!-- Answers with radios -->
                         <label class="item item-radio">
-                            <input type="radio" value="0" ng-model="response.q13"/>
+                            <input type="radio" value="0" ng-model="$parent.$parent.response.q13"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q13[0]}}
                             </div>
                             <i class="radio-icon ion-checkmark"></i>
                         </label>
                         <label class="item item-radio">
-                            <input type="radio" value="1" ng-model="response.q13"/>
+                            <input type="radio" value="1" ng-model="$parent.$parent.response.q13"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q13[1]}}
                             </div>
                             <i class="radio-icon ion-checkmark"></i>
                         </label>
                         <label class="item item-radio">
-                            <input type="radio" value="2" ng-model="response.q13"/>
+                            <input type="radio" value="2" ng-model="$parent.$parent.response.q13"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q13[2]}}
                             </div>
                             <i class="radio-icon ion-checkmark"></i>
                         </label>
                         <label class="item item-radio">
-                            <input type="radio" value="3" ng-model="response.q13"/>
+                            <input type="radio" value="3" ng-model="$parent.$parent.response.q13"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q13[3]}}
                             </div>
@@ -548,28 +549,28 @@
                         </div>
                         <!-- Answers with radios -->
                         <label class="item item-radio">
-                            <input type="radio" value="0" ng-model="response.q14"/>
+                            <input type="radio" value="0" ng-model="$parent.$parent.response.q14"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q14[0]}}
                             </div>
                             <i class="radio-icon ion-checkmark"></i>
                         </label>
                         <label class="item item-radio">
-                            <input type="radio" value="1" ng-model="response.q14"/>
+                            <input type="radio" value="1" ng-model="$parent.$parent.response.q14"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q14[1]}}
                             </div>
                             <i class="radio-icon ion-checkmark"></i>
                         </label>
                         <label class="item item-radio">
-                            <input type="radio" value="2" ng-model="response.q14"/>
+                            <input type="radio" value="2" ng-model="$parent.$parent.response.q14"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q14[2]}}
                             </div>
                             <i class="radio-icon ion-checkmark"></i>
                         </label>
                         <label class="item item-radio">
-                            <input type="radio" value="3" ng-model="response.q14"/>
+                            <input type="radio" value="3" ng-model="$parent.$parent.response.q14"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q14[3]}}
                             </div>
@@ -589,28 +590,28 @@
                         </div>
                         <!-- Answers with radios -->
                         <label class="item item-radio">
-                            <input type="radio" value="0" ng-model="response.q15"/>
+                            <input type="radio" value="0" ng-model="$parent.$parent.response.q15"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q15[0]}}
                             </div>
                             <i class="radio-icon ion-checkmark"></i>
                         </label>
                         <label class="item item-radio">
-                            <input type="radio" value="1" ng-model="response.q15"/>
+                            <input type="radio" value="1" ng-model="$parent.$parent.response.q15"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q15[1]}}
                             </div>
                             <i class="radio-icon ion-checkmark"></i>
                         </label>
                         <label class="item item-radio">
-                            <input type="radio" value="2" ng-model="response.q15"/>
+                            <input type="radio" value="2" ng-model="$parent.$parent.response.q15"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q15[2]}}
                             </div>
                             <i class="radio-icon ion-checkmark"></i>
                         </label>
                         <label class="item item-radio">
-                            <input type="radio" value="3" ng-model="response.q15"/>
+                            <input type="radio" value="3" ng-model="$parent.$parent.response.q15"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q15[3]}}
                             </div>
@@ -629,28 +630,28 @@
                         </div>
                         <!-- Answers with radios -->
                         <label class="item item-radio">
-                            <input type="radio" value="0" ng-model="response.q16"/>
+                            <input type="radio" value="0" ng-model="$parent.$parent.response.q16"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q16[0]}}
                             </div>
                             <i class="radio-icon ion-checkmark"></i>
                         </label>
                         <label class="item item-radio">
-                            <input type="radio" value="1" ng-model="response.q16"/>
+                            <input type="radio" value="1" ng-model="$parent.$parent.response.q16"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q16[1]}}
                             </div>
                             <i class="radio-icon ion-checkmark"></i>
                         </label>
                         <label class="item item-radio">
-                            <input type="radio" value="2" ng-model="response.q16"/>
+                            <input type="radio" value="2" ng-model="$parent.$parent.response.q16"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q16[2]}}
                             </div>
                             <i class="radio-icon ion-checkmark"></i>
                         </label>
                         <label class="item item-radio">
-                            <input type="radio" value="3" ng-model="response.q16"/>
+                            <input type="radio" value="3" ng-model="$parent.$parent.response.q16"/>
                             <div class="item-content item-text-wrap">
                                 {{text.q16[3]}}
                             </div>
@@ -660,34 +661,40 @@
                 </ion-slide>
 
                 <ion-slide>
-                    <div class="card padding">
 
+                    <div class="list padding">
+                        <h4>Review</h4>
 
-                    </div>
-                    <!-- submit button -->
-                    <div class="padding">
-                        <button type="submit" class="button button-block button-positive">Save</button>
                     </div>
                 </ion-slide>
-
             </ion-slide-box>
+            <!-- submit button -->
 
+
+            <!-- END OF FORM -->
 
             <div class="row">
-                <div class="col" ng-if="ind > 0">
+                <div class="col" ng-show="showBack">
                     <div class="padding">
                         <button type="button" class="button button-small button-block button-clear icon-left ion-chevron-left button-calm" ng-click="back()">Back</button>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col" ng-show="showFwd">
                     <div class="padding">
                         <button type="button" class="button button-small button-block button-clear icon-right ion-chevron-right button-calm" ng-click="next()">Next</button>
                     </div>
                 </div>
-
+                <div class="col" ng-show="!showFwd">
+                    <div class="padding">
+                        <button type="submit" class="button button-small button-block button-positive icon-right ion-paper-aeroplane">Save</button>
+                    </div>
+                </div>
             </div>
-            <!-- END OF FORM -->
         </form>
+
+
+
+
 
 
     </ion-content>

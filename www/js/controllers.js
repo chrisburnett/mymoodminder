@@ -83,10 +83,8 @@ angular.module('trump.controllers', [])
             // get the rest service object and create a new resource
             // on the server, then transition back to dashboard state
             QIDSResponses.save(response).then(function() { $state.go('tab.qids-list'); });
-
         };
-
-
+        $scope.showFwd = true;
         $scope.text = QuestionnaireText;
 
         // slide box control functions
@@ -97,7 +95,18 @@ angular.module('trump.controllers', [])
             $ionicSlideBoxDelegate.previous();
         };
         $scope.slideChanged = function(index) {
-            $scope.ind = index;
+
+            // control states of buttons
+            if(index > 0)
+                $scope.showBack = true;
+            else
+                $scope.showBack = false;
+
+            if(index < $ionicSlideBoxDelegate.slidesCount() - 1)
+                $scope.showFwd = true;
+            else
+                $scope.showFwd = false;
+
         };
     })
 
@@ -135,7 +144,7 @@ angular.module('trump.controllers', [])
             if($scope.passcode.length < 4) {
                 $scope.passcode = $scope.passcode + value;
                 if($scope.passcode.length == 4) {
-                    console.log("The four digit code was entered");
+                    conole.log("The four digit code was entered");
                 };
 
             }
