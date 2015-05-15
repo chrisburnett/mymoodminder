@@ -91,7 +91,7 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
                                 // the delete flag set. We'll ignore it and
                                 // try to delete later
                                 qids_responses.splice(qids_responses.indexOf(response), 1);
-                                localStorageService.set('qids_responses', qids_responses);
+                                //localStorageService.set('qids_responses', qids_responses);
                                 d.resolve(qids_responses);
                             }, function() {
                                 // the response has been persisted but

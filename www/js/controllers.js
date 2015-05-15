@@ -19,12 +19,12 @@ angular.module('trump.controllers', [])
 
         $scope.delete = function(response) {
             // immediately delete the response from the scope to update view
-            for(var r in $scope.qids_responses) {
-                if ($scope.qids_responses[r].completed_at == response.completed_at)
-                    $scope.qids_responses.splice(r, 1);
-            }
+            //for(var r in $scope.qids_responses) {
+            //    if ($scope.qids_responses[r].completed_at == response.completed_at)
+            //        $scope.qids_responses.splice(r, 1);
+            //}
             QIDSResponses.delete(response.completed_at).then(function(responses) {
-                $scope.qids_responses = responses;
+                $scope.qids_responses.splice($scope.qids_responses.indexOf(response), 1);
             });
         };
 
