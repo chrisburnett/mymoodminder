@@ -247,7 +247,7 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
         };
     })
 
-    .factory('Timepoints', function(localStorageService, BACKEND_URL, $resource) {
+    .factory('Messages', function() {
         // Might use a resource here that returns a JSON array We
         // should be querying the intermediate data service after
         // checking the local data store

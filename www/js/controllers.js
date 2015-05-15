@@ -108,6 +108,28 @@ angular.module('trump.controllers', [])
                 $scope.showFwd = false;
 
         };
+
+        // visibility of mutually exclisive questions TODO -
+        // implementing a directive would be a neater way of doing
+        // this probably, this is nasty brittle code, but for now (and
+        // given that the questionnaire is not going to change) this
+        // will do
+        $scope.toggleQ6 = function() {
+            $scope.showQ6 = !$scope.showQ6;
+            if($scope.showQ6) $scope.showQ7 = false;
+        };
+        $scope.toggleQ7 = function() {
+            $scope.showQ7 = !$scope.showQ7;
+            if($scope.showQ7) $scope.showQ6 = false;
+        };
+        $scope.toggleQ8 = function() {
+            $scope.showQ8 = !$scope.showQ8;
+            if($scope.showQ8) $scope.showQ9 = false;
+        };
+        $scope.toggleQ9 = function() {
+            $scope.showQ9 = !$scope.showQ9;
+            if($scope.showQ9) $scope.showQ8 = false;
+        };
     })
 
 
