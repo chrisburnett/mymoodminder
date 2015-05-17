@@ -8,10 +8,11 @@ Rails.application.routes.draw do
     post 'auth' => 'auth#authenticate'
   end
 
-  # admin route
-  get 'login' => 'api/auth#index'
+  namespace :admin do
+    get 'login' => 'login#index'
+    post 'login' => 'login#authenticate'
+  end
   
-  get 'admin' => 'admin#index'
   
 
   # The priority is based upon order of creation: first created -> highest priority.
