@@ -1,4 +1,4 @@
-class Api::QidsResponsesController < ApplicationController
+class Api::QidsResponsesController < SecureAPIController
 
   def destroy
     if @current_user then

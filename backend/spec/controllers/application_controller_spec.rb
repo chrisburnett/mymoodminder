@@ -4,7 +4,7 @@ require 'rails_helper'
 # authentication requirements shared by all the subclass controllers,
 # so that's what we'll test here
 
-RSpec.describe ApplicationController, :type => :controller do
+RSpec.describe SecureAPIController, :type => :controller do
 
   controller do
     def index

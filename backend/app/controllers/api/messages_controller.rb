@@ -1,4 +1,4 @@
-class Api::MessagesController < ApplicationController
+class Api::MessagesController < SecureAPIController
 
   # creating a message
   def create
