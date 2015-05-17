@@ -1,6 +1,9 @@
-FactoryGirl.define do  factory :message do
-    content "MyText"
-user nil
+FactoryGirl.define do
+
+
+  factory :message do
+    content "Lorem ipsum etc etc"
+    user
   end
 
 
@@ -22,8 +25,8 @@ user nil
     completed_at "2015-03-21T12:24:26.000Z"
     user
   end
-  
-  
+
+
   factory :user do
     username "dameramu"
     forename "Chris"
@@ -31,14 +34,27 @@ user nil
     password "ukelele"
 
     factory :user_with_responses do
-      
+
       transient do
         qids_response_count 5
       end
-      
+
       after(:create) do |user, evaluator|
         create_list(:qids_response, evaluator.qids_response_count, user: user)
       end
+    end
+
+    factory :user_with_messages do
+
+      transient do
+        messages_count 5
+      end
+
+      after(:create) do |user, evaluator|
+        create_list(:message, evaluator.messages_count, user: user)
+      end
+
+
     end
   end
 end
