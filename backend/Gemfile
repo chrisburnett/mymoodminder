@@ -32,6 +32,8 @@ gem 'bcrypt', '~> 3.1.7'
 # Push notifications
 gem 'rpush'
 
+# bootstrap for the admin interface
+gem 'twitter-bootstrap-rails'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
