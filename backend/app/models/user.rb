@@ -2,7 +2,8 @@ class User < ActiveRecord::Base
   include Authentication
   
   has_many :qids_responses
-
+  has_many :messages
+  
   has_secure_password
 
   validates :password,
