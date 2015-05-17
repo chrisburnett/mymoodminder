@@ -7,3 +7,4 @@ platforms/
 /old/
 /backend/Gemfile.lock
 /www/css/ionic.app.min.css
+/plugins/android.json
