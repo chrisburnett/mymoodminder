@@ -3,12 +3,15 @@ Rails.application.routes.draw do
     resources :users
     resources :qids_responses, only: [:index, :create, :update, :destroy]
     resources :messages, only: [:index, :create, :update, :destroy]
-
     
     # route for authenticating with the AuthController
     post 'auth' => 'auth#authenticate'
   end
 
+  # admin route
+  get 'login' => 'api/auth#index'
+  
+  get 'admin' => 'admin#index'
   
 
   # The priority is based upon order of creation: first created -> highest priority.
