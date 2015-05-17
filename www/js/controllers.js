@@ -1,7 +1,11 @@
 angular.module('trump.controllers', [])
 
-    .controller('DashCtrl', function($scope, $state, AuthService) {
+    .controller('DashCtrl', function($scope, $state, AuthService, Messages) {
 
+        Messages.all().then(function(messages) {
+            $scope.messages = messages;
+        });
+        
         // clear token and go to login screen
         $scope.logout = function() {
             AuthService.logout();

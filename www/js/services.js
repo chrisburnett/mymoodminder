@@ -121,7 +121,7 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
                 var qids_responses = localStorageService.get('qids_responses');
                 if(qids_responses) {
                     for(var i = 0; i < qids_responses.length; i++) {
-                        if(qids_responses[i].pending) promises.push(this.save(qids_responses[i]));
+                         if(qids_responses[i].pending) promises.push(this.save(qids_responses[i]));
                         if(qids_responses[i].delete) promises.push(this.delete(qids_responses[i].completed_at));
                     }
                 }
@@ -247,28 +247,22 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
         };
     })
 
-    .factory('Messages', function() {
-        // Might use a resource here that returns a JSON array We
-        // should be querying the intermediate data service after
-        // checking the local data store
-
-
+    .factory('Messages', function(localStorageService, $q, BACKEND_URL, $resource) {
         // just look at this sneaky javascript - return an anonymous
         // object with the following methods
         return {
+              
             all: function() {
-
-            },
-            remove: function(timepoint) {
-                timepoints.splice(timepoints.indexOf(timepoint), 1);
-            },
-            get: function(timepointId) {
-                for (var i = 0; i < timepoints.length; i++) {
-                    if (timepoints[i].id === parseInt(timepointId)) {
-                        return timepoints[i];
-                    }
-                }
-                return null;
+                var d = $q.defer();
+                $resource(BACKEND_URL + '/messages')
+                    .query({}, function(data) {
+                        localStorageService.set('messages', data);
+                        d.resolve(data);
+                    }, function(reason) {
+                        var messages = localStorageService.get('messages');
+                        d.resolve(messages);
+                    });
+                return d.promise;
             }
         };
     });

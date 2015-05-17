@@ -3,21 +3,22 @@
 <ion-view view-title="Home">
     <ion-content class="padding">
 
-        <div class="list card">
+        <div class="list">
             <div class="item item-divider">Progress</div>
             <div class="item item-body">
                 <div>
-                    You ate an apple today!
+                    Graph placeholder
                 </div>
             </div>
         </div>
 
 
-        <ion-list class="list list-inset" show-delete="false" can-swipe="true">
-            <div class="item item-divider">Recent activity</div>
-            <ion-item class="item item-remove-animate item-icon-right" ng-repeat="qids_response in qids_responses" type="item-text-wrap" href="#/tab/qids_response/{{qids_response.completed_at}}">
-                <h2>QIDS Response</h2>
-                <p>{{qids_response.completed_at}}</p>
+        <ion-list class="list" show-delete="false" can-swipe="true">
+            <div class="item item-divider">Messages</div>
+            <ion-item class="item item-remove-animate item-icon-right" ng-repeat="message in messages" type="item-text-wrap" href="#/tab/messages/{{message.id}}">
+                
+                <h4>{{message.created_at}}</h4>
+                <p>{{message.content}}</p>
                 <i class="icon ion-chevron-right icon-accessory"></i>
 
                 <!-- <ion-option-button class="button-assertive" ng-click="remove(timepoint)">-->
