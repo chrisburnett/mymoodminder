@@ -9,8 +9,8 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    get 'login' => 'login#index'
-    post 'login' => 'login#authenticate'
+    get 'login' => 'session#index'
+    post 'login' => 'session#create'
   end
   
   
