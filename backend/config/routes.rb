@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   namespace :admin do
     get 'login' => 'session#index'
     post 'login' => 'session#create'
+    get 'dashboard' => 'dashboard#index'
   end
   
   

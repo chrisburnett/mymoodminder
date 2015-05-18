@@ -13,7 +13,7 @@ class Admin::SessionController < ApplicationController
     user = User.find_by_username(params[:username]).try(:authenticate, params[:password])
     if user && user.admin? then
       session[:user_id] = user.id
-      render json: { user_id: user.id }, status: :ok
+      redirect_to admin_dashboard_url
     else
       flash[:notice] = "Invalid username or password"
       flash[:color] = "invalid"
