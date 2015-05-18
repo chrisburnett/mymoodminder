@@ -20,6 +20,11 @@ class Admin::SessionController < ApplicationController
       render :index
     end
   end
-  
-  
+
+
+  def destroy
+    session[:user_id] = nil
+    @current_user = nil
+    redirect_to admin_login_url
+  end
 end
