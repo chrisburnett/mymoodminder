@@ -210,11 +210,9 @@
 
                 <!-- QUESTION 6/7 -->
                 <ion-slide>
-                    <div class="item item-balanced">
-                        Please complete either 6 or 7 (not both)
-                    </div>
+
                     <div class="list card" id="qids-qa-6-7-a">
-                        <div class="item item-divider icon icon-left ion-plus-circled item-text-wrap" ng-click="toggleQ6()">
+                        <div ng-class="{'ion-plus-circled': !showQ6, 'ion-minus-circled': showQ6}"class="item item-divider icon icon-left item-text-wrap" ng-click="toggleQ6()">
                             <!-- Question -->
                             6. {{text.q6.q}}
                         </div>
@@ -252,7 +250,7 @@
                     </div>
 
                     <div class="list card" id="qids-qa-6-7-b">
-                        <div class="item icon icon-left ion-plus-circled item-divider item-text-wrap" ng-click="toggleQ7()">
+                        <div ng-class="{'ion-plus-circled': !showQ7, 'ion-minus-circled': showQ7}"  class="item icon icon-left item-divider item-text-wrap" ng-click="toggleQ7()">
                             <!-- Question -->
                             7. {{text.q7.q}}
                         </div>
@@ -288,20 +286,22 @@
                         </div>
                     </div>
 
+                    <div class="padding padding-vertical" ng-if="!showQ6 && !showQ7">
+                        <div class="padding">
+                            <h3>Please completed either question 6 or 7.</h3>
+                        </div>
+                    </div>
+                    
                 </ion-slide>
 
 
 
                 <!-- QUESTION 8/9 -->
                 <ion-slide>
-                    <div class="item item-balanced">
-                        Please complete either 8 or 9 (not both)
-                    </div>
+
                     <div class="list card" id="qids-qa-8-9-a">
 
-
-
-                        <div class="item icon icon-left ion-plus-circled item-divider item-text-wrap" ng-click="toggleQ8()">
+                        <div ng-class="{'ion-plus-circled': !showQ8, 'ion-minus-circled': showQ8}" class="item icon icon-left item-divider item-text-wrap" ng-click="toggleQ8()">
                             <!-- Question -->
                             8. {{text.q8.q}}
                         </div>
@@ -339,7 +339,7 @@
                     </div>
 
                     <div class="list card" id="qids-qa-8-9-b">
-                        <div class="item icon icon-left ion-plus-circled item-divider item-text-wrap" ng-click="toggleQ9()">
+                        <div ng-class="{'ion-plus-circled': !showQ9, 'ion-minus-circled': showQ9}"class="item icon icon-left item-divider item-text-wrap" ng-click="toggleQ9()">
                             <!-- Question -->
                             9. {{text.q9.q}}
                         </div>
@@ -372,6 +372,13 @@
                                 </div>
                                 <i class="radio-icon ion-checkmark"></i>
                             </label>
+                        </div>
+                    </div>
+
+                    
+                    <div class="padding padding-vertical" ng-if="!showQ8 && !showQ9">
+                        <div class="padding">
+                            <h3>Please completed either question 8 or 9.</h3>
                         </div>
                     </div>
                 </ion-slide>

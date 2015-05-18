@@ -17,7 +17,7 @@
             <div class="item item-divider">Messages</div>
             <ion-item class="item item-remove-animate item-icon-right" ng-repeat="message in messages" type="item-text-wrap" href="#/tab/messages/{{message.id}}">
                 
-                <h4>{{message.created_at}}</h4>
+                <h4>{{message.created_at | amCalendar}}</h4>
                 <p>{{message.content}}</p>
                 <i class="icon ion-chevron-right icon-accessory"></i>
 

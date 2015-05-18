@@ -1,14 +1,9 @@
-angular.module('trump.controllers', [])
+angular.module('trump.controllers', ['angularMoment'])
 
     .controller('DashCtrl', function($scope, $state, AuthService, Messages) {
 
         Messages.all().then(function(messages) {
-            $scope.messages = messages.map(function(msg) {
-                return {
-                    content: msg.content,
-                    created_at: moment(msg.created_at).calendar()
-                };
-            });
+            $scope.messages = messages;
         });
         
         // clear token and go to login screen

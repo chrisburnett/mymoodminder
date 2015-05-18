@@ -8,8 +8,7 @@
         <ion-list class="list list-inset" show-delete="false" can-swipe="true">
             
             <ion-item class="item item-remove-animate item-icon-right" ng-repeat="qids_response in qids_responses" type="item-text-wrap" href="#/tab/qids/{{qids_response.completed_at}}">
-                <h2>QIDS Entry</h2>
-                <p>{{qids_response.completed_at}}</p>
+                <h2>{{qids_response.completed_at | amCalendar}}</h2>
                 <i class="icon ion-chevron-right icon-accessory"></i>
 
                 <!-- <ion-option-button class="button-assertive" ng-click="remove(timepoint)">-->
