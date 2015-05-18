@@ -55,7 +55,7 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'LocalS
                 templateUrl: 'templates/pinlock.html',
                 controller: 'PinlockCtrl'
             })
-        
+
             .state('login', {
                 url: '/login',
                 templateUrl: 'templates/login.html',
@@ -121,7 +121,7 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'LocalS
                         controller: 'QIDSResponseCtrl'
                     }
                 }
-                
+
             });
 
         // if none of the above states are matched, use this as the fallback
@@ -197,4 +197,48 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'LocalS
 
     .config(function($httpProvider) {
         return $httpProvider.interceptors.push('AuthInterceptor');
+    })
+
+
+    .filter('qidsScore', function() {
+        // this service computes the QIDS-SR16 score WARNING: result
+        // will be NaN if there are blanks in the response, that is,
+        // if the participant didn't answer all the questions. This is
+        // because the QIDS scoring scheme isn't defined for cases
+        // where answers were skipped, and we'd need to make some kind
+        // of assumption then to come up with a score. For now, we'll
+        // just pass back a '!' and allow the view to render it
+        // somehow
+        return function(response) {
+            var score = 0;
+            var sleepItems = ['q1', 'q2', 'q3', 'q4'];
+            var weightItems = ['q6', 'q7', 'q8', 'q9'];
+            var remainingItems = ['q5', 'q10', 'q11', 'q12', 'q13', 'q14'];
+            var sleepScore = 0;
+            var weightScore = 0;
+            // pick the highest of the sleep items
+            for (var item in sleepItems) {
+                var thisScore = parseInt(response[sleepItems[item]]);
+                if(thisScore > sleepScore)
+                    sleepScore = thisScore;
+            }
+            // and highest of the weight items
+            for (var item in weightItems) {
+                var thisScore = parseInt(response[weightItems[item]]);
+                if(thisScore > weightScore)
+                    weightScore = thisScore;
+            }
+            score += sleepScore;
+            score += weightScore;
+            // highest of the two psychomotor scores
+            var q15 = parseInt(response.q15);
+            var q16 = parseInt(response.q16);
+            if(q15 > q16) score += q15;
+            else score += q16;
+            // add up the rest
+            for (var item in remainingItems) {
+                score += parseInt(response[remainingItems[item]]);
+            }
+            return score;
+        };
     });

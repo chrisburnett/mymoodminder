@@ -1,6 +1,6 @@
 angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
 
-    .factory('QIDSResponses', function(localStorageService, BACKEND_URL, $q, $resource, qidsScoringService) {
+    .factory('QIDSResponses', function(localStorageService, BACKEND_URL, $q, $resource, qidsScoreFilter) {
         return {
             // return a service which lets us persist a response
             // between invocations of the app locally (for now) and
@@ -48,7 +48,7 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
                 }
 
                 // compute the score locally and append it
-                response.score = qidsScoringService.score(response);
+                response.score = qidsScoreFilter(response);
 
                 // if we are using the remote storage scheme, send to
                 // server (for now, just do this anyway) if we are
@@ -270,41 +270,6 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
                 return d.promise;
             }
         };
-    })
-
-
-    .factory('qidsScoringService', function() {
-        // this service computes the QIDS-SR16 score
-        return {
-            score: function(response) {
-                var score = 0;
-                var sleepItems = ['q1', 'q2', 'q3', 'q4'];
-                var weightItems = ['q6', 'q7', 'q8', 'q9'];
-                var remainingItems = ['q5', 'q10', 'q11', 'q12', 'q13', 'q14'];
-                var sleepScore = 0;
-                var weightScore = 0;
-                // pick the highest of the sleep items
-                for (var item in sleepItems) {
-                    var thisScore = parseInt(response[item]);
-                    if(response[item] > sleepScore) 
-                        sleepScore = response[item];
-                }
-                // and highest of the weight items
-                for (var item in weightItems) {
-                    var thisScore = parseInt(response[item]);
-                    if(response[item] > weightScore)
-                        weightScore = response[item];
-                }
-                score += sleepScore;
-                score += weightScore;
-                // highest of the two psychomotor scores
-                if(response.q15 > response.q16) score += response.q15;
-                else score += response.q16;
-                // add up the rest
-                for (var item in remainingItems) {
-                    score += parseInt(response[item]);
-                }
-                return score;
-            }
-        }; 
     });
+
+
