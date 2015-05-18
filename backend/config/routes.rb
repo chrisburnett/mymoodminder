@@ -9,7 +9,11 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
+
+    resources :messages
+    
     get 'login' => 'session#index'
+    get 'logout' => 'session#destroy'
     post 'login' => 'session#create'
     get 'dashboard' => 'dashboard#index'
   end

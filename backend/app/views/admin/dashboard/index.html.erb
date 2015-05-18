@@ -1,1 +1,24 @@
-<h1>Welcome to the Admin panel</h1>
+<div class="row">
+    <div class="col-md-6">
+
+        <!-- message panel -->
+        <div class="panel panel-default">
+            <div class="panel-heading">User messaging</div>
+            <div class="panel-body">
+                <p>Push a message to a user</p>
+
+                <%= bootstrap_form_for [@message], url: { controller: 'messages', action: 'create' }, remote: true do |f| %>
+
+                    <%= f.select :user_id, User.all.collect {|u| [ u.id, u.id ] } %>
+
+                    <%= f.select :sender_id, User.all.collect {|u| [ u.id, u.id ] } %>
+
+                    <%= f.text_area :content, size: "24x6" %>
+
+                    <%= f.submit %>
+                    
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>
