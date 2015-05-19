@@ -1,4 +1,4 @@
-require 'pry'
+
 
 class NotAuthenticatedError < StandardError
 end

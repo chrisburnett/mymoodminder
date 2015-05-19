@@ -30,4 +30,6 @@ test:
 production:
   <<: *default
   database: trump
+  username: hjygoupidukiqv
+  password: cz1ZGMpy5EV7w0qI-D3BkuccYU
   #database: db/production.sqlite3
