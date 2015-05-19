@@ -5,6 +5,6 @@ node_modules/
 platforms/
 #plugins/
 /old/
-/backend/Gemfile.lock
+#/backend/Gemfile.lock
 /www/css/ionic.app.min.css
 /plugins/android.json
