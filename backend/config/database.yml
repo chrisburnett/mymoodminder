@@ -16,7 +16,9 @@ default: &default
 
 development:
   <<: *default
-  dayabase: trump_dev
+  database: trump_dev
+  username: trumpadmin
+  password: trumpadmin
   #database: db/development.sqlite3
 
 # Warning: The database defined as "test" will be erased and
@@ -25,6 +27,8 @@ development:
 test:
   <<: *default
   database: trump_test
+  username: trumpadmin
+  password: trumpadmin
   #database: db/test.sqlite3
 
 production:
