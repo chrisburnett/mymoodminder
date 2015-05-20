@@ -7,7 +7,8 @@ Rpush.configure do |config|
   # config.redis_options = {}
 
   # Frequency in seconds to check for new notifications.
-  config.push_poll = 2
+  # we really don't need to check that often - low frequency notifications.
+  config.push_poll = 30
 
   # The maximum number of notifications to load from the store every `push_poll` seconds.
   # If some notifications are still enqueued internally, Rpush will load the batch_size less
@@ -29,7 +30,16 @@ Rpush.configure do |config|
   # config.apns.feedback_receiver.enabled = true
   # config.apns.feedback_receiver.frequency = 60
 
- end
+  # start rpush process
+  if defined?(Rails)
+    ActiveSupport.on_load(:after_initialize) do
+      Rpush.embed
+    end
+  else
+    Rpush.embed
+  end
+
+end
 
 Rpush.reflect do |on|
 

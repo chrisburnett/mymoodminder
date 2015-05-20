@@ -1,4 +1,15 @@
-FactoryGirl.define do
+FactoryGirl.define do  factory :preset do
+    content "MyText"
+category nil
+  end
+  factory :preset_message_preset do
+    content "MyText"
+category nil
+  end
+  factory :category do
+    title "MyString"
+  end
+
 
 
   factory :message do
