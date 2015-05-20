@@ -30,14 +30,6 @@ Rpush.configure do |config|
   # config.apns.feedback_receiver.enabled = true
   # config.apns.feedback_receiver.frequency = 60
 
-  # start rpush process
-  if defined?(Rails)
-    ActiveSupport.on_load(:after_initialize) do
-      Rpush.embed
-    end
-  else
-    Rpush.embed
-  end
 
 end
 
@@ -136,4 +128,13 @@ Rpush.reflect do |on|
   # Called when an exception is raised.
   # on.error do |error|
   # end
+end
+
+# start rpush process
+if defined?(Rails)
+  ActiveSupport.on_load(:after_initialize) do
+    Rpush.embed
+  end
+else
+  Rpush.embed
 end
