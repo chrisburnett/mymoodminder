@@ -16,9 +16,23 @@
                     <%= f.text_area :content, size: "24x6" %>
 
                     <%= f.submit %>
-                    
+
                 <% end %>
             </div>
         </div>
+    </div>
+    <div class="col-md-6">
+        <!-- log panel -->
+        <div class="panel panel-default">
+            <div class="panel-heading">Event log</div>
+            <div class="panel-body">
+                
+                <% @logevents.each do |event| %>
+                    <p><%= event.content %></p>
+                <% end %>
+
+            </div>
+        </div>
+
     </div>
 </div>
