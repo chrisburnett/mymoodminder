@@ -8,9 +8,9 @@
                 <input type="password" placeholder="Password" ng-model="credentials.password">
             </label>
         </div>
-        
+
         <button class="button button-block button-calm" ng-click="login(credentials)">Login</button
->
+             >
 
         <div ng-if="wrongCredentials" class="card">
             <div class="item item-text-wrap item-assertive">
@@ -21,6 +21,11 @@
         <div ng-if="cannotConnect" class="card">
             <div class="item item-text-wrap item-assertive">
                 Sorry, there was a problem verifying your password with the server. Please try again later.
+            </div>
+        </div>
+        <div ng-if="registrationFailure" class="card">
+            <div class="item item-text-wrap item-assertive">
+                Sorry, there was a problem registering your device for notifications. Please try again later.
             </div>
         </div>
 

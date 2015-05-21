@@ -8,12 +8,12 @@
 angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'LocalStorageModule', 'ngCordova'])
 
 // this is where you configure the URL of the backend UI server
-    .constant('BACKEND_URL', 'https://murmuring-depths-9520.herokuapp.com/api')
-    .constant('AUTH_URL', 'https://murmuring-depths-9520.herokuapp.com/api/auth')
+    .constant('BACKEND_URL', 'https://murmuring-depths-9520-staging.herokuapp.com/api')
+    .constant('AUTH_URL', 'https://murmuring-depths-9520-staging.herokuapp.com/api/auth')
     .constant('ANDROID_SENDER_ID', '937013579687')
 
-    .run(function($ionicPlatform, $rootScope, $injector, $state, $cordovaPush, ANDROID_SENDER_ID) {
-        
+    .run(function($ionicPlatform, $rootScope, $injector, $state, $cordovaPush, RegistrationService, ANDROID_SENDER_ID) {
+
         // configuration for the android platform
         var androidConfig = {
             "senderID": ANDROID_SENDER_ID
@@ -22,7 +22,7 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'LocalS
         $ionicPlatform.ready(function() {
 
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-            
+
             // for form inputs)
             if (window.cordova && window.cordova.plugins.Keyboard) {
                 cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -49,9 +49,11 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'LocalS
 
             // register cordova push notifications
             $cordovaPush.register(androidConfig).then(function(result) {
-                // success                
+                // success
+                console.log(result);
             }, function(error) {
                 // error
+                console.log(error);
             });
             // notification event handler
             $rootScope.$on('$cordovaPush:notificationReceived', function(event, notification) {
@@ -62,7 +64,10 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'LocalS
                     // be pushing the messages and needs to know who
                     // each message should go to
                     if (notification.regid.length > 0) {
-                        alert('registration ID = ' + notification.regid);
+                        // store the token for later - we need to
+                        // authenticate before we can register our
+                        // device with the backend
+                        RegistrationService.set(notification.regid);
                     }
                     break;
                 case 'message':
@@ -74,7 +79,7 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'LocalS
                     break;
                 }
             });
-            
+
         });
     })
 
@@ -245,18 +250,23 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'LocalS
             delete: function() {
                 localStorageService.remove('registration_id');
             },
-            register: function(registration_id) {
+            register: function() {
+                var regid = this.get();
                 var d = $q.defer();
-                $http.post(BACKEND_URL + '/register', { registration_id: registration_id }).
-                    success(function(data) {
-                        // successfully updated registration ID
-                        console.log("success!");
-                        d.resolve();
-                    }).error(function(reason) {
-                        // failed to update registration ID
-                        console.log(reason);
-                        d.reject();
-                    });
+                if(regid) {
+                    $http.post(BACKEND_URL + '/register', { registration_id: regid }).
+                        success(function(data) {
+                            // successfully updated registration ID
+                            console.log("success!");
+                            d.resolve();
+                        }).error(function(reason) {
+                            // failed to update registration ID
+                            console.log(reason);
+                            d.reject();
+                        });
+                } else {
+                    d.reject('Cannot register with backend: no device ID');
+                }
                 return d.promise;
             }
         };

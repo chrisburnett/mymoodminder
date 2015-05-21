@@ -137,7 +137,7 @@ angular.module('trump.controllers', ['angularMoment'])
     })
 
 
-    .controller('LoginCtrl', function($scope, $state, AuthService) {
+    .controller('LoginCtrl', function($scope, $state, AuthService, RegistrationService) {
         // controller for handling login requests
         $scope.credentials = {};
 
@@ -146,14 +146,21 @@ angular.module('trump.controllers', ['angularMoment'])
             // reset problem flags
             $scope.wrongCredentials = null;
             $scope.cannotConnect = null;
-            AuthService.login(credentials.username, credentials.password).then(
-                function() {
+            AuthService.login(credentials.username, credentials.password)
+                .then(function() {
                     $state.go('tab.dash');
                 }, function(reason) {
                     // display the appropriate error message
                     if(reason == "401") { $scope.wrongCredentials = true; }
                     else { $scope.cannotConnect = true; }
+                })
+                .then(function() {
+                    // now try to register device with the backend
+                    RegistrationService.register();
+                }, function(reason) {
+                    $scope.registrationFailure = true;
                 });
+            
         };
     })
 
