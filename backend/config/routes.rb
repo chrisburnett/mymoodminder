@@ -1,11 +1,19 @@
 Rails.application.routes.draw do
   namespace :api, defaults: {format: :json} do
-    resources :users
+    resources :users, only: [:index]
     resources :qids_responses, only: [:index, :create, :update, :destroy]
     resources :messages, only: [:index, :create, :update, :destroy]
     
     # route for authenticating with the AuthController
     post 'auth' => 'auth#authenticate'
+
+    # custom route for registering the user's device ID this is NOT
+    # the best way to do this - the railsy way would be to have a
+    # restful representation of a registration, so you could have
+    # multiple devices for multiple users. But in the interest of
+    # saving time, I'm doing it this way.
+    # the before filters will take care of getting the user_id
+    post 'register' => 'users#register'
   end
 
   namespace :admin do
