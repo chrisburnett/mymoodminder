@@ -8,3 +8,4 @@ platforms/
 #/backend/Gemfile.lock
 /www/css/ionic.app.min.css
 /plugins/android.json
+/doc/notifications_sequence.graffle
