@@ -53,13 +53,15 @@ Rpush.reflect do |on|
   # end
 
   # Called when a notification is successfully delivered.
-  # on.notification_delivered do |notification|
-  # end
+  on.notification_delivered do |notification|
+    puts notification
+  end
 
   # Called when notification delivery failed.
   # Call 'error_code' and 'error_description' on the notification for the cause.
-  # on.notification_failed do |notification|
-  # end
+  on.notification_failed do |notification|
+    puts notification
+  end
 
   # Called when the notification delivery failed and only the notification ID
   # is present in memory.
@@ -84,14 +86,16 @@ Rpush.reflect do |on|
   # Called for each recipient which successfully receives a notification. This
   # can occur more than once for the same notification when there are multiple
   # recipients.
-  # on.gcm_delivered_to_recipient do |notification, registration_id|
-  # end
+  on.gcm_delivered_to_recipient do |notification, registration_id|
+    puts notification
+  end
 
   # Called for each recipient which fails to receive a notification. This
   # can occur more than once for the same notification when there are multiple
   # recipients. (do not handle invalid registration IDs here)
-  # on.gcm_failed_to_recipient do |notification, error, registration_id|
-  # end
+  on.gcm_failed_to_recipient do |notification, error, registration_id|
+    puts notification
+  end
 
   # Called when the GCM returns a canonical registration ID.
   # You will need to replace old_id with canonical_id in your records.
@@ -131,10 +135,10 @@ Rpush.reflect do |on|
 end
 
 # start rpush process
-if defined?(Rails)
-  ActiveSupport.on_load(:after_initialize) do
-    Rpush.embed
-  end
-else
-  Rpush.embed
-end
+# if defined?(Rails)
+#   ActiveSupport.on_load(:after_initialize) do
+#     Rpush.embed
+#   end
+# else
+#   Rpush.embed
+# end
