@@ -54,7 +54,6 @@ Rpush.reflect do |on|
 
   # Called when a notification is successfully delivered.
   on.notification_delivered do |notification|
-    puts notification
   end
 
   # Called when notification delivery failed.
@@ -87,14 +86,16 @@ Rpush.reflect do |on|
   # can occur more than once for the same notification when there are multiple
   # recipients.
   on.gcm_delivered_to_recipient do |notification, registration_id|
-    puts notification
+    LogEvent.create(content: '#{time.now}: Notification delivered to device id ending #{registration_id.last(5)}',
+                    type: 'success')
   end
 
   # Called for each recipient which fails to receive a notification. This
   # can occur more than once for the same notification when there are multiple
   # recipients. (do not handle invalid registration IDs here)
   on.gcm_failed_to_recipient do |notification, error, registration_id|
-    puts notification
+    LogEvent.create(content: '#{time.now}: Notification delivery FAILED to device id ending #{registration_id.last(5)}',
+                    type: 'failure')
   end
 
   # Called when the GCM returns a canonical registration ID.
