@@ -13,6 +13,12 @@ when 'development'
 end
 
 # import canned text messages
-CSV.foreach("script/messages.csv") do |row|
-  
+# start by scanning and creating categories
+categories = {}
+data = CSV.read("script/messages.csv")
+data.each do |category_title, message_preset|
+  categories[category_title] ||= Category.create(title: category_title)
+  categories[category_title].presets.create(content: message_preset)
 end
+
+
