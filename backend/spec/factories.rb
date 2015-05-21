@@ -1,4 +1,8 @@
-FactoryGirl.define do  factory :preset do
+FactoryGirl.define do  factory :log_event do
+    content "MyText"
+type ""
+  end
+  factory :preset do
     content "MyText"
 category nil
   end
