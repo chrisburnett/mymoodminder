@@ -5,16 +5,24 @@
 // the 2nd parameter is an array of 'requires'
 // 'trump.services' is found in services.js
 // 'trump.controllers' is found in controllers.js
-angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'LocalStorageModule'])
+angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'LocalStorageModule', 'ngCordova'])
 
 // this is where you configure the URL of the backend UI server
-    .constant('BACKEND_URL', 'http://localhost:3000/api')
-    .constant('AUTH_URL', 'http://localhost:3000/api/auth')
+    .constant('BACKEND_URL', 'https://murmuring-depths-9520.herokuapp.com/api')
+    .constant('AUTH_URL', 'https://murmuring-depths-9520.herokuapp.com/api/auth')
+    .constant('ANDROID_SENDER_ID', '937013579687')
 
+    .run(function($ionicPlatform, $rootScope, $injector, $state, $cordovaPush, ANDROID_SENDER_ID) {
+        
+        // configuration for the android platform
+        var androidConfig = {
+            "senderID": ANDROID_SENDER_ID
+        };
 
-    .run(function($ionicPlatform, $rootScope, $injector, $state) {
         $ionicPlatform.ready(function() {
+
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+            
             // for form inputs)
             if (window.cordova && window.cordova.plugins.Keyboard) {
                 cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -38,6 +46,35 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'LocalS
                     }
                 }
             });
+
+            // register cordova push notifications
+            $cordovaPush.register(androidConfig).then(function(result) {
+                // success                
+            }, function(error) {
+                // error
+            });
+            // notification event handler
+            $rootScope.$on('$cordovaPush:notificationReceived', function(event, notification) {
+                switch(notification.event) {
+                case 'registered':
+                    // we now have a device ID, we need to store it to
+                    // be posted to the backend, which will actually
+                    // be pushing the messages and needs to know who
+                    // each message should go to
+                    if (notification.regid.length > 0) {
+                        alert('registration ID = ' + notification.regid);
+                    }
+                    break;
+                case 'message':
+                    // this is the notification
+                    alert('message = ' + notification.message);
+                    break;
+                case 'error':
+                    alert('GCM error = ' + notification.msg);
+                    break;
+                }
+            });
+            
         });
     })
 
@@ -191,6 +228,36 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'LocalS
             logout: function() {
                 AuthToken.delete();
                 QIDSResponses.clear_cache();
+            }
+        };
+    })
+
+
+    .factory('RegistrationService', function($q, $http, AuthToken, BACKEND_URL, localStorageService) {
+        // service for managing the registration id
+        return {
+            set: function(registration_id) {
+                return localStorageService.set('registration_id', registration_id);
+            },
+            get: function() {
+                return localStorageService.get('registration_id');
+            },
+            delete: function() {
+                localStorageService.remove('registration_id');
+            },
+            register: function(registration_id) {
+                var d = $q.defer();
+                $http.post(BACKEND_URL + '/register', { registration_id: registration_id }).
+                    success(function(data) {
+                        // successfully updated registration ID
+                        console.log("success!");
+                        d.resolve();
+                    }).error(function(reason) {
+                        // failed to update registration ID
+                        console.log(reason);
+                        d.reject();
+                    });
+                return d.promise;
             }
         };
     })
