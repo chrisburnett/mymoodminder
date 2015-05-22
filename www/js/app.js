@@ -175,13 +175,13 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'LocalS
         // service for storing the authentication token in local storage
         return {
             set: function(token) {
-                return localStorageService.set('auth_token', token);
+                return window.localStorage.setItem('auth_token', token);
             },
             get: function() {
-                return localStorageService.get('auth_token');
+                return window.localStorage.getItem('auth_token');
             },
             delete: function() {
-                localStorageService.remove('auth_token');
+                window.localStorage.removeItem('auth_token');
             }
         };
     })
@@ -242,13 +242,13 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'LocalS
         // service for managing the registration id
         return {
             set: function(registration_id) {
-                return localStorageService.set('registration_id', registration_id);
+                return window.localStorage.setItem('registration_id', registration_id);
             },
             get: function() {
-                return localStorageService.get('registration_id');
+                return window.localStorage.getItem('registration_id');
             },
             delete: function() {
-                localStorageService.remove('registration_id');
+                window.localStorage.removeItem('registration_id');
             },
             register: function() {
                 var regid = this.get();

@@ -10,12 +10,12 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
                 $resource(BACKEND_URL + '/qids_responses')
                     .query({}, function(data) {
                         // if successful, update local storage
-                        localStorageService.set('qids_responses', data);
+                        window.localStorage.setItem('qids_responses', data);
                         d.resolve(data);
                     }, function(reason) {
                         // if can't connect, just return local storage
                         // miss out responses that are pending to be deleted
-                        var qids_responses = localStorageService.get('qids_responses');
+                        var qids_responses = window.localStorage.getItem('qids_responses');
                         if(qids_responses)
                             d.resolve(qids_responses.filter(function(response) {
                                 return !response.delete;
@@ -24,7 +24,7 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
                 return d.promise;
             },
             get: function(completed_at) {
-                var qids_responses = localStorageService.get('qids_responses');
+                var qids_responses = window.localStorage.getItem('qids_responses');
                 for(var response in qids_responses)
                     if(qids_responses[response].completed_at == completed_at) return qids_responses[response];
                 // it shouldn't happen that we can't find the matching
@@ -35,7 +35,7 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
             save: function(response) {
                 // the list of responses is stored locally in localStorage.
                 // update this before sending to server
-                var qids_responses = localStorageService.get('qids_responses') || {};
+                var qids_responses = window.localStorage.getItem('qids_responses') || {};
                 var d = $q.defer();
 
                 // use the date and time of completion as the key
@@ -63,7 +63,7 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
                         response.pending = true;
                         // store in localstorage
                         qids_responses.push(response);
-                        localStorageService.set('qids_responses', JSON.stringify(qids_responses));
+                        window.localStorage.setItem('qids_responses', JSON.stringify(qids_responses));
                     }
                     d.resolve(reason);
                 });
@@ -75,7 +75,7 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
                 // have been created on the server yet
                 // try to delete. Next time use a sync library for this...
                 var d = $q.defer();
-                var qids_responses = localStorageService.get('qids_responses');
+                var qids_responses = window.localStorage.getItem('qids_responses');
                 for (var response in qids_responses) {
                     if (qids_responses[response].completed_at == completed_at) {
                         // if the matching response doesn't have an id
@@ -83,7 +83,7 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
                         // the backend - just delete and be done with
                         if(!qids_responses[response].id) {
                             qids_responses.splice(qids_responses.indexOf(response), 1);
-                            localStorageService.set('qids_responses', qids_responses);
+                            window.localStorage.setItem('qids_responses', qids_responses);
                             d.resolve(qids_responses);
                         } else {
                             var id = qids_responses[response].id;
@@ -94,7 +94,7 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
                                 // the delete flag set. We'll ignore it and
                                 // try to delete later
                                 qids_responses.splice(qids_responses.indexOf(response), 1);
-                                //localStorageService.set('qids_responses', qids_responses);
+                                //window.localStorage.setItem('qids_responses', qids_responses);
                                 d.resolve(qids_responses);
                             }, function() {
                                 // the response has been persisted but
@@ -106,7 +106,7 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
                                 d.resolve(qids_responses);
                             }).finally(function() {
                                 // finally update localstorage
-                                localStorageService.set('qids_responses', JSON.stringify(qids_responses));
+                                window.localStorage.setItem('qids_responses', JSON.stringify(qids_responses));
                             });
                         }
                         break;
@@ -115,13 +115,13 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
                 return d.promise;
             },
             clear_cache: function() {
-                localStorageService.remove('qids_responses');
+                window.localStorage.removeItem('qids_responses');
             },
             sync_pending: function() {
                 // collect up all the promises so that we can resolve them as one
                 var promises = [];
                 // for each pending response in localstorage, try to save.
-                var qids_responses = localStorageService.get('qids_responses');
+                var qids_responses = window.localStorage.getItem('qids_responses');
                 if(qids_responses) {
                     for(var i = 0; i < qids_responses.length; i++) {
                          if(qids_responses[i].pending) promises.push(this.save(qids_responses[i]));
@@ -261,10 +261,10 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
                 var d = $q.defer();
                 $resource(BACKEND_URL + '/messages')
                     .query({}, function(data) {
-                        localStorageService.set('messages', data);
+                        window.localStorage.setItem('messages', data);
                         d.resolve(data);
                     }, function(reason) {
-                        var messages = localStorageService.get('messages');
+                        var messages = window.localStorage.getItem('messages');
                         d.resolve(messages);
                     });
                 return d.promise;
