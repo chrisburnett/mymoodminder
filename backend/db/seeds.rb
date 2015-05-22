@@ -21,4 +21,10 @@ data.each do |category_title, message_preset|
   categories[category_title].presets.create(content: message_preset)
 end
 
-
+# create entries for rpush - this creates a bit of state outside unit
+# tests, careful
+app = Rpush::Gcm::App.new
+app.name = "trump_app"
+app.auth_key = "key"
+app.connections = 1
+app.save!
