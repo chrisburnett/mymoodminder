@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     resources :users, only: [:index]
     resources :qids_responses, only: [:index, :create, :update, :destroy]
     resources :messages, only: [:index, :create, :update, :destroy]
+    resources :notifications, only: [:create]
     
     # route for authenticating with the AuthController
     post 'auth' => 'auth#authenticate'
