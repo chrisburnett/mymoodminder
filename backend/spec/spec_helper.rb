@@ -16,15 +16,27 @@
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 require 'factory_girl_rails'
 require 'capybara/rspec'
+require 'database_cleaner'
 
 RSpec.configure do |config|
   
   config.include FactoryGirl::Syntax::Methods
 
-  # spec/spec_helper.rb
-  
- 
 
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :truncation
+    DatabaseCleaner.clean
+
+    # create entries for rpush - this creates a bit of state outside unit
+    # tests, careful
+    app = Rpush::Gcm::App.new
+    app.name = "trump_app"
+    app.auth_key = "key"
+    app.connections = 1
+    app.save!
+
+ 
+  end
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.
 =begin

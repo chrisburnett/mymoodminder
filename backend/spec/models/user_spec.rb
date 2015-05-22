@@ -36,5 +36,11 @@ RSpec.describe User, :type => :model do
     expect(logged_user).not_to eq(user)
   end
 
+  describe "send_notification" do
+    it "adds a pending notification entry to the database" do
+      user = create(:user)
+      expect(user.send_notification("test")).to be_truthy
+    end
+  end
 end
 

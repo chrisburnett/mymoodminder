@@ -1,20 +1,22 @@
-FactoryGirl.define do  factory :log_event do
-    content "MyText"
-type ""
+FactoryGirl.define do
+
+  sequence :username do |n|
+    "user#{n}"
   end
+  
+  factory :log_event do
+    content "test_event"
+    type "success"
+  end
+  
   factory :preset do
-    content "MyText"
-category nil
+    content "test_text"
+    category
   end
-  factory :preset_message_preset do
-    content "MyText"
-category nil
-  end
+  
   factory :category do
-    title "MyString"
+    title "be more assertive"
   end
-
-
 
   factory :message do
     content "Lorem ipsum etc etc"
@@ -40,14 +42,19 @@ category nil
     completed_at "2015-03-21T12:24:26.000Z"
     user
   end
-
-
-  factory :user do
-    username "dameramu"
+  
+  factory :user  do
+    username "normal_user"
     forename "Chris"
     surname "Burnett"
     password "ukelele"
+    registration_id "regid"
 
+    factory :admin do
+      username "admin_user"
+      admin true
+    end
+    
     factory :user_with_responses do
 
       transient do
