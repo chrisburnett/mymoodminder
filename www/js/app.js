@@ -42,9 +42,16 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'LocalS
                     // no logged user, we should be going to #login
                     if ( toState.name != 'login' ) {
                         // not going to #login, we should redirect now
+                        event.preventDefault();
                         $state.go("login");
                     }
                 }
+            });
+
+            $rootScope.$on( "$stateChangeError", function(event, toState, toParams, fromState, fromParams) {
+                // this gets triggered if the authentication resolve in the main tab route fails
+                event.preventDefault();
+                $state.go("login");
             });
 
             // register cordova push notifications
@@ -88,8 +95,33 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'LocalS
     })
 
 
+    .factory('AuthToken', function(localStorageService) {
+        // service for storing the authentication token in local storage
+        return {
+            set: function(token) {
+                return window.localStorage.setItem('auth_token', token);
+            },
+            get: function() {
+                return window.localStorage.getItem('auth_token');
+            },
+            delete: function() {
+                window.localStorage.removeItem('auth_token');
+            }
+        };
+    })
+
+
     .config(function($stateProvider, $urlRouterProvider) {
 
+        var authenticated = function(AuthToken, $q) {
+            var d = $q.defer();
+            if(AuthToken.get())
+                d.resolve();
+            else
+                d.reject();
+            return d.promise;
+        };
+        
         $stateProvider
 
             .state('pinlock', {
@@ -108,7 +140,10 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'LocalS
             .state('tab', {
                 url: "/tab",
                 abstract: true,
-                templateUrl: "templates/tabs.html"
+                templateUrl: "templates/tabs.html",
+                resolve: {
+                    authenticated: authenticated
+                }
             })
 
         // Dashboard or overview tab
@@ -170,21 +205,6 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'LocalS
         $urlRouterProvider.otherwise('/tab/dash');
     })
 
-
-    .factory('AuthToken', function(localStorageService) {
-        // service for storing the authentication token in local storage
-        return {
-            set: function(token) {
-                return window.localStorage.setItem('auth_token', token);
-            },
-            get: function() {
-                return window.localStorage.getItem('auth_token');
-            },
-            delete: function() {
-                window.localStorage.removeItem('auth_token');
-            }
-        };
-    })
 
     .factory('AuthInterceptor', function($q, $injector, AUTH_URL) {
         return {
