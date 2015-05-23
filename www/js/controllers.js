@@ -1,9 +1,14 @@
 angular.module('trump.controllers', ['angularMoment'])
 
-    .controller('DashCtrl', function($scope, $state, AuthService, Messages) {
+    .controller('DashCtrl', function($scope, $state, AuthService, Messages, $ionicLoading) {
 
+        $ionicLoading.show({
+            template: 'Loading...',
+            delay: 1000
+        });        
         Messages.all().then(function(messages) {
             $scope.messages = messages;
+            $ionicLoading.hide();
         });
         
         // clear token and go to login screen
@@ -137,17 +142,22 @@ angular.module('trump.controllers', ['angularMoment'])
     })
 
 
-    .controller('LoginCtrl', function($scope, $state, AuthService, RegistrationService) {
+    .controller('LoginCtrl', function($scope, $state, AuthService, RegistrationService, $ionicLoading) {
         // controller for handling login requests
         $scope.credentials = {};
-
 
         $scope.login = function(credentials) {
             // reset problem flags
             $scope.wrongCredentials = null;
             $scope.cannotConnect = null;
+            // bring up loading modal in case logging in takes ages
+            $ionicLoading.show({
+                template: 'Signing in...',
+                delay: 1000
+            });   
             AuthService.login(credentials.username, credentials.password)
                 .then(function() {
+                    $ionicLoading.hide();
                     $state.go('tab.dash');
                 }, function(reason) {
                     // display the appropriate error message
