@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
+  get 'message_prefels/app/controllers'
+
   namespace :api, defaults: {format: :json} do
     resources :users, only: [:index]
     resources :qids_responses, only: [:index, :create, :update, :destroy]
     resources :messages, only: [:index, :create, :update, :destroy]
+    resources :message_preferences, only: [:index, :create, :update, :destroy]
     resources :notifications, only: [:create]
     
     # route for authenticating with the AuthController

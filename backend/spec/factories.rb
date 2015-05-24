@@ -1,19 +1,24 @@
-FactoryGirl.define do
+FactoryGirl.define do  factory :message_preference do
+    user
+    category
+    preference false
+  end
+
 
   sequence :username do |n|
     "user#{n}"
   end
-  
+
   factory :log_event do
     content "test_event"
     type "success"
   end
-  
+
   factory :preset do
     content "test_text"
     category
   end
-  
+
   factory :category do
     title "be more assertive"
   end
@@ -42,7 +47,7 @@ FactoryGirl.define do
     completed_at "2015-03-21T12:24:26.000Z"
     user
   end
-  
+
   factory :user  do
     username "normal_user"
     forename "Chris"
@@ -54,7 +59,7 @@ FactoryGirl.define do
       username "admin_user"
       admin true
     end
-    
+
     factory :user_with_responses do
 
       transient do

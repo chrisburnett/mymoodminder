@@ -3,7 +3,8 @@ class User < ActiveRecord::Base
 
   has_many :qids_responses
   has_many :messages
-
+  has_many :message_preferences
+  
   has_secure_password
 
   validates :password,
