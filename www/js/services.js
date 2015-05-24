@@ -41,6 +41,7 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
                 // use the date and time of completion as the key
                 // locally, but also set it as a property so it gets
                 // uploaded at sync
+                response = response || {};
                 var completed_at = response.completed_at;
                 if(!completed_at) {
                     completed_at = (new Date()).toISOString();
