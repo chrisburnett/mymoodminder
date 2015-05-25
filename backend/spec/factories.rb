@@ -1,9 +1,10 @@
-FactoryGirl.define do  factory :message_preference do
+FactoryGirl.define do
+
+  factory :message_preference do
     user
     category
-    preference false
+    preference falseS
   end
-
 
   sequence :username do |n|
     "user#{n}"
@@ -72,16 +73,21 @@ FactoryGirl.define do  factory :message_preference do
     end
 
     factory :user_with_messages do
-
       transient do
         messages_count 5
       end
-
       after(:create) do |user, evaluator|
         create_list(:message, evaluator.messages_count, user: user)
       end
+    end
 
-
+    factory :user_with_prefs do
+      transient do
+        preferences_count 5
+      end
+      after(:create) do |user, evaluator|
+        create_list(:message_preference, evaluator.preferences_count, user: user)
+      end
     end
   end
 end

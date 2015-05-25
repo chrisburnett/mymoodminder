@@ -1,0 +1,2 @@
+module Api::MessagePreferencesHelper
+end
