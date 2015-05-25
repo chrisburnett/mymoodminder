@@ -1,21 +1,40 @@
 angular.module('trump.controllers', ['angularMoment'])
 
-    .controller('DashCtrl', function($scope, $state, AuthService, Messages, $ionicLoading) {
+    .controller('DashCtrl', function($scope, $state, AuthService, Messages, $ionicLoading, $ionicModal) {
 
         $ionicLoading.show({
-            template: 'Loading...',
+            content: 'Loading Data',
+            animation: 'fade-in',
             delay: 1000
-        });        
+        });
+
+        // resolve and display all messages
         Messages.all().then(function(messages) {
             $scope.messages = messages;
             $ionicLoading.hide();
         });
-        
+
         // clear token and go to login screen
         $scope.logout = function() {
             AuthService.logout();
             $state.go('login');
         };
+
+        // display modal if user wants to stop receiving messages
+        $ionicModal.fromTemplateUrl('preference-modal.html', {
+            scope: $scope,
+            animation: 'slide-in-up'
+        }).then(function(modal) {
+            $scope.modal = modal;
+        });
+        $scope.openModal = function(message) {
+            $scope.message = message;
+            $scope.modal.show();
+        };
+        $scope.closeModal = function() {
+            $scope.modal.hide();
+        };
+
     })
 
     .controller('QIDSListCtrl', function($scope, $state, QIDSResponses, AuthService) {
@@ -152,9 +171,10 @@ angular.module('trump.controllers', ['angularMoment'])
             $scope.cannotConnect = null;
             // bring up loading modal in case logging in takes ages
             $ionicLoading.show({
-                template: 'Signing in...',
+                content: 'Loading Data',
+                animation: 'fade-in',
                 delay: 1000
-            });   
+            });
             AuthService.login(credentials.username, credentials.password)
                 .then(function() {
                     $ionicLoading.hide();
@@ -170,7 +190,7 @@ angular.module('trump.controllers', ['angularMoment'])
                 }, function(reason) {
                     $scope.registrationFailure = true;
                 });
-            
+
         };
     })
 
