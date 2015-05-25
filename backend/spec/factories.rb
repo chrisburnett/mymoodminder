@@ -3,7 +3,7 @@ FactoryGirl.define do
   factory :message_preference do
     user
     category
-    preference falseS
+    preference false
   end
 
   sequence :username do |n|
@@ -26,6 +26,7 @@ FactoryGirl.define do
 
   factory :message do
     content "Lorem ipsum etc etc"
+    preset
     user
   end
 
@@ -50,7 +51,7 @@ FactoryGirl.define do
   end
 
   factory :user  do
-    username "normal_user"
+    username
     forename "Chris"
     surname "Burnett"
     password "ukelele"

@@ -26,7 +26,9 @@ RSpec.configure do |config|
   config.before(:suite) do
     DatabaseCleaner.strategy = :truncation
     DatabaseCleaner.clean
+  
 
+  
     # create entries for rpush - this creates a bit of state outside unit
     # tests, careful
     app = Rpush::Gcm::App.new

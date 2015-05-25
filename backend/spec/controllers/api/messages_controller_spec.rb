@@ -1,5 +1,6 @@
 require 'rails_helper'
 require 'spec_helper'
+
 RSpec.describe Api::MessagesController, :type => :controller do
 
   before(:each) do
@@ -15,6 +16,11 @@ RSpec.describe Api::MessagesController, :type => :controller do
     it "responds with a list of JSON messages" do
       get :index
       expect(JSON.parse(response.body).length).to be 5
+    end
+    it "includes the category title in JSON response" do
+      
+      get :index
+      expect(JSON.parse(response.body).first['category']). to eq("be more assertive")
     end
   end
 
