@@ -23,7 +23,7 @@
                 <!-- <ion-option-button class="button-assertive" ng-click="remove(timepoint)">-->
                 <!--    Delete -->
                 <!-- </ion-option-button> -->
-                <ion-option-button class="button-royal" ng-click="openModal(message)">I didn't like this message</ion-option-button>
+                <ion-option-button class="button-royal" ng-click="showAlert(message)">I don't want to receive messages like this</ion-option-button>
             </ion-item>
         </ion-list>
 
@@ -34,23 +34,3 @@
     </ion-nav-buttons>
 </ion-view>
 
-
-<script id="preference-modal.html" type="text/ng-template">
-    <ion-modal-view>
-        <ion-header-bar>
-            <h1 class="title">Messages</h1>
-        </ion-header-bar>
-        <ion-content padding="true">
-            <div class="card">
-                <div class="item item-text-wrap item-text-wrap">
-                    <h2>Would you prefer not receiving messages about being {{message.category}}?</h2>
-                    <p>You can always change this setting later in the Settings tab.</p>
-
-                    
-                    
-                </div>
-            </div>
-
-        </ion-content>
-    </ion-modal-view>
-</script>

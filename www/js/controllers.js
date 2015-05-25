@@ -1,6 +1,6 @@
 angular.module('trump.controllers', ['angularMoment'])
 
-    .controller('DashCtrl', function($scope, $state, AuthService, Messages, $ionicLoading, $ionicModal) {
+    .controller('DashCtrl', function($scope, $state, AuthService, Messages, $ionicLoading, $ionicPopup) {
 
         $ionicLoading.show({
             content: 'Loading Data',
@@ -20,21 +20,17 @@ angular.module('trump.controllers', ['angularMoment'])
             $state.go('login');
         };
 
-        // display modal if user wants to stop receiving messages
-        $ionicModal.fromTemplateUrl('preference-modal.html', {
-            scope: $scope,
-            animation: 'slide-in-up'
-        }).then(function(modal) {
-            $scope.modal = modal;
-        });
-        $scope.openModal = function(message) {
-            $scope.message = message;
-            $scope.modal.show();
+        // An alert dialog. After alerting, delete the message
+        $scope.showAlert = function(message) {
+            $ionicPopup.alert({
+                title: 'Preferences updated',
+                template: '<p>You won\'t receive messages about <emph>being '+ message.category + '</emph> any more.</p><p> You can always change this in the Settings tab.</p>'
+            }).then(function() {
+                Messages.delete(message).then(function(messages) {
+                    $scope.messages.splice($scope.messages.indexOf(message));
+                });
+            });
         };
-        $scope.closeModal = function() {
-            $scope.modal.hide();
-        };
-
     })
 
     .controller('QIDSListCtrl', function($scope, $state, QIDSResponses, AuthService) {

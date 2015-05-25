@@ -269,6 +269,20 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
                         d.resolve(messages);
                     });
                 return d.promise;
+            },
+            delete: function(message) {
+                var d = $q.defer();
+                var messages = JSON.parse(window.localStorage.getItem('messages'));
+                for(var m in messages) {
+                    if(message.id == messages[m].id) {
+                        messages.splice(messages.indexOf(m), 1);
+                        window.localStorage.setItem('messages', JSON.stringify(messages));
+                        d.resolve(messages);
+                        break;
+                    }
+                }
+                return d.promise;
             }
+
         };
     });
