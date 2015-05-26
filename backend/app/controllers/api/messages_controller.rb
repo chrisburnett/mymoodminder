@@ -13,8 +13,18 @@ class Api::MessagesController < SecureAPIController
   # checking for messages
   def index
     if @current_user then
-      resp = @current_user.messages
-      render json: resp, status: 200
+      # we need to check the message preferences and block those which
+      # are unwanted
+      messages = []
+      prefs = @current_user.message_preferences
+      @current_user.messages.each do |message|
+        # if there's an explicit negative preference, don't put it
+        # else put it. There should only ever be one preference, but
+        # we take the first anyway
+        pref = prefs.where(category_id: message.preset.category.id)
+        if pref.empty? || pref.first.state then messages << message end
+      end
+      render json: messages, status: 200
     else
       fail NotAuthenticatedError
     end

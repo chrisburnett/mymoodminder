@@ -10,6 +10,7 @@ class Message < ActiveRecord::Base
     # over any explicitly defined content
     if preset then
       json[:category] = preset.category.title
+      json[:category_id] = preset.category.id
       json[:content] = preset.content
     end
 
