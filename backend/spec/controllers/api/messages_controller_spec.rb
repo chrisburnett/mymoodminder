@@ -4,7 +4,8 @@ require 'spec_helper'
 RSpec.describe Api::MessagesController, :type => :controller do
 
   before(:each) do
-    @current_user = create(:user_with_messages, messages_count: 5)
+    @current_user = create(:user)
+    @message = create(:message, user: @current_user)
     controller.instance_variable_set(:@current_user, @current_user)
   end
 
@@ -15,13 +16,18 @@ RSpec.describe Api::MessagesController, :type => :controller do
     end
     it "responds with a list of JSON messages" do
       get :index
-      expect(JSON.parse(response.body).length).to be 5
+      expect(JSON.parse(response.body).length).to be 1
     end
-    it "includes the category title in JSON response" do
-      
+    it "includes the category title in JSON response" do   
       get :index
-      expect(JSON.parse(response.body).first['category']). to eq("be more assertive")
+      expect(JSON.parse(response.body).first['category']).to eq("be more assertive")
     end
+    it "omits messages for which there is a negative preference" do
+      create(:message_preference, user: @current_user, category_id: @message.preset.category.id)
+      get :index
+      expect(JSON.parse(response.body).empty?).to be true
+    end
+    
   end
 
   describe "POST index" do
