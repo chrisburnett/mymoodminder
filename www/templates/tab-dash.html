@@ -23,7 +23,7 @@
                 <!-- <ion-option-button class="button-assertive" ng-click="remove(timepoint)">-->
                 <!--    Delete -->
                 <!-- </ion-option-button> -->
-                <ion-option-button class="button-royal" ng-click="showAlert(message)">I don't want to receive messages like this</ion-option-button>
+                <ion-option-button ng-if="message.preset" class="button-royal" ng-click="showAlert(message)">I don't want to receive messages like this</ion-option-button>
             </ion-item>
         </ion-list>
 
