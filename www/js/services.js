@@ -252,8 +252,45 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
     })
 
 
+    .factory('MessagePreferences', function($q, BACKEND_URL, $resource) {
+        // this service handles message preferences
+        return {
 
-    .factory('Messages', function(localStorageService, $q, BACKEND_URL, $resource) {
+            save: function(preference) {
+                // create a message preference on the server state is
+                // state: a boolean specifying whether to receive this
+                // message category or not
+                var d = $q.defer();
+                $resource(BACKEND_URL + '/message_preferences')
+                    .save(preference).$promise
+                    .then(function() {
+                        d.resolve();
+                    }, function(reason) {
+                        // failure to connect - need to store in
+                        // localstorage - sync will pick it up later
+                        var message_prefs = JSON.parse(window.localStorage.getItem('message_preferences')) || [];
+                        message_prefs.push(preference);
+                        window.localStorage.setItem('message_preferences', JSON.stringify(message_prefs));
+                    });
+            },
+            sync_pending: function() {
+                // if there are locally stored preferences, try to save them and clear
+                var promises = [];
+                var message_prefs = JSON.parse(window.localStorage.getItem('message_preferences'));
+                if(message_prefs)
+                    for(var i = 0; i < message_prefs.length; i++)
+                        promises.push(this.save(message_prefs[i]));
+                return $q.all(promises);
+            },
+            clear_cache: function() {
+                // after sync, remove locally stored preferences
+                window.localStorage.removeItem('message_preferences');
+            }
+        };
+    })
+
+
+    .factory('Messages', function($q, BACKEND_URL, $resource) {
         // just look at this sneaky javascript - return an anonymous
         // object with the following methods
         return {
@@ -265,6 +302,7 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
                         window.localStorage.setItem('messages', JSON.stringify(data));
                         d.resolve(data);
                     }, function(reason) {
+                        console.log('ERROR');
                         var messages = JSON.parse(window.localStorage.getItem('messages'));
                         d.resolve(messages);
                     });

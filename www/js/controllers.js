@@ -1,6 +1,6 @@
 angular.module('trump.controllers', ['angularMoment'])
 
-    .controller('DashCtrl', function($scope, $state, AuthService, Messages, $ionicLoading, $ionicPopup) {
+    .controller('DashCtrl', function($scope, $state, AuthService, Messages, MessagePreferences, $ionicLoading, $ionicPopup) {
 
         $ionicLoading.show({
             content: 'Loading Data',
@@ -8,12 +8,20 @@ angular.module('trump.controllers', ['angularMoment'])
             delay: 1000
         });
 
-        // resolve and display all messages
-        Messages.all().then(function(messages) {
-            $scope.messages = messages;
-            $ionicLoading.hide();
-        });
-
+        // try to sync message preferences then get messages from the
+        // server, finally take down curtain
+        MessagePreferences.sync_pending()
+            .then(function() {
+                // we won't do this if any of the sync promises fail
+                MessagePreferences.clear_cache();
+            })
+            .finally(function() {
+                Messages.all().then(function(messages) {
+                    $scope.messages = messages;
+                    $ionicLoading.hide();
+                });
+            });
+        
         // clear token and go to login screen
         $scope.logout = function() {
             AuthService.logout();
@@ -26,9 +34,17 @@ angular.module('trump.controllers', ['angularMoment'])
                 title: 'Preferences updated',
                 template: '<p>You won\'t receive messages about <emph>being '+ message.category + '</emph> any more.</p><p> You can always change this in the Settings tab.</p>'
             }).then(function() {
+                // delete the message from local scope, then create a
+                // message preference on the server for this message's
+                // category. After this, we shouldn't get the unwanted
+                // message back again
                 Messages.delete(message).then(function(messages) {
-                    $scope.messages.splice($scope.messages.indexOf(message));
+                    MessagePreferences.save({
+                        category_id: message.category_id,
+                        state: false
+                    });
                 });
+                $scope.messages.splice($scope.messages.indexOf(message));
             });
         };
     })
