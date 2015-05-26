@@ -21,14 +21,12 @@ require 'database_cleaner'
 RSpec.configure do |config|
   
   config.include FactoryGirl::Syntax::Methods
-
+  #config.use_transactional_fixtures = false
+  
 
   config.before(:suite) do
-    DatabaseCleaner.strategy = :truncation
-    DatabaseCleaner.clean
-  
-
-  
+    DatabaseCleaner.clean_with(:truncation)
+    
     # create entries for rpush - this creates a bit of state outside unit
     # tests, careful
     app = Rpush::Gcm::App.new
@@ -36,9 +34,20 @@ RSpec.configure do |config|
     app.auth_key = "key"
     app.connections = 1
     app.save!
-
- 
   end
+
+  config.before(:each) do
+    DatabaseCleaner.strategy = :transaction    
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.start  
+  end
+  
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
+
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.
 =begin
