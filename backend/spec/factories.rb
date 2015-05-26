@@ -2,8 +2,8 @@ FactoryGirl.define do
 
   factory :message_preference do
     user
-    category
-    preference false
+    association :category
+    state false
   end
 
   sequence :username do |n|
@@ -17,7 +17,7 @@ FactoryGirl.define do
 
   factory :preset do
     content "test_text"
-    category
+    association :category
   end
 
   factory :category do
@@ -26,7 +26,7 @@ FactoryGirl.define do
 
   factory :message do
     content "Lorem ipsum etc etc"
-    preset
+    association :preset
     user
   end
 
