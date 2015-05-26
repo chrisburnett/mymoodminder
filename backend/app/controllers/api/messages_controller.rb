@@ -18,11 +18,17 @@ class Api::MessagesController < SecureAPIController
       messages = []
       prefs = @current_user.message_preferences
       @current_user.messages.each do |message|
-        # if there's an explicit negative preference, don't put it
-        # else put it. There should only ever be one preference, but
-        # we take the first anyway
-        pref = prefs.where(category_id: message.preset.category.id)
-        if pref.empty? || pref.first.state then messages << message end
+        # if the message doesn't have a preset/category, then user
+        # preferences don't apply
+        if message.preset then
+          # if there's an explicit negative
+          # preference, don't put it else put it. There should only ever
+          # be one preference, but we take the first anyway
+          pref = prefs.where(category_id: message.preset.category.id)
+          if pref.empty? || pref.first.state then messages << message end
+        else
+          messages << message
+        end
       end
       render json: messages, status: 200
     else
