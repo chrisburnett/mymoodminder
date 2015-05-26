@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150526080933) do
+ActiveRecord::Schema.define(version: 20150526164203) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,7 +32,6 @@ ActiveRecord::Schema.define(version: 20150526080933) do
   create_table "message_preferences", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "category_id"
-    t.boolean  "preference"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.boolean  "state"
@@ -144,14 +143,15 @@ ActiveRecord::Schema.define(version: 20150526080933) do
   add_index "rpush_notifications", ["delivered", "failed"], name: "index_rpush_notifications_multi", where: "((NOT delivered) AND (NOT failed))", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.string   "username"
     t.string   "password_digest"
     t.string   "forename"
     t.string   "surname"
     t.boolean  "admin"
     t.string   "registration_id"
+    t.string   "delivery_preference"
   end
 
   add_foreign_key "messages", "presets"
