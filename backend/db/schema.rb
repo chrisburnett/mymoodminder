@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150526164203) do
+ActiveRecord::Schema.define(version: 20150526172906) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -152,6 +152,7 @@ ActiveRecord::Schema.define(version: 20150526164203) do
     t.boolean  "admin"
     t.string   "registration_id"
     t.string   "delivery_preference"
+    t.datetime "next_delivery_time"
   end
 
   add_foreign_key "messages", "presets"
