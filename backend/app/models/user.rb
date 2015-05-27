@@ -14,7 +14,15 @@ class User < ActiveRecord::Base
   validates :username,
   uniqueness: true, presence: true
 
+  after_initialize :init
 
+
+  # set a default value for the delivery preference. I don't like the
+  # magic string here, but it's the most straightforward way of
+  # dealing with this for now.
+  def init
+    self.delivery_preference ||= 'afternoon'
+  end
 
   def generate_auth_token
     payload = { user_id: self.id }
