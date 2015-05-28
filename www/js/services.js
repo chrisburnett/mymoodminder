@@ -262,7 +262,7 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
                     .query({}, function(data) {
                         d.resolve(data);
                     }, function(reason) {
-                        d.resolve(reason);
+                        d.reject(reason);
                     });
                 return d.promise;
             },
@@ -282,6 +282,7 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
                         var message_prefs = JSON.parse(window.localStorage.getItem('message_preferences')) || [];
                         message_prefs.push(preference);
                         window.localStorage.setItem('message_preferences', JSON.stringify(message_prefs));
+                        d.reject();
                     });
                 return d.promise;
             },
@@ -297,8 +298,10 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
                 var promises = [];
                 var message_prefs = JSON.parse(window.localStorage.getItem('message_preferences'));
                 if(message_prefs)
-                    for(var i = 0; i < message_prefs.length; i++)
+                    for(var i = 0; i < message_prefs.length; i++) {
+                        message_prefs.splice(message_prefs[i], 1);
                         promises.push(this.save(message_prefs[i]));
+                    }
                 return $q.all(promises);
             },
             clear_cache: function() {

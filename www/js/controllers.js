@@ -14,11 +14,13 @@ angular.module('trump.controllers', ['angularMoment'])
             .then(function() {
                 // we won't do this if any of the sync promises fail
                 MessagePreferences.clear_cache();
+                $ionicLoading.hide();
+            }, function() {
+                $ionicLoading.hide();
             })
             .finally(function() {
                 Messages.all().then(function(messages) {
                     $scope.messages = messages;
-                    $ionicLoading.hide();
                 });
             });
         
@@ -192,6 +194,8 @@ angular.module('trump.controllers', ['angularMoment'])
                     $ionicLoading.hide();
                     $state.go('tab.dash');
                 }, function(reason) {
+                    $ionicLoading.hide();
+
                     // display the appropriate error message
                     if(reason == "401") { $scope.wrongCredentials = true; }
                     else { $scope.cannotConnect = true; }
@@ -211,11 +215,15 @@ angular.module('trump.controllers', ['angularMoment'])
         // message and privacy controls view
         MessagePreferences.all().then(function(data) {
             $scope.message_preferences = data;
+        }, function(reason) {
+            $scope.connectionProblem = true;
         });
 
         $scope.save = function(preference) {
-            MessagePreferences.save(preference).then(function(data) {
-                console.log(data);
+            MessagePreferences.save(preference).catch(function(data) {
+                // if there's no communication with server, or a
+                // problem, then show the problem display
+                $scope.connectionProblem = true;
             });
         };
 
