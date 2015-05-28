@@ -15,7 +15,7 @@ class Scheduler
 
   # return a random time during the interval the following day
   def self.random_time(period)
-    (Date.tomorrow + rand(periods[period][0]..periods[period][1]).hour +
+    (Date.tomorrow + rand(periods[period.to_sym][0]..periods[period.to_sym][1]).hour +
      rand(0..60).minutes).to_datetime
   end
 

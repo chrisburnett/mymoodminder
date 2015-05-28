@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   validates :username,
   uniqueness: true, presence: true
 
-  after_create :init
+  after_initialize :init
 
 
   # set a default value for the delivery preference. I don't like the
@@ -29,6 +29,7 @@ class User < ActiveRecord::Base
     Category.all.each do |category|
       self.message_preferences.create(category_id: category.id, state: true)
     end
+    self.save
   end
   
 
