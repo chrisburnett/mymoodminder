@@ -14,7 +14,8 @@ RSpec.describe Scheduler do
       t = Scheduler.random_time(:morning)
       # t > 7 am tomorrow and before 12pm tomorrow
       expect(t).to be > (Date.tomorrow + (Scheduler.periods[:morning][0]).hour).to_datetime
-      expect(t).to be < (Date.tomorrow + (Scheduler.periods[:morning][1]).hour).to_datetime
+      expect(t).to be < (Date.tomorrow + (Scheduler.periods[:morning][1]).hour + 1).to_datetime
+      # + 1 becayse 60 minutes added
     end
   end
 
