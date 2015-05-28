@@ -206,7 +206,18 @@ angular.module('trump.controllers', ['angularMoment'])
         };
     })
 
-    .controller('SettingsCtrl', function($scope) {
+    .controller('SettingsCtrl', function($scope, MessagePreferences) {
+
+        // message and privacy controls view
+        MessagePreferences.all().then(function(data) {
+            $scope.message_preferences = data;
+        });
+
+        $scope.save = function(preference) {
+            MessagePreferences.save(preference).then(function(data) {
+                console.log(data);
+            });
+        };
 
     })
 
@@ -219,7 +230,7 @@ angular.module('trump.controllers', ['angularMoment'])
             if($scope.passcode.length < 4) {
                 $scope.passcode = $scope.passcode + value;
                 if($scope.passcode.length == 4) {
-                    conole.log("The four digit code was entered");
+                    console.log("The four digit code was entered");
                 };
 
             }

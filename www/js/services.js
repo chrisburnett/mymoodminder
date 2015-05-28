@@ -252,9 +252,20 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
     })
 
 
-    .factory('MessagePreferences', function($q, BACKEND_URL, $resource) {
+    .factory('MessagePreferences', function($q, BACKEND_URL, $http, $resource) {
         // this service handles message preferences
         return {
+
+            all: function() {
+                var d = $q.defer();
+                $resource(BACKEND_URL + '/message_preferences')
+                    .query({}, function(data) {
+                        d.resolve(data);
+                    }, function(reason) {
+                        d.resolve(reason);
+                    });
+                return d.promise;
+            },
 
             save: function(preference) {
                 // create a message preference on the server state is
@@ -272,7 +283,15 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
                         message_prefs.push(preference);
                         window.localStorage.setItem('message_preferences', JSON.stringify(message_prefs));
                     });
+                return d.promise;
             },
+
+            bulk_save: function(preferences) {
+                // upload a JSON array of new preference states
+                return $http.post(BACKEND_URL + '/message_preferences/mass_update',
+                                  preferences);
+            },
+            
             sync_pending: function() {
                 // if there are locally stored preferences, try to save them and clear
                 var promises = [];
@@ -322,5 +341,20 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
                 return d.promise;
             }
 
+        };
+    })
+
+    .factory('Categories', function($q, BACKEND_URL, $resource) {
+        return {
+            all: function() {
+                var d = $q.defer();
+                $resource(BACKEND_URL + '/categories')
+                    .query({}, function(data) {
+                        d.resolve(data);
+                    }, function(reason) {
+                        d.resolve(reason);
+                    });
+                return d.promise;
+            }
         };
     });
