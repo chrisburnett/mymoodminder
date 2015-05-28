@@ -19,12 +19,15 @@ case Rails.env
 when 'development'
   User.create(username: 'john', password: 'johnjohn', admin: false)
   User.create(username: 'dave', password: 'davedave', admin: true)
+
+when 'production'
+  User.create(username: 'dameramu', password: 'e', admin: true)
 end
 
 # create entries for rpush - this creates a bit of state outside unit
 # tests, careful
 app = Rpush::Gcm::App.new
 app.name = "trump_app"
-app.auth_key = "key"
+app.auth_key = "AIzaSyDxTnjBOvdFyx0XJl5oPzkVurCluTh6C9A"
 app.connections = 1
 app.save!
