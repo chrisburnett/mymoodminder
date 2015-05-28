@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
   # dealing with this for now.
   def init
     self.delivery_preference ||= 'afternoon'
-    
+    self.next_delivery_time = Time.now.to_datetime
     # when a user is created, set up default message preferences for
     # each category. Note: this assumes that the categories have been
     # loaded... By default receive everything
