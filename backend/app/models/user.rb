@@ -45,7 +45,7 @@ class User < ActiveRecord::Base
       n = Rpush::Gcm::Notification.new
       n.app = Rpush::Gcm::App.find_by_name(RPUSH_GCM_APP_NAME)
       n.registration_ids = [self.registration_id]
-      n.data = { message: content }
+      n.data = { message: content, title: TITLE_APP_NAME }
       n.save!
     end
   end

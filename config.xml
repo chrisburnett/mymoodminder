@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <widget id="com.ionicframework.trumpmobileapp873656" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>TrumpMobileApp</name>
+  <name>My Mood Minder</name>
   <description>
-        Mobile application for the TRUMP project
+        A depression self-management app
     </description>
   <author email="cburnett@abdn.ac.uk" href="http://trump-uk-india.org/">
       TRUMP Project - University of Aberdeen
