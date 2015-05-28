@@ -10,6 +10,8 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
 // this is where you configure the URL of the backend UI server
     .constant('BACKEND_URL', 'https://murmuring-depths-9520-staging.herokuapp.com/api')
     .constant('AUTH_URL', 'https://murmuring-depths-9520-staging.herokuapp.com/api/auth')
+    // .constant('BACKEND_URL', 'http://localhost:3000/api')
+    // .constant('AUTH_URL', 'http://localhost:3000/api/auth')
     .constant('ANDROID_SENDER_ID', '937013579687')
 
     .run(function($ionicPlatform, $rootScope, $injector, $state, $cordovaPush, RegistrationService, ANDROID_SENDER_ID) {
