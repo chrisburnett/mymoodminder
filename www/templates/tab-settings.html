@@ -1,9 +1,17 @@
 <ion-view view-title="Settings">
     <ion-content>
-        <ion-list>
-            <ion-toggle ng-repeat="mp in message_preferences" ng-model="mp.state" ng-change="save(mp)">
-                Being {{mp.title}}
-            </ion-toggle>
-        </ion-list>
+        <div ng-if="!connectionProblem">
+            <ion-list>
+                <ion-toggle ng-repeat="mp in message_preferences" ng-model="mp.state" ng-change="save(mp)">
+                    Being {{mp.title}}
+                </ion-toggle>
+            </ion-list>
+        </div>
+
+        <div ng-if="connectionProblem" class="card">
+            <div class="item item-text-wrap item-assertive">
+                Sorry, there was a problem communicating with the server. Please try again later.
+            </div>
+        </div>
     </ion-content>
 </ion-view>
