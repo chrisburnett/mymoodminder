@@ -16,7 +16,7 @@ namespace :messaging do
         # then generate and update the next message time
         user.next_delivery_time = Scheduler.random_time(user.delivery_preference)
         puts "Next message for User #{user.id} at #{user.next_delivery_time.to_s}"
-        user.save
+        user.save(validate: false)
       end
     end
   end
