@@ -14,7 +14,7 @@ namespace :messaging do
         message.save
         user.send_notification(message.preset.content)
         # then generate and update the next message time
-        user.next_delivery_time = Scheduler.random_time(user.delivery_preference)
+        user.next_delivery_time = Scheduler.random_time(user.delivery_preference.to_sym)
         puts "Next message for User #{user.id} at #{user.next_delivery_time.to_s}"
         user.save(validate: false)
       end
