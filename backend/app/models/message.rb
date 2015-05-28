@@ -11,9 +11,8 @@ class Message < ActiveRecord::Base
     if preset then
       json[:category] = preset.category.title
       json[:category_id] = preset.category.id
-      json[:content] = preset.content
+      json[:content] = preset.content 
     end
-
     return json
   end
   

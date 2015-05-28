@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   validates :username,
   uniqueness: true, presence: true
 
-  after_initialize :init
+  after_create :init
 
 
   # set a default value for the delivery preference. I don't like the
@@ -22,7 +22,15 @@ class User < ActiveRecord::Base
   # dealing with this for now.
   def init
     self.delivery_preference ||= 'afternoon'
+    
+    # when a user is created, set up default message preferences for
+    # each category. Note: this assumes that the categories have been
+    # loaded... By default receive everything
+    Category.all.each do |category|
+      self.message_preferences.create(category_id: category.id, state: true)
+    end
   end
+  
 
   def generate_auth_token
     payload = { user_id: self.id }

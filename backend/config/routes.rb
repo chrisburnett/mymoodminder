@@ -4,8 +4,11 @@ Rails.application.routes.draw do
     resources :users, only: [:index]
     resources :qids_responses, only: [:index, :create, :update, :destroy]
     resources :messages, only: [:index, :create, :update, :destroy]
-    resources :message_preferences, only: [:index, :create, :update, :destroy]
+    resources :message_preferences, only: [:index, :create, :update, :destroy] do
+      get 'mass_update', on: :collection
+    end
     resources :notifications, only: [:create]
+    resources :categories, only: [:index]
     
     # route for authenticating with the AuthController
     post 'auth' => 'auth#authenticate'
