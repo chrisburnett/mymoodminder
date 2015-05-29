@@ -23,6 +23,7 @@ class User < ActiveRecord::Base
   def init
     self.delivery_preference ||= 'afternoon'
     self.next_delivery_time = Time.now.to_datetime
+    self.next_qids_reminder_time = Time.now + 1.week
     # when a user is created, set up default message preferences for
     # each category. Note: this assumes that the categories have been
     # loaded... By default receive everything
@@ -39,14 +40,14 @@ class User < ActiveRecord::Base
   end
 
 
-  def send_notification(content)
+  def send_notification(content, type)
     # send a notification to this user's registered device
     # only do this id there's a registered device
     if self.registration_id then
       n = Rpush::Gcm::Notification.new
       n.app = Rpush::Gcm::App.find_by_name(RPUSH_GCM_APP_NAME)
       n.registration_ids = [self.registration_id]
-      n.data = { message: content, title: TITLE_APP_NAME }
+      n.data = { message: content, title: TITLE_APP_NAME, type: type }
       n.save!
     end
   end

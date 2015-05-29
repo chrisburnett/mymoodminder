@@ -39,7 +39,7 @@ RSpec.describe User, :type => :model do
   describe "send_notification" do
     it "adds a pending notification entry to the database" do
       user = create(:user)
-      expect(user.send_notification("test")).to be_truthy
+      expect(user.send_notification("test", :message)).to be_truthy
     end
   end
 end

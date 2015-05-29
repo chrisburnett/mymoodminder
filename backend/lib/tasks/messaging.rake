@@ -12,12 +12,19 @@ namespace :messaging do
         puts "Generating message for User #{user.id}"
         message = Scheduler.generate_message(user, Category.all)
         message.save
-        user.send_notification(message.preset.content)
+        user.send_notification(message.preset.content, :message)
         # then generate and update the next message time
-        user.next_delivery_time = Scheduler.random_time(user.delivery_preference.to_sym)
+        user.next_delivery_time = Scheduler.random_time(user.delivery_preference.to_sym) + 1.day
         puts "Next message for User #{user.id} at #{user.next_delivery_time.to_s}"
         user.save(validate: false)
       end
+
+      if user.next_qids_reminder_time < Time.now then
+        puts "Sending QIDS reminder for User #{user.id}"
+        reminder = user.send_notification("Please create a weekly entry", :reminder)
+        user.next_qids_reminder_time = Scheduler.random_time(user.delivery_preference.to_sym) + 6.days
+      end
+      
     end
   end
 
