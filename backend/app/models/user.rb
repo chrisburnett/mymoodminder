@@ -27,7 +27,12 @@ class User < ActiveRecord::Base
     # when a user is created, set up default message preferences for
     # each category. Note: this assumes that the categories have been
     # loaded... By default receive everything
-    Category.all.each do |category|
+
+    # only create preferences in the app for categories we have marked
+    # as preferable, that is, the user is allowed to set delivery
+    # preferences for those categories. Medication advice and attitude
+    # shifters are (for the moment) exempt
+    Category.where(preferable: true).each do |category|
       self.message_preferences.create(category_id: category.id, state: true)
     end
     self.save(validate: false)

@@ -11,9 +11,17 @@ require 'csv'
 categories = {}
 data = CSV.read("script/messages.csv")
 data.each do |category_title, message_preset|
-  categories[category_title] ||= Category.create(title: category_title)
+  # mark some categories as 'not preferable' - i.e., users can't set a
+  # preference for them
+  preferable = true
+  if category_title == "medication information" ||
+      category_title == "attitude_shifter" then
+    preferable = false
+  categories[category_title] ||= Category.create(title: category_title, preferable: preferable)
   categories[category_title].presets.create(content: message_preset)
 end
+
+
 
 case Rails.env
 when 'development'

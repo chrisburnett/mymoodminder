@@ -22,6 +22,7 @@ FactoryGirl.define do
 
   factory :category do
     title "be more assertive"
+    preferable true
   end
 
   factory :message do

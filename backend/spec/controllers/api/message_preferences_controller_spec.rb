@@ -9,13 +9,24 @@ RSpec.describe Api::MessagePreferencesController, :type => :controller do
     controller.instance_variable_set(:@current_user, @current_user)
   end
 
+  describe "GET index" do
+    it "does not return preferences for non-preferable categories" do
+      c1 = create(:category)
+      c2 = create(:category, preferable: false)
+      create(:message_preference, user: @current_user, category: c1)
+      create(:message_preference, user: @current_user, category: c2)
+      get :index
+      expect(JSON.parse(response.body).length).to be 1
+    end
+    
+  end
+  
+
   describe "POST index" do
     
     it "creates a preference" do
       post :create, message_preference: attributes_for(:message_preference, user_id: @current_user.id, category_id: @category.id, state: true)
       expect(response.status).to be 200
-      puts controller.params
-
       expect(@current_user.message_preferences.length).to be 1
     end
 

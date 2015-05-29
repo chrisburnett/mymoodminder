@@ -13,7 +13,7 @@ class Api::MessagePreferencesController < SecureAPIController
 
   def index
     if @current_user then
-      resp = @current_user.message_preferences
+      resp = MessagePreference.joins(:category).where(user_id: @current_user.id, categories: { preferable: true })
       render json: resp, status: :ok
     else
       fail NotAuthenticatedError
