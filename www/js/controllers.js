@@ -227,6 +227,12 @@ angular.module('trump.controllers', ['angularMoment'])
             });
         };
 
+        // clear token and go to login screen
+        $scope.logout = function() {
+            AuthService.logout();
+            $state.go('login');
+        };
+
     })
 
     .controller('PinlockCtrl', function($scope) {
