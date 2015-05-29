@@ -14,9 +14,10 @@ data.each do |category_title, message_preset|
   # mark some categories as 'not preferable' - i.e., users can't set a
   # preference for them
   preferable = true
-  if category_title == "medication information" ||
-      category_title == "attitude_shifter" then
+  if category_title === "medication information" ||
+      category_title === "attitude shifter" then
     preferable = false
+  end
   categories[category_title] ||= Category.create(title: category_title, preferable: preferable)
   categories[category_title].presets.create(content: message_preset)
 end
