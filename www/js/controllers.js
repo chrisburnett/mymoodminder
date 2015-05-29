@@ -2,6 +2,10 @@ angular.module('trump.controllers', ['angularMoment'])
 
     .controller('DashCtrl', function($scope, $state, AuthService, Messages, MessagePreferences, $ionicLoading, $ionicPopup) {
 
+        if(window.localStorage.getItem('qids_reminder')) {
+            $scope.qidsReminder = true;
+        }
+        
         $ionicLoading.show({
             content: 'Loading Data',
             animation: 'fade-in',
@@ -48,6 +52,13 @@ angular.module('trump.controllers', ['angularMoment'])
                 });
                 $scope.messages.splice($scope.messages.indexOf(message));
             });
+        };
+
+        $scope.doQidsReminder = function() {
+            // clear the reminder key from localstorage and go to new
+            // reminder view
+            window.localStorage.removeItem('qids_reminder');
+            $state.go('tab.qids-new');
         };
     })
 
