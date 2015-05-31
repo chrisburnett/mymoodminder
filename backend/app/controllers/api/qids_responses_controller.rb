@@ -3,6 +3,7 @@ class Api::QidsResponsesController < SecureAPIController
   def destroy
     if @current_user then
       resp = @current_user.qids_responses.find(params[:id]).destroy
+      EVENT_LOG.tagged(DateTime.now, 'QIDS', @current_user.id) { EVENT_LOG.info('User deleted a QIDS request') }
       render json: resp, status: 201
     else
       fail NotAuthenticatedError
@@ -12,6 +13,7 @@ class Api::QidsResponsesController < SecureAPIController
   def create
     if @current_user then
       resp = @current_user.qids_responses.create(safe_params)
+      EVENT_LOG.tagged(DateTime,now, 'QIDS', @current_user.id) { EVENT_LOG.info('Submitted new QIDS response') }
       render json: resp, status: 201
     else
       fail NotAuthenticatedError
@@ -21,6 +23,7 @@ class Api::QidsResponsesController < SecureAPIController
   def index
     if @current_user then
       responses = @current_user.qids_responses
+      EVENT_LOG.tagged(DateTime.now, 'QIDS', @current_user.id) { EVENT_LOG.info('Requested list QIDS responses') }
       render json: responses, status: 200
     else
       fail NotAuthenticatedError

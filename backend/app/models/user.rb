@@ -41,6 +41,7 @@ class User < ActiveRecord::Base
 
   def generate_auth_token
     payload = { user_id: self.id }
+    EVENT_LOG.tagged('AUTH') { EVENT_LOG.info('User #{self.id} generated new auth token') }
     Authentication::AuthToken.encode(payload)
   end
 
@@ -54,6 +55,7 @@ class User < ActiveRecord::Base
       n.registration_ids = [self.registration_id]
       n.data = { message: content, title: TITLE_APP_NAME, type: type }
       n.save!
+      EVENT_LOG.tagged('MSG') { EVENT_LOG.info('Sent #{type} to user #{self.id}') }
     end
   end
 
