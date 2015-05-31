@@ -3,33 +3,50 @@
 
         <!-- message panel -->
         <div class="panel panel-default">
-            <div class="panel-heading">User messaging</div>
+            <div class="panel-heading">User management</div>
             <div class="panel-body">
-                <p>Push a message to a user</p>
-
+                <h4>Messaging</h4>
                 <%= bootstrap_form_for [@message], url: { controller: 'messages', action: 'create' }, remote: true do |f| %>
 
                     <%= f.select :user_id, User.all.collect {|u| [ u.id, u.id ] } %>
 
-                    <%= f.select :sender_id, User.all.collect {|u| [ u.id, u.id ] } %>
-
+                    <p>Push a message to a user</p>
                     <%= f.text_area :content, size: "24x6" %>
 
                     <%= f.submit %>
+
+
+                    <h4>Notifications</h4>
+
+                    <%= f.button type: 'button', class: 'btn btn-default', id: 'reset-delivery' do %>
+                        Reset message delivery time
+                    <% end %>
+
+                    <%= f.button type: 'button', class: 'btn btn-default', id: 'reset-reminder' do %>
+                        Reset QIDS reminder time
+                    <% end %>
+
+                    <%= f.button type: 'button', class: 'btn btn-default', id: 'deliver' do %>
+                        Deliver pending notifications
+                    <% end %>
 
                 <% end %>
             </div>
         </div>
     </div>
+
     <div class="col-md-6">
         <!-- log panel -->
         <div class="panel panel-default">
             <div class="panel-heading">Event log</div>
             <div class="panel-body">
-                
-                <% @logevents.each do |event| %>
-                    <p><%= event.content %></p>
+
+                <% @logevents.each do |le| %>
+                    <%= le.lstrip.rstrip %></br>
                 <% end %>
+
+
+
 
             </div>
         </div>

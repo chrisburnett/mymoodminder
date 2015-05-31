@@ -6,7 +6,7 @@ class Admin::DashboardController < ApplicationController
 
   
   def index
-    if @current_user then
+    if session[:user_id] then
       @message = Message.new
       @logevents = `tail -n 25 #{Rails.root}/log/event.log`.split("\n")
     else
@@ -16,7 +16,7 @@ class Admin::DashboardController < ApplicationController
 
   # run the rake task to push notifications
   def deliver
-    if @current_user then
+    if session[:user_id] then
       Rake::Task['messaging:deliver'].invoke
       render nothing: true, status: :ok
     else
