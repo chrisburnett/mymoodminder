@@ -31,5 +31,4 @@ $(document).ready ->
                                         next_qids_reminder_time: 'reset'
 
         $("#deliver").on 'click', (event) ->
-                $.ajax '/admin/dashboard/deliver',
-                        type: 'GET'
+                $.get '/admin/dashboard/deliver'
