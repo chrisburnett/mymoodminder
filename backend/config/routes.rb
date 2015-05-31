@@ -25,11 +25,14 @@ Rails.application.routes.draw do
   namespace :admin do
 
     resources :messages
+    resources :users
     
     get 'login' => 'session#index'
     get 'logout' => 'session#destroy'
     post 'login' => 'session#create'
     get 'dashboard' => 'dashboard#index'
+    get 'dashboard/deliver' => 'dashboard#deliver'
+    
   end
   
   
