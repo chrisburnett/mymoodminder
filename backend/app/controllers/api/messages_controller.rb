@@ -17,7 +17,7 @@ class Api::MessagesController < SecureAPIController
       # are unwanted
       messages = []
       prefs = @current_user.message_preferences
-      @current_user.messages.each do |message|
+      @current_user.messages.order(created_at: :desc).each do |message|
         # if the message doesn't have a preset/category, then user
         # preferences don't apply
         if message.preset then
