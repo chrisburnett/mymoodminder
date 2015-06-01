@@ -55,7 +55,7 @@ class User < ActiveRecord::Base
       n.registration_ids = [self.registration_id]
       n.data = { message: content, title: TITLE_APP_NAME, type: type }
       n.save!
-      EVENT_LOG.tagged(DateTime.now, 'GCM', self.id) { EVENT_LOG.info('Sent #{type} to device') }
+      EVENT_LOG.tagged(DateTime.now, 'GCM', self.id) { EVENT_LOG.info('Sent message to device') }
     end
   end
 
