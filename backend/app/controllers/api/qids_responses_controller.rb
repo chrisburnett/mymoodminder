@@ -13,7 +13,7 @@ class Api::QidsResponsesController < SecureAPIController
   def create
     if @current_user then
       resp = @current_user.qids_responses.create(safe_params)
-      EVENT_LOG.tagged(DateTime,now, 'QIDS', @current_user.id) { EVENT_LOG.info('Submitted new QIDS response') }
+      EVENT_LOG.tagged(DateTime.now, 'QIDS', @current_user.id) { EVENT_LOG.info('Submitted new QIDS response') }
       render json: resp, status: 201
     else
       fail NotAuthenticatedError
