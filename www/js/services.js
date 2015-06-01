@@ -335,7 +335,7 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
                 var messages = JSON.parse(window.localStorage.getItem('messages'));
                 for(var m in messages) {
                     if(message.id === messages[m].id) {
-                        messages.splice(messages.indexOf(m), 1);
+                        messages.splice(m, 1);
                         window.localStorage.setItem('messages', JSON.stringify(messages));
                         d.resolve(messages);
                         break;

@@ -49,8 +49,9 @@ angular.module('trump.controllers', ['angularMoment'])
                         category_id: message.category_id,
                         state: false
                     });
+                    $scope.messages = messages;
                 });
-                $scope.messages.splice($scope.messages.indexOf(message));
+                //$scope.messages.splice($scope.messages.indexOf(message));
             });
         };
 
