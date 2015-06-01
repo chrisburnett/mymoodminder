@@ -1,11 +1,17 @@
 <ion-view view-title="Settings">
     <ion-content>
         <div ng-if="!connectionProblem">
-            <ion-list>
+            <div class="padding">
+                You can choose the topics of messages you'd like to receive.
+            </div>
+            <div class="list card">
+                <div class="item item-divider">
+                    Message preferences
+                </div>
                 <ion-toggle ng-repeat="mp in message_preferences" ng-model="mp.state" ng-change="save(mp)">
                     Being {{mp.title}}
                 </ion-toggle>
-            </ion-list>
+            </div>
         </div>
 
         <div ng-if="connectionProblem" class="card">
@@ -15,7 +21,7 @@
         </div>
     </ion-content>
 
-    
+
     <ion-nav-buttons side="secondary">
         <button class="button" ng-click="logout()">Logout</button>
     </ion-nav-buttons>

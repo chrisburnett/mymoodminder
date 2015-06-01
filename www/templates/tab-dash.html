@@ -14,19 +14,18 @@
 
 
         <ion-list class="list" show-delete="false" can-swipe="true">
-            <div class="item item-divider">Messages</div>
 
             <!-- QIDS reminder -->
-            <ion-item class="item item-calm item-icon-left" ng-if="qidsReminder" ng-click="doQidsReminder()">
+            <ion-item class="item calm item-icon-left" ng-if="qidsReminder" ng-click="doQidsReminder()">
                 <i class="icon ion-android-alarm-clock"></i>
                 <h3>{{qidsReminder | amCalendar}}</h3>
                 <p>Please make a new entry by tapping here.</p>
             </ion-item>
-
+            <div class="item item-divider">Messages</div>
             <ion-item class="item item-remove-animate item-icon-left item-text-wrap" ng-repeat="message in messages" href="#/tab/messages/{{message.id}}">
-                <i class="icon ion-chatbubble"></i>
-                                
-                <h3>{{message.created_at | amCalendar}}</h3>
+                            
+                <i class="positive icon ion-chatbubble"></i>
+                <div class="positive">{{message.created_at | amCalendar}}</div>
                 {{message.content}}
                 <!--<i class="icon ion-chevron-right icon-accessory"></i>-->
                 <!-- <ion-option-button class="button-assertive" ng-click="remove(timepoint)">-->
