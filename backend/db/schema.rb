@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150529154408) do
+ActiveRecord::Schema.define(version: 20150601125427) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,6 +80,7 @@ ActiveRecord::Schema.define(version: 20150529154408) do
     t.datetime "updated_at",   null: false
     t.string   "q6_7"
     t.string   "q8_9"
+    t.text     "note"
   end
 
   add_index "qids_responses", ["user_id"], name: "index_qids_responses_on_user_id", using: :btree

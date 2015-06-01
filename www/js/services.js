@@ -1,6 +1,6 @@
 angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
 
-    .factory('QIDSResponses', function(localStorageService, BACKEND_URL, $q, $resource, qidsScoreFilter) {
+    .factory('QIDSResponses', ["localStorageService", "BACKEND_URL", "$q", "$resource", "qidsScoreFilter", function(localStorageService, BACKEND_URL, $q, $resource, qidsScoreFilter) {
         return {
             // return a service which lets us persist a response
             // between invocations of the app locally (for now) and
@@ -132,7 +132,7 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
                 return $q.all(promises);
             }
         };
-    })
+    }])
 
     .factory('QuestionnaireText', function() {
         return {
@@ -252,7 +252,7 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
     })
 
 
-    .factory('MessagePreferences', function($q, BACKEND_URL, $http, $resource) {
+    .factory('MessagePreferences', ["$q", "BACKEND_URL", "$http", "$resource", function($q, BACKEND_URL, $http, $resource) {
         // this service handles message preferences
         return {
 
@@ -309,10 +309,10 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
                 window.localStorage.removeItem('message_preferences');
             }
         };
-    })
+    }])
 
 
-    .factory('Messages', function($q, BACKEND_URL, $resource) {
+    .factory('Messages', ["$q", "BACKEND_URL", "$resource", function($q, BACKEND_URL, $resource) {
         // just look at this sneaky javascript - return an anonymous
         // object with the following methods
         return {
@@ -345,9 +345,9 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
             }
 
         };
-    })
+    }])
 
-    .factory('Categories', function($q, BACKEND_URL, $resource) {
+    .factory('Categories', ["$q", "BACKEND_URL", "$resource", function($q, BACKEND_URL, $resource) {
         return {
             all: function() {
                 var d = $q.defer();
@@ -360,4 +360,4 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
                 return d.promise;
             }
         };
-    });
+    }]);

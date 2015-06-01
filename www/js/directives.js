@@ -1,5 +1,5 @@
 angular.module('trump.directives', [])
-    .directive('hideTabs', function($rootScope, $state) {
+    .directive('hideTabs', ["$rootScope", "$state", function($rootScope, $state) {
         return {
             restrict: 'A',
             link: function(scope, element, attributes) {
@@ -13,4 +13,4 @@ angular.module('trump.directives', [])
                 });
             }
         };
-    });
+    }]);

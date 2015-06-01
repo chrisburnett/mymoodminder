@@ -10,3 +10,7 @@ platforms/
 /plugins/android.json
 /doc/notifications_sequence.graffle
 /backend/event.log
+/dist_css/
+/dist_js/
+/www/dist/
+/www/js/templates.js
