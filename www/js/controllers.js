@@ -1,6 +1,6 @@
 angular.module('trump.controllers', ['angularMoment'])
 
-    .controller('DashCtrl', function($scope, $state, AuthService, Messages, MessagePreferences, $ionicLoading, $ionicPopup) {
+    .controller('DashCtrl', ["$scope", "$state", "AuthService", "Messages", "MessagePreferences", "$ionicLoading", "$ionicPopup", function($scope, $state, AuthService, Messages, MessagePreferences, $ionicLoading, $ionicPopup) {
 
         if(window.localStorage.getItem('qids_reminder')) {
             $scope.qidsReminder = true;
@@ -60,9 +60,9 @@ angular.module('trump.controllers', ['angularMoment'])
             window.localStorage.removeItem('qids_reminder');
             $state.go('tab.qids-new');
         };
-    })
+    }])
 
-    .controller('QIDSListCtrl', function($scope, $state, QIDSResponses, AuthService) {
+    .controller('QIDSListCtrl', ["$scope", "$state", "QIDSResponses", "AuthService", function($scope, $state, QIDSResponses, AuthService) {
         // try to sync pending responses, then load responses to scope
         QIDSResponses.sync_pending().finally(function() {
             QIDSResponses.all()
@@ -90,9 +90,9 @@ angular.module('trump.controllers', ['angularMoment'])
             AuthService.logout();
             $state.go('login');
         };
-    })
+    }])
 
-    .controller('QIDSDetailCtrl', function($scope, $state, $stateParams, QIDSResponses, QuestionnaireText) {
+    .controller('QIDSDetailCtrl', ["$scope", "$state", "$stateParams", "QIDSResponses", "QuestionnaireText", function($scope, $state, $stateParams, QIDSResponses, QuestionnaireText) {
         // here we will want to use the message service and qids
         // service to get a list of events, order them by time and
         // then add that processed list to the scope
@@ -127,11 +127,11 @@ angular.module('trump.controllers', ['angularMoment'])
                 $state.go ('tab.qids-list');
             });
         };
-    })
+    }])
 
 
 
-    .controller('QIDSResponseCtrl', function($scope, $state, $ionicSlideBoxDelegate, QIDSResponses, QuestionnaireText) {
+    .controller('QIDSResponseCtrl', ["$scope", "$state", "$ionicSlideBoxDelegate", "QIDSResponses", "QuestionnaireText", function($scope, $state, $ionicSlideBoxDelegate, QIDSResponses, QuestionnaireText) {
         $scope.createResponse = function(response) {
             // get the rest service object and create a new resource
             // on the server, then transition back to dashboard state
@@ -183,10 +183,10 @@ angular.module('trump.controllers', ['angularMoment'])
             $scope.showQ9 = !$scope.showQ9;
             if($scope.showQ9) $scope.showQ8 = false;
         };
-    })
+    }])
 
 
-    .controller('LoginCtrl', function($scope, $state, AuthService, RegistrationService, $ionicLoading) {
+    .controller('LoginCtrl', ["$scope", "$state", "AuthService", "RegistrationService", "$ionicLoading", function($scope, $state, AuthService, RegistrationService, $ionicLoading) {
         // controller for handling login requests
         $scope.credentials = {};
 
@@ -219,9 +219,9 @@ angular.module('trump.controllers', ['angularMoment'])
                 });
 
         };
-    })
+    }])
 
-    .controller('SettingsCtrl', function($scope, MessagePreferences) {
+    .controller('SettingsCtrl', ["$scope", "MessagePreferences", function($scope, MessagePreferences) {
 
         // message and privacy controls view
         MessagePreferences.all().then(function(data) {
@@ -244,9 +244,9 @@ angular.module('trump.controllers', ['angularMoment'])
             $state.go('login');
         };
 
-    })
+    }])
 
-    .controller('PinlockCtrl', function($scope) {
+    .controller('PinlockCtrl', ["$scope", function($scope) {
         $scope.init = function() {
             $scope.passcode = "";
         };
@@ -266,4 +266,4 @@ angular.module('trump.controllers', ['angularMoment'])
                 $scope.passcode = $scope.passcode.substring(0, $scope.passcode.length - 1);
             }
         };
-    });
+    }]);

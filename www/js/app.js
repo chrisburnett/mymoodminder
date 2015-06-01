@@ -8,13 +8,13 @@
 angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.directives', 'LocalStorageModule', 'ngCordova'])
 
 // this is where you configure the URL of the backend UI server
-    .constant('BACKEND_URL', 'https://murmuring-depths-9520-staging.herokuapp.com/api')
-    .constant('AUTH_URL', 'https://murmuring-depths-9520-staging.herokuapp.com/api/auth')
-    //.constant('BACKEND_URL', 'http://localhost:3000/api')
-    //.constant('AUTH_URL', 'http://localhost:3000/api/auth')
+    //.constant('BACKEND_URL', 'https://murmuring-depths-9520-staging.herokuapp.com/api')
+    //.constant('AUTH_URL', 'https://murmuring-depths-9520-staging.herokuapp.com/api/auth')
+    .constant('BACKEND_URL', 'http://localhost:3000/api')
+    .constant('AUTH_URL', 'http://localhost:3000/api/auth')
     .constant('ANDROID_SENDER_ID', '937013579687')
 
-    .run(function($ionicPlatform, $rootScope, $injector, $state, $cordovaPush, RegistrationService, ANDROID_SENDER_ID) {
+    .run(["$ionicPlatform", "$rootScope", "$injector", "$state", "$cordovaPush", "RegistrationService", "ANDROID_SENDER_ID", function($ionicPlatform, $rootScope, $injector, $state, $cordovaPush, RegistrationService, ANDROID_SENDER_ID) {
 
         // configuration for the android platform
         var androidConfig = {
@@ -93,14 +93,14 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
             });
 
         });
-    })
+    }])
 
-    .config(function(localStorageServiceProvider) {
+    .config(["localStorageServiceProvider", function(localStorageServiceProvider) {
         localStorageServiceProvider.setPrefix('trumpApp');
-    })
+    }])
 
 
-    .factory('AuthToken', function(localStorageService) {
+    .factory('AuthToken', ["localStorageService", function(localStorageService) {
         // service for storing the authentication token in local storage
         return {
             set: function(token) {
@@ -113,10 +113,10 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
                 window.localStorage.removeItem('auth_token');
             }
         };
-    })
+    }])
 
 
-    .config(function($stateProvider, $urlRouterProvider) {
+    .config(["$stateProvider", "$urlRouterProvider", function($stateProvider, $urlRouterProvider) {
 
         var authenticated = function(AuthToken, $q) {
             var d = $q.defer();
@@ -126,6 +126,7 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
                 d.reject();
             return d.promise;
         };
+        authenticated.$inject = ["AuthToken", "$q"];
         
         $stateProvider
 
@@ -209,10 +210,10 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
 
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/tab/dash');
-    })
+    }])
 
 
-    .factory('AuthInterceptor', function($q, $injector, AUTH_URL) {
+    .factory('AuthInterceptor', ["$q", "$injector", "AUTH_URL", function($q, $injector, AUTH_URL) {
         return {
             // This will be called on every outgoing http request
             request: function(config) {
@@ -237,10 +238,10 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
                 return $q.reject(response);
             }
         };
-    })
+    }])
 
 
-    .factory('AuthService', function($http, $q, $rootScope, AuthToken, QIDSResponses, AUTH_URL) {
+    .factory('AuthService', ["$http", "$q", "$rootScope", "AuthToken", "QIDSResponses", "AUTH_URL", function($http, $q, $rootScope, AuthToken, QIDSResponses, AUTH_URL) {
         // service for logging in
         return {
             login: function(username, password) {
@@ -261,10 +262,10 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
                 QIDSResponses.clear_cache();
             }
         };
-    })
+    }])
 
 
-    .factory('RegistrationService', function($q, $http, AuthToken, BACKEND_URL, localStorageService) {
+    .factory('RegistrationService', ["$q", "$http", "AuthToken", "BACKEND_URL", "localStorageService", function($q, $http, AuthToken, BACKEND_URL, localStorageService) {
         // service for managing the registration id
         return {
             set: function(registration_id) {
@@ -296,11 +297,11 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
                 return d.promise;
             }
         };
-    })
+    }])
 
-    .config(function($httpProvider) {
+    .config(["$httpProvider", function($httpProvider) {
         return $httpProvider.interceptors.push('AuthInterceptor');
-    })
+    }])
 
 
     .filter('qidsScore', function() {
