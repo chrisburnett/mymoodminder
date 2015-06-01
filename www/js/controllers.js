@@ -5,7 +5,7 @@ angular.module('trump.controllers', ['angularMoment'])
         if(window.localStorage.getItem('qids_reminder')) {
             $scope.qidsReminder = true;
         }
-        
+
         $ionicLoading.show({
             content: 'Loading Data',
             animation: 'fade-in',
@@ -27,7 +27,7 @@ angular.module('trump.controllers', ['angularMoment'])
                     $scope.messages = messages;
                 });
             });
-        
+
         // clear token and go to login screen
         $scope.logout = function() {
             AuthService.logout();
@@ -81,7 +81,7 @@ angular.module('trump.controllers', ['angularMoment'])
                 animation: 'fade-in',
                 delay: 1000
             });
-            
+
             QIDSResponses.delete(response.completed_at).then(function(responses) {
                 $scope.qids_responses.splice($scope.qids_responses.indexOf(response), 1);
                 $ionicLoading.hide();
@@ -138,8 +138,9 @@ angular.module('trump.controllers', ['angularMoment'])
 
 
 
-    .controller('QIDSResponseCtrl', ["$scope", "$state", "$ionicSlideBoxDelegate", "QIDSResponses", "QuestionnaireText", function($scope, $state, $ionicSlideBoxDelegate, QIDSResponses, QuestionnaireText) {
-        $scope.createResponse = function(response) {
+    .controller('QIDSResponseCtrl', ["$scope", "$state", "$ionicSlideBoxDelegate", "$ionicPopup", "QIDSResponses", "QuestionnaireText", function($scope, $state, $ionicSlideBoxDelegate, $ionicPopup, QIDSResponses, QuestionnaireText) {
+
+        var save = function(response) {
             // get the rest service object and create a new resource
             // on the server, then transition back to dashboard state
             QIDSResponses.save(response).then(function() {
@@ -172,6 +173,37 @@ angular.module('trump.controllers', ['angularMoment'])
                 $scope.showFwd = false;
 
         };
+
+        $scope.createResponse = function(response) {
+            // if any of the questions are empty
+            var missing = false;
+            for(var q in QuestionnaireText) {
+                if(!response[q]) {
+                    // should be a better way to do this...
+                    if(q != "q6" && q != "q7" && q != "q8" && q != "q9") {
+                        missing = true;
+                        break;
+                    }
+                }
+            }
+            // check mutual exclusives
+            if(response["q6_7"] || response["q7_8"])
+                missing = false;
+            
+            if(missing) {
+                var confirmPopup = $ionicPopup.confirm({
+                    title: 'Missing information',
+                    template: '<p>You haven\'t answered all of the questions. That\'s OK, it only means we won\'t be able to give you a score. Do you still want to save?</p>'
+                });
+                confirmPopup.then(function(answer) {
+                    if(answer) {
+                        save(response);
+                    };
+                });
+            } else {
+                save(response);
+            }
+        }
 
         // visibility of mutually exclisive questions TODO -
         // implementing a directive would be a neater way of doing
