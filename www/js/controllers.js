@@ -57,7 +57,6 @@ angular.module('trump.controllers', ['angularMoment'])
         $scope.doQidsReminder = function() {
             // clear the reminder key from localstorage and go to new
             // reminder view
-            window.localStorage.removeItem('qids_reminder');
             $state.go('tab.qids-new');
         };
     }])
@@ -135,7 +134,11 @@ angular.module('trump.controllers', ['angularMoment'])
         $scope.createResponse = function(response) {
             // get the rest service object and create a new resource
             // on the server, then transition back to dashboard state
-            QIDSResponses.save(response).then(function() { $state.go('tab.qids-list'); });
+            QIDSResponses.save(response).then(function() {
+                // when the user creates a response, clear the reminder
+                window.localStorage.removeItem('qids_reminder');
+                $state.go('tab.qids-list');
+            });
         };
         $scope.showFwd = true;
         $scope.text = QuestionnaireText;
