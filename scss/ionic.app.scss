@@ -16,7 +16,9 @@ $dark:                            #444 !default;
 */
 
 //$item-font-size:                  14px !default;
-$item-padding:                    14px !default;
+$item-padding:                    14px;
+
+$base-background-color:           #f8f8f8;
 
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
