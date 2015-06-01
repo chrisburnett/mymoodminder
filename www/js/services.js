@@ -222,7 +222,7 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
             },
             q13: {
                 q: "General interest",
-                0: "I do not think of suicide or death.",
+                0: "There is no change from usual in how interested I am in other people or activities.",
                 1: "I notice that I am less interested in people or activities.",
                 2: "I find I have interest in only one or two of my formerly pursued activities.",
                 3: "I have virtually no interest in formerly pursued activities."
