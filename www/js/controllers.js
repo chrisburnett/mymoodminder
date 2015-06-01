@@ -61,7 +61,7 @@ angular.module('trump.controllers', ['angularMoment'])
         };
     }])
 
-    .controller('QIDSListCtrl', ["$scope", "$state", "QIDSResponses", "AuthService", function($scope, $state, QIDSResponses, AuthService) {
+    .controller('QIDSListCtrl', ["$scope", "$state", "QIDSResponses", "AuthService", "$ionicLoading", function($scope, $state, QIDSResponses, AuthService, $ionicLoading) {
         // try to sync pending responses, then load responses to scope
         QIDSResponses.sync_pending().finally(function() {
             QIDSResponses.all()
@@ -75,8 +75,15 @@ angular.module('trump.controllers', ['angularMoment'])
             //    if ($scope.qids_responses[r].completed_at == response.completed_at)
             //        $scope.qids_responses.splice(r, 1);
             //}
+            $ionicLoading.show({
+                content: 'Loading Data',
+                animation: 'fade-in',
+                delay: 1000
+            });
+            
             QIDSResponses.delete(response.completed_at).then(function(responses) {
                 $scope.qids_responses.splice($scope.qids_responses.indexOf(response), 1);
+                $ionicLoading.hide();
             });
         };
 
