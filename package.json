@@ -19,6 +19,7 @@
     "gulp-ngmin": "^0.3.0",
     "gulp-useref": "^1.2.0",
     "gulp-util": "^2.2.14",
+    "protractor": "^2.1.0",
     "shelljs": "^0.3.0"
   },
   "cordovaPlugins": []
