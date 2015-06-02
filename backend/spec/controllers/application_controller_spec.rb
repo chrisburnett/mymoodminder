@@ -35,7 +35,7 @@ RSpec.describe SecureAPIController, :type => :controller do
   end
 
   it "returns HTTP 419 if the given token has expired" do
-    allow(Time).to receive(:now).and_return(2.days.from_now)
+    allow(Time).to receive(:now).and_return(7.months.from_now)
     request.headers['Authorization'] = 'Bearer ' + @token
     get :index
     expect(response.status).to be 419
