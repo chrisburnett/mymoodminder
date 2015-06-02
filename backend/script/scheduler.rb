@@ -29,9 +29,15 @@ class Scheduler
     preferred_categories = categories.reject do |c|
       (pref = preferences.find_by(category_id: c.id)) && !pref.state
     end
-    # get a random preferred category and a random preset from it
-    preset = preferred_categories.sample.presets.sample
-    user.messages.build(preset_id: preset.id)
+    # get a random preferred category and a random preset from it Tue
+    # Jun 2 16:53:28 2015 - don't do this now: instead, put all the
+    # presets from perferred categories in a bag and choose one. This
+    # is to give a bit more weight to the medication advice category
+    all_presets = []
+    preferred_categories.each do |cat|
+      all_presets += cat.presets
+    end
+    user.messages.build(preset_id: all_presets.sample.id)
   end
   
 end
