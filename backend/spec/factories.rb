@@ -57,6 +57,7 @@ FactoryGirl.define do
     surname "Burnett"
     password "ukelele"
     registration_id "regid"
+    receive_notifications true
 
     factory :admin do
       username "admin_user"
