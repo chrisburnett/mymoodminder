@@ -1,10 +1,22 @@
 class Api::UsersController < SecureAPIController
 
-  def index
-    users = User.all
-    render json: users, status: :ok
+  def show
+    if @current_user then
+      render json: @current_user, status: :ok
+    else
+      fail NotAuthenticatedError
+    end
   end
 
+  def update
+    if @current_user then
+      @current_user.update_attributes!(safe_params)
+      render json: @current_user, status: :ok
+    else
+      fail NotAuthenticatedError
+    end
+  end
+  
   # set the user's device ID for pushing notifications to Google Cloud
   # Messaging
   def register
@@ -14,6 +26,10 @@ class Api::UsersController < SecureAPIController
     else
       fail NotAuthenticatedError
     end
+  end
+  
+  def safe_params
+    params.require(:user).permit(:receive_notifications)
   end
   
   
