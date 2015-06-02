@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   has_many :qids_responses
   has_many :messages
   has_many :message_preferences
-  
+
   has_secure_password
 
   validates :password,
@@ -37,7 +37,7 @@ class User < ActiveRecord::Base
     end
     self.save(validate: false)
   end
-  
+
 
   def generate_auth_token
     payload = { user_id: self.id }
@@ -49,14 +49,19 @@ class User < ActiveRecord::Base
   def send_notification(content, type)
     # send a notification to this user's registered device
     # only do this id there's a registered device
-    if self.registration_id then
-      n = Rpush::Gcm::Notification.new
-      n.app = Rpush::Gcm::App.find_by_name(RPUSH_GCM_APP_NAME)
-      n.registration_ids = [self.registration_id]
-      n.data = { message: content, title: TITLE_APP_NAME, type: type }
-      n.save!
-      EVENT_LOG.tagged(DateTime.now, 'GCM', self.id) { EVENT_LOG.info('Sent message to device') }
+    if self.receive_notifications then
+      if self.registration_id then
+        n = Rpush::Gcm::Notification.new
+        n.app = Rpush::Gcm::App.find_by_name(RPUSH_GCM_APP_NAME)
+        n.registration_ids = [self.registration_id]
+        n.data = { message: content, title: TITLE_APP_NAME, type: type }
+        n.save!
+        EVENT_LOG.tagged(DateTime.now, 'GCM', self.id) { EVENT_LOG.info('Sent notification to device') }
+      end
+    else
+      EVENT_LOG.tagged(DateTime.now, 'GCM', self.id) { EVENT_LOG.info('Notification queued but not sent to device - user preference') }
     end
+
   end
 
 end
