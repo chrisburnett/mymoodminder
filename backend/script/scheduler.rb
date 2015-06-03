@@ -1,5 +1,3 @@
-
-
 class Scheduler
 
   # handy map of time periods NOTE - this isn't ideal, they should be
@@ -7,9 +5,10 @@ class Scheduler
   # we're baking them into the scheduler. Sorry.
   def self.periods
     {
-    morning: [7,11],
-    afternoon: [12,17],
-    evening: [18,23]
+      morning: [7,11],
+      afternoon: [12,17],
+      evening: [18,23],
+      anytime: [7,23]
     }
   end
 
@@ -19,7 +18,7 @@ class Scheduler
      rand(0..60).minutes).to_datetime
   end
 
-  
+
   def self.generate_message(user, categories)
     # pick a message preset from the (preferred) categories and create
     # it, and create a notification to go with it
@@ -39,5 +38,5 @@ class Scheduler
     end
     user.messages.build(preset_id: all_presets.sample.id)
   end
-  
+
 end

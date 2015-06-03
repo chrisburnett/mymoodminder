@@ -13,7 +13,7 @@ RSpec.describe Api::UsersController, :type => :controller do
       get :show
       expect(response.status).to be 200
     end
-    
+
     it "responds with the user's profile" do
       get :show
       expect(JSON.parse(response.body)['forename']).to eq("Chris")
@@ -25,6 +25,10 @@ RSpec.describe Api::UsersController, :type => :controller do
       put :update, { user: { receive_notifications: false } }
       expect(JSON.parse(response.body)['receive_notifications']).to be_falsey
     end
-  end
 
+    it "sets the current user's delivery preference" do
+      put :update, { user: { delivery_preference: 'anytime' } }
+      expect(JSON.parse(response.body)['delivery_preference']).to eq('anytime')
+    end
+  end
 end
