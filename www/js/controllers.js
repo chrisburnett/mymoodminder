@@ -290,8 +290,12 @@ angular.module('trump.controllers', ['angularMoment'])
         };
     }])
 
-    .controller('MessagePrefsCtrl', ["$scope", "MessagePreferences", function($scope, MessagePreferences) {
+    .controller('MessagePrefsCtrl', ["$scope", "MessagePreferences", "User", function($scope, MessagePreferences, User) {
 
+        $scope.user = {
+            delivery_preference: 'anytime'
+        }
+        
         // message and privacy controls view
         MessagePreferences.all().then(function(data) {
             $scope.message_preferences = data;
@@ -299,6 +303,17 @@ angular.module('trump.controllers', ['angularMoment'])
             $scope.connectionProblem = true;
         });
 
+        // called when the user updates their delivery preference
+        $scope.updateDeliveryPreference = function(user) {
+            User.updateDeliveryPreference(user).then(function(data) {
+                //success
+                console.log(data);
+            }, function(reason) {
+                //failure
+                console.log(reason);
+            });
+        };
+        
         $scope.save = function(preference) {
             MessagePreferences.save(preference).catch(function(data) {
                 // if there's no communication with server, or a

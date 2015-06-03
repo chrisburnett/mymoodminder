@@ -2,9 +2,28 @@
     <ion-content>
         <div ng-if="!connectionProblem">
             <div class="padding">
+                When would you like us to send you messages?
+            </div>
+
+            <label class="item item-input item-select">
+                <div class="input-label">
+                    Time of day
+                </div>
+                <select ng-model="user.delivery_preference" ng-change="updateDeliveryPreference(user)">
+                    <option selected value="anytime">Any time of day</option>
+                    <option value="morning">Morning</option>
+                    <option value="afternoon">Afternoon</option>
+                    <option value="evening">Evening</option>
+                </select>
+            </label>
+
+            <ion-toggle ng-model="user.receive_notifications" toggle-class="toggle-calm" ng-change="updateDeliveryPreference(user)">Receive notifications</ion-toggle>
+
+
+            <div class="padding">
                 You can choose the topics of messages you'd like to receive.
             </div>
-            <div class="list card">
+            <div class="list">
                 <div class="item item-divider">
                     I'm interested in...
                 </div>

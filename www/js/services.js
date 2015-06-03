@@ -311,6 +311,14 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
         };
     }])
 
+    .factory('User', ["$http", "BACKEND_URL", function($http, BACKEND_URL) {
+        // service for setting stuff on the user profile
+        return {
+            updateDeliveryPreference: function(user) {
+                return $http.put(BACKEND_URL + '/user', user); 
+            }
+        };
+    }])
 
     .factory('Messages', ["$q", "BACKEND_URL", "$resource", function($q, BACKEND_URL, $resource) {
         // just look at this sneaky javascript - return an anonymous
