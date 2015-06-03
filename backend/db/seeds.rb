@@ -1,3 +1,4 @@
+require_relative '../script/import_messages.rb'
 require 'csv'
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
@@ -8,6 +9,7 @@ require 'csv'
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 # import canned text messages
 # start by scanning and creating categories
+<<<<<<< Updated upstream
 categories = {}
 data = CSV.read("script/messages.csv")
 data.each do |category_title, message_preset|
@@ -22,6 +24,21 @@ data.each do |category_title, message_preset|
   categories[category_title].presets.create(content: message_preset)
 end
 
+=======
+# categories = {}
+# data = CSV.read("script/messages.csv")
+# data.each do |category_title, message_preset|
+#   # mark some categories as 'not preferable' - i.e., users can't set a
+#   # preference for them
+#   preferable = true
+#   if category_title === "medication information" then
+#     preferable = false
+#   end
+#   categories[category_title] ||= Category.create(title: category_title, preferable: preferable)
+#   categories[category_title].presets.create(content: message_preset)
+# end
+MessageImporter.import
+>>>>>>> Stashed changes
 
 
 case Rails.env
