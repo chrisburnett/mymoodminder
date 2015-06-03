@@ -28,7 +28,7 @@
                     I'm interested in...
                 </div>
                 <ion-toggle ng-repeat="mp in message_preferences" ng-model="mp.state" ng-change="save(mp)">
-                    Being {{mp.title}}
+                    {{mp.title}}
                 </ion-toggle>
             </div>
         </div>
