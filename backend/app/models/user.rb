@@ -21,7 +21,8 @@ class User < ActiveRecord::Base
   # magic string here, but it's the most straightforward way of
   # dealing with this for now.
   def init
-    self.delivery_preference ||= 'afternoon'
+    self.delivery_preference ||= 'anytime'
+    self.receive_notifications ||= true
     self.next_delivery_time = Time.now.to_datetime
     self.next_qids_reminder_time = Time.now + 1.week
     # when a user is created, set up default message preferences for
