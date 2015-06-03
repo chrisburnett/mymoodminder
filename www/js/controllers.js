@@ -189,7 +189,7 @@ angular.module('trump.controllers', ['angularMoment'])
             // check mutual exclusives
             if(response["q6_7"] || response["q7_8"])
                 missing = false;
-            
+
             if(missing) {
                 var confirmPopup = $ionicPopup.confirm({
                     title: 'Missing information',
@@ -264,7 +264,33 @@ angular.module('trump.controllers', ['angularMoment'])
         };
     }])
 
-    .controller('SettingsCtrl', ["$scope", "MessagePreferences", function($scope, MessagePreferences) {
+    .controller('SettingsCtrl', ["$scope", function($scope) {
+
+
+    }])
+
+    .controller('WithdrawCtrl', ["$scope", "$state", "AuthService", "WithdrawService", "$ionicPopup", function($scope, $state, AuthService, WithdrawService, $ionicPopup) {
+        $scope.withdraw = function() {
+            var confirmPopup = $ionicPopup.confirm({
+                title: 'Are you sure?',
+                template: '<p>Your MyMoodMinder information will be deleted, and you will no longer be able to log in.<p>'
+            });
+            confirmPopup.then(function(answer) {
+                if(answer) {
+                    WithdrawService.withdraw().then(
+                        function() {
+                            AuthService.logout();
+                            $state.go('login');
+                        }, function() {
+                            $scope.connectionProblem = true;
+                        }
+                    );
+                };
+            });
+        };
+    }])
+
+    .controller('MessagePrefsCtrl', ["$scope", "MessagePreferences", function($scope, MessagePreferences) {
 
         // message and privacy controls view
         MessagePreferences.all().then(function(data) {

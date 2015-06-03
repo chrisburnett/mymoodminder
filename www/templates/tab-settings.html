@@ -1,27 +1,22 @@
 <ion-view view-title="Settings">
-    <ion-content>
-        <div ng-if="!connectionProblem">
-            <div class="padding">
-                You can choose the topics of messages you'd like to receive.
-            </div>
-            <div class="list card">
-                <div class="item item-divider">
-                    I'm interested in...
-                </div>
-                <ion-toggle ng-repeat="mp in message_preferences" ng-model="mp.state" ng-change="save(mp)">
-                    Being {{mp.title}}
-                </ion-toggle>
-            </div>
+    <ion-content class="padding">
+        <ion-list class="list list-inset">
+            <a ui-sref="tab.messages" class="item item-icon-right">
+                Message preferences
+                <i class="icon ion-chevron-right icon-accessory"></i>
+            </a>
+            <a ui-sref="tab.messages" class="item item-icon-right">
+                Privacy preferences
+                <i class="icon ion-chevron-right icon-accessory"></i>
+            </a>
+            <a ui-sref="tab.withdraw" class="item assertive item-icon-right">
+                Withdraw from study
+                <i class="icon ion-chevron-right icon-accessory"></i>
+            </a>
         </div>
 
-        <div ng-if="connectionProblem" class="card">
-            <div class="item item-text-wrap item-assertive">
-                Sorry, there was a problem communicating with the server. Please try again later.
-            </div>
-        </div>
+
     </ion-content>
-
-
     <ion-nav-buttons side="secondary">
         <button class="button" ng-click="logout()">Logout</button>
     </ion-nav-buttons>

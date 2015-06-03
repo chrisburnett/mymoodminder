@@ -196,6 +196,27 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
                 cache: false
             })
 
+            .state('tab.withdraw', {
+                url: '/withdraw',
+                views: {
+                    'tab-settings': {
+                        templateUrl: 'withdraw.html',
+                        controller: 'WithdrawCtrl'
+                    }
+                }
+            })
+
+
+            .state('tab.messages', {
+                url: '/messages',
+                views: {
+                    'tab-settings': {
+                        templateUrl: 'tab-settings-messages.html',
+                        controller: 'MessagePrefsCtrl'
+                    }
+                }
+            })
+
         // create a new entry
             .state('tab.qids-new', {
                 url: '/entry',
@@ -264,6 +285,16 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
         };
     }])
 
+    .factory('WithdrawService', ["$http", "BACKEND_URL", "AuthToken", function($http, BACKEND_URL, AuthToken) {
+        return {
+            withdraw: function() {
+                // send withdraw message to backend - all
+                // confirmations have been done in UI, just do it
+                // return a promise. Controller will resolve and update view
+                return $http.get(BACKEND_URL + 'user/withdraw');
+            }
+        };
+    }])
 
     .factory('RegistrationService', ["$q", "$http", "AuthToken", "BACKEND_URL", "localStorageService", function($q, $http, AuthToken, BACKEND_URL, localStorageService) {
         // service for managing the registration id
