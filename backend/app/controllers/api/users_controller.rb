@@ -10,7 +10,8 @@ class Api::UsersController < SecureAPIController
 
   def update
     if @current_user then
-      @current_user.update_attributes!(safe_params)
+      @current_user.attributes = safe_params
+      @current_user.save(validate: false)
       render json: @current_user, status: :ok
     else
       fail NotAuthenticatedError
