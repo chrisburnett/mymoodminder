@@ -290,19 +290,21 @@ angular.module('trump.controllers', ['angularMoment'])
         };
     }])
 
-    .controller('MessagePrefsCtrl', ["$scope", "MessagePreferences", "User", function($scope, MessagePreferences, User) {
+    .controller('MessagePrefsCtrl', ["$scope", "MessagePreferences", "User", "AuthService", "$state", function($scope, MessagePreferences, User, AuthService, $state) {
 
         $scope.connectionProblem = false;
         
-        $scope.user = {
-            delivery_preference: 'anytime'
-        }
-        
         // message and privacy controls view
-        MessagePreferences.all().then(function(data) {
-            $scope.message_preferences = data;
+        MessagePreferences.all().then(function(prefs) {
+            $scope.message_preferences = prefs;
         }, function(reason) {
             $scope.connectionProblem = true;
+        }).then(function() {
+            User.get().then(function(user) {
+                $scope.user = user;
+            }, function() {
+                $scope.connectionProblem = true;
+            });
         });
 
         // called when the user updates their delivery preference

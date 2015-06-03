@@ -314,6 +314,9 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
     .factory('User', ["$http", "BACKEND_URL", function($http, BACKEND_URL) {
         // service for setting stuff on the user profile
         return {
+            get: function() {
+                return $http.get(BACKEND_URL + '/user');
+            },
             updateDeliveryPreference: function(user) {
                 return $http.put(BACKEND_URL + '/user', user); 
             }
