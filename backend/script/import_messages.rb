@@ -1,7 +1,7 @@
 require 'csv'
 
 class MessageImporter
-  def import
+  def self.import
     categories = {}
     data = CSV.read("script/messages.csv")
     data.each do |category_title, message_preset|
