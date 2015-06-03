@@ -20,6 +20,12 @@ RSpec.describe Api::QidsResponsesController, :type => :controller do
       expect(JSON.parse(response.body).length).to be 5
     end
     # for now, no edit
+    it "responds not authenticated if user is withdrawn" do
+      @current_user.withdrawn = true
+      @current_user.save(validate: false)
+      get :index
+      expect(response.status).to be 401
+    end
   end
 
   describe "POST index" do

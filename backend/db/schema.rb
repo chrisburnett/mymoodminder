@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150602012901) do
+ActiveRecord::Schema.define(version: 20150603122937) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -159,6 +159,7 @@ ActiveRecord::Schema.define(version: 20150602012901) do
     t.string   "gp_contact_number"
     t.boolean  "local_storage"
     t.boolean  "receive_notifications"
+    t.boolean  "withdrawn"
   end
 
   add_foreign_key "messages", "presets"

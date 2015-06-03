@@ -32,7 +32,7 @@ class SecureAPIController < ActionController::Base
 
   # Check to make sure the current user was set
   def authenticate_request
-    if !@current_user
+    if !@current_user || @current_user.withdrawn?
       fail NotAuthenticatedError
     end
   end

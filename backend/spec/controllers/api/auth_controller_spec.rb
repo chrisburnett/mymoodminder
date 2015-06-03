@@ -26,13 +26,18 @@ RSpec.describe Api::AuthController, :type => :controller do
       expect(response.status).to be 401
     end
 
-    it "responds provides no token on unsuccessful login" do
+    it "responds and provides no token on unsuccessful login" do
       user = create(:user)
       post :authenticate, {username: user.username, password: "wrongpass"}
 
       expect(JSON.parse(response.body)['auth_token']).to be_falsey
     end
 
+    it "responds and provides no token if user is withdrawn" do
+      user = create(:user, withdrawn: true)
+      post :authenticate, {username: user.username, password: user.password}
+      expect(JSON.parse(response.body)['auth_token']).to be_falsey
+    end
   end
 
 end

@@ -58,6 +58,7 @@ FactoryGirl.define do
     password "ukelele"
     registration_id "regid"
     receive_notifications true
+    withdrawn false
 
     factory :admin do
       username "admin_user"
