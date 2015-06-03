@@ -292,6 +292,8 @@ angular.module('trump.controllers', ['angularMoment'])
 
     .controller('MessagePrefsCtrl', ["$scope", "MessagePreferences", "User", function($scope, MessagePreferences, User) {
 
+        $scope.connectionProblem = false;
+        
         $scope.user = {
             delivery_preference: 'anytime'
         }
