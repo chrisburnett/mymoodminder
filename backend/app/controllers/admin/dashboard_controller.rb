@@ -17,8 +17,11 @@ class Admin::DashboardController < ApplicationController
     if session[:user_id] then
       EVENT_LOG.tagged(DateTime.now, 'ADMIN') { EVENT_LOG.info('Test-firing message push to devices') }
       User.all.each do |user|
-        user.send_notification('test broadcast', :message)
-        user.send_notification("Please create a weekly entry", :reminder)
+        if rand > 0.5
+          user.send_notification('test broadcast', :message)
+        else
+          user.send_notification("Please create a weekly entry", :reminder)
+        end
       end
       Rpush.push
       render nothing: true, status: :ok
