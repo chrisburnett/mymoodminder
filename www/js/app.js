@@ -82,7 +82,7 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
                 case 'message':
                     // this is the notification
                     if(notification.type == 'message')
-                        alert('message = ' + notification.message);
+                        window.localStorage.setItem('new_message', notification);
                     else
                         window.localStorage.setItem('qids_reminder', Date.now());
                     break;
