@@ -1,17 +1,20 @@
 angular.module('trump.controllers', ['angularMoment'])
 
-    .controller('DashCtrl', ["$scope", "$state", "AuthService", "Messages", "MessagePreferences", "$ionicLoading", "$ionicPopup", function($scope, $state, AuthService, Messages, MessagePreferences, $ionicLoading, $ionicPopup) {
+    .controller('DashCtrl', ["$scope", "$state", "AuthService", "Messages", "MessagePreferences", "$ionicLoading", "$ionicPopup", "$ionicModal", function($scope, $state, AuthService, Messages, MessagePreferences, $ionicLoading, $ionicPopup, $ionicModal) {
 
-        if(window.localStorage.getItem('qids_reminder')) {
+        // check for notifications/reminders received
+        if(window.localStorage.getItem('qids_reminder'))
             $scope.qidsReminder = true;
-        }
+        var new_message = window.localStorage.getItem('new_message');
+        if(new_message)
+            $scope.new_message = new_message;
 
+        // bring up loading modal
         $ionicLoading.show({
             content: 'Loading Data',
             animation: 'fade-in',
             delay: 1000
         });
-
         // try to sync message preferences then get messages from the
         // server, finally take down curtain
         MessagePreferences.sync_pending()
@@ -33,6 +36,29 @@ angular.module('trump.controllers', ['angularMoment'])
             AuthService.logout();
             $state.go('login');
         };
+        // new message modal - if we have just received a new message,
+        // bring up a nice screen to show it to the user
+        $ionicModal.fromTemplateUrl('message-modal.html', {
+            scope: $scope,
+            animation: 'slide-in-up'
+        }).then(function(modal) {
+            $scope.modal = modal;
+            // it's initialised now - if there's a message, open the
+            // modal
+            var new_message = window.localStorage.getItem('new_message');
+            if(new_message) {
+                $scope.new_message = JSON.parse(new_message);
+                $scope.modal.show();
+            };
+        });
+        $scope.closeModal = function() {
+            $scope.modal.hide();
+        };
+        //Cleanup the modal when we're done with it!
+        $scope.$on('$destroy', function() {
+            $scope.modal.remove();
+        });
+
 
         // An alert dialog. After alerting, delete the message
         $scope.showAlert = function(message) {
@@ -293,7 +319,7 @@ angular.module('trump.controllers', ['angularMoment'])
     .controller('MessagePrefsCtrl', ["$scope", "MessagePreferences", "User", "AuthService", "$state", function($scope, MessagePreferences, User, AuthService, $state) {
 
         $scope.connectionProblem = false;
-        
+
         // message and privacy controls view
         MessagePreferences.all().then(function(prefs) {
             $scope.message_preferences = prefs;
@@ -317,7 +343,7 @@ angular.module('trump.controllers', ['angularMoment'])
                 console.log(reason);
             });
         };
-        
+
         $scope.save = function(preference) {
             MessagePreferences.save(preference).catch(function(data) {
                 // if there's no communication with server, or a
