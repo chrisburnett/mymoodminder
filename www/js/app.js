@@ -13,6 +13,7 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
     //.constant('BACKEND_URL', 'http://localhost:3000/api')
     //.constant('AUTH_URL', 'http://localhost:3000/api/auth')
     .constant('ANDROID_SENDER_ID', '937013579687')
+    .constant('BG_COUNT', 8)
 
     .run(["$ionicPlatform", "$rootScope", "$injector", "$state", "$cordovaPush", "RegistrationService", "ANDROID_SENDER_ID", function($ionicPlatform, $rootScope, $injector, $state, $cordovaPush, RegistrationService, ANDROID_SENDER_ID) {
 

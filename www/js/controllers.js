@@ -1,6 +1,6 @@
 angular.module('trump.controllers', ['angularMoment'])
 
-    .controller('DashCtrl', ["$scope", "$state", "AuthService", "Messages", "MessagePreferences", "$ionicLoading", "$ionicPopup", "$ionicModal", function($scope, $state, AuthService, Messages, MessagePreferences, $ionicLoading, $ionicPopup, $ionicModal) {
+    .controller('DashCtrl', ["$scope", "$state", "AuthService", "Messages", "MessagePreferences", "Background", "$ionicLoading", "$ionicPopup", "$ionicModal", function($scope, $state, AuthService, Messages, MessagePreferences, Background, $ionicLoading, $ionicPopup, $ionicModal) {
 
         // check for notifications/reminders received
         if(window.localStorage.getItem('qids_reminder'))
@@ -48,6 +48,7 @@ angular.module('trump.controllers', ['angularMoment'])
             var new_message = window.localStorage.getItem('new_message');
             if(new_message) {
                 $scope.new_message = JSON.parse(new_message);
+                $scope.bg_url = Background.get();
                 $scope.modal.show();
             };
         });
