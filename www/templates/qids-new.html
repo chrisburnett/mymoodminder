@@ -678,6 +678,12 @@
                             <input type="text" placeholder="Notes..." ng-model="$parent.$parent.response.note">
                         </label>
 
+                        <div class="col" ng-show="!showFwd">
+                            <div class="padding">
+                                <button type="submit" class="button button-block button-positive icon-right ion-paper-aeroplane">Save</button>
+                            </div>
+                        </div>
+
                     </div>
                 </ion-slide>
             </ion-slide-box>
@@ -696,11 +702,7 @@
                         <button type="button" class="button button-small button-block button-clear icon-right ion-chevron-right button-calm" ng-click="next()">Next</button>
                     </div>
                 </div>
-                <div class="col" ng-show="!showFwd">
-                    <div class="padding">
-                        <button type="submit" class="button button-small button-block button-positive icon-right ion-paper-aeroplane">Save</button>
-                    </div>
-                </div>
+
             </div>
         </form>
 
