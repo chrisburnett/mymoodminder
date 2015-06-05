@@ -1,0 +1,19 @@
+<ion-modal-view>
+    <ion-header-bar class="bar bar-header bar-calm">
+        <h1 class="title">New message</h1>
+    </ion-header-bar>
+    <ion-content style="background-image: url('{{bg_url}}')" class="padding center-vertical modal-background">
+        <div class="padding-horizontal">
+            <div class="card ">
+                <div class="item item-text-wrap item-icon-left">
+                    <i class="positive icon ion-chatbubble"></i>
+                    <h4 class="calm">{{new_message.category}}</h4>
+                    <h2>{{new_message.content}}</h2>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+    <div class="bar bar-footer bar-calm">
+        <div class="title" ng-click="closeModal()">Close</div>
+    </div>
+</ion-modal-view>

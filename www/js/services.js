@@ -358,6 +358,17 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
         };
     }])
 
+    .factory('Background', ["BG_COUNT", function(BG_COUNT) {
+        // this service returns a random background from the resource
+        // directory for the message display modal (or other uses)
+        return {
+            get: function() {
+                var index = Math.floor(Math.random() * (BG_COUNT)) + 1;
+                return '../img/bg' + index + '.jpg';
+            }
+        };
+    }])
+
     .factory('Categories', ["$q", "BACKEND_URL", "$resource", function($q, BACKEND_URL, $resource) {
         return {
             all: function() {
