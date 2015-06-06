@@ -326,19 +326,20 @@ angular.module('trump.controllers', ['angularMoment'])
             $scope.message_preferences = prefs;
         }, function(reason) {
             $scope.connectionProblem = true;
-        }).then(function() {
-            User.get().then(function(user) {
-                $scope.user = user;
-            }, function() {
-                $scope.connectionProblem = true;
-            });
+        });
+
+        User.get().then(function(response) {
+            $scope.user = response.data;
+            console.log(response.data);
+        }, function() {
+            $scope.connectionProblem = true;
         });
 
         // called when the user updates their delivery preference
         $scope.updateDeliveryPreference = function(user) {
-            User.updateDeliveryPreference(user).then(function(data) {
+            User.updateDeliveryPreference(user).then(function(response) {
                 //success
-                console.log(data);
+                console.log(response);
             }, function(reason) {
                 //failure
                 console.log(reason);
