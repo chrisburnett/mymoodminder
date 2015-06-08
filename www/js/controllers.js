@@ -1,7 +1,12 @@
 angular.module('trump.controllers', ['angularMoment'])
 
-    .controller('DashCtrl', ["$scope", "$state", "AuthService", "Messages", "MessagePreferences", "Background", "$ionicLoading", "$ionicPopup", "$ionicModal", function($scope, $state, AuthService, Messages, MessagePreferences, Background, $ionicLoading, $ionicPopup, $ionicModal) {
+    .controller('DashCtrl', ["$scope", "$state", "AuthService", "Messages", "MessagePreferences", "$ionicLoading", "$ionicPopup", "NewMessageModal", function($scope, $state, AuthService, Messages, MessagePreferences, $ionicLoading, $ionicPopup, NewMessageModal) {
 
+        // before doing anything else, try to load cached messages;
+        // heroku takes ages to respond and we don't want the
+        // interface to sit
+        $scope.messages = Messages.cached();
+        
         // check for notifications/reminders received
         if(window.localStorage.getItem('qids_reminder'))
             $scope.qidsReminder = true;
@@ -36,30 +41,7 @@ angular.module('trump.controllers', ['angularMoment'])
             AuthService.logout();
             $state.go('login');
         };
-        // new message modal - if we have just received a new message,
-        // bring up a nice screen to show it to the user
-        $ionicModal.fromTemplateUrl('message-modal.html', {
-            scope: $scope,
-            animation: 'slide-in-up'
-        }).then(function(modal) {
-            $scope.modal = modal;
-            // it's initialised now - if there's a message, open the
-            // modal
-            var new_message = window.localStorage.getItem('new_message');
-            if(new_message) {
-                $scope.new_message = JSON.parse(new_message);
-                $scope.bg_url = Background.get();
-                $scope.modal.show();
-            };
-        });
-        $scope.closeModal = function() {
-            $scope.modal.hide();
-        };
-        //Cleanup the modal when we're done with it!
-        $scope.$on('$destroy', function() {
-            $scope.modal.remove();
-        });
-
+        
 
         // An alert dialog. After alerting, delete the message
         $scope.showAlert = function(message) {
@@ -81,6 +63,7 @@ angular.module('trump.controllers', ['angularMoment'])
                 //$scope.messages.splice($scope.messages.indexOf(message));
             });
         };
+
 
         $scope.doQidsReminder = function() {
             // clear the reminder key from localstorage and go to new

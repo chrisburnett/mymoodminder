@@ -15,7 +15,7 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
     .constant('ANDROID_SENDER_ID', '937013579687')
     .constant('BG_COUNT', 8)
 
-    .run(["$ionicPlatform", "$rootScope", "$injector", "$state", "$cordovaPush", "RegistrationService", "ANDROID_SENDER_ID", function($ionicPlatform, $rootScope, $injector, $state, $cordovaPush, RegistrationService, ANDROID_SENDER_ID) {
+    .run(["$ionicPlatform", "$rootScope", "$injector", "$state", "$cordovaPush", "RegistrationService", "ANDROID_SENDER_ID", "NewMessageModal", function($ionicPlatform, $rootScope, $injector, $state, $cordovaPush, RegistrationService, ANDROID_SENDER_ID, NewMessageModal) {
 
         // configuration for the android platform
         var androidConfig = {
@@ -82,8 +82,11 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
                     break;
                 case 'message':
                     // this is the notification
-                    if(notification.type == 'message')
-                        window.localStorage.setItem('new_message', notification);
+                    if(notification.payload.type == 'message') {
+                        //window.localStorage.setItem('new_message', JSON.stringify(notification));
+                        window.alert(JSON.stringify(notification));
+                        NewMessageModal.open(notification.payload);
+                    }
                     else
                         window.localStorage.setItem('qids_reminder', Date.now());
                     break;
@@ -96,9 +99,9 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
         });
     }])
 
-    .config(["localStorageServiceProvider", function(localStorageServiceProvider) {
-        localStorageServiceProvider.setPrefix('trumpApp');
-    }])
+    // .config(["localStorageServiceProvider", function(localStorageServiceProvider) {
+    //     localStorageServiceProvider.setPrefix('trumpApp');
+    // }])
 
 
     .factory('AuthToken', ["localStorageService", function(localStorageService) {

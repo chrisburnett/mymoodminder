@@ -292,7 +292,7 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
                 return $http.post(BACKEND_URL + '/message_preferences/mass_update',
                                   preferences);
             },
-            
+
             sync_pending: function() {
                 // if there are locally stored preferences, try to save them and clear
                 var promises = [];
@@ -318,7 +318,7 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
                 return $http.get(BACKEND_URL + '/user');
             },
             updateDeliveryPreference: function(user) {
-                return $http.put(BACKEND_URL + '/user', user); 
+                return $http.put(BACKEND_URL + '/user', user);
             }
         };
     }])
@@ -327,7 +327,9 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
         // just look at this sneaky javascript - return an anonymous
         // object with the following methods
         return {
-
+            cached: function() {
+                return JSON.parse(window.localStorage.getItem('messages'));
+            },
             all: function() {
                 var d = $q.defer();
                 $resource(BACKEND_URL + '/messages')
@@ -364,7 +366,41 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
         return {
             get: function() {
                 var index = Math.floor(Math.random() * (BG_COUNT)) + 1;
-                return '../img/bg' + index + '.jpg';
+                return 'img/bg' + index + '.jpg';
+            }
+        };
+    }])
+
+    .factory('NewMessageModal', ["$rootScope", "$ionicModal", "Background", function($rootScope, $ionicModal, Background){
+        // new message modal - if we have just received a new message,
+        // bring up a nice screen to show it to the user
+        var messageModal;
+        $ionicModal.fromTemplateUrl('message-modal.html', {
+            scope: $rootScope,
+            animation: 'slide-in-up'
+        }).then(function(modal) {
+            messageModal = modal;
+        });
+
+        return {
+            open: function(new_message) {
+
+                // it's initialised now -n if there's a message, open the
+                // modal
+                if(!messageModal.isShown()) {
+                    $rootScope.messageModal = messageModal;
+                    $rootScope.closeModal = function() {
+                        $rootScope.messageModal.hide().then(function() {
+                            $rootScope.messageModal.remove();
+                        });
+                    };
+                };
+                $rootScope.new_message = new_message;
+                $rootScope.bg_url = Background.get();
+                $rootScope.messageModal.show();
+            },
+            shown: function() {
+                return messageModal.isShown();
             }
         };
     }])
