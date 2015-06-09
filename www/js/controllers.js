@@ -73,6 +73,10 @@ angular.module('trump.controllers', ['angularMoment'])
     }])
 
     .controller('QIDSListCtrl', ["$scope", "$state", "QIDSResponses", "AuthService", "$ionicLoading", function($scope, $state, QIDSResponses, AuthService, $ionicLoading) {
+
+        // get cached responses (if any)
+        $scope.qids_responses = QIDSResponses.cached();
+
         // try to sync pending responses, then load responses to scope
         QIDSResponses.sync_pending().finally(function() {
             QIDSResponses.all()

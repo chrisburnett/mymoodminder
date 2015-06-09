@@ -5,6 +5,9 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
             // return a service which lets us persist a response
             // between invocations of the app locally (for now) and
             // retrieve it later
+            cached: function() {
+                return window.localStorage.getItem('qids_responses');
+            },
             all: function() {
                 var d = $q.defer();
                 $resource(BACKEND_URL + '/qids_responses')
