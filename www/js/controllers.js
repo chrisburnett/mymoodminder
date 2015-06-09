@@ -36,12 +36,22 @@ angular.module('trump.controllers', ['angularMoment'])
                 });
             });
 
+        // chart data setup
+        $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
+        $scope.series = ['Series A', 'Series B'];
+        $scope.data = [
+            [65, 59, 80, 81, 56, 55, 40],
+            [28, 48, 40, 19, 86, 27, 90]
+        ];
+        $scope.onClick = function (points, evt) {
+            console.log(points, evt);
+        };
+        
         // clear token and go to login screen
         $scope.logout = function() {
             AuthService.logout();
             $state.go('login');
         };
-        
 
         // An alert dialog. After alerting, delete the message
         $scope.showAlert = function(message) {
