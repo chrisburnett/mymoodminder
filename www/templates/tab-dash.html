@@ -13,7 +13,7 @@
         </div>
 
         <!-- QIDS reminder -->
-        <ion-item class="item calm item-icon-left" ng-if="qidsReminder" ng-click="doQidsReminder()">
+        <ion-item class="item calm item-icon-left" ng-if="qidsReminder" ui-sref="tab.qids-new">
             <i class="icon ion-android-alarm-clock"></i>
             <h3>{{qidsReminder | amCalendar}}</h3>
             <p>Please make a new entry by tapping here.</p>
@@ -30,11 +30,6 @@
                 <h4 class="calm">{{message.category}}</h4>
                 <h2>{{message.content}}</h2>
 
-
-                <!--<i class="icon ion-chevron-right icon-accessory"></i>-->
-                <!-- <ion-option-button class="button-assertive" ng-click="remove(timepoint)">-->
-                <!--    Delete -->
-                <!-- </ion-option-button> -->
                 <ion-option-button ng-if="message.preset_id" class="button-royal" ng-click="showAlert(message)">I don't want to receive messages like this</ion-option-button>
             </ion-item>
         </ion-list>

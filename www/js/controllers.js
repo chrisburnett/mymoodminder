@@ -43,7 +43,7 @@ angular.module('trump.controllers', ['angularMoment'])
         };
         
 
-        // An alert dialog. After alerting, delete the message
+        // Alert user that preferences are about to change
         $scope.showAlert = function(message) {
             $ionicPopup.alert({
                 title: 'Preferences updated',
@@ -64,12 +64,6 @@ angular.module('trump.controllers', ['angularMoment'])
             });
         };
 
-
-        $scope.doQidsReminder = function() {
-            // clear the reminder key from localstorage and go to new
-            // reminder view
-            $state.go('tab.qids-new');
-        };
     }])
 
     .controller('QIDSListCtrl', ["$scope", "$state", "QIDSResponses", "AuthService", "$ionicLoading", function($scope, $state, QIDSResponses, AuthService, $ionicLoading) {
