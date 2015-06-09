@@ -12,6 +12,20 @@
             </div>
         </div>
 
+        <div>
+            <p ng-if="!response.score">We couldn't calculate your QIDS score for this entry, because some answers are missing.</p>
+            
+            <div class="row">
+                <div class="col item"><h1>17</h1></div>
+                <div class="col col-75">Your QIDS score was calculated from the answers you gave.</div>
+            </div>
+            <button class="button button-clear button-positive">
+                What is QIDS?
+            </button>
+        </div>
+
+
+
         <div class="list">
 
             <div ng-repeat="(key, value) in response"  class="item item-text-wrap" ng-if="key.charAt(0) == 'q' && value">

@@ -12,24 +12,25 @@
             </div>
         </div>
 
+        <!-- QIDS reminder -->
+        <ion-item class="item calm item-icon-left" ng-if="qidsReminder" ng-click="doQidsReminder()">
+            <i class="icon ion-android-alarm-clock"></i>
+            <h3>{{qidsReminder | amCalendar}}</h3>
+            <p>Please make a new entry by tapping here.</p>
+        </ion-item>
 
         <ion-list class="list" show-delete="false" can-swipe="true">
+            <!--<div class="item item-divider">Messages</div>-->
 
-            <!-- QIDS reminder -->
-            <ion-item class="item calm item-icon-left" ng-if="qidsReminder" ng-click="doQidsReminder()">
-                <i class="icon ion-android-alarm-clock"></i>
-                <h3>{{qidsReminder | amCalendar}}</h3>
-                <p>Please make a new entry by tapping here.</p>
-            </ion-item>
-            <div class="item item-divider">Messages</div>
+
             <ion-item class="item item-remove-animate item-icon-left item-text-wrap" ng-repeat="message in messages" href="#/tab/messages/{{message.id}}">
-                            
+
                 <i class="positive icon ion-chatbubble"></i>
                 <h4 class="positive">{{message.created_at | amCalendar}}</h4>
                 <h4 class="calm">{{message.category}}</h4>
                 <h2>{{message.content}}</h2>
-                
-                
+
+
                 <!--<i class="icon ion-chevron-right icon-accessory"></i>-->
                 <!-- <ion-option-button class="button-assertive" ng-click="remove(timepoint)">-->
                 <!--    Delete -->
@@ -44,4 +45,3 @@
         <button class="button" ng-click="logout()">Logout</button>
     </ion-nav-buttons>
 </ion-view>
-
