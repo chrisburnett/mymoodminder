@@ -393,9 +393,9 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
                 if(!messageModal.isShown()) {
                     $rootScope.messageModal = messageModal;
                     $rootScope.closeModal = function() {
-                        $rootScope.messageModal.hide().then(function() {
-                            $rootScope.messageModal.remove();
-                        });
+                        $rootScope.messageModal.hide();
+                        // we don't presently remove the modal
+                        //$rootScope.messageModal.remove();
                     };
                 };
                 $rootScope.new_message = new_message;
