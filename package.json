@@ -22,5 +22,8 @@
     "protractor": "^2.1.0",
     "shelljs": "^0.3.0"
   },
-  "cordovaPlugins": []
+  "cordovaPlugins": [],
+  "cordovaPlatforms": [
+    "android"
+  ]
 }

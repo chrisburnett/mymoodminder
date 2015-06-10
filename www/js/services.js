@@ -423,14 +423,14 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
                     data.push(parseInt(q.score));
                 });
                 chart.labels = labels;
-                chart.data = [data];
-                chart.options = {
-                    pointDotStrokeWidth: 2
-                };
-                chart.onClick = function (points, evt) {
-                    console.log(points, evt);
-                };
-                return chart;
+                chart.series = [data];
+                // chart.options = {
+                //     pointDotStrokeWidth: 2
+                // };
+                // chart.onClick = function (points, evt) {
+                //     console.log(points, evt);
+                // };
+                return new Chartist.Line('.ct-chart', chart);
             }
         };
     }])

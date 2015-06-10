@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'trump.services' is found in services.js
 // 'trump.controllers' is found in controllers.js
-angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.directives', 'templates', 'chart.js', 'ngCordova'])
+angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.directives', 'templates', 'ngCordova'])
 
 // this is where you configure the URL of the backend UI server
     .constant('BACKEND_URL', 'https://murmuring-depths-9520-staging.herokuapp.com/api')
