@@ -424,13 +424,26 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
                 });
                 chart.labels = labels;
                 chart.series = [data];
-                // chart.options = {
-                //     pointDotStrokeWidth: 2
-                // };
+                var options = {
+                    high: 27,
+                    referenceValue: 27,
+                    low: 0,
+                    onlyInteger: true,
+                    chartPadding: {
+                        top: 10,
+                        right: 15,
+                        bottom: -5,
+                        left: 4
+                    },
+                    lineSmooth: Chartist.Interpolation.simple({
+                        divisor: 2
+                    }),
+                    showArea: true
+                };
                 // chart.onClick = function (points, evt) {
                 //     console.log(points, evt);
                 // };
-                return new Chartist.Line('.ct-chart', chart);
+                return new Chartist.Line('.ct-chart', chart, options);
             }
         };
     }])
