@@ -25,4 +25,5 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
-
+@import "_chartist-settings.scss";
+@import "www/lib/chartist/dist/scss/chartist.scss";
