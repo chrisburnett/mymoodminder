@@ -4,15 +4,23 @@
     <ion-content class="padding">
 
         <!-- progress graph -->
-        <div id="graph">
-            <canvas id="line" class="chart chart-line" data="chart.data"
-                    labels="chart.labels"
+        <div id="graph" class="list">
+              <div class="item item-divider dash-heading">
+                  Symptom tracking
+              </div>
+            <div class="item item-text-wrap">
+                <canvas id="line" class="chart chart-line" data="chart.data"
+                        labels="chart.labels"
                     click="chart.onClick">
-            </canvas>
+                </canvas>
+            </div>
         </div>
 
 
         <!-- QIDS reminder -->
+        <div class="item item-divider dash-heading">
+            Messages and information
+        </div>
         <ion-item class="item calm item-icon-left" ng-if="qidsReminder" ui-sref="tab.qids-new">
             <i class="icon ion-android-alarm-clock"></i>
             <h3>{{qidsReminder | amCalendar}}</h3>
