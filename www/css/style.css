@@ -59,3 +59,10 @@
 .slider-pager .slider-pager-page {
     width: 10px;
 }
+
+.item.item-divider.dash-heading {
+    padding-top: 4px;
+    padding-bottom: 4px;
+    min-height: 30px;
+    font-size: 14px;
+}
