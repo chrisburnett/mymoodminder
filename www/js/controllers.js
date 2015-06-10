@@ -1,6 +1,6 @@
 angular.module('trump.controllers', ['angularMoment'])
 
-    .controller('DashCtrl', ["$scope", "$state", "AuthService", "Messages", "MessagePreferences", "$ionicLoading", "$ionicPopup", "NewMessageModal", function($scope, $state, AuthService, Messages, MessagePreferences, $ionicLoading, $ionicPopup, NewMessageModal) {
+    .controller('DashCtrl', ["$scope", "$state", "AuthService", "Messages", "MessagePreferences", "QIDSResponses", "Chart", "$ionicLoading", "$ionicPopup", "NewMessageModal", function($scope, $state, AuthService, Messages, MessagePreferences, QIDSResponses, Chart, $ionicLoading, $ionicPopup, NewMessageModal) {
 
         // before doing anything else, try to load cached messages;
         // heroku takes ages to respond and we don't want the
@@ -36,12 +36,17 @@ angular.module('trump.controllers', ['angularMoment'])
                 });
             });
 
+        // chart data setup - NEED TO NOT BLOCK ON THIS
+        QIDSResponses.all().then(function(responses) {
+            $scope.chart = Chart.create(responses);
+        });
+        
+        
         // clear token and go to login screen
         $scope.logout = function() {
             AuthService.logout();
             $state.go('login');
         };
-        
 
         // Alert user that preferences are about to change
         $scope.showAlert = function(message) {

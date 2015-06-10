@@ -408,6 +408,33 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
         };
     }])
 
+    .factory('Chart', ["moment", function(moment) {
+        // service to create the chart js structure, keeps it out of
+        // the controller
+        return {
+            create: function(responses) {
+                var chart = {};
+                var labels = [], data = [];
+                // build chart.js structure from responses
+                responses.forEach(function(q) {
+                    labels.push(
+                        moment(q.completed_at).format("MMM D")
+                    );
+                    data.push(parseInt(q.score));
+                });
+                chart.labels = labels;
+                chart.data = [data];
+                chart.options = {
+                    pointDotStrokeWidth: 2
+                };
+                chart.onClick = function (points, evt) {
+                    console.log(points, evt);
+                };
+                return chart;
+            }
+        };
+    }])
+
     .factory('Categories', ["$q", "BACKEND_URL", "$resource", function($q, BACKEND_URL, $resource) {
         return {
             all: function() {

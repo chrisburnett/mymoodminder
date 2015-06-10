@@ -3,14 +3,14 @@
 <ion-view view-title="Home">
     <ion-content class="padding">
 
-        <div class="list">
-            <div class="item item-divider">Progress</div>
-            <div class="item item-body">
-                <div>
-                    Graph placeholder
-                </div>
-            </div>
+        <!-- progress graph -->
+        <div id="graph">
+            <canvas id="line" class="chart chart-line" data="chart.data"
+                    labels="chart.labels"
+                    click="chart.onClick">
+            </canvas>
         </div>
+
 
         <!-- QIDS reminder -->
         <ion-item class="item calm item-icon-left" ng-if="qidsReminder" ui-sref="tab.qids-new">
@@ -21,7 +21,6 @@
 
         <ion-list class="list" show-delete="false" can-swipe="true">
             <!--<div class="item item-divider">Messages</div>-->
-
 
             <ion-item class="item item-remove-animate item-icon-left item-text-wrap" ng-repeat="message in messages" href="#/tab/messages/{{message.id}}">
 
