@@ -216,7 +216,7 @@ angular.module('trump.controllers', ['angularMoment'])
             } else {
                 save(response);
             }
-        }
+        };
 
         // visibility of mutually exclisive questions TODO -
         // implementing a directive would be a neater way of doing
