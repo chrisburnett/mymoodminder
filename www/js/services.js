@@ -422,8 +422,9 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
                     );
                     data.push(parseInt(q.score));
                 });
-                chart.labels = labels;
-                chart.series = [data];
+                // reverse because the items come out in reverse chronilogical order
+                chart.labels = labels.reverse();
+                chart.series = [data.reverse()];
                 var options = {
                     high: 27,
                     referenceValue: 27,
