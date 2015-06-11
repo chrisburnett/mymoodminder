@@ -333,6 +333,24 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
             cached: function() {
                 return JSON.parse(window.localStorage.getItem('messages'));
             },
+            create: function(text) {
+                // create a personal log message
+                var d = $q.defer();
+                $resource(BACKEND_URL + '/messages')
+                    .save({
+                        content: text,
+                        log_entry: true
+                    })
+                    .then(function(data) {
+                        // success
+                        d.resolve();
+                    }, function(reason) {
+                        // can't contact server
+                        console.log(reason);
+                        d.reject();
+                    });
+                return d;
+            },
             all: function() {
                 var d = $q.defer();
                 $resource(BACKEND_URL + '/messages')
@@ -430,11 +448,12 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
                     referenceValue: 27,
                     low: 0,
                     onlyInteger: true,
+                    scaleMinSpace: 20,
                     chartPadding: {
                         top: 10,
-                        right: 15,
-                        bottom: -5,
-                        left: 4
+                        right: 5,
+                        bottom: -10,
+                        left: -15
                     },
                     lineSmooth: Chartist.Interpolation.simple({
                         divisor: 2
