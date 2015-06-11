@@ -74,7 +74,7 @@ angular.module('trump.controllers', ['angularMoment'])
     .controller('QIDSListCtrl', ["$scope", "$state", "QIDSResponses", "AuthService", "$ionicLoading", function($scope, $state, QIDSResponses, AuthService, $ionicLoading) {
 
         // get cached responses (if any)
-        $scope.qids_responses = QIDSResponses.cached();
+        //$scope.qids_responses = QIDSResponses.cached();
 
         // try to sync pending responses, then load responses to scope
         QIDSResponses.sync_pending().finally(function() {
@@ -98,6 +98,8 @@ angular.module('trump.controllers', ['angularMoment'])
             QIDSResponses.delete(response.completed_at).then(function(responses) {
                 $scope.qids_responses.splice($scope.qids_responses.indexOf(response), 1);
                 $ionicLoading.hide();
+            }, function(reason) {
+                console.log(reason);
             });
         };
 
@@ -188,6 +190,14 @@ angular.module('trump.controllers', ['angularMoment'])
         };
 
         $scope.createResponse = function(response) {
+            if(!response) {
+                var emptyPopup = $ionicPopup.alert({
+                    title: 'No information',
+                    template: '<p>You haven\'t answered any of the questions. Please answer at least one.</p>'
+                });
+                emptyPopup.then(function() { return; });
+            }
+
             // if any of the questions are empty
             var missing = false;
             for(var q in QuestionnaireText) {
@@ -215,7 +225,7 @@ angular.module('trump.controllers', ['angularMoment'])
                 });
             } else {
                 save(response);
-            }
+            };
         };
 
         // visibility of mutually exclisive questions TODO -
