@@ -37,9 +37,9 @@ angular.module('trump.controllers', ['angularMoment'])
             });
 
         // chart data setup - NEED TO NOT BLOCK ON THIS
-        QIDSResponses.all().then(function(responses) {
-            $scope.chart = Chart.create(responses);
-        });
+        //QIDSResponses.all().then(function(responses) {
+        $scope.chart = Chart.create(JSON.parse(window.localStorage.getItem('qids_responses')));
+        //});
         
         
         // clear token and go to login screen
