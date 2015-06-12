@@ -12,7 +12,8 @@
                 <div class="ct-chart ct-major-seventh"></div>
             </div>
         </div>
-        <button class="button button-block button-calm" ng-click="new()">New symptom record</button>
+        
+        <button class="button button-block button-calm" ng-click="new()" ng-if="qidsDue">Make a new symptom record</button>
 
         <ion-list class="list list-inset" show-delete="false" can-swipe="true">
             <div class="item item-divider">

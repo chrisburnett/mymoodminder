@@ -79,7 +79,10 @@ angular.module('trump.controllers', ['angularMoment'])
                 .then(function(responses) { $scope.qids_responses = responses; });
         });
 
-
+        // check for notifications/reminders received
+        if(window.localStorage.getItem('qids_reminder'))
+            $scope.qidsDue = true;
+        
         $scope.delete = function(response) {
             // immediately delete the response from the scope to update view
             //for(var r in $scope.qids_responses) {
