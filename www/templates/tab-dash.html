@@ -3,17 +3,27 @@
 <ion-view view-title="Home">
     <ion-content class="padding">
 
+
+
+
         <!-- QIDS reminder -->
+        <div class="list">
+            <ion-item ng-if="qidsReminder" class="item-icon-left item-text-wrap" ui-sref="tab.qids-new">
+                <i class="energized icon ion-android-alarm-clock"></i>
+                <p>It's time to make a new symptom record! Tap here.</p>
+            </ion-item>
+
+            <ion-item ng-if="!qidsReminder" class="item-icon-left item-text-wrap">
+                <i class="positive icon ion-clock"></i>
+                <p>We'll ask you to record your symptoms <span am-time-ago="nextQidsDate"></span>.</p>
+            </ion-item>
+        </div>
+
+
+        <!-- Message list -->
         <div class="item item-divider dash-heading">
             Messages and information
         </div>
-        <ion-item class="item calm item-icon-left item-text-wrap" ng-if="qidsReminder" ui-sref="tab.qids-new">
-            <i class="icon ion-android-alarm-clock"></i>
-            <h3>{{qidsReminder | amCalendar}}</h3>
-            <p>Please make a new entry by tapping here.</p>
-        </ion-item>
-
-        <!-- Message list -->
         <ion-list class="list" show-delete="false" can-swipe="true">
             <ion-item class="item item-remove-animate item-icon-left item-text-wrap" ng-repeat="message in messages" href="#/tab/messages/{{message.id}}">
                 <i class="positive icon ion-chatbubble"></i>

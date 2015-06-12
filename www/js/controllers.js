@@ -1,6 +1,6 @@
 angular.module('trump.controllers', ['angularMoment'])
 
-    .controller('DashCtrl', ["$scope", "$state", "AuthService", "Messages", "MessagePreferences", "QIDSResponses", "$ionicLoading", "$ionicPopup", "NewMessageModal", function($scope, $state, AuthService, Messages, MessagePreferences, QIDSResponses, $ionicLoading, $ionicPopup, NewMessageModal) {
+    .controller('DashCtrl', ["$scope", "$state", "AuthService", "Messages", "MessagePreferences", "User", "QIDSResponses", "$ionicLoading", "$ionicPopup", "NewMessageModal", function($scope, $state, AuthService, Messages, MessagePreferences, User, QIDSResponses, $ionicLoading, $ionicPopup, NewMessageModal) {
 
         // before doing anything else, try to load cached messages;
         // heroku takes ages to respond and we don't want the
@@ -36,7 +36,13 @@ angular.module('trump.controllers', ['angularMoment'])
                 });
             });
 
+        // get the qids deadline
+        User.get().then(function(response) {
+            $scope.nextQidsDate = response.data.next_qids_reminder_time;
+            console.log($scope.nextQidsDate);
+        });
         
+        console.log($scope.nextQidsDate);
         // clear token and go to login screen
         $scope.logout = function() {
             AuthService.logout();
