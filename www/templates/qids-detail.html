@@ -1,7 +1,21 @@
 <ion-nav-view></ion-nav-view>
 
-<ion-view view-title="Entry details">
+<ion-view view-title="{{response.completed_at | amCalendar}}">
     <ion-content class="padding">
+
+
+
+        <div>
+            <p ng-if="!response.score">We couldn't calculate your score for this entry, because some answers are missing.</p>
+
+            <div ng-if="response.score" class="row">
+                <div class="score">{{response.score}}</div>
+                <div class="col col-75">The score for this entry was calculated from the answers you gave.</div>
+                <button class="button button-clear button-positive">
+                    How was this score calculated?
+                </button>
+            </div>
+        </div>
 
         <div class="card" ng-if="response.note">
             <div class="item item-divider">
@@ -12,22 +26,11 @@
             </div>
         </div>
 
-        <div>
-            <p ng-if="!response.score">We couldn't calculate your QIDS score for this entry, because some answers are missing.</p>
-            
-            <div class="row">
-                <div class="col item"><h1>17</h1></div>
-                <div class="col col-75">Your QIDS score was calculated from the answers you gave.</div>
-            </div>
-            <button class="button button-clear button-positive">
-                What is QIDS?
-            </button>
-        </div>
-
-
 
         <div class="list">
-
+            <div class="item item-divider">
+                Answers to questions
+            </div>
             <div ng-repeat="(key, value) in response"  class="item item-text-wrap" ng-if="key.charAt(0) == 'q' && value">
                 <h2>{{text[key].q}}</h2>
                 {{text[key][value]}}

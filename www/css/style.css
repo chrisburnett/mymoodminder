@@ -66,3 +66,17 @@
     min-height: 30px;
     font-size: 14px;
 }
+
+.score {
+    /*background: radial-gradient( 5px -9px, circle, white 8%, red 26px );*/
+    background-color: #387ef5;
+    border: 2px solid white;
+    border-radius: 12px; /* one half of ( (border * 2) + height + padding ) */
+    /*box-shadow: 1px 1px 1px black;*/
+    color: white;
+    font: bold 48px Helvetica, Verdana, Tahoma;
+    height: 76px; 
+    min-width: 80px;
+    padding: 8px 3px 0 3px;
+    text-align: center;
+}
