@@ -1,17 +1,28 @@
 <ion-nav-view></ion-nav-view>
 
 <ion-view view-title="Symptom self-monitoring">
-    <ion-content class="padding">
 
+    <ion-content class="padding">
+        <!-- progress graph -->
+        <div id="graph" class="list">
+            <div class="item item-divider dash-heading">
+                Symptom tracking
+            </div>
+            <div class="item item-text-wrap">
+                <div class="ct-chart ct-major-seventh"></div>
+            </div>
+        </div>
         <button class="button button-block button-calm" ng-click="new()">New symptom record</button>
-        
+
         <ion-list class="list list-inset" show-delete="false" can-swipe="true">
-            
+            <div class="item item-divider">
+                Symptom records
+            </div>
             <ion-item class="item item-remove-animate item-icon-right" ng-repeat="qids_response in qids_responses" type="item-text-wrap" href="#/tab/qids/{{qids_response.completed_at}}">
                 <span class="badge badge-calm">{{qids_response | qidsScore}}</span>
 
                 <h2>{{qids_response.completed_at | amCalendar}}</h2>
-                
+
                 <i class="icon ion-chevron-right icon-accessory"></i>
 
                 <!-- <ion-option-button class="button-assertive" ng-click="remove(timepoint)">-->

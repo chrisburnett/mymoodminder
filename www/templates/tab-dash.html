@@ -3,22 +3,11 @@
 <ion-view view-title="Home">
     <ion-content class="padding">
 
-        <!-- progress graph -->
-        <div id="graph" class="list">
-              <div class="item item-divider dash-heading">
-                  Symptom tracking
-              </div>
-            <div class="item item-text-wrap">
-                <div class="ct-chart ct-major-seventh"></div>
-            </div>
-        </div>
-
-
         <!-- QIDS reminder -->
         <div class="item item-divider dash-heading">
             Messages and information
         </div>
-        <ion-item class="item calm item-icon-left" ng-if="qidsReminder" ui-sref="tab.qids-new">
+        <ion-item class="item calm item-icon-left item-text-wrap" ng-if="qidsReminder" ui-sref="tab.qids-new">
             <i class="icon ion-android-alarm-clock"></i>
             <h3>{{qidsReminder | amCalendar}}</h3>
             <p>Please make a new entry by tapping here.</p>

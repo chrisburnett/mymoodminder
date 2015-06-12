@@ -1,6 +1,6 @@
 angular.module('trump.controllers', ['angularMoment'])
 
-    .controller('DashCtrl', ["$scope", "$state", "AuthService", "Messages", "MessagePreferences", "QIDSResponses", "Chart", "$ionicLoading", "$ionicPopup", "NewMessageModal", function($scope, $state, AuthService, Messages, MessagePreferences, QIDSResponses, Chart, $ionicLoading, $ionicPopup, NewMessageModal) {
+    .controller('DashCtrl', ["$scope", "$state", "AuthService", "Messages", "MessagePreferences", "QIDSResponses", "$ionicLoading", "$ionicPopup", "NewMessageModal", function($scope, $state, AuthService, Messages, MessagePreferences, QIDSResponses, $ionicLoading, $ionicPopup, NewMessageModal) {
 
         // before doing anything else, try to load cached messages;
         // heroku takes ages to respond and we don't want the
@@ -36,11 +36,6 @@ angular.module('trump.controllers', ['angularMoment'])
                 });
             });
 
-        // chart data setup - NEED TO NOT BLOCK ON THIS
-        //QIDSResponses.all().then(function(responses) {
-        $scope.chart = Chart.create(JSON.parse(window.localStorage.getItem('qids_responses')));
-        //});
-        
         
         // clear token and go to login screen
         $scope.logout = function() {
@@ -71,11 +66,13 @@ angular.module('trump.controllers', ['angularMoment'])
 
     }])
 
-    .controller('QIDSListCtrl', ["$scope", "$state", "QIDSResponses", "AuthService", "$ionicLoading", function($scope, $state, QIDSResponses, AuthService, $ionicLoading) {
+    .controller('QIDSListCtrl', ["$scope", "$state", "QIDSResponses", "AuthService", "Chart", "$ionicLoading", function($scope, $state, QIDSResponses, AuthService, Chart, $ionicLoading) {
 
         // get cached responses (if any)
         //$scope.qids_responses = QIDSResponses.cached();
+        $scope.chart = Chart.create(JSON.parse(window.localStorage.getItem('qids_responses')));
 
+        //$scope.qids_responses = JSON.parse(window.localStorage.getItem('qids_responses'));
         // try to sync pending responses, then load responses to scope
         QIDSResponses.sync_pending().finally(function() {
             QIDSResponses.all()
