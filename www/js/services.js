@@ -6,7 +6,7 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
             // between invocations of the app locally (for now) and
             // retrieve it later
             cached: function() {
-                return JSON.parse(window.localStorage.getItem('qids_responses'));
+                return window.localStorage.getItem('qids_responses');
             },
             all: function() {
                 var d = $q.defer();
