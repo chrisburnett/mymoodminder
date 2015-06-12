@@ -7,9 +7,6 @@ angular.module('trump.controllers', ['angularMoment'])
         // interface to sit
         $scope.messages = Messages.cached();
         
-        // check for notifications/reminders received
-        if(window.localStorage.getItem('qids_reminder'))
-            $scope.qidsReminder = true;
         var new_message = window.localStorage.getItem('new_message');
         if(new_message)
             $scope.new_message = new_message;
@@ -37,12 +34,11 @@ angular.module('trump.controllers', ['angularMoment'])
             });
 
         // get the qids deadline
+        $scope.qidsReminder = window.localStorage.getItem('qids_responses');
         User.get().then(function(response) {
-            $scope.nextQidsDate = response.data.next_qids_reminder_time;
-            console.log($scope.nextQidsDate);
+            $scope.nextQidsDate = response.data.next_qids_reminder_time; 
         });
         
-        console.log($scope.nextQidsDate);
         // clear token and go to login screen
         $scope.logout = function() {
             AuthService.logout();
