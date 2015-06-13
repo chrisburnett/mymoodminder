@@ -102,15 +102,15 @@ angular.module('trump.controllers', ['angularMoment'])
             //    if ($scope.qids_responses[r].completed_at == response.completed_at)
             //        $scope.qids_responses.splice(r, 1);
             //}
-            $ionicLoading.show({
-                content: 'Loading Data',
-                animation: 'fade-in',
-                delay: 1000
-            });
+            // $ionicLoading.show({
+            //     content: 'Loading Data',
+            //     animation: 'fade-in',
+            //     delay: 1000
+            // });
 
-            QIDSResponses.delete(response.completed_at).then(function(responses) {
+            QIDSResponses.delete(response).then(function(responses) {
                 $scope.qids_responses.splice($scope.qids_responses.indexOf(response), 1);
-                $ionicLoading.hide();
+                //$ionicLoading.hide();
             }, function(reason) {
                 console.log(reason);
             });

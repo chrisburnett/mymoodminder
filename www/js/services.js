@@ -76,40 +76,40 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
                 });
                 return d.promise;
             },
-            delete: function(completed_at) {
+            delete: function(response) {
                 // we use the completion time to identify the
                 // QIDSresponse on the client, becuase it might not
                 // have been created on the server yet
                 // try to delete. Next time use a sync library for this...
                 var d = $q.defer();
                 var qids_responses = JSON.parse(window.localStorage.getItem('qids_responses'));
-                for (var response in qids_responses) {
-                    if (qids_responses[response].completed_at == completed_at) {
+                
+                qids_responses.forEach(function(item) {
+                    if (item.completed_at == response.completed_at) {
                         // if the matching response doesn't have an id
                         // attribute yet, it hasn't been persisted on
                         // the backend - just delete and be done with
-                        if(!qids_responses[response].id) {
+                        if(!item.id) {
                             qids_responses.splice(qids_responses.indexOf(response), 1);
                             window.localStorage.setItem('qids_responses', JSON.stringify(qids_responses));
                             d.resolve(qids_responses);
                         } else {
-                            var id = qids_responses[response].id;
+                            var id = item.id;
                             $resource(BACKEND_URL + '/qids_responses/:id').delete({id: id}).$promise.then(function() {
                                 // successfully deleted
                                 // clear from hash only if we were able to
                                 // delete on server, otherwise leave it with
                                 // the delete flag set. We'll ignore it and
                                 // try to delete later
-                                qids_responses.splice(qids_responses.indexOf(response), 1);
-                                //window.localStorage.setItem('qids_responses', qids_responses);
                                 d.resolve(qids_responses);
-                            }, function() {
+                            }, function(reason) {
                                 // the response has been persisted but
                                 // we can't update the server yet -
                                 // mark for deletion
-                                qids_responses[response].delete = true;
+                                item.delete = true;
                                 // on failure, update localstorage with response marked for deletion
                                 // it will be hidden
+                                console.log(reason);
                                 d.resolve(qids_responses);
                             }).finally(function() {
                                 // finally update localstorage
@@ -117,10 +117,9 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
                                 new_qids_responses.splice(qids_responses.indexOf(response), 1);
                                 window.localStorage.setItem('qids_responses', JSON.stringify(new_qids_responses));
                             });
-                        }
-                        break;
+                        };
                     };
-                };
+                });
                 return d.promise;
             },
             clear_cache: function() {
