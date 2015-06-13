@@ -113,7 +113,9 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
                                 d.resolve(qids_responses);
                             }).finally(function() {
                                 // finally update localstorage
-                                window.localStorage.setItem('qids_responses', JSON.stringify(qids_responses));
+                                var new_qids_responses = JSON.parse(window.localstorage.getItem('qids_responses'));
+                                new_qids_responses.splice(qids_responses.indexOf(response), 1);
+                                window.localStorage.setItem('qids_responses', JSON.stringify(new_qids_responses));
                             });
                         }
                         break;
