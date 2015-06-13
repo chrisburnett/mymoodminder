@@ -161,7 +161,7 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
                 0: "Most of the time, I awaken no more than 30 minutes before I need to get up.",
                 1: "More than half the time, I awaken more than 30 minutes before I need to get up.",
                 2: "I almost always awaken at least one hour or so before I need to, but I go back to sleep eventually.",
-                3: " I awaken at least one hour before I need to, and can't go back to sleep."
+                3: "I awaken at least one hour before I need to, and can't go back to sleep."
             },
             q4: {
                 q: "Sleeping too much",
@@ -173,9 +173,9 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
             q5: {
                 q: "Feeling sad",
                 0: "I do not feel sad.",
-                1: "More than half the time, I awaken more than 30 minutes before I need to get up.",
-                2: "I almost always awaken at least one hour or so before I need to, but I go back to sleep eventually.",
-                3: "I awaken at least one hour before I need to, and can't go back to sleep."
+                1: "I feel sad less than half the time.",
+                2: "I feel sad more than half the time.",
+                3: "I feel ."
             },
             q6: {
                 q: "Decreased appetite",
