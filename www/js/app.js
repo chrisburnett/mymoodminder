@@ -87,8 +87,6 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
                 case 'message':
                     // this is the notification
                     if(notification.payload.type == 'message') {
-                        //window.localStorage.setItem('new_message', JSON.stringify(notification));
-                        window.alert(JSON.stringify(notification));
                         NewMessageModal.open(notification.payload);
                     }
                     else
