@@ -175,7 +175,7 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
                 0: "I do not feel sad.",
                 1: "I feel sad less than half the time.",
                 2: "I feel sad more than half the time.",
-                3: "I feel ."
+                3: "I feel sad nearly all the time."
             },
             q6: {
                 q: "Decreased appetite",
