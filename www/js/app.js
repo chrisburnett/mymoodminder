@@ -24,6 +24,10 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
 
         $ionicPlatform.ready(function() {
 
+            // ensure a structure for qids responses
+            var qids_responses = window.localStorage.getItem('qids_responses');
+            if(!qids_responses) window.localStorage.setItem('qids_responses', '[]');
+            
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
 
             // for form inputs)

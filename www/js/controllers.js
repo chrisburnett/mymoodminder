@@ -78,9 +78,8 @@ angular.module('trump.controllers', ['angularMoment'])
 
     .controller('QIDSListCtrl', ["$scope", "$state", "QIDSResponses", "AuthService", "Chart", "$ionicLoading", function($scope, $state, QIDSResponses, AuthService, Chart, $ionicLoading) {
 
-        // get cached responses (if any)
-        //$scope.qids_responses = QIDSResponses.cached();
-        $scope.chart = Chart.create(JSON.parse(window.localStorage.getItem('qids_responses')));
+        // get cached responses (if any) for chart
+        $scope.chart = Chart.create(QIDSResponses.cached());
 
         //$scope.qids_responses = JSON.parse(window.localStorage.getItem('qids_responses'));
         // try to sync pending responses, then load responses to scope

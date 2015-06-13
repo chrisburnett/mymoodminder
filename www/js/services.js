@@ -6,7 +6,10 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
             // between invocations of the app locally (for now) and
             // retrieve it later
             cached: function() {
-                return JSON.parse(window.localStorage.getItem('qids_responses'));
+                if(window.localStorage.getItem('qids_responses'))
+                    return JSON.parse(window.localStorage.getItem('qids_responses'));
+                else
+                    return [];
             },
             all: function() {
                 var d = $q.defer();
@@ -38,7 +41,7 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
             save: function(response) {
                 // the list of responses is stored locally in localStorage.
                 // update this before sending to server
-                var qids_responses = JSON.parse(window.localStorage.getItem('qids_responses') || {});
+                var qids_responses = JSON.parse(window.localStorage.getItem('qids_responses') || []);
                 var d = $q.defer();
 
                 // use the date and time of completion as the key
