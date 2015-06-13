@@ -85,7 +85,11 @@ angular.module('trump.controllers', ['angularMoment'])
         // try to sync pending responses, then load responses to scope
         QIDSResponses.sync_pending().finally(function() {
             QIDSResponses.all()
-                .then(function(responses) { $scope.qids_responses = responses; });
+                .then(function(responses) {
+                    $scope.qids_responses = responses;
+                    // update chart with server responses
+                    Chart.update($scope.chart, responses);
+                });
         });
 
         // check for notifications/reminders received

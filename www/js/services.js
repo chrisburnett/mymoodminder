@@ -432,41 +432,47 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
     .factory('Chart', ["moment", function(moment) {
         // service to create the chart js structure, keeps it out of
         // the controller
+        var options = {
+            high: 27,
+            referenceValue: 27,
+            low: 0,
+            onlyInteger: true,
+            scaleMinSpace: 20,
+            chartPadding: {
+                top: 10,
+                right: 5,
+                bottom: -10,
+                left: -15
+            },
+            lineSmooth: Chartist.Interpolation.simple({
+                divisor: 2
+            }),
+            showArea: true
+        };
+        
+        var update = function(responses) {
+            var chart = {};
+            var labels = [], data = [];
+            responses.forEach(function(q) {
+                labels.push(
+                    moment(q.completed_at).format("MMM D")
+                );
+                data.push(parseInt(q.score));
+            });
+            // reverse because the items come out in reverse chronilogical order
+            chart.labels = labels.reverse();
+            chart.series = [data.reverse()];
+            return chart;
+        };
+        
         return {
             create: function(responses) {
-                var chart = {};
-                var labels = [], data = [];
-                // build chart.js structure from responses
-                responses.forEach(function(q) {
-                    labels.push(
-                        moment(q.completed_at).format("MMM D")
-                    );
-                    data.push(parseInt(q.score));
-                });
-                // reverse because the items come out in reverse chronilogical order
-                chart.labels = labels.reverse();
-                chart.series = [data.reverse()];
-                var options = {
-                    high: 27,
-                    referenceValue: 27,
-                    low: 0,
-                    onlyInteger: true,
-                    scaleMinSpace: 20,
-                    chartPadding: {
-                        top: 10,
-                        right: 5,
-                        bottom: -10,
-                        left: -15
-                    },
-                    lineSmooth: Chartist.Interpolation.simple({
-                        divisor: 2
-                    }),
-                    showArea: true
-                };
-                // chart.onClick = function (points, evt) {
-                //     console.log(points, evt);
-                // };
-                return new Chartist.Line('.ct-chart', chart, options);
+                var chartObj = update(responses);
+                return new Chartist.Line('.ct-chart', chartObj, options);
+            },
+            update: function(chart, responses) {
+                var chartObj = update(responses);
+                chart.update(chartObj);
             }
         };
     }])
