@@ -2,11 +2,6 @@ angular.module('trump.controllers', ['angularMoment'])
 
     .controller('DashCtrl', ["$scope", "$state", "AuthService", "Messages", "MessagePreferences", "User", "QIDSResponses", "$ionicLoading", "$ionicPopup", "NewMessageModal", function($scope, $state, AuthService, Messages, MessagePreferences, User, QIDSResponses, $ionicLoading, $ionicPopup, NewMessageModal) {
 
-        // before doing anything else, try to load cached messages;
-        // heroku takes ages to respond and we don't want the
-        // interface to sit
-        $scope.messages = Messages.cached();
-        
         var new_message = window.localStorage.getItem('new_message');
         if(new_message)
             $scope.new_message = new_message;
