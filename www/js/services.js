@@ -443,9 +443,9 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
                 bottom: -10,
                 left: -15
             },
-            lineSmooth: Chartist.Interpolation.simple({
-                divisor: 2
-            }),
+            //lineSmooth: Chartist.Interpolation.simple({
+            //    divisor: 2
+            //}),
             showArea: true
         };
         
