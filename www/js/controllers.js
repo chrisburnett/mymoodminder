@@ -105,6 +105,8 @@ angular.module('trump.controllers', ['angularMoment'])
 
             QIDSResponses.delete(response).then(function(responses) {
                 $scope.qids_responses.splice($scope.qids_responses.indexOf(response), 1);
+                Chart.update($scope.chart, $scope.qids_responses);
+
                 //$ionicLoading.hide();
             }, function(reason) {
                 console.log(reason);
