@@ -9,12 +9,17 @@
             <p ng-if="!response.score">We couldn't calculate your score for this entry, because some answers are missing.</p>
 
             <div ng-if="response.score" class="row">
-                <div class="score">{{response.score}}</div>
-                <div class="col col-75">The score for this entry was calculated from the answers you gave.</div>
-                <button class="button button-clear button-positive">
-                    How was this score calculated?
-                </button>
+                <div class="col col-33">
+                    <div ui-sref="tab.help-qids" class="score"><sup>{{response.score}}</sup><span class="score-denominator">/<sub>27</sub></span></div>
+                </div>
+                <div class="col col-67">
+                    <p>This score is based on the answers you gave in this symptom record.</p>
+                </div>
             </div>
+
+            <button ui-sref="tab.help-qids" class="button button-clear button-positive">
+                How was this score produced?
+            </button>
         </div>
 
         <div class="card" ng-if="response.note">

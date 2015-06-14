@@ -212,7 +212,6 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
                 }
             })
 
-
             .state('tab.messages', {
                 url: '/messages',
                 views: {
@@ -233,7 +232,18 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
                     }
                 }
 
+            })
+
+            .state('tab.help-qids', {
+                url: '/help-qids',
+                views: {
+                    'tab-qids': {
+                        templateUrl: "help-qids.html",
+                        controller: 'QidsHelpCtrl'
+                    }
+                }
             });
+        
 
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/tab/dash');

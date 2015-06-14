@@ -386,4 +386,8 @@ angular.module('trump.controllers', ['angularMoment'])
                 $scope.passcode = $scope.passcode.substring(0, $scope.passcode.length - 1);
             }
         };
+    }])
+
+    .controller('QidsHelpCtrl', ["$scope", function($scope) {
+        
     }]);
