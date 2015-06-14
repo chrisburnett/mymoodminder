@@ -13,7 +13,7 @@ namespace :messaging do
 
         message = Scheduler.generate_message(user, Category.all)
         message.save
-        user.send_notification(message.preset.content, :message)
+        user.send_notification(message.preset.content, :message, message.preset.category)
         # then generate and update the next message time
         user.next_delivery_time = Scheduler.random_time(user.delivery_preference.to_sym) + 1.day
 

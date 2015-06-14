@@ -460,7 +460,7 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
             });
             // reverse because the items come out in reverse chronilogical order
             chart.labels = labels.reverse();
-            chart.series = [data.reverse()];
+            chart.series = [data];
             return chart;
         };
         

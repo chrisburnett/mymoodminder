@@ -47,7 +47,7 @@ class User < ActiveRecord::Base
   end
 
 
-  def send_notification(content, type)
+  def send_notification(content, type, category="")
     # send a notification to this user's registered device
     # only do this id there's a registered device
     if self.receive_notifications then
@@ -55,7 +55,7 @@ class User < ActiveRecord::Base
         n = Rpush::Gcm::Notification.new
         n.app = Rpush::Gcm::App.find_by_name(RPUSH_GCM_APP_NAME)
         n.registration_ids = [self.registration_id]
-        n.data = { message: content, title: TITLE_APP_NAME, type: type }
+        n.data = { message: content, category: category, title: TITLE_APP_NAME, type: type }
         n.save!
         EVENT_LOG.tagged(DateTime.now, 'GCM', self.id) { EVENT_LOG.info('Sent notification to device') }
       end
