@@ -295,9 +295,14 @@ angular.module('trump.controllers', ['angularMoment'])
         };
     }])
 
-    .controller('SettingsCtrl', ["$scope", function($scope) {
+    .controller('SettingsCtrl', ["$scope", "AuthService", "$state", function($scope, AuthService, $state) {
 
-
+        // clear token and go to login screen
+        $scope.logout = function() {
+            AuthService.logout();
+            $state.go('login');
+        };
+        
     }])
 
     .controller('WithdrawCtrl', ["$scope", "$state", "AuthService", "WithdrawService", "$ionicPopup", function($scope, $state, AuthService, WithdrawService, $ionicPopup) {
