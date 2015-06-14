@@ -16,7 +16,7 @@
         <button class="button button-block button-calm" ng-click="new()" ng-if="qidsDue">Make a new symptom record</button>
 
         <ion-list class="list list-inset" show-delete="false" can-swipe="true">
-            <div class="item item-divider">
+            <div class="item item-divider dash-heading">
                 Symptom records
             </div>
             <ion-item class="item item-remove-animate item-icon-right" ng-repeat="qids_response in qids_responses" type="item-text-wrap" href="#/tab/qids/{{qids_response.completed_at}}">
