@@ -13,7 +13,7 @@
                 <p>It's time to make a new symptom record! Tap here.</p>
             </ion-item>
 
-            <ion-item ng-if="!qidsReminder" class="item-icon-left item-text-wrap">
+            <ion-item ng-if="!qidsReminder && nextQidsDate" class="item-icon-left item-text-wrap">
                 <i class="positive icon ion-clock"></i>
                 <p>We'll ask you to record your symptoms <span ng-if="!notificationPending" am-time-ago="nextQidsDate"></span><span ng-if="notificationPending">today</span>.</p>
             </ion-item>
