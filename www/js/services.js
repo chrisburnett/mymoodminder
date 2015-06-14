@@ -69,7 +69,7 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
                     if(!response.pending) {
                         response.pending = true;
                         // store in localstorage
-                        qids_responses.push(response);
+                        qids_responses.unshift(response);
                         window.localStorage.setItem('qids_responses', JSON.stringify(qids_responses));
                     }
                     d.resolve(reason);
@@ -453,13 +453,13 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
             var chart = {};
             var labels = [], data = [];
             responses.forEach(function(q) {
-                labels.push(
+                labels.unshift(
                     moment(q.completed_at).format("MMM D")
                 );
-                data.push(parseInt(q.score));
+                data.unshift(parseInt(q.score));
             });
             // reverse because the items come out in reverse chronilogical order
-            chart.labels = labels.reverse();
+            chart.labels = labels;
             chart.series = [data];
             return chart;
         };
