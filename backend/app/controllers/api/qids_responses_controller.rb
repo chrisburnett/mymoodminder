@@ -22,7 +22,7 @@ class Api::QidsResponsesController < SecureAPIController
 
   def index
     if @current_user then
-      responses = @current_user.qids_responses
+      responses = @current_user.qids_responses.order(completed_at: :desc)
       EVENT_LOG.tagged(DateTime.now, 'QIDS', @current_user.id) { EVENT_LOG.info('Requested list QIDS responses') }
       render json: responses, status: 200
     else
