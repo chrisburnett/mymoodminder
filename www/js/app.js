@@ -212,6 +212,16 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
                 }
             })
 
+            .state('tab.change-password', {
+                url: '/change-password',
+                views: {
+                    'tab-settings': {
+                        templateUrl: 'change-password.html',
+                        controller: 'ChangePasswordCtrl'
+                    }
+                }
+            })
+
             .state('tab.messages', {
                 url: '/messages',
                 views: {

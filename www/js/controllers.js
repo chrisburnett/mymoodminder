@@ -328,6 +328,29 @@ angular.module('trump.controllers', ['angularMoment'])
         };
     }])
 
+    .controller('ChangePasswordCtrl', ["$scope", "$state", "$ionicPopup", "User", function($scope, $state, $ionicPopup, User) {
+        $scope.msgs = {};
+        $scope.changePassword = function(user) {
+            if(user.password_confirm != user.password) {
+                $scope.msgs.passwordMismatch = true;
+            } else {
+                User.update(user).then(function(data) {
+                    $ionicPopup.alert({
+                        title: 'Password changed',
+                        template: '<p>Your password has been updated.</p>'
+                    }).then(function() {
+                        $state.go('tab.settings');
+                    });
+
+                    $scope.success = true;
+                }, function(reason) {
+                    //failure
+                    $scope.msgs.connectionProblem = true;
+                });
+            };
+        };
+    }])
+
     .controller('MessagePrefsCtrl', ["$scope", "MessagePreferences", "User", "AuthService", "$state", function($scope, MessagePreferences, User, AuthService, $state) {
 
         $scope.connectionProblem = false;

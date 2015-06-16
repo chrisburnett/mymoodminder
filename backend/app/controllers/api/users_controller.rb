@@ -30,7 +30,7 @@ class Api::UsersController < SecureAPIController
   end
   
   def safe_params
-    params.require(:user).permit(:receive_notifications, :withdrawn, :delivery_preference)
+    params.require(:user).permit(:receive_notifications, :withdrawn, :delivery_preference, :password)
   end
   
   
