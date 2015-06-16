@@ -351,6 +351,21 @@ angular.module('trump.controllers', ['angularMoment'])
         };
     }])
 
+    .controller('PrivacyCtrl', ["$scope", "User", function($scope, User) {
+        // load user prefs
+        User.get().then(function(response) {
+            $scope.user = response.data;
+        }, function(reason) {
+            $scope.connectionProblem = true;
+        });
+        
+        $scope.save = function(user) {
+            User.update(user).then(function(response) {
+                $scope.user = response.data;
+            });
+        };
+    }])
+
     .controller('MessagePrefsCtrl', ["$scope", "MessagePreferences", "User", "AuthService", "$state", function($scope, MessagePreferences, User, AuthService, $state) {
 
         $scope.connectionProblem = false;
