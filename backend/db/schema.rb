@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150603122937) do
+ActiveRecord::Schema.define(version: 20150616071411) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -160,6 +160,11 @@ ActiveRecord::Schema.define(version: 20150603122937) do
     t.boolean  "local_storage"
     t.boolean  "receive_notifications"
     t.boolean  "withdrawn"
+    t.boolean  "share_qids_answers"
+    t.boolean  "share_qids_scores"
+    t.boolean  "share_qids_notes"
+    t.boolean  "share_messages"
+    t.boolean  "share_message_prefs"
   end
 
   add_foreign_key "messages", "presets"
