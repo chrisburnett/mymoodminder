@@ -371,7 +371,7 @@ angular.module('trump.controllers', ['angularMoment'])
 
         // called when the user updates their delivery preference
         $scope.updateDeliveryPreference = function(user) {
-            User.updateDeliveryPreference(user).then(function(response) {
+            User.update(user).then(function(response) {
                 //success
                 console.log(response);
             }, function(reason) {

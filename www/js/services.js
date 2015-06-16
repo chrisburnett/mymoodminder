@@ -322,8 +322,8 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
             get: function() {
                 return $http.get(BACKEND_URL + '/user');
             },
-            updateDeliveryPreference: function(user) {
-                return $http.put(BACKEND_URL + '/user', user);
+            update: function(user) {
+                return $http.put(BACKEND_URL + '/user', { user: user });
             }
         };
     }])
