@@ -18,7 +18,8 @@
             </div>
 
             <button ui-sref="tab.help-qids" class="button button-clear button-positive">
-                How was this score produced?
+                <span ng-if="response.score">How was this score produced?</span>
+                <span ng-if="!response.score">About symptom scores</span>
             </button>
         </div>
 
