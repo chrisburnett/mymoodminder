@@ -155,8 +155,10 @@ angular.module('trump.controllers', ['angularMoment'])
         $scope.text = QuestionnaireText;
 
         $scope.delete = function(response) {
-            QIDSResponses.delete(response.completed_at).then(function() {
+            QIDSResponses.delete(response).then(function() {
                 $state.go ('tab.qids-list');
+            }, function(reason) {
+                console.log(reason);
             });
         };
     }])
