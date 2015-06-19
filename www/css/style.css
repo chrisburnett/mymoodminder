@@ -1,4 +1,8 @@
 /* Empty. Add your own CSS if you like */
+@font-face {
+    font-family: Dosis;
+    src: url('../fonts/Dosis-Bold.otf');
+}
 
 /* CSS for the pin code unlock */
 .center-vertical {
@@ -83,4 +87,13 @@
 
 .score-denominator {
     font-size: 28px;
+}
+
+.login-banner {
+    background: -webkit-linear-gradient(#03a6ff, #3ad7ff) repeat scroll 0 0 #EEEEEE;
+    color: white;
+    padding: 50px 5px 30px 5px;  
+    text-align: center;
+    font-family: Dosis;
+    font-size: 42px;
 }
