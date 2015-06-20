@@ -97,3 +97,11 @@
     font-family: Dosis;
     font-size: 42px;
 }
+
+.home-banner {
+    color: #19384C;
+    padding: 10px 5px 20px 5px;  
+    text-align: center;
+    font-family: Dosis;
+    font-size: 30px;
+}

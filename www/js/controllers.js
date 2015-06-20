@@ -354,7 +354,7 @@ angular.module('trump.controllers', ['angularMoment'])
         };
     }])
 
-    .controller('PrivacyCtrl', ["$scope", "User", function($scope, User) {
+    .controller('PrivacyCtrl', ["$scope", "$state", "AuthService", "User", function($scope, $state, AuthService, User) {
         // load user prefs
         User.get().then(function(response) {
             $scope.user = response.data;
@@ -367,6 +367,15 @@ angular.module('trump.controllers', ['angularMoment'])
                 $scope.user = response.data;
             });
         };
+
+        
+        // clear token and go to login screen
+        $scope.logout = function() {
+            AuthService.logout();
+            $state.go('login');
+        };
+
+        
     }])
 
     .controller('MessagePrefsCtrl', ["$scope", "MessagePreferences", "User", "AuthService", "$state", function($scope, MessagePreferences, User, AuthService, $state) {
