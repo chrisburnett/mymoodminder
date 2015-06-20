@@ -36,6 +36,14 @@ class User < ActiveRecord::Base
     Category.where(preferable: true).each do |category|
       self.message_preferences.create(category_id: category.id, state: true)
     end
+
+    # privacy settings - all ON to begin with. That means participants
+    # are not making the policy any more relaxed during the trial than
+    # it was at the beginning
+    %w(qids_answers qids_scores qids_notes messages message_prefs).each do |p|
+      self.send("share_#{p}=", true)
+    end
+    
     self.save(validate: false)
   end
 
