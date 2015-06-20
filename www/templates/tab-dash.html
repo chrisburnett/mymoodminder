@@ -13,11 +13,12 @@
         <div class="card" ng-if="messages && messages.length > 0">
             <item ui-sref="tab.messages" class="item item-icon-right item-icon-left item-text-wrap">
                 <i class="positive icon ion-chatbubble"></i>
-                <h4 class="positive">{{messages[0].created_at | amCalendar}}</h4>
+                <h4 class="positive">Latest message - {{messages[0].created_at | amCalendar}}</h4>
                 <h2>{{messages[0].content}}</h2>
                 <button type="button" class="button button-clear button-positive button-small">
-                    Tap to see all messages...
+                    See all messages...
                 </button>
+
                 <i class="icon ion-chevron-right icon-accessory"></i>
             </item>
 
@@ -45,6 +46,12 @@
                 <p>See my symptom records</p>
                 <i class="icon ion-chevron-right icon-accessory"></i>
             </a>
+            
+            <!-- <a ui-sref="tab.messages" class="item item-icon-left item-icon-right"> -->
+            <!--     <i class="icon ion-email"></i> -->
+            <!--     <p>See all received messages</p> -->
+            <!--     <i class="icon ion-chevron-right icon-accessory"></i> -->
+            <!-- </a> -->
 
             <a ui-sref="tab.settings-privacy" class="item item-icon-left item-icon-right">
                 <i class="icon ion-locked"></i>
