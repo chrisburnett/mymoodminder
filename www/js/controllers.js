@@ -18,30 +18,31 @@ angular.module('trump.controllers', ['angularMoment'])
             .then(function() {
                 // we won't do this if any of the sync promises fail
                 MessagePreferences.clear_cache();
-                $ionicLoading.hide();
-            }, function() {
-                $ionicLoading.hide();
             })
-            .finally(function() {
+            .then(function() {
+                // get the qids deadline
+                $scope.qidsReminder = window.localStorage.getItem('qids_reminder');
+                User.get().then(function(response) {
+                    $scope.nextQidsDate = response.data.next_qids_reminder_time;
+                    if(new Date($scope.nextQidsDate) < Date.now()) {
+                        // we set this flag to deal with the case where the
+                        // app knows the deadline is passed but we haven't got
+                        // the notification from the server yet. In this case,
+                        // we tell the view to show the user that a message
+                        // will be send 'today'
+                        $scope.notificationPending = true;
+                    };
+                });
+            })
+            .then(function() {
                 Messages.all().then(function(messages) {
                     $scope.messages = messages;
                 });
+            })
+            .then(function() {
+                $ionicLoading.hide();
             });
 
-        // get the qids deadline
-        $scope.qidsReminder = window.localStorage.getItem('qids_reminder');
-        User.get().then(function(response) {
-            $scope.nextQidsDate = response.data.next_qids_reminder_time;
-            if(new Date($scope.nextQidsDate) < Date.now()) {
-                // we set this flag to deal with the case where the
-                // app knows the deadline is passed but we haven't got
-                // the notification from the server yet. In this case,
-                // we tell the view to show the user that a message
-                // will be send 'today'
-                $scope.notificationPending = true;
-            }
-        });
-        
         // clear token and go to login screen
         $scope.logout = function() {
             AuthService.logout();
