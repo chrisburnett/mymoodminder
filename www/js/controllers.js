@@ -79,7 +79,11 @@ angular.module('trump.controllers', ['angularMoment'])
                 //$scope.messages.splice($scope.messages.indexOf(message));
             });
         };
-
+        // clear token and go to login screen
+        $scope.logout = function() {
+            AuthService.logout();
+            $state.go('login');
+        };
     }])
 
     .controller('QIDSListCtrl', ["$scope", "$state", "QIDSResponses", "AuthService", "Chart", "$ionicLoading", function($scope, $state, QIDSResponses, AuthService, Chart, $ionicLoading) {
@@ -135,7 +139,7 @@ angular.module('trump.controllers', ['angularMoment'])
         };
     }])
 
-    .controller('QIDSDetailCtrl', ["$scope", "$state", "$stateParams", "QIDSResponses", "QuestionnaireText", function($scope, $state, $stateParams, QIDSResponses, QuestionnaireText) {
+    .controller('QIDSDetailCtrl', ["$scope", "$state", "$stateParams", "QIDSResponses", "QuestionnaireText", "AuthService", function($scope, $state, $stateParams, QIDSResponses, QuestionnaireText, AuthService) {
         // here we will want to use the message service and qids
         // service to get a list of events, order them by time and
         // then add that processed list to the scope
@@ -176,7 +180,7 @@ angular.module('trump.controllers', ['angularMoment'])
 
 
 
-    .controller('QIDSResponseCtrl', ["$scope", "$state", "$ionicSlideBoxDelegate", "$ionicPopup", "QIDSResponses", "QuestionnaireText", function($scope, $state, $ionicSlideBoxDelegate, $ionicPopup, QIDSResponses, QuestionnaireText) {
+    .controller('QIDSResponseCtrl', ["$scope", "$state", "$ionicSlideBoxDelegate", "$ionicPopup", "QIDSResponses", "QuestionnaireText", "AuthService", function($scope, $state, $ionicSlideBoxDelegate, $ionicPopup, QIDSResponses, QuestionnaireText, AuthService) {
 
         var save = function(response) {
             // get the rest service object and create a new resource
@@ -271,6 +275,13 @@ angular.module('trump.controllers', ['angularMoment'])
         $scope.toggleQ9 = function() {
             $scope.showQ9 = !$scope.showQ9;
             if($scope.showQ9) $scope.showQ8 = false;
+        };
+
+
+        // clear token and go to login screen
+        $scope.logout = function() {
+            AuthService.logout();
+            $state.go('login');
         };
     }])
 
