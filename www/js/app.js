@@ -222,7 +222,7 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
                 }
             })
         
-            .state('tab.privacy', {
+            .state('tab.settings-privacy', {
                 url: '/privacy',
                 views: {
                     'tab-settings': {
@@ -232,8 +232,8 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
                 }
             })
 
-            .state('tab.messages', {
-                url: '/messages',
+            .state('tab.settings-messages', {
+                url: '/settings-messages',
                 views: {
                     'tab-settings': {
                         templateUrl: 'tab-settings-messages.html',
