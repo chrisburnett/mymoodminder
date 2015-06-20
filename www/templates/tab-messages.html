@@ -1,9 +1,7 @@
 <ion-view view-title="Messages">
     <ion-content class="padding">
         <!-- Message list -->
-        <div class="item item-divider dash-heading">
-            Messages and information
-        </div>
+
         <ion-list class="list" show-delete="false" can-swipe="true">
             <ion-item class="item item-remove-animate item-icon-left item-text-wrap" ng-repeat="message in messages" href="#/tab/messages/{{message.id}}">
                 <i class="positive icon ion-chatbubble"></i>
