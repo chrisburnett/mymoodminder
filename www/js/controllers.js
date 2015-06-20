@@ -12,27 +12,23 @@ angular.module('trump.controllers', ['angularMoment'])
             animation: 'fade-in',
             delay: 1000
         });
+
         // try to sync message preferences then get messages from the
         // server, finally take down curtain
-        MessagePreferences.sync_pending()
-            .then(function() {
-                // we won't do this if any of the sync promises fail
-                MessagePreferences.clear_cache();
-            })
-            .then(function() {
-                // get the qids deadline
-                $scope.qidsReminder = window.localStorage.getItem('qids_reminder');
-                User.get().then(function(response) {
-                    $scope.nextQidsDate = response.data.next_qids_reminder_time;
-                    if(new Date($scope.nextQidsDate) < Date.now()) {
-                        // we set this flag to deal with the case where the
-                        // app knows the deadline is passed but we haven't got
-                        // the notification from the server yet. In this case,
-                        // we tell the view to show the user that a message
-                        // will be send 'today'
-                        $scope.notificationPending = true;
-                    };
-                });
+
+        // get the qids deadline
+        $scope.qidsReminder = window.localStorage.getItem('qids_reminder');
+        User.get()
+            .then(function(response) {
+                $scope.nextQidsDate = response.data.next_qids_reminder_time;
+                if(new Date($scope.nextQidsDate) < Date.now()) {
+                    // we set this flag to deal with the case where the
+                    // app knows the deadline is passed but we haven't got
+                    // the notification from the server yet. In this case,
+                    // we tell the view to show the user that a message
+                    // will be send 'today'
+                    $scope.notificationPending = true;
+                };
             })
             .then(function() {
                 Messages.all().then(function(messages) {
@@ -48,6 +44,20 @@ angular.module('trump.controllers', ['angularMoment'])
             AuthService.logout();
             $state.go('login');
         };
+    }])
+
+    .controller('MessagesCtrl', ["$scope", "$state", "MessagePreferences", "$ionicPopup", "AuthService", "Messages", function($scope, $state, MessagePreferences, $ionicPopup, AuthService, Messages) {
+
+        MessagePreferences.sync_pending()
+            .then(function() {
+                // we won't do this if any of the sync promises fail
+                MessagePreferences.clear_cache();
+            })
+            .then(function() {
+                Messages.all().then(function(messages) {
+                    $scope.messages = messages;
+                });
+            });
 
         // Alert user that preferences are about to change
         $scope.showAlert = function(message) {

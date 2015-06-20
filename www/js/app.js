@@ -169,6 +169,17 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
                 },
                 cache: false
             })
+
+            .state('tab.messages', {
+                url: '/messages',
+                views: {
+                    'tab-dash': {
+                        templateUrl: 'tab-messages.html',
+                        controller: 'MessagesCtrl'
+                    }
+                }
+            })
+        
         // view a list of QIDS entries and details about them
             .state('tab.qids-detail', {
                 url: '/qids/:responseId',
