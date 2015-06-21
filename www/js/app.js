@@ -89,8 +89,11 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
                     if(notification.payload.type == 'message') {
                         NewMessageModal.open(notification.payload);
                     }
-                    else
+                    else {
                         window.localStorage.setItem('qids_reminder', Date.now());
+                        event.preventDefault();
+                        $state.go('tab.qids-new');
+                    }
                     break;
                 case 'error':
                     alert('GCM error = ' + notification.msg);
