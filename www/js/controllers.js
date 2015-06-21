@@ -10,7 +10,7 @@ angular.module('trump.controllers', ['angularMoment'])
         $ionicLoading.show({
             content: 'Loading Data',
             animation: 'fade-in',
-            delay: 1000
+            delay: 100
         });
 
         // try to sync message preferences then get messages from the
