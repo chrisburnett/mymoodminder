@@ -3,20 +3,22 @@
     <ion-content>
 
         <div class="padding">
-            You can control how the information in this app is shared
-            with My Mood Minder researchers.
+            <p>You can control how the information in this app is shared
+                with My Mood Minder researchers.</p>
+            <p>Any items which are checked will be visible to
+                researchers, and items unchecked will be kept private.</p>
         </div>
 
         <div class="padding">
-            <button typ="button" class="button button-clear button-positive" ui-sref="tab.help">How is my information stored and used?</button>
+            <button typ="button" class="button button-clear button-positive" ui-sref="tab.help">How can my information be used?</button>
         </div>
 
         <div class="list">
-            <ion-checkbox ng-model="user.share_qids_answers" ng-change="save(user)">Your answers to questions</ion-checkbox>
-            <ion-checkbox ng-model="user.share_qids_scores" ng-change="save(user)">Your symptom scores</ion-checkbox>
-            <ion-checkbox ng-model="user.share_qids_notes" ng-change="save(user)">Your personal notes</ion-checkbox>
-            <ion-checkbox ng-model="user.share_messages" ng-change="save(user)">The messages you've received</ion-checkbox>
-            <ion-checkbox ng-model="user.share_message_prefs" ng-change="save(user)">Your message preferences</ion-checkbox>
+            <ion-checkbox ng-model="user.share_qids_answers" ng-change="save(user)">Share answers to questions</ion-checkbox>
+            <ion-checkbox ng-model="user.share_qids_scores" ng-change="save(user)">Share symptom scores</ion-checkbox>
+            <ion-checkbox ng-model="user.share_qids_notes" ng-change="save(user)">Share personal notes</ion-checkbox>
+            <ion-checkbox ng-model="user.share_messages" ng-change="save(user)">Share received messages</ion-checkbox>
+            <ion-checkbox ng-model="user.share_message_prefs" ng-change="save(user)">Share message preferences</ion-checkbox>
         </div>
         
         <div ng-if="connectionProblem" class="card card-assertive padding">
