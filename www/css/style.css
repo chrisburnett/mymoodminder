@@ -99,8 +99,8 @@
 }
 
 .home-banner {
-    color: #19384C;
-    padding: 10px 5px 5px 5px;  
+    color: white;
+    /*padding: 10px 5px 5px 5px;  */
     text-align: center;
     font-family: Dosis;
     font-size: 30px;
