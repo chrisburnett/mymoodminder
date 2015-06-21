@@ -63,7 +63,7 @@ angular.module('trump.controllers', ['angularMoment'])
         $scope.showAlert = function(message) {
             $ionicPopup.alert({
                 title: 'Preferences updated',
-                template: '<p>You won\'t receive messages about <emph>being '+ message.category + '</emph> any more.</p><p> You can always change this in the Settings tab.</p>'
+                template: '<p>You won\'t receive messages about <emph>'+ message.category.toLowerCase() + '</emph> any more.</p><p> You can always change this in the Settings tab.</p>'
             }).then(function() {
                 // delete the message from local scope, then create a
                 // message preference on the server for this message's
