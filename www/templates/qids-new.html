@@ -9,19 +9,24 @@
             <ion-slide-box show-pager="true" on-slide-changed="slideChanged(index)" >
 
                 <ion-slide>
+
+                    <div class="row">
+                        <div class="col padding">
+                            <p>This questionnaire is often used by
+                                researchers and clinicians to look at
+                                symptoms of depression a person may be
+                                experiencing. Filling in the questionnaire
+                                weekly allows you to keep an eye on your
+                                wellbeing.</p>
+
+
+                            <p>Please answer these questions, reflecting on the
+                                <strong>the last seven days</strong>.</p>
+                        </div>
+                    </div>
+
                     <div class="padding">
-                        <p>This questionnaire is often used by
-                            researchers and clinicians to look at
-                            symptoms of depression a person may be
-                            experiencing. Filling in the questionnaire
-                            weekly allows you to keep an eye on your
-                            wellbeing.</p>
-
-                        <p>Please answer these questions, reflecting on the
-                            <strong>the last seven days</strong>.</p>
-
-
-                        <button ui-sref="tab.help-qids" type="button" class="button button-clear button-positive">
+                        <button ui-sref="tab.help-qids" type="button" class="button button-clear button-positive button-text-wrap">
                             More about this questionnaire
                         </button>
 
@@ -30,7 +35,15 @@
                         </button>
 
                     </div>
-
+                    <div class="row swipebox">
+                        <div class="col-75 padding swipebox-content">
+                            Swipe your finger left and right to move
+                            between questions
+                        </div>
+                        <div class="col-25 swipebox">
+                            <img src="img/Swipe_Left.png">
+                        </div>
+                    </div>
                 </ion-slide>
 
                 <ion-slide>
@@ -716,7 +729,7 @@
 
 
 
-            <div class="row">
+            <div class="row nopadding">
                 <div class="col" ng-show="showBack">
                     <div class="padding">
                         <button type="button" class="button button-small button-block button-clear icon-left ion-chevron-left button-calm" ng-click="back()">Back</button>
