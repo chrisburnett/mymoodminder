@@ -1,8 +1,17 @@
 <ion-view view-title="Messages">
     <ion-content class="padding">
         <!-- Message list -->
-
+        <div class="row swipebox">
+            <div class="col-75 padding swipebox-content">
+                If you don't like a message, swipe it to block similar
+                messages.
+            </div>
+            <div class="col-25 swipebox">
+                <img src="img/Swipe_Left.png">
+            </div>
+        </div>
         <ion-list class="list" show-delete="false" can-swipe="true">
+            
             <ion-item class="item item-remove-animate item-icon-left item-text-wrap" ng-repeat="message in messages" href="#/tab/messages/{{message.id}}">
                 <i class="positive icon ion-chatbubble"></i>
                 <h4 class="positive">{{message.created_at | amCalendar}}</h4>
