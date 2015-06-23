@@ -469,6 +469,10 @@ angular.module('trump.controllers', ['angularMoment'])
         };
     }])
 
+    .controller('HelpCtrl', ["$scope", function($scope) {
+        
+    }])
+
     .controller('QidsHelpCtrl', ["$scope", function($scope) {
         
     }]);

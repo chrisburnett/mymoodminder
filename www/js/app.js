@@ -267,7 +267,17 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
                 }
 
             })
-
+        
+            .state('tab.help', {
+                url: '/help',
+                views: {
+                    'tab-help': {
+                        templateUrl: "tab-help.html",
+                        controller: 'HelpCtrl'
+                    }
+                }
+            })
+        
             .state('tab.help-qids', {
                 url: '/help-qids',
                 views: {
