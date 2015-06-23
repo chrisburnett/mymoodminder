@@ -101,7 +101,7 @@ angular.module('trump.controllers', ['angularMoment'])
                 .then(function(responses) {
                     $scope.qids_responses = responses;
                     // update chart with server responses
-                    Chart.update($scope.chart, responses);
+                    $scope.chart = Chart.create(responses);
                 });
         });
 
