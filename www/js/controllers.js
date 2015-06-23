@@ -6,12 +6,15 @@ angular.module('trump.controllers', ['angularMoment'])
         // if(new_message)
         //     $scope.new_message = new_message;
 
-        // bring up loading modal
-        $ionicLoading.show({
-            content: 'Loading Data',
-            animation: 'fade-in',
-            delay: 100
-        });
+        // bring up loading modal, as long as the new message modal
+        // isn't up
+        if(!NewMessageModal.shown()) {
+            $ionicLoading.show({
+                content: 'Loading Data',
+                animation: 'fade-in',
+                delay: 100
+            });
+        };
 
         // try to sync message preferences then get messages from the
         // server, finally take down curtain
@@ -35,7 +38,7 @@ angular.module('trump.controllers', ['angularMoment'])
                     $scope.messages = messages;
                 });
             })
-            .then(function() {
+            .finally(function() {
                 $ionicLoading.hide();
             });
 
