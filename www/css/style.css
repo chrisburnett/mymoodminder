@@ -61,7 +61,7 @@
 }
 /* End CSS for pin code unlock */
 .slider-pager .slider-pager-page {
-    width: 10px;
+    width: 6px;
 }
 
 .item.item-divider.dash-heading {
@@ -104,4 +104,14 @@
     text-align: center;
     font-family: Dosis;
     font-size: 30px;
+}
+
+.swipebox {
+    background: #03a6ff;
+    color: white;
+    font-weight: bold;
+}
+
+.nopadding {
+    padding: 0;
 }
