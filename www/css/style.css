@@ -73,20 +73,21 @@
 
 .score {
     /*background: radial-gradient( 5px -9px, circle, white 8%, red 26px );*/
-    background-color: #387ef5;
+    /*background-color: #03a6ff;*/
     /*border: 2px solid white;*/
-    border-radius: 4px; /* one half of ( (border * 2) + height + padding ) */
+    /*border-radius: 4px; /* one half of ( (border * 2) + height + padding ) */
     /*box-shadow: 1px 1px 1px black;*/
-    color: white;
-    font: bold 52px Helvetica, Verdana, Tahoma;
+    color: #444444;
+    font: bold 54px Helvetica, Verdana, Tahoma;
     height: 100%; 
     min-width: 100%;
     padding: 8px 3px 0 3px;
     text-align: center;
+    font-family: Dosis;
 }
 
 .score-denominator {
-    font-size: 28px;
+    font-size: 36px;
 }
 
 .login-banner {
