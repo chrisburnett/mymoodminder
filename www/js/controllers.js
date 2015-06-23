@@ -1,11 +1,8 @@
 angular.module('trump.controllers', ['angularMoment'])
 
-    .controller('DashCtrl', ["$scope", "$state", "AuthService", "Messages", "MessagePreferences", "User", "QIDSResponses", "$ionicLoading", "$ionicPopup", "NewMessageModal", function($scope, $state, AuthService, Messages, MessagePreferences, User, QIDSResponses, $ionicLoading, $ionicPopup, NewMessageModal) {
+    .controller('DashCtrl', ["$scope", "$state", "AuthService", "Messages", "MessagePreferences", "User", "QIDSResponses", "$ionicLoading", "$ionicPopup", "NewMessageModal", "Background", function($scope, $state, AuthService, Messages, MessagePreferences, User, QIDSResponses, $ionicLoading, $ionicPopup, NewMessageModal, Background) {
 
-        // var new_message = window.localStorage.getItem('new_message');
-        // if(new_message)
-        //     $scope.new_message = new_message;
-
+        $scope.bg_url = Background.get();
         // bring up loading modal, as long as the new message modal
         // isn't up
         if(!NewMessageModal.shown()) {
