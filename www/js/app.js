@@ -290,7 +290,19 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
                         controller: 'HelpCtrl'
                     }
                 }
+            })
+
+            .state('tab.contacts', {
+                url: '/contacts',
+                views: {
+                    'tab-help': {
+                        templateUrl: "tab-contacts.html",
+                        controller: 'ContactsCtrl'
+                    }
+                }
             });
+
+        
         
         
         

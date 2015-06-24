@@ -476,6 +476,44 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
         };
     }])
 
+    .factory('Contacts', [function() {
+        // returns the contacts in JSON form
+        return [
+            {
+                name: "NHS24",
+                description: "NHS 24 is a service for health services outside of normal GP hours. When you phone NHS 24 you will usually speak to a trained nurse who will advise you on the best course of action for the situation.",
+                contact_tel: "0845 24 24 24",
+                contact_email: "",
+                contact_web: "",
+                logo_url: ""
+            },
+            {
+                name: "Samaritans",
+                description: "Samaritans are a non-profit organisation aiming to provide confidential non-judgmental support on the phone to anybody who needs it 24 hours a day. They take calls from anybody who wishes to speak about anything, mental health related or not.",
+                contact_tel: "08457 90 90 90",
+                contact_email: "jo@samaritans.org",
+                contact_web: "http://www.samaritans.org/your-community/samaritans-work-scotland",
+                logo_url: ""
+            },
+            {
+                name: "The Scottish Association for Mental Health",
+                description: "SAMH are a charity aiming to promote mental health and wellbeing in Scotland and run a number of campaigns including anti-stigmatisation, suicide prevention and anti-bullying.",
+                contact_tel: "0141 530 1000",
+                contact_email: "enquire@samh.org.uk",
+                contact_web: "http://www.samh.org.uk/",
+                logo_url: ""
+            },
+            {
+                name: "Breathing Space",
+                description: "Breathing Space offers a confidential phone service for anybody experiencing low mood, anxiety or depression. The service is aimed at providing empathy, support, advice and direction and is free to phone from many networks. The service hours are 24 hours at weekends (6pm Friday - 6am Monday) and 6pm to 2am on weekdays (Monday - Thursday).",
+                contact_tel: "0800 83 85 87",
+                contact_email: "",
+                contact_web: "http://breathingspace.scot/",
+                logo_url: ""
+            }
+        ];
+    }])
+
     .factory('Categories', ["$q", "BACKEND_URL", "$resource", function($q, BACKEND_URL, $resource) {
         return {
             all: function() {

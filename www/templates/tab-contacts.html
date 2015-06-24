@@ -1,0 +1,19 @@
+<ion-view view-title="Useful contacts">
+    <ion-content class="padding">
+
+        <!-- list of contacts -->
+        <ion-list class="list">
+            <ion-item class="item item-text-wrap" ng-repeat="contact in contacts">
+                <!-- contact -->
+                <div class="positive contact-name">{{contact.name}}</div>
+                <h2 ng-if="contact.contact_tel"><i class="padding ion-android-call positive"></i><a ng-href="tel:{{contact_tel}}">{{contact.contact_tel}}</a></h2>
+                <h2 ng-if="contact.contact_email"><i class="padding ion-email positive"></i><a ng-href="mailto:{{contact.contact_email}}">Send an email</a></h2>
+                <h2 ng-if="contact.contact_web"><i class="padding ion-earth positive"></i><a ng-href="{{contact.contact_web}}">Go to website</a></h2>
+                <div class="padding">{{contact.description}}</div>
+            </ion-item>
+        </ion-list>
+
+    </ion-content>
+</ion-view>
+
+

@@ -471,6 +471,8 @@ angular.module('trump.controllers', ['angularMoment'])
         if(!gp_contact) {
             User.get().then(function(response) {
                 $scope.gp_contact = response.data.gp_contact_number;
+                // NOTE: not the right place to do this... but
+                window.localStorage.setItem('gp_contact', $scope.gp_contact);
             }, function(reason) {
                 $scope.connectionProblem = true;
             });
@@ -478,6 +480,10 @@ angular.module('trump.controllers', ['angularMoment'])
             $scope.gp_contact = gp_contact;    
         };
         
+    }])
+
+    .controller('ContactsCtrl', ["$scope", "Contacts", function($scope, Contacts) {
+        $scope.contacts = Contacts;
     }])
 
     .controller('QidsHelpCtrl', ["$scope", function($scope) {
