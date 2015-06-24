@@ -3,8 +3,13 @@
     <ion-content>
 
         <div class="padding">
-            <p>You can control how the information in this app is shared
-                with My Mood Minder researchers.</p>
+            <p>You have the option of choosing whether to share your
+                responses with the research team for the study.</p>
+
+            <p><strong>Any data
+                visible to the researchers will remain anonymous and
+                confidential.</strong></p>
+
             <p>Any items which are checked will be visible to
                 researchers, and items unchecked will be kept private.</p>
         </div>
@@ -20,12 +25,12 @@
             <ion-checkbox ng-model="user.share_messages" ng-change="save(user)">Share received messages</ion-checkbox>
             <ion-checkbox ng-model="user.share_message_prefs" ng-change="save(user)">Share message preferences</ion-checkbox>
         </div>
-        
+
         <div ng-if="connectionProblem" class="card card-assertive padding">
             There was a problem connecting to the server, so your
             password was not changed. Please try again later.
         </div>
-        
+
     </ion-content>
 
     <ion-nav-buttons side="secondary">
