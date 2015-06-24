@@ -124,6 +124,10 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
         };
     }])
 
+    .config(["$compileProvider", function($compileProvider) {
+        // allow tel: links
+        $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|tel):/);
+    }])
 
     .config(["$stateProvider", "$urlRouterProvider", function($stateProvider, $urlRouterProvider) {
 
