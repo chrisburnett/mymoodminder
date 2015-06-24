@@ -116,3 +116,13 @@
 .nopadding {
     padding: 0;
 }
+
+.gp-contact {
+    text-align: center;
+    font-size: 34px;
+    padding-top: 5px;
+}
+
+a {
+    text-decoration: none;
+}
