@@ -1,19 +1,21 @@
-<ion-view view-title="About the QIDS score">
-    
+<ion-view view-title="Help and information">
+
     <ion-content class="padding">
-        
+
         <div class="padding">
-            
-            <h4>The QIDS questionnaire</h4>
-            <p>Blahnlkdjsdkjs</p>
-            
-            <h4>What do the scores mean?</h4>
-            <p>Bskldhjjh</p>
-            
-            <h4>How are scores calculated?</h4>
-            <p>jlhkjhfkjhdkjhsdkjhf</p>
+            <div class="card">
+                <div class="item item-text-wrap">
+                    If you are concerned about your symptoms or medication, contact your GP surgery on:
+                    <div class="gp-contact">
+                        <a ng-href="tel:{{gp_contact}}" class="positive gp-contact">
+                            <i class="positive icon ion-android-call"></i>
+                            {{gp_contact}}
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
-       
+
     </ion-content>
 
     <ion-nav-buttons side="secondary">
