@@ -267,6 +267,16 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
                 }
 
             })
+
+            .state('tab.qids-help', {
+                url: '/qids-help',
+                views: {
+                    'tab-qids': {
+                        templateUrl: "qids-help.html",
+                        controller: 'QidsHelpCtrl'
+                    }
+                }
+            })
         
             .state('tab.help', {
                 url: '/help',
@@ -276,17 +286,9 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
                         controller: 'HelpCtrl'
                     }
                 }
-            })
-        
-            .state('tab.help-qids', {
-                url: '/help-qids',
-                views: {
-                    'tab-qids': {
-                        templateUrl: "help-qids.html",
-                        controller: 'QidsHelpCtrl'
-                    }
-                }
             });
+        
+        
         
 
         // if none of the above states are matched, use this as the fallback

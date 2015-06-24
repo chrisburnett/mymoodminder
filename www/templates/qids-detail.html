@@ -10,15 +10,15 @@
 
             <div ng-if="response.score" class="row">
                 <div class="col col-33">
-                    <div ui-sref="tab.help-qids" class="score"><sup>{{response.score}}</sup><span class="score-denominator">/<sub>27</sub></span></div>
+                    <div ui-sref="tab.qids-help" class="score"><sup>{{response.score}}</sup><span class="score-denominator">/<sub>27</sub></span></div>
                 </div>
                 <div class="col col-67">
                     <p>This score is based on the answers you gave in this symptom record.</p>
                 </div>
             </div>
                       
-            <button ui-sref="tab.help-qids" type="button" class="button button-clear button-positive">
-                <span ng-if="response.score">How was this score produced?</span>
+            <button ui-sref="tab.qids-help" type="button" class="button button-clear button-positive">
+                <span ng-if="response.score">What does this score mean?</span>
                 <span ng-if="!response.score">About symptom scores</span>
             </button>
         </div>
