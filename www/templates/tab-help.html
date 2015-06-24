@@ -2,18 +2,40 @@
 
     <ion-content class="padding">
 
-        <div class="padding">
-            <div class="card">
-                <div class="item item-text-wrap">
-                    If you are concerned about your symptoms or medication, contact your GP surgery on:
-                    <div class="gp-contact">
-                        <a ng-href="tel:{{gp_contact}}" class="positive gp-contact">
-                            <i class="positive icon ion-android-call"></i>
-                            {{gp_contact}}
-                        </a>
-                    </div>
+        <div class="card">
+            <div class="item item-text-wrap">
+                Call your GP if you have any
+                concerns about your health.
+                <div class="gp-contact">
+                    <a ng-href="tel:{{gp_contact}}" class="positive gp-contact">
+                        <i class="positive icon ion-android-call"></i>
+                        {{gp_contact}}
+                    </a>
                 </div>
+                If your concerns are an emergency, phone 999.
             </div>
+        </div>
+
+        <div class="padding">
+            Here you can find help on using this application, as well
+            as a list of useful contacts and services.
+        </div>
+
+        <div class="list">
+            <a ui-sref="tab.contacts" class="item item-text-wrap item-icon-right">
+                Getting help and services
+                <i class="icon ion-chevron-right icon-accessory"></i>
+            </a>
+
+            <a class="item item-text-wrap item-icon-right">
+                About my mood minder
+                <i class="icon ion-chevron-right icon-accessory"></i>
+            </a>
+            
+            <a class="item item-text-wrap item-icon-right">
+                Contact us
+                <i class="icon ion-chevron-right icon-accessory"></i>
+            </a>
         </div>
 
     </ion-content>
