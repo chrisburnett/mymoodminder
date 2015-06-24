@@ -466,10 +466,20 @@ angular.module('trump.controllers', ['angularMoment'])
         };
     }])
 
-    .controller('HelpCtrl', ["$scope", function($scope) {
+    .controller('HelpCtrl', ["$scope", "User", function($scope, User) {
+        var gp_contact = window.localStorage.getItem('gp_contact');
+        if(!gp_contact) {
+            User.get().then(function(response) {
+                $scope.gp_contact = response.data.gp_contact_number;
+            }, function(reason) {
+                $scope.connectionProblem = true;
+            });
+        } else {
+            $scope.gp_contact = gp_contact;    
+        };
         
     }])
 
     .controller('QidsHelpCtrl', ["$scope", function($scope) {
-        
+
     }]);
