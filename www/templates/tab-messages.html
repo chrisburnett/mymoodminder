@@ -3,8 +3,7 @@
         <!-- Message list -->
         <div class="row swipebox">
             <div class="col-75 padding swipebox-content">
-                If you don't like a message, swipe it to block similar
-                messages.
+                You can hide messages from categories you don't like by swiping.
             </div>
             <div class="col-25 swipebox">
                 <img src="img/Swipe_Left.png">
@@ -17,7 +16,7 @@
                 <h4 class="positive">{{message.created_at | amCalendar}}</h4>
                 <h4 class="calm">{{message.category}}</h4>
                 <h2>{{message.content}}</h2>
-                <ion-option-button ng-if="message.preset_id" class="button-calm" ng-click="showAlert(message)">I don't want to receive messages like this</ion-option-button>
+                <ion-option-button ng-if="message.preset_id" class="button-calm" ng-click="showAlert(message)">Hide messages from the "{{message.category}}" category</ion-option-button>
             </ion-item>
         </ion-list>
     </ion-content>
