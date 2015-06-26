@@ -1,11 +1,11 @@
 <ion-view view-title="Withdraw from study">
-    
+
     <ion-content class="padding">
         <div ng-if="connectionProblem" class="card-assertive padding">
             There was a problem connecting to the server, so you have
             not been withdrawn at this point. Please try again later.
         </div>
-        
+
         <div class="padding">
             <p>You are free to withdraw from the study at any time.</p>
 
@@ -13,10 +13,19 @@
                 removed from your phone, and you will no longer be able to log in.</p>
 
             <p>We may contact you to dicuss your experience with My Mood
-                Minder.</p>
+                Minder. If you do not want this, untick the checkbox below.
+            </p>
 
             <p>If you are sure you want to withdraw, tap the button below. </p>
         </div>
+
+
+
+        <ion-checkbox class="item-text-wrap">
+            I am happy to be contacted by my mood minder researchers.
+        </ion-checkbox>
+
+
         <button class="button button-block button-assertive" ng-click="withdraw()">
             I want to withdraw from the study
         </button>
