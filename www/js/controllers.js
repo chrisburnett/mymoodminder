@@ -11,6 +11,8 @@ angular.module('trump.controllers', ['angularMoment'])
                 animation: 'fade-in',
                 delay: 100
             });
+        } else {
+            $ionicLoading.hide();
         };
 
         // try to sync message preferences then get messages from the
