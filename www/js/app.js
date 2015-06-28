@@ -15,7 +15,7 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
     .constant('ANDROID_SENDER_ID', '937013579687')
     .constant('BG_COUNT', 8)
 
-    .run(["$ionicPlatform", "$rootScope", "$injector", "$state", "$cordovaPush", "RegistrationService", "ANDROID_SENDER_ID", "NewMessageModal", function($ionicPlatform, $rootScope, $injector, $state, $cordovaPush, RegistrationService, ANDROID_SENDER_ID, NewMessageModal) {
+    .run(["$ionicPlatform", "$rootScope", "$injector", "$state", "$cordovaPush", "RegistrationService", "ANDROID_SENDER_ID", "NewMessageModal", "amMoment", function($ionicPlatform, $rootScope, $injector, $state, $cordovaPush, RegistrationService, ANDROID_SENDER_ID, NewMessageModal, amMoment) {
 
         // configuration for the android platform
         var androidConfig = {
@@ -27,6 +27,9 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
             // ensure a structure for qids responses
             var qids_responses = window.localStorage.getItem('qids_responses');
             if(!qids_responses) window.localStorage.setItem('qids_responses', '[]');
+
+            // set moment locale to UK
+            amMoment.changeLocale('en-GB');
             
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
 
