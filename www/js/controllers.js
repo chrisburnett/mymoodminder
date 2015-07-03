@@ -489,5 +489,10 @@ angular.module('trump.controllers', ['angularMoment'])
     }])
 
     .controller('QidsHelpCtrl', ["$scope", function($scope) {
+        
+    }])
 
+    .controller('PrivacyInfoCtrl', ["$scope", function($scope) {
+        
     }]);
+

@@ -91,8 +91,10 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
                     // this is the notification
                     if(notification.payload.type == 'message') {
                         NewMessageModal.open(notification.payload);
-                    }
-                    else {
+                    } else if(notification.payload.type == 'update') {
+
+
+                    } else {
                         window.localStorage.setItem('qids_reminder', Date.now());
                         event.preventDefault();
                         $state.go('tab.qids-new');
@@ -107,9 +109,9 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
         });
     }])
 
-    // .config(["localStorageServiceProvider", function(localStorageServiceProvider) {
-    //     localStorageServiceProvider.setPrefix('trumpApp');
-    // }])
+// .config(["localStorageServiceProvider", function(localStorageServiceProvider) {
+//     localStorageServiceProvider.setPrefix('trumpApp');
+// }])
 
 
     .factory('AuthToken', ["localStorageService", function(localStorageService) {
@@ -245,6 +247,16 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
                     'tab-settings': {
                         templateUrl: 'tab-settings-privacy.html',
                         controller: 'PrivacyCtrl'
+                    }
+                }
+            })
+
+            .state('tab.privacy-info', {
+                url: '/privacy-info',
+                views: {
+                    'tab-settings': {
+                        templateUrl: 'privacy-info.html',
+                        controller: 'PrivacyInfoCtrl'
                     }
                 }
             })
