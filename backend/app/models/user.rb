@@ -24,7 +24,10 @@ class User < ActiveRecord::Base
     self.delivery_preference ||= 'anytime'
     self.receive_notifications ||= true
     self.next_delivery_time = Time.now.to_datetime
-    self.next_qids_reminder_time = Time.now + 1.week
+    
+    # self.next_qids_reminder_time = Time.now + 1.week
+    # allow users to immediately imput QIDS
+    self.next_qids_reminder_time = Time.now
     # when a user is created, set up default message preferences for
     # each category. Note: this assumes that the categories have been
     # loaded... By default receive everything
@@ -43,6 +46,8 @@ class User < ActiveRecord::Base
     %w(qids_answers qids_scores qids_notes messages message_prefs).each do |p|
       self.send("share_#{p}=", true)
     end
+
+    self.messages.create(content: "Welcome to My Mood Minder.")
     
     self.save(validate: false)
   end
