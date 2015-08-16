@@ -16,3 +16,7 @@ platforms/
 /www/js/templates.js
 /scss/.sass-cache/
 /releases/
+/.tern-port
+/.tern-project
+/backend/.env
+/www/js/.tern-port
