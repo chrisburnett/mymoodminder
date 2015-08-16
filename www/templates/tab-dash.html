@@ -27,23 +27,25 @@
                 What would you like to do?
             </div>
 
-            <a ng-if="qidsReminder" class="item item-icon-left item-text-wrap item-icon-right" ui-sref="tab.qids-new">
-                <i class="energized icon ion-android-alarm-clock"></i>
-                <p>It's time to make a new symptom record! Tap here.</p>
-                <i class="icon ion-chevron-right icon-accessory"></i>
-            </a>
 
             <ion-item ng-if="!qidsReminder && nextQidsDate" class="item-icon-left item-text-wrap">
                 <i class="positive icon ion-clock"></i>
                 <p>You can record your symptoms <span ng-if="!notificationPending" am-time-ago="nextQidsDate"></span><span ng-if="notificationPending">today</span>.</p>
             </ion-item>
 
+            <a ng-if="qidsReminder || notificationPending" class="item item-icon-left item-text-wrap item-icon-right" ui-sref="tab.qids-new">
+                <i class="energized icon ion-android-alarm-clock"></i>
+                <p>Tap here to create a new symptom record.</p>
+                <i class="icon ion-chevron-right icon-accessory"></i>
+            </a>
+
+
             <a ui-sref="tab.qids-list" class="item item-icon-left item-icon-right">
                 <i class="icon ion-stats-bars"></i>
                 <p>See my symptom records</p>
                 <i class="icon ion-chevron-right icon-accessory"></i>
             </a>
-            
+
             <!-- <a ui-sref="tab.messages" class="item item-icon-left item-icon-right"> -->
             <!--     <i class="icon ion-email"></i> -->
             <!--     <p>See all received messages</p> -->
