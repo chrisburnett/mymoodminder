@@ -302,7 +302,14 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
                     }
                 }
             })
-
+			.state('tab.contact-us', {
+				url: '/contact-us',
+				views: {
+					'tab-contact-us': {
+						templateUrl: "tab-contact-us.html"
+					}
+				}
+			})
             .state('tab.contacts', {
                 url: '/contacts',
                 views: {
