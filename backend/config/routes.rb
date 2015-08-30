@@ -26,7 +26,8 @@ Rails.application.routes.draw do
 
     resources :messages
     resources :users
-    
+
+    put 'users' => 'users#update'
     get 'login' => 'session#index'
     get 'logout' => 'session#destroy'
     post 'login' => 'session#create'

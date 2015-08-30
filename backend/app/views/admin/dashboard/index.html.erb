@@ -5,6 +5,13 @@
         <div class="panel panel-default">
             <div class="panel-heading">User management</div>
             <div class="panel-body">
+                <h4>GP contact</h4>
+                <%= form_for :user, url: '/admin/users/', method: 'put', remote: true do |f| %>
+                    <%= f.select :user_id, User.all.collect {|u| [ u.id, u.id ] } %>
+                    <%= f.text_field :gp_contact_number %>
+                    <%= f.submit %>
+                <% end %>
+
                 <h4>Messaging</h4>
                 <%= bootstrap_form_for [@message], url: { controller: 'messages', action: 'create' }, remote: true do |f| %>
 

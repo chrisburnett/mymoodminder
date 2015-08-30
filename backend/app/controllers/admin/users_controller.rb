@@ -3,12 +3,15 @@ class Admin::UsersController < ApplicationController
   def update
     # just some convenience setting here for user attributes
     
-    u = User.find(params[:id])
+    u = User.find(safe_params[:user_id])
     if safe_params[:next_delivery_time] == 'reset' then
       u.next_delivery_time = Time.now
     end
     if safe_params[:next_qids_reminder_time] == 'reset' then
       u.next_qids_reminder_time = Time.now
+    end
+    if safe_params[:gp_contact_number] then
+      u.gp_contact_number = safe_params[:gp_contact_number]
     end
     u.save(validate: false)
     render json: u, status: :ok
@@ -17,7 +20,7 @@ class Admin::UsersController < ApplicationController
   private
 
   def safe_params
-    params.require(:user).permit(:id, :next_delivery_time, :next_qids_reminder_time, :gp_contact_number)
+    params.require(:user).permit(:id, :user_id, :next_delivery_time, :next_qids_reminder_time, :gp_contact_number)
   end
   
 end
