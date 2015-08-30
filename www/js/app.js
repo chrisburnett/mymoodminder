@@ -10,8 +10,8 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
 // this is where you configure the URL of the backend UI server
     .constant('BACKEND_URL', 'https://murmuring-depths-9520-staging.herokuapp.com/api')
     .constant('AUTH_URL', 'https://murmuring-depths-9520-staging.herokuapp.com/api/auth')
-    //.constant('BACKEND_URL', 'http://localhost:3000/api')
-    //.constant('AUTH_URL', 'http://localhost:3000/api/auth')
+//.constant('BACKEND_URL', 'http://localhost:3000/api')
+//.constant('AUTH_URL', 'http://localhost:3000/api/auth')
     .constant('ANDROID_SENDER_ID', '937013579687')
     .constant('BG_COUNT', 8)
 
@@ -30,7 +30,7 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
 
             // set moment locale to UK
             amMoment.changeLocale('en-GB');
-            
+
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
 
             // for form inputs)
@@ -141,7 +141,7 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
             return d.promise;
         };
         authenticated.$inject = ["AuthToken", "$q"];
-        
+
         $stateProvider
 
             .state('pinlock', {
@@ -187,7 +187,7 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
                     }
                 }
             })
-        
+
         // view a list of QIDS entries and details about them
             .state('tab.qids-detail', {
                 url: '/qids/:responseId',
@@ -240,7 +240,7 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
                     }
                 }
             })
-        
+
             .state('tab.settings-privacy', {
                 url: '/privacy',
                 views: {
@@ -292,7 +292,7 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
                     }
                 }
             })
-        
+
             .state('tab.help', {
                 url: '/help',
                 views: {
@@ -302,11 +302,21 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
                     }
                 }
             })
+			.state('tab.infosheet', {
+				url: '/infosheet',
+				views: {
+					'tab-help': {
+						templateUrl: "tab-infosheet.html",
+						controller: 'InfosheetCtrl'
+					}
+				}
+			})
 			.state('tab.contact-us', {
 				url: '/contact-us',
 				views: {
-					'tab-contact-us': {
-						templateUrl: "tab-contact-us.html"
+					'tab-help': {
+						templateUrl: "tab-contact-us.html",
+						controller: 'ContactUsCtrl'
 					}
 				}
 			})
@@ -320,10 +330,10 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
                 }
             });
 
-        
-        
-        
-        
+
+
+
+
 
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/tab/dash');

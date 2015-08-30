@@ -107,7 +107,7 @@ angular.module('trump.controllers', ['angularMoment'])
         // check for notifications/reminders received
         if(window.localStorage.getItem('qids_reminder'))
             $scope.qidsDue = true;
-        
+
         $scope.delete = function(response) {
             // immediately delete the response from the scope to update view
             //for(var r in $scope.qids_responses) {
@@ -330,7 +330,7 @@ angular.module('trump.controllers', ['angularMoment'])
             AuthService.logout();
             $state.go('login');
         };
-        
+
     }])
 
     .controller('WithdrawCtrl', ["$scope", "$state", "AuthService", "WithdrawService", "$ionicPopup", function($scope, $state, AuthService, WithdrawService, $ionicPopup) {
@@ -384,21 +384,21 @@ angular.module('trump.controllers', ['angularMoment'])
         }, function(reason) {
             $scope.connectionProblem = true;
         });
-        
+
         $scope.save = function(user) {
             User.update(user).then(function(response) {
                 $scope.user = response.data;
             });
         };
 
-        
+
         // clear token and go to login screen
         $scope.logout = function() {
             AuthService.logout();
             $state.go('login');
         };
 
-        
+
     }])
 
     .controller('MessagePrefsCtrl', ["$scope", "MessagePreferences", "User", "AuthService", "$state", function($scope, MessagePreferences, User, AuthService, $state) {
@@ -479,20 +479,26 @@ angular.module('trump.controllers', ['angularMoment'])
                 $scope.connectionProblem = true;
             });
         } else {
-            $scope.gp_contact = gp_contact;    
+            $scope.gp_contact = gp_contact;
         };
-        
+
     }])
+
+	.controller('InfosheetCtrl', ["$scope", function($scope) {
+
+	}])
 
     .controller('ContactsCtrl', ["$scope", "Contacts", function($scope, Contacts) {
         $scope.contacts = Contacts;
     }])
 
     .controller('QidsHelpCtrl', ["$scope", function($scope) {
-        
+
+    }])
+    .controller('ContactUsCtrl', ["$scope", function($scope) {
+
     }])
 
     .controller('PrivacyInfoCtrl', ["$scope", function($scope) {
-        
-    }]);
 
+    }]);
