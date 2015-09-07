@@ -130,7 +130,7 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
     }])
 
 
-    .config(["$stateProvider", "$urlRouterProvider", function($stateProvider, $urlRouterProvider) {
+    .config(["$stateProvider", "$urlRouterProvider", function($stateProvider, $urlRouterProvider, Events) {
 
         var authenticated = function(AuthToken, $q) {
             var d = $q.defer();
@@ -162,7 +162,8 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
                 abstract: true,
                 templateUrl: "tabs.html",
                 resolve: {
-                    authenticated: authenticated
+                    authenticated: authenticated,
+					events: 'Events'
                 }
             })
 
@@ -175,6 +176,9 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
                         controller: 'DashCtrl'
                     }
                 },
+				onEnter: function(events) {
+					events.put("Entered: dashboard");
+				},
                 cache: false
             })
 
@@ -185,7 +189,10 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
                         templateUrl: 'tab-messages.html',
                         controller: 'MessagesCtrl'
                     }
-                }
+                },
+				onEnter: function(events) {
+					events.put("Entered: messages");
+				}
             })
 
         // view a list of QIDS entries and details about them
@@ -196,7 +203,10 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
                         templateUrl: 'qids-detail.html',
                         controller: 'QIDSDetailCtrl'
                     }
-                }
+                },
+				onEnter: function(events) {
+					events.put("Entered: symptom record detail");
+				}
             })
             .state('tab.qids-list', {
                 url: '/qids-list',
@@ -206,7 +216,10 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
                         controller: 'QIDSListCtrl'
                     }
                 },
-                cache: false
+                cache: false,
+				onEnter: function(events) {
+					events.put("Entered: symptom record list");
+				}
             })
 
         // customise app settings
@@ -218,7 +231,10 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
                         controller: 'SettingsCtrl'
                     }
                 },
-                cache: false
+                cache: false,
+				onEnter: function(events) {
+					events.put("Entered: settings");
+				}
             })
 
             .state('tab.withdraw', {
@@ -228,7 +244,10 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
                         templateUrl: 'withdraw.html',
                         controller: 'WithdrawCtrl'
                     }
-                }
+                },
+				onEnter: function(events) {
+					events.put("Entered: withdrawl screen");
+				}
             })
 
             .state('tab.change-password', {
@@ -238,7 +257,10 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
                         templateUrl: 'change-password.html',
                         controller: 'ChangePasswordCtrl'
                     }
-                }
+                },
+				onEnter: function(events) {
+					events.put("Entered: change password screen");
+				},
             })
 
             .state('tab.settings-privacy', {
@@ -248,7 +270,10 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
                         templateUrl: 'tab-settings-privacy.html',
                         controller: 'PrivacyCtrl'
                     }
-                }
+                },
+				onEnter: function(events) {
+					events.put("Entered: privacy settings");
+				}
             })
 
             .state('tab.privacy-info', {
@@ -258,7 +283,10 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
                         templateUrl: 'privacy-info.html',
                         controller: 'PrivacyInfoCtrl'
                     }
-                }
+                },
+				onEnter: function(events) {
+					events.put("Entered: privacy information page");
+				}
             })
 
             .state('tab.settings-messages', {
@@ -268,7 +296,10 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
                         templateUrl: 'tab-settings-messages.html',
                         controller: 'MessagePrefsCtrl'
                     }
-                }
+                },
+				onEnter: function(events) {
+					events.put("Entered: message settings");
+				}
             })
 
         // create a new entry
@@ -279,8 +310,10 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
                         templateUrl: "qids-new.html",
                         controller: 'QIDSResponseCtrl'
                     }
-                }
-
+                },
+				onEnter: function(events) {
+					events.put("Entered: new symptom record");
+				}
             })
 
             .state('tab.qids-help', {
@@ -290,7 +323,10 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
                         templateUrl: "qids-help.html",
                         controller: 'QidsHelpCtrl'
                     }
-                }
+                },
+				onEnter: function(events) {
+					events.put("Entered: QIDS help page");
+				}
             })
 
             .state('tab.help', {
@@ -300,7 +336,10 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
                         templateUrl: "tab-help.html",
                         controller: 'HelpCtrl'
                     }
-                }
+                },
+				onEnter: function(events) {
+					events.put("Entered: general help page");
+				}
             })
 			.state('tab.infosheet', {
 				url: '/infosheet',
@@ -309,6 +348,9 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
 						templateUrl: "tab-infosheet.html",
 						controller: 'InfosheetCtrl'
 					}
+				},
+				onEnter: function(events) {
+					events.put("Entered: patient information sheet");
 				}
 			})
 			.state('tab.contact-us', {
@@ -318,6 +360,9 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
 						templateUrl: "tab-contact-us.html",
 						controller: 'ContactUsCtrl'
 					}
+				},
+				onEnter: function(events) {
+					events.put("Entered: contact us page");
 				}
 			})
             .state('tab.contacts', {
@@ -327,13 +372,11 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
                         templateUrl: "tab-contacts.html",
                         controller: 'ContactsCtrl'
                     }
-                }
+                },
+				onEnter: function(events) {
+					events.put("Entered: useful contacts page");
+				}
             });
-
-
-
-
-
 
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/tab/dash');

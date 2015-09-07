@@ -83,7 +83,7 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
                 // try to delete. Next time use a sync library for this...
                 var d = $q.defer();
                 var qids_responses = JSON.parse(window.localStorage.getItem('qids_responses'));
-                
+
                 for(var i = 0; i < qids_responses.length; i++) {
                     if (qids_responses[i].completed_at == response.completed_at) {
                         // if the matching response doesn't have an id
@@ -448,7 +448,7 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
             //}),
             showArea: true
         };
-        
+
         var update = function(responses) {
             var chart = {};
             var labels = [], data = [];
@@ -463,7 +463,7 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
             chart.series = [data];
             return chart;
         };
-        
+
         return {
             create: function(responses) {
                 var chartObj = update(responses);
@@ -527,4 +527,14 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
                 return d.promise;
             }
         };
-    }]);
+    }])
+
+	.factory('Events', ["$q", "BACKEND_URL", "$resource", "moment", function($q, BACKEND_URL, $resource, moment) {
+		return {
+			put: function(event) {
+				var events_cache = JSON.parse(window.localStorage.getItem('events_cache') || "[]");
+				events_cache.push("[" + moment().utc().format() + "] " + event);
+				window.localStorage.setItem('events_cache', JSON.stringify(events_cache));
+			}
+		};
+	}]);
