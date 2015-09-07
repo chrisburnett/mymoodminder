@@ -532,6 +532,15 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
 	.factory('Events', ["$q", "BACKEND_URL", "$resource", "moment", function($q, BACKEND_URL, $resource, moment) {
 		return {
 			put: function(event) {
+				// var d = $q.defer();
+				// $resource(BACKEND_URL + '/events')
+				// 	.save({description: event}).$promise
+				// 	.then(function() {
+				// 		d.resolve();
+				// 	});
+				// storing locally for emergency/backup purposes. Full
+				// data should be sent to server... although we may
+				// miss some things if we lose connectivity
 				var events_cache = JSON.parse(window.localStorage.getItem('events_cache') || "[]");
 				events_cache.push("[" + moment().utc().format() + "] " + event);
 				window.localStorage.setItem('events_cache', JSON.stringify(events_cache));
