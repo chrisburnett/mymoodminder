@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   has_many :qids_responses
   has_many :messages
   has_many :message_preferences
-
+  has_many :events
   has_secure_password
 
   validates :password,
@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
     self.delivery_preference ||= 'anytime'
     self.receive_notifications ||= true
     self.next_delivery_time = Time.now.to_datetime
-    
+
     # self.next_qids_reminder_time = Time.now + 1.week
     # allow users to immediately imput QIDS
     self.next_qids_reminder_time = Time.now
@@ -48,7 +48,7 @@ class User < ActiveRecord::Base
     end
 
     self.messages.create(content: "Welcome to My Mood Minder.")
-    
+
     self.save(validate: false)
   end
 

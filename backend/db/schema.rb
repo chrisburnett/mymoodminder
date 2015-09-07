@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150616071411) do
+ActiveRecord::Schema.define(version: 20150907222148) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,15 @@ ActiveRecord::Schema.define(version: 20150616071411) do
     t.datetime "updated_at", null: false
     t.boolean  "preferable"
   end
+
+  create_table "events", force: :cascade do |t|
+    t.string   "description"
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "events", ["user_id"], name: "index_events_on_user_id", using: :btree
 
   create_table "log_events", force: :cascade do |t|
     t.text     "content"
@@ -144,6 +153,14 @@ ActiveRecord::Schema.define(version: 20150616071411) do
 
   add_index "rpush_notifications", ["delivered", "failed"], name: "index_rpush_notifications_multi", where: "((NOT delivered) AND (NOT failed))", using: :btree
 
+  create_table "updates", force: :cascade do |t|
+    t.string   "version"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "path"
+    t.string   "change_msg"
+  end
+
   create_table "users", force: :cascade do |t|
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
@@ -167,6 +184,7 @@ ActiveRecord::Schema.define(version: 20150616071411) do
     t.boolean  "share_message_prefs"
   end
 
+  add_foreign_key "events", "users"
   add_foreign_key "messages", "presets"
   add_foreign_key "messages", "users"
   add_foreign_key "messages", "users"
