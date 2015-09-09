@@ -191,7 +191,7 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
                     }
                 },
 				onEnter: function(events) {
-					events.put("Entered: messages");
+					events.put("Entered: messages list");
 				}
             })
 
@@ -233,7 +233,7 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
                 },
                 cache: false,
 				onEnter: function(events) {
-					events.put("Entered: settings");
+					events.put("Entered: settings page");
 				}
             })
 
@@ -246,7 +246,7 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
                     }
                 },
 				onEnter: function(events) {
-					events.put("Entered: withdrawl screen");
+					events.put("Entered: withdraw screen");
 				}
             })
 
@@ -272,7 +272,7 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
                     }
                 },
 				onEnter: function(events) {
-					events.put("Entered: privacy settings");
+					events.put("Entered: privacy settings page");
 				}
             })
 
@@ -298,7 +298,7 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
                     }
                 },
 				onEnter: function(events) {
-					events.put("Entered: message settings");
+					events.put("Entered: message settings page");
 				}
             })
 
@@ -312,7 +312,7 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
                     }
                 },
 				onEnter: function(events) {
-					events.put("Entered: new symptom record");
+					events.put("Entered: new symptom record page");
 				}
             })
 
