@@ -14,6 +14,7 @@ class Api::MessagePreferencesController < SecureAPIController
   def index
     if @current_user then
       resp = MessagePreference.joins(:category).where(user_id: @current_user.id, categories: { preferable: true })
+      @current_user.events.create(description: "Accessed: Message preference list")
       render json: resp, status: :ok
     else
       fail NotAuthenticatedError
@@ -39,6 +40,8 @@ class Api::MessagePreferencesController < SecureAPIController
       .find_or_create_by(category_id: category)
     pref.state = state
     pref.save
+    @current_user.events.create(description: "Updated: message preferences (set category #{category_id} to #{state})")
+
   end
 
   def safe_params

@@ -30,18 +30,19 @@ class Api::MessagesController < SecureAPIController
           messages << message
         end
       end
+      @current_user.events.create(description: "Accessed: message list")
       render json: messages, status: 200
     else
       fail NotAuthenticatedError
     end
   end
-  
-  
+
+
   private
 
   def safe_params
     params.require(:message).permit(:user_id, :sender_id, :content)
   end
-  
-      
+
+
 end
