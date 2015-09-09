@@ -7,6 +7,10 @@ class Api::AuthController < ApplicationController
     user = User.find_by_username(params[:username]).try(:authenticate, params[:password])
     if user && !user.withdrawn
       user.events.create(description: "Authentication: successful login")
+      if !user.active then
+        user.active = true
+        user.save(validate: false)
+      end
       render json: { auth_token: user.generate_auth_token }, status: :ok
     else
       render json: { error: 'Invalid username or password' }, status: :unauthorized
