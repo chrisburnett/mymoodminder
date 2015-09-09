@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150907222148) do
+ActiveRecord::Schema.define(version: 20150909234017) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -182,6 +182,7 @@ ActiveRecord::Schema.define(version: 20150907222148) do
     t.boolean  "share_qids_notes"
     t.boolean  "share_messages"
     t.boolean  "share_message_prefs"
+    t.boolean  "active"
   end
 
   add_foreign_key "events", "users"
