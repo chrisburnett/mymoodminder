@@ -15,7 +15,7 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
     .constant('ANDROID_SENDER_ID', '937013579687')
     .constant('BG_COUNT', 8)
 
-    .run(["$ionicPlatform", "$rootScope", "$injector", "$state", "$cordovaPush", "RegistrationService", "ANDROID_SENDER_ID", "NewMessageModal", "amMoment", function($ionicPlatform, $rootScope, $injector, $state, $cordovaPush, RegistrationService, ANDROID_SENDER_ID, NewMessageModal, amMoment) {
+    .run(["$ionicPlatform", "$rootScope", "$injector", "$state", "$cordovaPush", "RegistrationService", "ANDROID_SENDER_ID", "NewMessageModal", "amMoment", function($ionicPlatform, $rootScope, $injector, $state, $cordovaPush, RegistrationService, ANDROID_SENDER_ID, NewMessageModal, amMoment, Events) {
 
         // configuration for the android platform
         var androidConfig = {
@@ -74,6 +74,7 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
             });
             // notification event handler
             $rootScope.$on('$cordovaPush:notificationReceived', function(event, notification) {
+				Events.put("Received notification: " + notification.payload.type);
                 switch(notification.event) {
                 case 'registered':
                     // we now have a device ID, we need to store it to
