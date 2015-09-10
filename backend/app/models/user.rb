@@ -71,9 +71,11 @@ class User < ActiveRecord::Base
         n.data = { message: content, category: category, title: TITLE_APP_NAME, type: type }
         n.save!
         EVENT_LOG.tagged(DateTime.now, 'GCM', self.id) { EVENT_LOG.info('Sent notification to device') }
+        self.events.create(description: "Notification (#{type}) sent to device")
       end
     else
       EVENT_LOG.tagged(DateTime.now, 'GCM', self.id) { EVENT_LOG.info('Notification queued but not sent to device - user preference') }
+      self.events.create(description: "Notification (#{type}) queued but not sent to device (user preference)")
     end
 
   end
