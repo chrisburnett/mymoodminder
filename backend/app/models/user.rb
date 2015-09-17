@@ -1,3 +1,5 @@
+require 'csv'
+
 class User < ActiveRecord::Base
   include Authentication
 
@@ -57,6 +59,44 @@ class User < ActiveRecord::Base
     payload = { user_id: self.id }
     EVENT_LOG.tagged(DateTime.now, 'AUTH', self.id) { EVENT_LOG.info('Generated new auth token') }
     Authentication::AuthToken.encode(payload)
+  end
+
+
+  def events_to_csv(options={})
+    CSV.generate(options) do |csv|
+      csv << Event.column_names
+      Event.where(user_id: id).each do |event|
+        csv << event.attributes.values_at(*Event.column_names)
+      end
+    end
+  end
+
+  def qids_to_csv(options={})
+    CSV.generate(options) do |csv|
+      csv << QidsResponse.column_names
+      QidsResponse.where(user_id: id).each do |response|
+        csv << response.attributes.values_at(*QidsReponse.column_names)
+      end
+    end
+  end
+
+  def messages_to_csv(options={})
+    CSV.generate(options) do |csv|
+      csv << Message.column_names
+      Message.where(user_id: id).each do |message|
+        csv << message.attributes.values_at(*Message.column_names)
+      end
+    end
+  end
+
+
+  def self.to_csv
+    CSV.generate do |csv|
+      csv << column_names
+      all.each do |user|
+        csv << user.attributes.values_at(*column_names)
+      end
+    end
   end
 
 

@@ -16,11 +16,34 @@ class Admin::UsersController < ApplicationController
     u.save(validate: false)
     render json: u, status: :ok
   end
-  
+
+
+  def export
+    send_data User.to_csv
+  end
+
+  def export_events
+    u = User.find(params[:id])
+    send_data u.events_to_csv
+  end
+
+  def export_qids
+    u = User.find(params[:id])
+    send_data u.qids_to_csv
+  end
+
+  def export_messages
+    u = User.find(params[:id])
+    send_data u.messages_to_csv
+  end
+
+
+
+
   private
 
   def safe_params
     params.require(:user).permit(:id, :user_id, :next_delivery_time, :next_qids_reminder_time, :gp_contact_number)
   end
-  
+
 end

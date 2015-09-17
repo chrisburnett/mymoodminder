@@ -28,6 +28,10 @@ Rails.application.routes.draw do
     resources :users
 
     put 'users' => 'users#update'
+    get 'export', to: 'users#export', as: 'export_users'
+    get 'users/:id/export_events', to: 'users#export_events', as: 'export_user_events'
+    get 'users/:id/export_qids', to: 'users#export_qids', as: 'export_user_qids'
+    get 'users/:id/export_messages', to: 'users#export_messages', as: 'export_user_messages'
     get 'login' => 'session#index'
     get 'logout' => 'session#destroy'
     post 'login' => 'session#create'

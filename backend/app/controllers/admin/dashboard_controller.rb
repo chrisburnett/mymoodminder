@@ -6,6 +6,7 @@ class Admin::DashboardController < ApplicationController
   def index
     if session[:user_id] then
       @message = Message.new
+      @users = User.all
       @logevents = `tail -n 25 #{Rails.root}/log/event.log`.split("\n")
     else
       redirect_to admin_login_url

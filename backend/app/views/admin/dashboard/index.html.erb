@@ -1,3 +1,22 @@
+<div class="panel panel-default">
+	<div class="panel-heading">Data export</div>
+	<div class="panel-body">
+		<div class="container">
+			<% @users.each do |u| %>
+				<div class="row" <% if u.username then %>class="bg-success"<% end %>>
+					<div class="col-md-3">User <%= u.username %></div>
+					<div class="col-md-2"><%= link_to 'Events', admin_export_user_events_path(u.id) %></div>
+					<div class="col-md-2"><%= link_to 'Responses', admin_export_user_qids_path(u.id) %></div>
+					<div class="col-md-2"><%= link_to 'Messages', admin_export_user_messages_path(u.id) %></div>
+				</div>
+			<% end %>
+		</div>
+		<div class="container">
+			<%= link_to 'Export user details', admin_export_users_path %>
+		</div>
+	</div>
+</div>
+
 <div class="row">
     <div class="col-md-6">
 
