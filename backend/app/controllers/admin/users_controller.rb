@@ -2,7 +2,7 @@ class Admin::UsersController < ApplicationController
 
   def update
     # just some convenience setting here for user attributes
-    
+
     u = User.find(safe_params[:user_id])
     if safe_params[:next_delivery_time] == 'reset' then
       u.next_delivery_time = Time.now
@@ -19,22 +19,22 @@ class Admin::UsersController < ApplicationController
 
 
   def export
-    send_data User.to_csv
+    send_data User.to_csv, filename: 'user_profiles.csv'
   end
 
   def export_events
     u = User.find(params[:id])
-    send_data u.events_to_csv
+    send_data u.events_to_csv, filename: 'user_#{u.id}_events.csv'
   end
 
   def export_qids
     u = User.find(params[:id])
-    send_data u.qids_to_csv
+    send_data u.qids_to_csv, filename: 'user_#{u.id}_qids.csv'
   end
 
   def export_messages
     u = User.find(params[:id])
-    send_data u.messages_to_csv
+    send_data u.messages_to_csv, filename: 'user_#{u.id}_messages.csv'
   end
 
 
