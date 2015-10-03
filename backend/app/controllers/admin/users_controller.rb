@@ -24,17 +24,17 @@ class Admin::UsersController < ApplicationController
 
   def export_events
     u = User.find(params[:id])
-    send_data u.events_to_csv, filename: 'user_#{u.id}_events.csv'
+    send_data u.events_to_csv, filename: "user_#{u.id}_events.csv"
   end
 
   def export_qids
     u = User.find(params[:id])
-    send_data u.qids_to_csv, filename: 'user_#{u.id}_qids.csv'
+    send_data u.qids_to_csv, filename: "user_#{u.id}_qids.csv"
   end
 
   def export_messages
     u = User.find(params[:id])
-    send_data u.messages_to_csv, filename: 'user_#{u.id}_messages.csv'
+    send_data u.messages_to_csv, filename: "user_#{u.id}_messages.csv"
   end
 
 
