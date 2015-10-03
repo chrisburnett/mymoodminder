@@ -65,7 +65,7 @@ class User < ActiveRecord::Base
   def events_to_csv(options={})
     CSV.generate(options) do |csv|
       csv << Event.column_names
-      Event.where(user_id: id).each do |event|
+      events.each do |event|
         csv << event.attributes.values_at(*Event.column_names)
       end
     end
@@ -74,8 +74,8 @@ class User < ActiveRecord::Base
   def qids_to_csv(options={})
     CSV.generate(options) do |csv|
       csv << QidsResponse.column_names
-      QidsResponse.where(user_id: id).each do |response|
-        csv << response.attributes.values_at(*QidsReponse.column_names)
+      qids_responses.each do |response|
+        csv << response.attributes.values_at(*QidsResponse.column_names)
       end
     end
   end
@@ -83,7 +83,7 @@ class User < ActiveRecord::Base
   def messages_to_csv(options={})
     CSV.generate(options) do |csv|
       csv << Message.column_names
-      Message.where(user_id: id).each do |message|
+      messages.each do |message|
         csv << message.attributes.values_at(*Message.column_names)
       end
     end
