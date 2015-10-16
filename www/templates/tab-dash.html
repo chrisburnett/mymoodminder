@@ -1,6 +1,6 @@
 <ion-nav-view></ion-nav-view>
 
-<ion-view view-title="<span class='home-banner'>my mood minder</span>">
+<ion-view view-title="<span class='home-banner'>My Mood Minder</span>">
     <ion-content class="padding" style="background-image: url('{{bg_url}}'); opacity: 0.8">            
         
         <!-- MOTD -->
@@ -33,7 +33,8 @@
                 <p>You can record your symptoms <span ng-if="!notificationPending" am-time-ago="nextQidsDate"></span><span ng-if="notificationPending">today</span>.</p>
             </ion-item>
 
-            <a class="item item-icon-left item-text-wrap item-icon-right" ui-sref="tab.qids-new">
+            <a ng-if="qidsReminder || notificationPending" class="item item-icon-left item-text-wrap item-icon-right" ui-sref="tab.qids-new">
+			<!--a class="item item-icon-left item-text-wrap item-icon-right" ui-sref="tab.qids-new"-->
                 <i class="energized icon ion-android-alarm-clock"></i>
                 <p>Tap here to create a new symptom record.</p>
                 <i class="icon ion-chevron-right icon-accessory"></i>

@@ -385,7 +385,7 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
 
 
     .factory('AuthInterceptor', ["$q", "$injector", "AUTH_URL", function($q, $injector, AUTH_URL) {
-        return {
+		return {
             // This will be called on every outgoing http request
             request: function(config) {
                 var AuthToken = $injector.get('AuthToken');

@@ -291,7 +291,6 @@ angular.module('trump.controllers', ['angularMoment'])
     .controller('LoginCtrl', ["$scope", "$state", "AuthService", "RegistrationService", "$ionicLoading", function($scope, $state, AuthService, RegistrationService, $ionicLoading) {
         // controller for handling login requests
         $scope.credentials = {};
-
         $scope.login = function(credentials) {
             // reset problem flags
             $scope.wrongCredentials = null;
@@ -308,7 +307,6 @@ angular.module('trump.controllers', ['angularMoment'])
                     $state.go('tab.dash');
                 }, function(reason) {
                     $ionicLoading.hide();
-
                     // display the appropriate error message
                     if(reason == "401") { $scope.wrongCredentials = true; }
                     else { $scope.cannotConnect = true; }
@@ -468,9 +466,10 @@ angular.module('trump.controllers', ['angularMoment'])
         };
     }])
 
-    .controller('HelpCtrl', ["$scope", "User", function($scope, User) {
+	// VB fix start
+    /*.controller('HelpCtrl', ["$scope", "User", function($scope, User) {
         var gp_contact = window.localStorage.getItem('gp_contact');
-        if(!gp_contact) {
+        if(!gp_contact || gp_contact == "null") {
             User.get().then(function(response) {
                 $scope.gp_contact = response.data.gp_contact_number;
                 // NOTE: not the right place to do this... but
@@ -481,9 +480,19 @@ angular.module('trump.controllers', ['angularMoment'])
         } else {
             $scope.gp_contact = gp_contact;
         };
-
+    }])*/
+	.controller('HelpCtrl', ["$scope", "User", function($scope, User) {
+        // retrieve from the server all the time (cause the number might have been updated)
+		User.get().then(function(response) {
+			$scope.gp_contact = response.data.gp_contact_number;
+			// NOTE: not the right place to do this... but
+			window.localStorage.setItem('gp_contact', $scope.gp_contact);
+		}, function(reason) {
+			$scope.connectionProblem = true;
+		});
     }])
-
+	// VB fix end
+	
 	.controller('InfosheetCtrl', ["$scope", function($scope) {
 
 	}])
