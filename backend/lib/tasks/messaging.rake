@@ -22,7 +22,7 @@ namespace :messaging do
       if user.next_qids_reminder_time < Time.now then
 
         user.send_notification("Please create a weekly entry", :reminder)
-        user.next_qids_reminder_time = Scheduler.random_time(user.delivery_preference.to_sym) + 6.days
+        user.next_qids_reminder_time = Scheduler.random_time(user.delivery_preference.to_sym) + 7.days
       end
       user.save(validate: false)
 
