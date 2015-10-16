@@ -104,7 +104,8 @@ class User < ActiveRecord::Base
   def send_notification(content, type, category="")
     # send a notification to this user's registered device
     # only do this id there's a registered device
-    if self.receive_notifications then
+	if self.receive_notifications || "#{type}" == "reminder" then # we never want reminder notifications to be disabled
+    #if self.receive_notifications then
       if self.registration_id then
         n = Rpush::Gcm::Notification.new
         n.app = Rpush::Gcm::App.find_by_name(RPUSH_GCM_APP_NAME)
