@@ -47,21 +47,35 @@
                         <%= f.button type: 'button', class: 'btn btn-default', id: 'reset-delivery' do %>
                             Reset message delivery time
                         <% end %>
-                    </p><p>
+                    </p><!--p>
                         <%= f.button type: 'button', class: 'btn btn-default', id: 'reset-reminder' do %>
                             Reset QIDS reminder time
                         <% end %>
-                    </p><p>
+                    </p--><p>
                         <%= f.button type: 'button', class: 'btn btn-default', id: 'deliver' do %>
                             Test notifications/reminders
                         <% end %>
                     </p>
                 <% end %>
+				
+				<h4>Reset QIDS Timer</h4>
+				<%= form_for :user, url: '/admin/users/', method: 'put', remote: true do |f| %>
+					User: 
+                    <%= f.select :user_id, User.all.collect {|u| [ u.id, u.id ] } %>
+					<!--%= f.hidden_field :next_qids_reminder_time, :value => "reset" %-->
+					<!--%= datetime_select(:user, :next_qids_reminder_time) %-->
+					<br/>
+					Date: <%= f.text_field :next_qids_reminder_time %>
+					<br/>
+					format to follow: 13/10/2015 09:10:00
+					<%= f.submit "Reset QIDS timer" %>
+                <% end %>
+				
             </div>
         </div>
     </div>
 
-    <div class="col-md-6">
+	<div class="col-md-6">
         <!-- log panel -->
         <div class="panel panel-default">
             <div class="panel-heading">Event log</div>
@@ -78,4 +92,5 @@
         </div>
 
     </div>
+	
 </div>
