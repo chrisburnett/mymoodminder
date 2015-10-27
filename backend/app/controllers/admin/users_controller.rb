@@ -9,7 +9,7 @@ class Admin::UsersController < ApplicationController
 	
 	if safe_params[:next_qids_reminder_time] && DateTime.parse(safe_params[:next_qids_reminder_time]) then
 	  #ex: 13/10/2015 09:10:00 +0100'
-	  gmtFlag = " +0100"
+	  gmtFlag = " +0000"
 	  date = DateTime.parse(safe_params[:next_qids_reminder_time] + gmtFlag)
       u.next_qids_reminder_time = date
     end
