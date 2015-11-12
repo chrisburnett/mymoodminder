@@ -482,7 +482,7 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
             {
                 name: "NHS24",
                 description: "NHS 24 is a service for health services outside of normal GP hours. When you phone NHS 24 you will usually speak to a trained nurse who will advise you on the best course of action for the situation.",
-                contact_tel: "0845 111",
+                contact_tel: "111",
                 contact_email: "",
                 contact_web: "",
                 logo_url: ""
