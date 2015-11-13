@@ -12,6 +12,8 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
     .constant('AUTH_URL', 'https://murmuring-depths-9520-staging.herokuapp.com/api/auth')
 //.constant('BACKEND_URL', 'http://localhost:3000/api')
 //.constant('AUTH_URL', 'http://localhost:3000/api/auth')
+//.constant('BACKEND_URL', 'http://10.0.2.2:3000/api') // localhost for emulator
+//.constant('AUTH_URL', 'http://10.0.2.2:3000/api/auth') // localhost for emulator
     .constant('ANDROID_SENDER_ID', '937013579687')
     .constant('BG_COUNT', 8)
 
@@ -75,6 +77,7 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
             // notification event handler
             $rootScope.$on('$cordovaPush:notificationReceived', function(event, notification) {
 				Events.put("Received notification: " + notification.payload.type);
+				//alert('notification.event: ' + notification.event);
                 switch(notification.event) {
                 case 'registered':
                     // we now have a device ID, we need to store it to

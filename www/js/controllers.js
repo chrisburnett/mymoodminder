@@ -18,19 +18,63 @@ angular.module('trump.controllers', ['angularMoment'])
         // try to sync message preferences then get messages from the
         // server, finally take down curtain
 
+		// Check if the qids has been answered in the last week if not we flag notificationPending to true
+        QIDSResponses.sync_pending().finally(function() {
+            QIDSResponses.all()
+                .then(function(responses) {
+                    $scope.qids_responses = responses;
+					if($scope.qids_responses && $scope.qids_responses.length > 0){
+						//alert('$scope.qids_responses:[0] ' + $scope.qids_responses[0].completed_at);
+						
+						var oneWeekAgo = new Date(Date.now() + -7*24*3600*1000); // now minus 7 days
+						//alert('now - 7 days: ' + oneWeekAgo);
+	 
+						// format of qids_responses[0].completed_at : 2015-10-20T10:14:23.168Z
+						var dateStr = $scope.qids_responses[0].completed_at;
+						//var dateStr = "2015-10-13T13:43:23.168Z";
+						var datetime = dateStr.split("T");
+						var date = datetime[0].split("-");
+						var year = date[0];
+						var month = date[1];
+						var day = date[2];
+						var time = datetime[1].split(".")[0].split(":");
+						var hh = time[0];
+						var mm = time[1];
+						var ss = time[2];
+						var lastResponseDate = new Date(year,month-1,day,hh,mm,ss);
+						lastResponseDate.setHours(lastResponseDate.getHours()+1);
+						//alert("lastResponseDate :  "  +  lastResponseDate);
+						
+						if (lastResponseDate.getTime() > oneWeekAgo.getTime()) {
+							//alert("The qids has been answered in the last week");
+						}
+						else{
+							$scope.notificationPending = true;
+							//alert("The qids has NOT been answered in the last week");
+						}
+					}
+					else{
+						// there has not been any responses submitted yet
+						$scope.notificationPending = true;
+					}
+                });
+        });
+		
         // get the qids deadline
         $scope.qidsReminder = window.localStorage.getItem('qids_reminder');
+		//alert('$scope.qidsReminder: ' + $scope.qidsReminder);
         User.get()
             .then(function(response) {
                 $scope.nextQidsDate = response.data.next_qids_reminder_time;
-                if(new Date($scope.nextQidsDate) < Date.now()) {
+				// never happens because after the reminder notif is being sent, in the backend the next_qids_reminder_time is updated automatically to the next qids reminder date
+                /*if(new Date($scope.nextQidsDate) < Date.now()) {
                     // we set this flag to deal with the case where the
                     // app knows the deadline is passed but we haven't got
                     // the notification from the server yet. In this case,
                     // we tell the view to show the user that a message
                     // will be send 'today'
                     $scope.notificationPending = true;
-                };
+                }*/
             })
             .then(function() {
                 Messages.all().then(function(messages) {
