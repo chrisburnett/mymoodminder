@@ -499,6 +499,16 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
         // somehow
         return function(response) {
 			//alert('qidsScore ' + JSON.stringify(response));
+			
+			// check qids completeness // there should be no less than 14 answers
+			if(!response['q1'] || !response['q2'] || !response['q3'] || !response['q4'] 
+				|| !response['q5'] || !response['q10'] || !response['q11'] || !response['q12'] || !response['q13'] || !response['q14']
+				|| !response['q15'] || !response['q16']
+				|| !response['q6_7'] || !response['q8_9']){
+				//alert('QIDS not complete');
+				return undefined;
+			}
+			
             var score = 0;
             var sleepItems = ['q1', 'q2', 'q3', 'q4'];
             var weightItems = ['q6_7', 'q8_9'];
@@ -534,7 +544,7 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
             // add up the rest
             for (var item in remainingItems) {
 				//alert('remaining items : ' + parseInt(response[remainingItems[item]]));
-                score += parseInt(response[remainingItems[item]]);
+				score += parseInt(response[remainingItems[item]]);
             }
             return score;
         };

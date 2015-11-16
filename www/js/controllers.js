@@ -133,7 +133,7 @@ angular.module('trump.controllers', ['angularMoment'])
     }])
 
     .controller('QIDSListCtrl', ["$scope", "$state", "QIDSResponses", "AuthService", "Chart", "$ionicLoading", function($scope, $state, QIDSResponses, AuthService, Chart, $ionicLoading) {
-
+		
         // get cached responses (if any) for chart
         $scope.chart = Chart.create(QIDSResponses.cached());
 
@@ -274,18 +274,33 @@ angular.module('trump.controllers', ['angularMoment'])
 
             // if any of the questions are empty
             var missing = false;
+			
+			var q_sleep_answered_counter = 0;
+			var q_psychomotor_answered_counter = 0;
+			var q_remaining_answered_counter = 0;
+			// checking the 14 questions have been answered
             for(var q in QuestionnaireText) {
-                if(!response[q]) {
-                    // should be a better way to do this...
-                    if(q != "q6" && q != "q7" && q != "q8" && q != "q9") {
-                        missing = true;
-                        break;
-                    }
-                }
-            }
-            // check mutual exclusives
-            if(response["q6_7"] || response["q7_8"])
-                missing = false;
+				if(q == "q1" || q == "q2" || q == "q3" || q == "q4"){
+					if(response[q])
+						q_sleep_answered_counter+=1;
+				}
+				if(q == "q15" || q == "q16"){
+					if(response[q])
+						q_psychomotor_answered_counter+=1;
+				}
+				if(q == "q5" || q == "q10" || q == "q11" || q == "q12" || q == "q13" || q == "q14"){
+					if(response[q])
+						q_remaining_answered_counter+=1;
+				}
+			}
+			if(q_sleep_answered_counter != 4 || q_psychomotor_answered_counter != 2 || q_remaining_answered_counter != 6){
+				missing = true;
+			}
+			
+            // check both weight question are answered
+            if(!response["q6_7"] || !response["q8_9"]){
+                missing = true;
+			}
 
             if(missing) {
                 var confirmPopup = $ionicPopup.confirm({
