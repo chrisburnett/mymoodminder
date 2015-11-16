@@ -67,14 +67,14 @@ angular.module('trump.controllers', ['angularMoment'])
             .then(function(response) {
                 $scope.nextQidsDate = response.data.next_qids_reminder_time;
 				// never happens because after the reminder notif is being sent, in the backend the next_qids_reminder_time is updated automatically to the next qids reminder date
-                /*if(new Date($scope.nextQidsDate) < Date.now()) {
+				if(new Date($scope.nextQidsDate) < Date.now()) {
                     // we set this flag to deal with the case where the
                     // app knows the deadline is passed but we haven't got
                     // the notification from the server yet. In this case,
                     // we tell the view to show the user that a message
                     // will be send 'today'
                     $scope.notificationPending = true;
-                }*/
+                }
             })
             .then(function() {
                 Messages.all().then(function(messages) {
@@ -218,6 +218,7 @@ angular.module('trump.controllers', ['angularMoment'])
         $scope.delete = function(response) {
             QIDSResponses.delete(response).then(function() {
                 $state.go ('tab.qids-list');
+				window.localStorage.removeItem('qids_responses');
             }, function(reason) {
                 console.log(reason);
             });
