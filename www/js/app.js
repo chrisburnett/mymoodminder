@@ -76,7 +76,7 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
             });
             // notification event handler
             $rootScope.$on('$cordovaPush:notificationReceived', function(event, notification) {
-				Events.put("Received notification: " + notification.payload.type);
+				//Events.put("Received notification: " + notification.payload.type);
 				//alert('notification.event: ' + notification.event);
                 switch(notification.event) {
                 case 'registered':
