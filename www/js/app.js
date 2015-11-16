@@ -498,33 +498,42 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
         // just pass back a '!' and allow the view to render it
         // somehow
         return function(response) {
+			//alert('qidsScore ' + JSON.stringify(response));
             var score = 0;
             var sleepItems = ['q1', 'q2', 'q3', 'q4'];
-            var weightItems = ['q6', 'q7', 'q8', 'q9'];
+            var weightItems = ['q6_7', 'q8_9'];
             var remainingItems = ['q5', 'q10', 'q11', 'q12', 'q13', 'q14'];
             var sleepScore = 0;
             var weightScore = 0;
             // pick the highest of the sleep items
             for (var item in sleepItems) {
                 var thisScore = parseInt(response[sleepItems[item]]);
+				//alert('sleep tmp: ' + thisScore);
                 if(thisScore > sleepScore)
                     sleepScore = thisScore;
             }
+			//alert('sleep score: ' + sleepScore);
             // and highest of the weight items
             for (var item in weightItems) {
-                var thisScore = parseInt(response[weightItems[item]]);
+				// need to apply a modulus 4 - see how it is scored in templates\qids-new.html
+                var thisScore = parseInt(response[weightItems[item]]) % 4;
+				//alert('weight tmp: ' + thisScore);
                 if(thisScore > weightScore)
                     weightScore = thisScore;
             }
+			//alert('weightScore : ' + weightScore);
             score += sleepScore;
             score += weightScore;
             // highest of the two psychomotor scores
             var q15 = parseInt(response.q15);
             var q16 = parseInt(response.q16);
+			//alert('q15 tmp: ' + q15);
+			//alert('q16 tmp: ' + q16);
             if(q15 > q16) score += q15;
             else score += q16;
             // add up the rest
             for (var item in remainingItems) {
+				//alert('remaining items : ' + parseInt(response[remainingItems[item]]));
                 score += parseInt(response[remainingItems[item]]);
             }
             return score;

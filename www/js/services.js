@@ -55,8 +55,10 @@ angular.module('trump.services', ['LocalStorageModule', 'ngResource'])
                 }
 
                 // compute the score locally and append it
+				//alert('compute the score locally and append it');
                 response.score = qidsScoreFilter(response);
-
+				//alert('score computed locally: ' + response.score);
+				
                 // if we are using the remote storage scheme, send to
                 // server (for now, just do this anyway) if we are
                 // unable to connect, mark the QIDSresponse as pending
