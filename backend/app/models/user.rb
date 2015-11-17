@@ -100,7 +100,6 @@ class User < ActiveRecord::Base
     end
   end
 
-
   def send_notification(content, type, category="")
     # send a notification to this user's registered device
     # only do this id there's a registered device
@@ -114,6 +113,7 @@ class User < ActiveRecord::Base
         n.save!
         EVENT_LOG.tagged(DateTime.now, 'GCM', self.id) { EVENT_LOG.info('Sent notification to device') }
         self.events.create(description: "Notification (#{type}) sent to device")
+        self.events.create(description: "Notification, id: (#{self.id}), reg id: (#{self.registration_id})")
       end
     else
       EVENT_LOG.tagged(DateTime.now, 'GCM', self.id) { EVENT_LOG.info('Notification queued but not sent to device - user preference') }
