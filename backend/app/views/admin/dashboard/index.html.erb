@@ -56,6 +56,11 @@
                             Test notifications/reminders
                         <% end %>
                     </p>
+					<p>
+						<%= f.button type: 'button', class: 'btn btn-default', id: 'reset_registration_ids' do %>
+							Reset registration IDs
+						<% end %>
+					</p>
                 <% end %>
 				
 				<h4>Reset QIDS Timer</h4>
@@ -67,8 +72,19 @@
 					<br/>
 					Date: <%= f.text_field :next_qids_reminder_time %>
 					<br/>
-					format to follow: 13/10/2015 09:10:00
+					format to follow: 17/11/2015 10:10:00
 					<%= f.submit "Reset QIDS timer" %>
+                <% end %>
+				
+				<h4>IN TEST - Reset message Timer</h4>
+				<%= form_for :user, url: '/admin/users/', method: 'put', remote: true do |f| %>
+					User: 
+                    <%= f.select :user_id, User.all.collect {|u| [ u.id, u.id ] } %>
+					<br/>
+					Date: <%= f.text_field :next_delivery_time %>
+					<br/>
+					format to follow: 17/11/2015 10:10:00
+					<%= f.submit "Reset message timer" %>
                 <% end %>
 				
             </div>

@@ -31,5 +31,23 @@ class Admin::DashboardController < ApplicationController
     end
   end
 
+  # run the rake task to push notifications
+  # Does not work
+  def reset_registration_ids
+    if session[:user_id] then
+      user = User.find(11)
+      user.update_attribute(:registration_id, "XX")
+      #User.all.each do |user|
+      #  if user.id == 11 then
+      #    user.update_attribute(:registration_id, "XX")
+      #    #user.registration_id = ""
+      #    #user.save(validate: false)
+      #  end
+      #end
+      render nothing: true, status: :ok
+   else
+      redirect_to admin_login_url
+   end
+  end
 
 end

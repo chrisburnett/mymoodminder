@@ -18,6 +18,13 @@ class Admin::UsersController < ApplicationController
 	#  #u.next_qids_reminder_time = DateTime.tomorrow
     #end
 	
+	if safe_params[:next_delivery_time] && DateTime.parse(safe_params[:next_delivery_time]) then
+	  #ex: 13/10/2015 09:10:00 +0100'
+	  gmtFlag = " +0000"
+	  date = DateTime.parse(safe_params[:next_delivery_time] + gmtFlag)
+      u.next_delivery_time = date
+    end
+	
     if safe_params[:gp_contact_number] then
       u.gp_contact_number = safe_params[:gp_contact_number]
     end
