@@ -489,11 +489,18 @@ angular.module('trump.controllers', ['angularMoment'])
         };
 
         $scope.save = function(preference) {
-            MessagePreferences.save(preference).catch(function(data) {
+			MessagePreferences.save(preference).then(function(response) {
+                //success
+                console.log(response);
+            }, function(reason) {
+                //failure
+                console.log(reason);
+            });
+            /*MessagePreferences.save(preference).catch(function(data) {
                 // if there's no communication with server, or a
                 // problem, then show the problem display
                 $scope.connectionProblem = true;
-            });
+            });*/
         };
 
         // clear token and go to login screen
