@@ -5,11 +5,20 @@
         <ion-list class="list">
             <ion-item class="item item-text-wrap" ng-repeat="contact in contacts">
                 <!-- contact -->
-                <div class="positive contact-name">{{contact.name}}</div>
-                <h2 ng-if="contact.contact_tel"><i class="padding ion-android-call positive"></i><a ng-href="tel:{{contact_tel}}">{{contact.contact_tel}}</a></h2>
-                <h2 ng-if="contact.contact_email"><i class="padding ion-email positive"></i><a ng-href="mailto:{{contact.contact_email}}">Send an email</a></h2>
-                <h2 ng-if="contact.contact_web"><i class="padding ion-earth positive"></i><a ng-href="{{contact.contact_web}}">Go to website</a></h2>
-                <div class="padding">{{contact.description}}</div>
+                <div class="positive contact-name">{{contact.name}}</div>				
+				
+				<!--h2 ng-if="contact.contact_tel"><i class="padding ion-android-call positive"></i><a ng-href="tel:{{contact_tel}}">{{contact.contact_tel}}</a></h2-->
+				<h2 ng-if="contact.contact_tel"><i class="padding ion-android-call positive"></i><a ng-href="#" ng-click="openDialer(contact.contact_tel)">{{contact.contact_tel}}</a></h2>
+                
+				<!--h2 ng-if="contact.contact_email"><i class="padding ion-email positive"></i><a ng-href="mailto:{{contact.contact_email}}">Send an email</a></h2-->
+				<h2 ng-if="contact.contact_email"><i class="padding ion-email positive"></i><a ng-href="#" ng-click="sendEmail(contact.contact_email)">Send an email</a></h2>
+				<!-- OR FOLLOWING alternative solution (works too)--><!--h2 ng-if="contact.contact_email"><i class="padding ion-email positive"></i><a ng-href="mailto:{{contact.contact_email}}">Send an email</a></h2-->
+				
+                <!--h2 ng-if="contact.contact_web"><i class="padding ion-earth positive"></i><a ng-href="{{contact.contact_web}}">Go to website</a></h2-->
+                <!--h2 ng-if="contact.contact_web"><i class="padding ion-earth positive"></i><a ng-href="http://apache.org" target="_system">Go to website</a></h2--> <!--failed attempt to open the link in the device's browser-->
+				<h2 ng-if="contact.contact_web"><i class="padding ion-earth positive"></i><a ng-href="#" ng-click="openBrowser(contact.contact_web)">Go to website</a></h2>
+				
+				<div class="padding">{{contact.description}}</div>
             </ion-item>
         </ion-list>
 

@@ -565,7 +565,20 @@ angular.module('trump.controllers', ['angularMoment'])
 	}])
 
     .controller('ContactsCtrl', ["$scope", "Contacts", function($scope, Contacts) {
-        $scope.contacts = Contacts;
+		$scope.contacts = Contacts;
+		$scope.openDialer = function(tel) {
+			// open system phone dialer
+			document.location.href = "tel:".concat(tel);
+        };
+		$scope.sendEmail = function(email) {
+			// open external mail app to send email
+			window.location.href = "mailto:".concat(email);
+        };
+		$scope.openBrowser = function(url) {
+			// to open a link in the device's browser
+			// requires inappbrowser plugin (install with: ionic plugin add cordova-plugin-inappbrowser)
+			cordova.InAppBrowser.open(url, '_system');
+        };
     }])
 
     .controller('QidsHelpCtrl', ["$scope", function($scope) {
