@@ -394,19 +394,22 @@ angular.module('trump.controllers', ['angularMoment'])
     .controller('WithdrawCtrl', ["$scope", "$state", "AuthService", "WithdrawService", "$ionicPopup", function($scope, $state, AuthService, WithdrawService, $ionicPopup) {
         $scope.withdraw = function() {
             var confirmPopup = $ionicPopup.confirm({
-                title: 'Are you sure?',
-                template: '<p>Your MyMoodMinder information will be deleted, and you will no longer be able to log in.<p>'
+                title: '',
+                template: '<p>Are you sure you wish to withdraw from the study?<p>'
             });
             confirmPopup.then(function(answer) {
                 if(answer) {
-                    WithdrawService.withdraw().then(
+				    url = "sms:".concat("07756148152").concat("?body=WITHDRAW");
+					//alert(url);
+					document.location.href = url;
+                    /*WithdrawService.withdraw().then(
                         function() {
-                            AuthService.logout();
-                            $state.go('login');
+                            //AuthService.logout();
+                            //$state.go('login');
                         }, function() {
                             $scope.connectionProblem = true;
                         }
-                    );
+                    );*/
                 };
             });
         };
@@ -557,6 +560,12 @@ angular.module('trump.controllers', ['angularMoment'])
 		}, function(reason) {
 			$scope.connectionProblem = true;
 		});
+		
+		// call functionnality
+		$scope.openDialer = function(tel) {
+			// open system phone dialer
+			document.location.href = "tel:".concat(tel);
+        };
     }])
 	// VB fix end
 	
