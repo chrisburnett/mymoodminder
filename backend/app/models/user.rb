@@ -27,9 +27,9 @@ class User < ActiveRecord::Base
     self.receive_notifications ||= true
     self.next_delivery_time = Time.now.to_datetime
 
-    # self.next_qids_reminder_time = Time.now + 1.week
+    self.next_qids_reminder_time = Time.now + 1.week
     # allow users to immediately imput QIDS
-    self.next_qids_reminder_time = Time.now
+    #self.next_qids_reminder_time = Time.now
     # when a user is created, set up default message preferences for
     # each category. Note: this assumes that the categories have been
     # loaded... By default receive everything
