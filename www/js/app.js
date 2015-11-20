@@ -315,6 +315,7 @@ angular.module('trump', ['ionic', 'trump.controllers', 'trump.services', 'trump.
                         controller: 'QIDSResponseCtrl'
                     }
                 },
+                cache: false,
 				onEnter: function(events) {
 					events.put("Entered: new symptom record page");
 				}
