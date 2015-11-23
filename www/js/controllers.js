@@ -242,15 +242,22 @@ angular.module('trump.controllers', ['angularMoment'])
 
 
 
-    .controller('QIDSResponseCtrl', ["$scope", "$state", "$ionicSlideBoxDelegate", "$ionicPopup", "QIDSResponses", "QuestionnaireText", "AuthService", function($scope, $state, $ionicSlideBoxDelegate, $ionicPopup, QIDSResponses, QuestionnaireText, AuthService) {
+    .controller('QIDSResponseCtrl', ["$scope", "$state", "$ionicSlideBoxDelegate", "$ionicPopup", "QIDSResponses", "$ionicLoading", "QuestionnaireText", "AuthService", function($scope, $state, $ionicSlideBoxDelegate, $ionicPopup, QIDSResponses, $ionicLoading, QuestionnaireText, AuthService) {
 
         var save = function(response) {
+			$ionicLoading.show({
+                content: 'Loading Data',
+                animation: 'fade-in',
+                delay: 100
+            });
+		
             // get the rest service object and create a new resource
             // on the server, then transition back to dashboard state
             QIDSResponses.save(response).then(function() {
                 // when the user creates a response, clear the reminder
                 window.localStorage.removeItem('qids_reminder');
                 $state.go('tab.qids-list');
+				$ionicLoading.hide();
             });
         };
         $scope.showFwd = true;
