@@ -44,12 +44,16 @@ class Admin::UsersController < ApplicationController
 
   def export_qids
     u = User.find(params[:id])
-    send_data u.qids_to_csv, filename: "user_#{u.id}_qids.csv"
+    if u.share_qids_answers then
+      send_data u.qids_to_csv, filename: "user_#{u.id}_qids.csv"
+    end
   end
 
   def export_messages
     u = User.find(params[:id])
-    send_data u.messages_to_csv, filename: "user_#{u.id}_messages.csv"
+    if u.share_messages then
+      send_data u.messages_to_csv, filename: "user_#{u.id}_messages.csv"
+    end
   end
 
 
