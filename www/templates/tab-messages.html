@@ -11,7 +11,7 @@
         </div-->
         <ion-list class="list" show-delete="false" can-swipe="false">
             
-            <ion-item class="item item-remove-animate item-icon-left item-text-wrap" ng-repeat="message in messages" href="#/tab/messages/{{message.id}}">
+            <ion-item class="item item-remove-animate item-icon-left item-text-wrap" ng-repeat="message in messages">
                 <i class="positive icon ion-chatbubble"></i>
                 <h4 class="positive">{{message.created_at | amCalendar}}</h4>
                 <h4 class="calm">{{message.category}}</h4>
